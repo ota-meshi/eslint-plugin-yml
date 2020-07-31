@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four/ZWK4-input.yaml
+---
+a: 1
+?   b
+&anchor c: 3

@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-default/V9D5-input.yaml
+-       sun: yellow
+-       ?       earth: blue
+        :       moon: white

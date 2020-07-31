@@ -1,0 +1,6 @@
+# block-mapping/invalid/yaml-test-suite-for-default/DFF7-input.yaml
+{
+? explicit: entry,
+implicit: entry,
+?
+}

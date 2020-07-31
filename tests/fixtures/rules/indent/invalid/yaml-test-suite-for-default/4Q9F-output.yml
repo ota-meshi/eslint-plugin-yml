@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-default/4Q9F-input.yaml
+--- >
+        ab
+        cd
+        
+        ef
+
+
+        gh

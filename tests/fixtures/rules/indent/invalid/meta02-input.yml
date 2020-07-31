@@ -1,0 +1,8 @@
+# {"options":[4]}
+&anchor
+ !!map
+  a: b
+...
+!!map
+ &anchor
+  a: b

@@ -1,0 +1,3 @@
+# indent/invalid/yaml-test-suite-for-four/AB8U-input.yaml
+-   single multiline
+    - sequence entry

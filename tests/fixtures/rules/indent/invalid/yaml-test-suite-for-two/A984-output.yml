@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-two/A984-input.yaml
+a: b
+  c
+d:
+  e
+  f

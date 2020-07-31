@@ -1,0 +1,9 @@
+# block-sequence/invalid/flow02-input.yml
+- 1
+- a:
+    b
+- a:
+    {
+      b:
+        c}
+

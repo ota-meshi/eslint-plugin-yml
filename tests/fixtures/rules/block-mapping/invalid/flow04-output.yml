@@ -1,0 +1,4 @@
+# block-mapping/invalid/flow04-input.yml
+a:
+    foo: bar
+    baz: qux

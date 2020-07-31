@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-four/A6F9-input.yaml
+strip: |-
+    text
+clip: |
+    text
+keep: |+
+    text

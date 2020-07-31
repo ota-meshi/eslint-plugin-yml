@@ -1,0 +1,11 @@
+# block-mapping/invalid/within-seq-flow04-input.yml
+a:
+  b
+c: [
+  d,
+  {
+    e:
+      f
+}
+]
+

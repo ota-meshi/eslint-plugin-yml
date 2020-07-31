@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-four/9U5K-input.yaml
+---
+# Products purchased
+-   item    : Super Hoop
+    quantity: 1
+-   item    : Basketball
+    quantity: 4
+-   item    : Big Shoes
+    quantity: 1

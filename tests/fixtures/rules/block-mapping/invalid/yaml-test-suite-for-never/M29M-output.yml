@@ -1,0 +1,9 @@
+# block-mapping/invalid/yaml-test-suite-for-never/M29M-input.yaml
+a: |
+ ab
+ 
+ cd
+ ef
+ 
+
+...

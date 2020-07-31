@@ -1,0 +1,8 @@
+# block-mapping/invalid/yaml-test-suite-for-never/4ZYM-input.yaml
+plain: text
+  lines
+quoted: "text
+  	lines"
+block: |
+  text
+   	lines

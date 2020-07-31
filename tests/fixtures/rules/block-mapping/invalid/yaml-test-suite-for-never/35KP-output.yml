@@ -1,0 +1,9 @@
+# block-mapping/invalid/yaml-test-suite-for-never/35KP-input.yaml
+--- !!map
+{? a
+: b}
+--- !!seq
+- !!str c
+--- !!str
+d
+e

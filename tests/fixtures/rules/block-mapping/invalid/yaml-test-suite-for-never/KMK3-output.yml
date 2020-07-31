@@ -1,0 +1,4 @@
+# block-mapping/invalid/yaml-test-suite-for-never/KMK3-input.yaml
+foo:
+  {bar: 1}
+baz: 2

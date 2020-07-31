@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-two/LQZ7-input.yaml
+"implicit block key" : [
+  "implicit flow key" : value,
+]

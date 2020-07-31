@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-default/S4JQ-input.yaml
+# Assuming conventional resolution:
+-       "12"
+-       12
+-       ! 12

@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-two/6LVF-input.yaml
+%FOO  bar baz # Should be ignored
+# with a warning.
+--- "foo"

@@ -1,0 +1,4 @@
+# block-mapping/invalid/within-seq-flow01-input.yml
+- 
+  a: b
+  c: d 

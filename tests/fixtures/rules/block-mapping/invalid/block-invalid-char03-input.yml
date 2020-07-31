@@ -1,0 +1,5 @@
+# {"options": ["never"]}
+- ?foo: safe question mark
+- :foo: safe colon
+- -foo: safe dash
+- this is#not: a comment

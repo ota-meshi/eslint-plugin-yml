@@ -1,0 +1,8 @@
+# block-mapping/invalid/yaml-test-suite-for-never/9DXL-input.yaml
+{Mapping: Document}
+---
+# Empty
+...
+%YAML 1.2
+---
+{matches %: 20}

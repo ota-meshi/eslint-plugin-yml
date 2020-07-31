@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-default/2SXE-input.yaml
+&a: key: &a value
+foo:
+        *a:

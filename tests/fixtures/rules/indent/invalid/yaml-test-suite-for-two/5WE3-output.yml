@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-two/5WE3-input.yaml
+? explicit key # Empty value
+? |
+    block key
+: - one # Explicit compact
+  - two # block value

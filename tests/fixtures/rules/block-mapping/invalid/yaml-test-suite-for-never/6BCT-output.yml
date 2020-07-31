@@ -1,0 +1,4 @@
+# block-mapping/invalid/yaml-test-suite-for-never/6BCT-input.yaml
+- foo:	 bar
+- - baz
+  -	baz

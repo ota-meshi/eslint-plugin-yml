@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four/QF4Y-input.yaml
+[
+    foo: bar
+]

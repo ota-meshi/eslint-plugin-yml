@@ -1,0 +1,11 @@
+# indent/invalid/yaml-test-suite-for-default/4QFQ-input.yaml
+-       |
+                detected
+-       >
+                
+                 
+                 # detected
+-       |15
+                explicit
+-       >
+                detected

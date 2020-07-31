@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-four/JTV5-input.yaml
+?   a
+    true
+:   null
+    d
+?   e
+    42

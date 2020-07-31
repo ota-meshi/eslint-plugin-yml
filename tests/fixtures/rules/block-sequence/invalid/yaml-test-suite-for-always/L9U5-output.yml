@@ -1,0 +1,4 @@
+# block-sequence/invalid/yaml-test-suite-for-always/L9U5-input.yaml
+implicit block key : 
+  - implicit flow key : value
+ 

@@ -1,0 +1,5 @@
+# indent/invalid/block-mapping01-input.yml
+a : 
+  b
+c: 
+  d

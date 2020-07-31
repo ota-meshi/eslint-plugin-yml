@@ -1,0 +1,7 @@
+# indent/invalid/block-plain01-input.yml
+- a
+  b
+  c
+- a
+  b
+  c

@@ -1,0 +1,5 @@
+# block-mapping/invalid/yaml-test-suite-for-never/AZ63-input.yaml
+1:
+- 2
+- 3
+4: 5

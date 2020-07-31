@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected indentation of 8 spaces but found 0 spaces.",
+        "line": 4,
+        "column": 1
+    }
+]

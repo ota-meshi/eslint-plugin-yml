@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-default/753E-input.yaml
+--- |-
+        ab
+ 
+ 
+...

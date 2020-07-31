@@ -1,0 +1,8 @@
+# indent/invalid/yaml-test-suite-for-default/UT92-input.yaml
+---
+{ matches
+        % : 20 }
+...
+---
+# Empty
+...

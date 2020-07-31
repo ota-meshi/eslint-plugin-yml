@@ -1,0 +1,6 @@
+# block-mapping/invalid/yaml-test-suite-for-never/36F6-input.yaml
+---
+plain: a
+ b
+
+ c

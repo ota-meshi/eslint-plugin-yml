@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-two/Z67P-input.yaml
+literal: |2
+  value
+folded: !foo >2
+  value

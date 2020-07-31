@@ -1,0 +1,5 @@
+# block-sequence/invalid/yaml-test-suite-for-never/6JWB-input.yaml
+foo: !!seq
+  - !!str a
+  - !!map
+    key: !!str value

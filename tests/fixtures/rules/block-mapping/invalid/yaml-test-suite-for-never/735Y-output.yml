@@ -1,0 +1,7 @@
+# block-mapping/invalid/yaml-test-suite-for-never/735Y-input.yaml
+-
+  "flow in block"
+- >
+ Block scalar
+- !!map # Block collection
+  {foo : bar}

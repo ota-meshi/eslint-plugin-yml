@@ -1,0 +1,5 @@
+# block-mapping/invalid/block-and-comment01-input.yml
+# Comment
+{foo: bar, # Comment
+baz: qux} # Comment
+# Comment

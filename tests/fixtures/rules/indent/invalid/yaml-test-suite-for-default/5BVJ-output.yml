@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-default/5BVJ-input.yaml
+literal: |
+        some
+        text
+folded: >
+        some
+        text

@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four/WZ62-input.yaml
+{
+    foo : !!str,
+    !!str : bar,
+}

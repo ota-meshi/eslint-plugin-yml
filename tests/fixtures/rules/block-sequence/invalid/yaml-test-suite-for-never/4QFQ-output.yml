@@ -1,0 +1,11 @@
+# block-sequence/invalid/yaml-test-suite-for-never/4QFQ-input.yaml
+- |
+ detected
+- >
+ 
+  
+  # detected
+- |1
+  explicit
+- >
+ detected

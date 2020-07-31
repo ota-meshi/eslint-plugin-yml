@@ -1,0 +1,5 @@
+# block-mapping/invalid/yaml-test-suite-for-never/93JH-input.yaml
+ - {key: value,
+   key2: value2}
+ -
+   {key3: value3}

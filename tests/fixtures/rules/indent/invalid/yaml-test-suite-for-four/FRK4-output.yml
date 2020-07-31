@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four/FRK4-input.yaml
+{
+    ?   foo :,
+    :   bar,
+}

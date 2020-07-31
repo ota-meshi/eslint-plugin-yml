@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-default/M29M-input.yaml
+a: |
+        ab
+        
+        cd
+        ef
+ 
+
+...

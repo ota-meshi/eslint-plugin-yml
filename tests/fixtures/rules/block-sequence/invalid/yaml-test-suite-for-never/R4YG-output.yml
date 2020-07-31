@@ -1,0 +1,12 @@
+# block-sequence/invalid/yaml-test-suite-for-never/R4YG-input.yaml
+- |
+ detected
+- >
+ 
+  
+  # detected
+- |1
+  explicit
+- >
+ 	
+ detected

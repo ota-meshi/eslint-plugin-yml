@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-two/36F6-input.yaml
+---
+plain: a
+  b
+
+  c

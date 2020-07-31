@@ -1,0 +1,5 @@
+# indent/invalid/block-sequence02-input.yml
+-   a: b
+    c: d
+-   d: f
+    g: h
