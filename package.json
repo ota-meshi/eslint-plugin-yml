@@ -4,8 +4,7 @@
   "description": "This ESLint plugin provides linting rules for YAML.",
   "main": "lib/index.js",
   "files": [
-    "lib",
-    "index.d.ts"
+    "lib"
   ],
   "scripts": {
     "prebuild": "npm run -s clean && npm run setup-types",
@@ -53,7 +52,7 @@
     "eslint": ">=6.0.0"
   },
   "dependencies": {
-    "yaml-eslint-parser": "0.0.7"
+    "yaml-eslint-parser": "^0.0.7"
   },
   "devDependencies": {
     "@mysticatea/eslint-plugin": "^13.0.0",
