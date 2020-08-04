@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-yml",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "This ESLint plugin provides linting rules for YAML.",
   "main": "lib/index.js",
   "files": [
@@ -24,8 +24,8 @@
     "docs:watch": "vuepress dev --debug docs",
     "docs:build": "npm run build:ts && vuepress build docs --no-cache",
     "docs-deploysetup": "npm run docs:build && npm run docs-deploysetup:clean && npm run docs-deploysetup:copy",
-    "docs-deploysetup:clean": "rimraf assets",
-    "docs-deploysetup:copy": "npx cpx \"docs/\\.vuepress/dist/**\" . -u",
+    "docs-deploysetup:clean": "rimraf docs/assets",
+    "docs-deploysetup:copy": "npx cpx \"docs/\\.vuepress/dist/**\" \"docs\" -u",
     "preversion": "npm test && npm run update && git add .",
     "version": "npm run eslint-fix && git add .",
     "setup-types": "node ./tools/setup-eslint-rule-types.js",
@@ -52,12 +52,14 @@
     "eslint": ">=6.0.0"
   },
   "dependencies": {
+    "lodash": "^4.17.19",
     "yaml-eslint-parser": "^0.0.7"
   },
   "devDependencies": {
     "@mysticatea/eslint-plugin": "^13.0.0",
     "@types/eslint": "^7.2.0",
     "@types/estree": "^0.0.44",
+    "@types/lodash": "^4.14.158",
     "@types/mocha": "^7.0.2",
     "@types/node": "^14.0.13",
     "@types/semver": "^7.3.1",

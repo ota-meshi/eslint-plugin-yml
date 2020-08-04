@@ -1,7 +1,7 @@
 import type { AST } from "yaml-eslint-parser"
 import { createRule } from "../utils"
 import { hasTabIndent, getNumOfIndent } from "../utils/yaml"
-import { YAMLToken, Fix, RuleFixer } from "../types"
+import type { YAMLToken, Fix, RuleFixer } from "../types"
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -80,7 +80,8 @@ export default createRule("indent", {
         docs: {
             description: "enforce consistent indentation",
             categories: null,
-            extensionRule: true,
+            extensionRule: false,
+            // extensionRule: true,
         },
         fixable: "whitespace",
         schema: [

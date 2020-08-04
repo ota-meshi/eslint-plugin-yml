@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Expected space after '#' in comment.",
+        "line": 2,
+        "column": 1
+    },
+    {
+        "message": "Expected space after '#+' in comment.",
+        "line": 5,
+        "column": 1
+    }
+]

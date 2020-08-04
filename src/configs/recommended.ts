@@ -5,6 +5,7 @@ export = {
     extends: [baseExtend],
     rules: {
         // eslint-plugin-yml rules
+        "yml/no-irregular-whitespace": "error",
         "yml/no-tab-indent": "error",
     },
 }

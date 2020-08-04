@@ -40,8 +40,6 @@ This rule reports enforces a consistent indentation style. The default style is 
 
 ## :wrench: Options
 
-Nothing.
-
 ```json
 {
   "yml/indent": ["error", 2]
@@ -60,5 +58,3 @@ Specify the number of indents.
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/indent.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/indent.js)
-
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/indent)</sup>

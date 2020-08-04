@@ -1,0 +1,7 @@
+# {"options": ["always", {"markers": ["+"]}]}
+#a
+# b
+#  c
+#+a
+#+ b
+#+  c

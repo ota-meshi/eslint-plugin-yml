@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected exception block, space after '#' in comment.",
+        "line": 3,
+        "column": 1
+    }
+]

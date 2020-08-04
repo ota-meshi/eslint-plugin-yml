@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected space after '#' in comment.",
+        "line": 2,
+        "column": 1
+    }
+]
