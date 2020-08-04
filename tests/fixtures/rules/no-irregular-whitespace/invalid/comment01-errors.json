@@ -1,0 +1,32 @@
+[
+    {
+        "message": "Irregular whitespace not allowed.",
+        "line": 2,
+        "column": 4
+    },
+    {
+        "message": "Irregular whitespace not allowed.",
+        "line": 2,
+        "column": 6
+    },
+    {
+        "message": "Irregular whitespace not allowed.",
+        "line": 2,
+        "column": 8
+    },
+    {
+        "message": "Irregular whitespace not allowed.",
+        "line": 2,
+        "column": 10
+    },
+    {
+        "message": "Irregular whitespace not allowed.",
+        "line": 2,
+        "column": 12
+    },
+    {
+        "message": "Irregular whitespace not allowed.",
+        "line": 2,
+        "column": 14
+    }
+]

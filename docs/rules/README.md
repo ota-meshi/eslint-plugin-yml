@@ -15,10 +15,11 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 |:--------|:------------|:-------:|:-----------:|
 | [yml/block-mapping](./block-mapping.md) | require or disallow block style mappings. | :wrench: |  |
 | [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: |  |
+| [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
 | [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: |
 
 ## Extension Rules
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
-| [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
+| [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: |

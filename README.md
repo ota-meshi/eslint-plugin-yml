@@ -118,13 +118,14 @@ The rules with the following star :star: are included in the config.
 |:--------|:------------|:-------:|:-----------:|
 | [yml/block-mapping](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping.html) | require or disallow block style mappings. | :wrench: |  |
 | [yml/block-sequence](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence.html) | require or disallow block style sequences. | :wrench: |  |
+| [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  |
 | [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: |
 
 ### Extension Rules
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
-| [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  |
+| [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: |
 
 <!--RULES_TABLE_END-->
 <!--RULES_SECTION_END-->

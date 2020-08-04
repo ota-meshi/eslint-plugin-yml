@@ -107,9 +107,5 @@ dist
 /lib
 
 # docs
-/404.html
-/index.html
-/assets
-/playground
-/rules
-/user-guide
+/docs/assets
+/docs/**/*.html
