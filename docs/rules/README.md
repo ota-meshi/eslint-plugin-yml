@@ -24,5 +24,6 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 |:--------|:------------|:-------:|:-----------:|
 | [yml/flow-mapping-curly-newline](./flow-mapping-curly-newline.md) | enforce consistent line breaks inside braces | :wrench: |  |
 | [yml/flow-mapping-curly-spacing](./flow-mapping-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |  |
+| [yml/flow-sequence-bracket-newline](./flow-sequence-bracket-newline.md) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: |  |
 | [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: |
 | [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: |  |

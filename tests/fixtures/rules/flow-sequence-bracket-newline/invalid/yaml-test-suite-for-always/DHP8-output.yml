@@ -1,0 +1,4 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-always/DHP8-input.yaml
+[
+        foo, bar, 42
+]

@@ -5,8 +5,8 @@ import type { YAMLToken } from "../types"
  * @param {Token} token The token to check.
  * @returns {boolean} `true` if the token is a comment token.
  */
-export function isCommentToken(token: YAMLToken) {
-    return token.type === "Block" || token.type === "Line"
+export function isCommentToken(token: YAMLToken | null) {
+    return token && (token.type === "Block" || token.type === "Line")
 }
 /**
  * Determines whether two adjacent tokens are on the same line.

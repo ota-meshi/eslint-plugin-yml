@@ -1,0 +1,2 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-never/87E4-input.yaml
+'implicit block key' : ['implicit flow key' : value,]

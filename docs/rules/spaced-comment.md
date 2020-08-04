@@ -22,6 +22,15 @@ description: "enforce consistent spacing after the `# yml/spaced-comment
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
+pageClass: "rule-details"
+sidebarDepth: 0
+title: "yml/spaced-comment"
+description: "enforce consistent spacing after the `# yml/spaced-comment
+
+> enforce consistent spacing after the `#` in a comment
+
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 # yml/spaced-comment
 
 > enforce consistent spacing after the `#` in a comment

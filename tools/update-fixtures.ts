@@ -57,3 +57,13 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "flow-sequence-bracket-newline",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)

@@ -1,0 +1,11 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-always/8UDB-input.yaml
+[
+"double
+ quoted", 'single
+           quoted',
+plain
+ text, [
+          nested 
+ ],
+single: pair,
+]

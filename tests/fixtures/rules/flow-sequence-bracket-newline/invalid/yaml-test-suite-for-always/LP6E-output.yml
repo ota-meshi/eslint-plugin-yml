@@ -1,0 +1,11 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-always/LP6E-input.yaml
+- [
+        a, b , c 
+]
+- { "a"  : b
+   , c : 'd' ,
+   e   : "f"
+  }
+- [
+              
+]
