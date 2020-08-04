@@ -1,0 +1,6 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-never/Q88A-input.yaml
+- [a, b]
+- { a: b }
+- "a"
+- 'b'
+- c

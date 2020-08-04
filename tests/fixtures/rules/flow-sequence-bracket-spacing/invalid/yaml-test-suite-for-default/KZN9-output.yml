@@ -1,0 +1,4 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-default/KZN9-input.yaml
+- [YAML : separate]
+- [: empty key entry]
+- [{JSON: like}:adjacent]

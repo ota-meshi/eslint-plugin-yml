@@ -67,3 +67,13 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "flow-sequence-bracket-spacing",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)

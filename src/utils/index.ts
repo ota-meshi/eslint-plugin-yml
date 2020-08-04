@@ -66,7 +66,10 @@ export function defineWrapperListener(
  * Get the proxy node
  */
 export function getProxyNode(node: AST.YAMLNode, properties: any): any {
-    const safeKeys = new Set<string | number | symbol>(["range"])
+    const safeKeys = new Set<string | number | symbol>([
+        "range",
+        "typeAnnotation",
+    ])
     const cache: any = {}
     return new Proxy(node, {
         get(_t, key) {
