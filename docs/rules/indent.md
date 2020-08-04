@@ -40,8 +40,6 @@ This rule reports enforces a consistent indentation style. The default style is 
 
 ## :wrench: Options
 
-Nothing.
-
 ```json
 {
   "yml/indent": ["error", 2]

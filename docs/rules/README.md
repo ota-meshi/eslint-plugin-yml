@@ -23,3 +23,4 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
 | [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: |
+| [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: |  |

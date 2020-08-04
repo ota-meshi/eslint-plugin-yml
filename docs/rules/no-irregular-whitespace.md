@@ -32,8 +32,6 @@ c: d
 
 ## :wrench: Options
 
-Nothing.
-
 ```json
 {
   "yml/no-irregular-whitespace": ["error", {

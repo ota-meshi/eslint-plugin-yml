@@ -1,0 +1,7 @@
+# spaced-comment/invalid/always-markers01-input.yml
+# a
+# b
+#  c
+#+ a
+#+ b
+#+  c
