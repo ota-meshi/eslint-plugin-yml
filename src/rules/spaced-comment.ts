@@ -120,7 +120,7 @@ export default createRule("spaced-comment", {
             description:
                 "enforce consistent spacing after the `#` in a comment",
             categories: null,
-            extensionRule: true,
+            extensionRule: "spaced-comment",
         },
         fixable: "whitespace",
         schema: [
@@ -159,6 +159,9 @@ export default createRule("spaced-comment", {
         type: "suggestion",
     },
     create(context) {
+        if (!context.parserServices.isYAML) {
+            return {}
+        }
         const sourceCode = context.getSourceCode()
 
         // Unless the first option is never, require a space

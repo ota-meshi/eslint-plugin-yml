@@ -20,7 +20,14 @@ for (const ruleName of ruleNames) {
     const filePath = path.join(TYPINGS_ESLINT_RULES_ROOT, `${ruleName}.d.ts`)
     fs.writeFileSync(
         filePath,
-        `import type { Rule } from "eslint"
+        `/**
+ * See          : https://eslint.org/docs/rules/${ruleName}
+ * Rule source  : https://github.com/eslint/eslint/blob/master/lib/rules/${ruleName}.js
+ * Local source : ${require
+     .resolve(`eslint/lib/rules/${ruleName}`)
+     .replace(/^.*\/node_modules/u, "node_modules")}
+ */
+import type { Rule } from "eslint"
 declare const rule: Rule.RuleModule
 export = rule
 `

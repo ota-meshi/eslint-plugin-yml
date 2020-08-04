@@ -1,0 +1,32 @@
+[
+    {
+        "message": "A linebreak is required after '['.",
+        "line": 2,
+        "column": 3
+    },
+    {
+        "message": "A linebreak is required before ']'.",
+        "line": 2,
+        "column": 21
+    },
+    {
+        "message": "A linebreak is required after '['.",
+        "line": 3,
+        "column": 3
+    },
+    {
+        "message": "A linebreak is required before ']'.",
+        "line": 3,
+        "column": 23
+    },
+    {
+        "message": "A linebreak is required after '['.",
+        "line": 4,
+        "column": 3
+    },
+    {
+        "message": "A linebreak is required before ']'.",
+        "line": 4,
+        "column": 27
+    }
+]

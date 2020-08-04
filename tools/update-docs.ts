@@ -99,16 +99,16 @@ class DocFile {
     }
 
     public updateFooter() {
-        const { ruleName } = this.rule.meta.docs
+        const { ruleName, extensionRule } = this.rule.meta.docs
         const footerPattern = /## Implementation[\s\S]+$/u
         const footer = `## Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/${ruleName}.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/${ruleName}.js)
 ${
-    this.rule.meta.docs.extensionRule
+    extensionRule
         ? `
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/${ruleName})</sup>
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/${extensionRule})</sup>
 `
         : ""
 }`

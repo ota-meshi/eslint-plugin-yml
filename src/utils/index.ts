@@ -6,6 +6,8 @@ import type {
 } from "../types"
 import type { Rule } from "eslint"
 import type { AST } from "yaml-eslint-parser"
+import debug from "debug"
+const log = debug("eslint-plugin-yml:utils/index")
 
 /**
  * Define the rule.
@@ -30,6 +32,9 @@ export function createRule(
     }
 }
 
+type CoreRuleListener = {
+    [key: string]: (node: any) => void
+}
 /**
  * Define the wrapped core rule.
  */
@@ -38,7 +43,7 @@ export function defineWrapperListener(
     context: RuleContext,
     proxyOptions: {
         options: any[]
-        createListenerProxy?: (listener: RuleListener) => RuleListener
+        createListenerProxy?: (listener: CoreRuleListener) => RuleListener
     },
 ): RuleListener {
     if (!context.parserServices.isYAML) {
@@ -51,7 +56,8 @@ export function defineWrapperListener(
     }) as RuleListener
 
     const yamlListener =
-        proxyOptions.createListenerProxy?.(listener) ?? listener
+        proxyOptions.createListenerProxy?.(listener as CoreRuleListener) ??
+        listener
 
     return yamlListener
 }
@@ -60,6 +66,10 @@ export function defineWrapperListener(
  * Get the proxy node
  */
 export function getProxyNode(node: AST.YAMLNode, properties: any): any {
+    const safeKeys = new Set<string | number | symbol>([
+        "range",
+        "typeAnnotation",
+    ])
     const cache: any = {}
     return new Proxy(node, {
         get(_t, key) {
@@ -68,6 +78,9 @@ export function getProxyNode(node: AST.YAMLNode, properties: any): any {
             }
             if (key in properties) {
                 return (cache[key] = properties[key])
+            }
+            if (!safeKeys.has(key)) {
+                log(`fallback: ${String(key)}`)
             }
             return (node as any)[key]
         },

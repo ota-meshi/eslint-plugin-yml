@@ -37,3 +37,43 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "flow-mapping-curly-newline",
+    {
+        default: [],
+        always: ["always"],
+        never: ["never"],
+    },
+    { force: true },
+)
+
+makeSuiteTests(
+    "flow-mapping-curly-spacing",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)
+
+makeSuiteTests(
+    "flow-sequence-bracket-newline",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)
+
+makeSuiteTests(
+    "flow-sequence-bracket-spacing",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)

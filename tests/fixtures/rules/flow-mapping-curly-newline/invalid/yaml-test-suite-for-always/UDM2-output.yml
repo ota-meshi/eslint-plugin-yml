@@ -1,0 +1,4 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/UDM2-input.yaml
+- {
+         url: http://example.org 
+}

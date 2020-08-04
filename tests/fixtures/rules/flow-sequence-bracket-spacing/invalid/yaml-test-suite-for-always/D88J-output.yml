@@ -1,0 +1,2 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-always/D88J-input.yaml
+a: [ b, c ]

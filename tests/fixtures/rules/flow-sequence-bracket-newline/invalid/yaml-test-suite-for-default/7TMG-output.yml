@@ -1,0 +1,7 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-default/7TMG-input.yaml
+---
+[
+         word1
+# comment
+, word2
+]

@@ -1,0 +1,2 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-never/LQZ7-input.yaml
+"implicit block key" : ["implicit flow key" : value,]

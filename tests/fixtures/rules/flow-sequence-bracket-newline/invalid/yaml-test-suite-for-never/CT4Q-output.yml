@@ -1,0 +1,3 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-never/CT4Q-input.yaml
+[? foo
+ bar : baz]

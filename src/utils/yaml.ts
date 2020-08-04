@@ -231,10 +231,16 @@ export function incIndent(indent: string, context: RuleContext) {
             ? "  "
             : numOfIndent === 4
             ? "    "
-            : numOfIndent <= 1
-            ? " "
             : " ".repeat(numOfIndent)
     return `${indent}${add}`
+}
+
+/**
+ * Returns the indent that is incremented.
+ */
+export function decIndent(indent: string, context: RuleContext) {
+    const numOfIndent = getNumOfIndent(context)
+    return " ".repeat(indent.length - numOfIndent)
 }
 
 /**

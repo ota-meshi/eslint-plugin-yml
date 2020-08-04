@@ -1,0 +1,4 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/X38W-input.yaml
+{
+         &a [a, &b b]: *b, *a : [c, *b, d]
+}

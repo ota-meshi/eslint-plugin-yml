@@ -1,0 +1,4 @@
+# flow-sequence-bracket-newline/invalid/yaml-test-suite-for-always/D88J-input.yaml
+a: [
+        b, c
+]
