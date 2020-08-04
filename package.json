@@ -47,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/ota-meshi/eslint-plugin-yml/issues"
   },
-  "homepage": "https://github.com/ota-meshi/eslint-plugin-yml#readme",
+  "homepage": "https://ota-meshi.github.io/eslint-plugin-yml/",
   "peerDependencies": {
     "eslint": ">=6.0.0"
   },
