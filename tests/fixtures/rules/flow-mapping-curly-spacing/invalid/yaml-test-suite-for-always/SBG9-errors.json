@@ -1,0 +1,12 @@
+[
+    {
+        "message": "A space is required after '{'.",
+        "line": 2,
+        "column": 1
+    },
+    {
+        "message": "A space is required before '}'.",
+        "line": 2,
+        "column": 22
+    }
+]

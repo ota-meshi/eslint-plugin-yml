@@ -14,6 +14,7 @@
     "lint": "eslint \"tests\" \"src\" \"docs/.vuepress\" --ext .js,.vue,.ts,.json",
     "eslint-fix": "eslint \"tests\" \"src\" \"docs/.vuepress\" --ext .js,.vue,.ts,.json --fix",
     "pretest": "npm run setup-types",
+    "pretest:base": "cross-env DEBUG=eslint-plugin-yml*",
     "test:base": "mocha --require ts-node/register \"tests/src/**/*.ts\" --reporter dot --timeout 60000",
     "test": "npm run test:base",
     "cover": "nyc --reporter=lcov npm run test:base",
@@ -52,11 +53,13 @@
     "eslint": ">=6.0.0"
   },
   "dependencies": {
+    "debug": "^4.1.1",
     "lodash": "^4.17.19",
     "yaml-eslint-parser": "^0.0.7"
   },
   "devDependencies": {
     "@mysticatea/eslint-plugin": "^13.0.0",
+    "@types/debug": "^4.1.5",
     "@types/eslint": "^7.2.0",
     "@types/estree": "^0.0.44",
     "@types/lodash": "^4.14.158",
@@ -64,6 +67,7 @@
     "@types/node": "^14.0.13",
     "@types/semver": "^7.3.1",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.2",
     "eslint": "^7.3.0",
     "eslint-plugin-jsonc": "^0.3.1",
     "eslint4b": "^7.3.1",

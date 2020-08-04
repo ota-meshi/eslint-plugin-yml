@@ -6,6 +6,8 @@ import type {
 } from "../types"
 import type { Rule } from "eslint"
 import type { AST } from "yaml-eslint-parser"
+import debug from "debug"
+const log = debug("eslint-plugin-yml:utils/index")
 
 /**
  * Define the rule.
@@ -64,6 +66,7 @@ export function defineWrapperListener(
  * Get the proxy node
  */
 export function getProxyNode(node: AST.YAMLNode, properties: any): any {
+    const safeKeys = new Set<string | number | symbol>(["range"])
     const cache: any = {}
     return new Proxy(node, {
         get(_t, key) {
@@ -72,6 +75,9 @@ export function getProxyNode(node: AST.YAMLNode, properties: any): any {
             }
             if (key in properties) {
                 return (cache[key] = properties[key])
+            }
+            if (!safeKeys.has(key)) {
+                log(`fallback: ${String(key)}`)
             }
             return (node as any)[key]
         },

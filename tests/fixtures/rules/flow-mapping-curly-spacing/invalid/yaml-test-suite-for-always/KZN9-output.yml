@@ -1,0 +1,4 @@
+# flow-mapping-curly-spacing/invalid/yaml-test-suite-for-always/KZN9-input.yaml
+- [ YAML : separate ]
+- [ : empty key entry ]
+- [ { JSON: like }:adjacent ]

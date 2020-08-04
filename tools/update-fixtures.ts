@@ -47,3 +47,13 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "flow-mapping-curly-spacing",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)
