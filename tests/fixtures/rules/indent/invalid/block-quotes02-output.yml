@@ -1,0 +1,10 @@
+# indent/invalid/block-quotes02-input.yml
+[
+  "a
+  b", "c
+  d"
+]
+...
+["a
+  b", "c
+  d"]

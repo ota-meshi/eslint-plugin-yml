@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-default/9FMG-input.yaml
+a:
+        b:
+                c: d
+        e:
+                f: g
+h: i

@@ -1,0 +1,4 @@
+# block-mapping/invalid/flow10-input.yml
+-
+  a: b
+  c: d

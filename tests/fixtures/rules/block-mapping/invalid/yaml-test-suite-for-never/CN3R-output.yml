@@ -1,0 +1,7 @@
+# block-mapping/invalid/yaml-test-suite-for-never/CN3R-input.yaml
+&flowseq [
+ {a: b},
+ {&c c: d},
+ { &e e: f },
+ &g { g: h }
+]

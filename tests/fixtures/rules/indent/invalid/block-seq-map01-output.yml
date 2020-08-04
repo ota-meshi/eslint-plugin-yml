@@ -1,0 +1,22 @@
+# indent/invalid/block-seq-map01-input.yml
+?   -   a: b
+        c: d
+    -   e: f
+        g: h
+:   -   a: b
+        c: d
+    -   e: f
+        g: h
+
+?
+    foo
+:
+    -   a: b
+        c: d
+    -   e: f
+        g: h
+
+?   [ 1,
+        2 ]
+:   [ 1, 2,
+        3 ]

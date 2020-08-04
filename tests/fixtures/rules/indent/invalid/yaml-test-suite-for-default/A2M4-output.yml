@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-default/A2M4-input.yaml
+?       a
+:       -       b
+        -       -       c
+                -       d

@@ -1,0 +1,5 @@
+# block-sequence/invalid/yaml-test-suite-for-always/EHF6-input.yaml
+!!map {
+  k: !!seq
+  [ a, !!str b]
+}

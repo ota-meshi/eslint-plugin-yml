@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four/RR7F-input.yaml
+a: 4.2
+?   23
+:   d

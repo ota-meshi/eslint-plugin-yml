@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-default/RLU9-input.yaml
+foo:
+        -       42
+bar:
+        -       44

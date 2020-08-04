@@ -1,0 +1,4 @@
+# block-mapping/invalid/yaml-test-suite-for-never/KZN9-input.yaml
+- [ {YAML : separate} ]
+- [ : empty key entry ]
+- [ {{JSON: like}:adjacent} ]

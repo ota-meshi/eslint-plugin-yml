@@ -1,0 +1,9 @@
+# block-sequence/invalid/yaml-test-suite-for-always/M7NX-input.yaml
+---
+{
+ a: [
+  b, c, {
+   d: [e, f]
+  }
+ ]
+}

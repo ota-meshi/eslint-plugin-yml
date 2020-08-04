@@ -1,0 +1,9 @@
+# block-sequence/invalid/yaml-test-suite-for-never/PBJ2-input.yaml
+american:
+    [Boston Red Sox,
+    Detroit Tigers,
+    New York Yankees]
+national:
+    [New York Mets,
+    Chicago Cubs,
+    Atlanta Braves]

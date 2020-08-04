@@ -1,0 +1,6 @@
+# {"options": [{"multiline": "never", "singleline": "always"}]}
+key: value
+...
+{
+  key: value
+}

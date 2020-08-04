@@ -1,0 +1,4 @@
+# block-mapping/invalid/block-invalid-char01-input.yml
+- a[b: c]d
+- a{b: c}d
+- {a:b: c:d}

@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-default/6CK3-input.yaml
+%TAG !e! tag:example.com,2000:app/
+---
+-       !local foo
+-       !!str bar
+-       !e!tag%21 baz

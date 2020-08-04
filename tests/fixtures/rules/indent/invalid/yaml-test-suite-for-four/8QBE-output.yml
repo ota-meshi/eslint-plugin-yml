@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four/8QBE-input.yaml
+key:
+    -   item1
+    -   item2

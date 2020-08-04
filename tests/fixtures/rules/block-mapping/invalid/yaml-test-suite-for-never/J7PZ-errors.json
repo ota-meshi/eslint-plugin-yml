@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Must use flow style mappings.",
+        "line": 6,
+        "column": 3
+    },
+    {
+        "message": "Must use flow style mappings.",
+        "line": 7,
+        "column": 3
+    },
+    {
+        "message": "Must use flow style mappings.",
+        "line": 8,
+        "column": 3
+    }
+]

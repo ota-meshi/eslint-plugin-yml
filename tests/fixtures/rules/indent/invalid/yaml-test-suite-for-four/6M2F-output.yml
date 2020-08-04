@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four/6M2F-input.yaml
+?   &a a
+:   &b b
+:   *a

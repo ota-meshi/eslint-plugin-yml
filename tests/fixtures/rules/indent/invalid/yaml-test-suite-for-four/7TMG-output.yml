@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four/7TMG-input.yaml
+---
+[ word1
+    # comment
+    , word2]

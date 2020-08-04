@@ -1,0 +1,5 @@
+# block-mapping/invalid/block-invalid-char03-input.yml
+- {?foo: safe question mark}
+- {:foo: safe colon}
+- {-foo: safe dash}
+- {this is#not: a comment}

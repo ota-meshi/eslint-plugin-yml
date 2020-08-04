@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Must use block style mappings.",
+        "line": 2,
+        "column": 3
+    },
+    {
+        "message": "Must use block style mappings.",
+        "line": 3,
+        "column": 3
+    }
+]

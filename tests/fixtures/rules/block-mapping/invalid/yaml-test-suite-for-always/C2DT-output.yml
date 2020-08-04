@@ -1,0 +1,6 @@
+# block-mapping/invalid/yaml-test-suite-for-always/C2DT-input.yaml
+{
+"adjacent":value,
+"readable": value,
+"empty":
+}

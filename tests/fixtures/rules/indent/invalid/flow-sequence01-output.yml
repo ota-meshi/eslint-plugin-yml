@@ -1,0 +1,7 @@
+# indent/invalid/flow-sequence01-input.yml
+[
+  a : 
+    b
+  ,
+  1
+]

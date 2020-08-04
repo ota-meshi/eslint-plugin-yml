@@ -1,0 +1,10 @@
+# indent/invalid/yaml-test-suite-for-four/P2AD-input.yaml
+-   | # Empty header↓
+        literal
+-   >7 # Indentation indicator↓
+        folded
+-   |+ # Chomping indicator↓
+        keep
+
+-   >7- # Both indicators↓
+        strip

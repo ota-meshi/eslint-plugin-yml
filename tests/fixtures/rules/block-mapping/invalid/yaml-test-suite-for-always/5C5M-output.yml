@@ -1,0 +1,7 @@
+# block-mapping/invalid/yaml-test-suite-for-always/5C5M-input.yaml
+- 
+  one : two
+  three: four  
+- 
+  five: six
+  seven : eight

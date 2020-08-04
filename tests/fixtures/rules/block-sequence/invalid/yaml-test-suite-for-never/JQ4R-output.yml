@@ -1,0 +1,4 @@
+# block-sequence/invalid/yaml-test-suite-for-never/JQ4R-input.yaml
+block sequence:
+  - one
+  - two : three

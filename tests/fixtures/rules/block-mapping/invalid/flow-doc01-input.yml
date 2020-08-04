@@ -1,0 +1,13 @@
+# {"options":["always"]}
+{ foo: bar }
+
+...
+
+&a { foo: bar }
+
+...
+
+&a {
+  foo: bar
+}
+

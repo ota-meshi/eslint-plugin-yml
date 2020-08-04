@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-two/NP9H-input.yaml
+"folded 
+to a space,	
+
+to a line feed, or 	\
+\ 	non-content"

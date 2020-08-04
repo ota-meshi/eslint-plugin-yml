@@ -1,0 +1,7 @@
+# block-mapping/invalid/yaml-test-suite-for-never/5BVJ-input.yaml
+literal: |
+  some
+  text
+folded: >
+  some
+  text

@@ -1,0 +1,4 @@
+# block-mapping/invalid/yaml-test-suite-for-never/HMQ5-input.yaml
+{!!str &a1 "foo":
+  !!str bar,
+&a2 baz : *a1}

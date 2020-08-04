@@ -1,0 +1,7 @@
+# block-sequence/invalid/yaml-test-suite-for-always/5KJE-input.yaml
+- 
+  - one
+  - two 
+- 
+  - three
+  - four

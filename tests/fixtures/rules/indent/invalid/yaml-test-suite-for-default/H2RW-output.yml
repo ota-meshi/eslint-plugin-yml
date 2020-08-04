@@ -1,0 +1,13 @@
+# indent/invalid/yaml-test-suite-for-default/H2RW-input.yaml
+foo: 1
+
+bar: 2
+    
+text: |
+        a
+          
+        b
+
+        c
+        
+        d

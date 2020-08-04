@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-two/6JWB-input.yaml
+foo: !!seq
+  - !!str a
+  - !!map
+      key: !!str value

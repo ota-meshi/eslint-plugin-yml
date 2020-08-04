@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-two/SKE5-input.yaml
+---
+seq:
+  &anchor
+    - a
+    - b

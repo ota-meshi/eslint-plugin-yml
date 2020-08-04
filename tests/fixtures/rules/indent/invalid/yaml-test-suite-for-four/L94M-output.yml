@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four/L94M-input.yaml
+?   !!str a
+:   !!int 47
+?   c
+:   !!str d

@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-two/D83L-input.yaml
+- |4-
+    explicit indent and chomp
+- |-4
+    chomp and explicit indent

@@ -1,0 +1,5 @@
+# {"options": ["never"]}
+# Comment
+foo: bar # Comment
+baz: qux # Comment
+# Comment

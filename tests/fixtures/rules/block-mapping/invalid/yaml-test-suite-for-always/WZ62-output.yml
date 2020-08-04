@@ -1,0 +1,4 @@
+# block-mapping/invalid/yaml-test-suite-for-always/WZ62-input.yaml
+  foo : !!str
+  !!str : bar
+

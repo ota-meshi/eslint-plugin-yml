@@ -1,0 +1,5 @@
+# block-mapping/invalid/yaml-test-suite-for-never/S3PD-input.yaml
+plain key: in-line value
+: # Both empty
+"quoted key":
+- entry

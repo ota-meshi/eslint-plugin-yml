@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-four/Q88A-input.yaml
+-   [ a, b ]
+-   { a: b }
+-   "a"
+-   'b'
+-   c

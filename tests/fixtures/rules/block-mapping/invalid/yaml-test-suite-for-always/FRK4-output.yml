@@ -1,0 +1,5 @@
+# block-mapping/invalid/yaml-test-suite-for-always/FRK4-input.yaml
+{
+  ? foo :,
+  : bar,
+}

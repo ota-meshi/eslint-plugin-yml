@@ -1,0 +1,5 @@
+# block-sequence/invalid/yaml-test-suite-for-never/D83L-input.yaml
+- |2-
+  explicit indent and chomp
+- |-2
+  chomp and explicit indent

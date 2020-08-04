@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-default/Z67P-input.yaml
+literal: |8
+        value
+folded: !foo >8
+        value

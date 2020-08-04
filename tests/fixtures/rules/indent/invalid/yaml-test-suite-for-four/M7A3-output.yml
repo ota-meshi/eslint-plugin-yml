@@ -1,0 +1,8 @@
+# indent/invalid/yaml-test-suite-for-four/M7A3-input.yaml
+Bare
+document
+...
+# No document
+...
+|
+    %!PS-Adobe-2.0 # Not the first line

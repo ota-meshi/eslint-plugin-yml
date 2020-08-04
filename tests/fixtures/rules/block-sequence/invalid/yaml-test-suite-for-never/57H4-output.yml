@@ -1,0 +1,7 @@
+# block-sequence/invalid/yaml-test-suite-for-never/57H4-input.yaml
+sequence: !!seq
+- entry
+- !!seq
+   [nested]
+mapping: !!map
+ foo: bar

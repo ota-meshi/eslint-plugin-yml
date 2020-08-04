@@ -1,0 +1,10 @@
+import path from "path"
+const base = require.resolve("./base")
+const baseExtend = path.extname(`${base}`) === ".ts" ? "plugin:yml/base" : base
+export = {
+    extends: [baseExtend],
+    rules: {
+        // eslint-plugin-yml rules
+        "yml/no-tab-indent": "error",
+    },
+}

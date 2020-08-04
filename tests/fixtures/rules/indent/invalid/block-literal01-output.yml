@@ -1,0 +1,13 @@
+# indent/invalid/block-literal01-input.yml
+- |
+    a
+    b
+    c
+- |+
+    a
+    b
+    c
+- |-
+    a
+    b
+    c

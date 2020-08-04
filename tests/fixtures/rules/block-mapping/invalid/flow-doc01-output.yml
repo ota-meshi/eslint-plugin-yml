@@ -1,0 +1,14 @@
+# block-mapping/invalid/flow-doc01-input.yml
+foo: bar 
+
+...
+
+&a 
+  foo: bar 
+
+...
+
+&a 
+  foo: bar
+
+

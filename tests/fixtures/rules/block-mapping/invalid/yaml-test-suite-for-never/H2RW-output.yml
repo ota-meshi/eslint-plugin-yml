@@ -1,0 +1,13 @@
+# block-mapping/invalid/yaml-test-suite-for-never/H2RW-input.yaml
+foo: 1
+
+bar: 2
+    
+text: |
+  a
+    
+  b
+
+  c
+ 
+  d

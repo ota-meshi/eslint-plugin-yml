@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-default/W4TN-input.yaml
+%YAML 1.2
+--- |
+        %!PS-Adobe-2.0
+...
+%YAML1.2
+---
+# Empty
+...

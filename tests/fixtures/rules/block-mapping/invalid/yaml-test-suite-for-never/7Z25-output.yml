@@ -1,0 +1,5 @@
+# block-mapping/invalid/yaml-test-suite-for-never/7Z25-input.yaml
+---
+scalar1
+...
+{key: value}

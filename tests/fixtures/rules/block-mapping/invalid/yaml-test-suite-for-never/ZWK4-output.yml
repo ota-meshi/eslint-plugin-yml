@@ -1,0 +1,5 @@
+# block-mapping/invalid/yaml-test-suite-for-never/ZWK4-input.yaml
+---
+a: 1
+? b
+&anchor c: 3

@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-default/6WPF-input.yaml
+---
+"
+foo 
+
+bar
+
+baz
+"

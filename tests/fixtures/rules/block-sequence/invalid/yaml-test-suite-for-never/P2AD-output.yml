@@ -1,0 +1,10 @@
+# block-sequence/invalid/yaml-test-suite-for-never/P2AD-input.yaml
+- | # Empty header↓
+ literal
+- >1 # Indentation indicator↓
+  folded
+- |+ # Chomping indicator↓
+ keep
+
+- >1- # Both indicators↓
+  strip

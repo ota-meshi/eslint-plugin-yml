@@ -1,0 +1,4 @@
+# block-mapping/invalid/yaml-test-suite-for-never/QF4Y-input.yaml
+[
+{foo: bar}
+]

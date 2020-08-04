@@ -1,0 +1,5 @@
+# {"options": ["never"]}
+{ 
+  key: value,
+  foo: bar
+}

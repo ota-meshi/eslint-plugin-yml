@@ -1,0 +1,5 @@
+# block-mapping/invalid/flow07-input.yml
+a: 
+ foo: bar
+ baz:
+   [qux]

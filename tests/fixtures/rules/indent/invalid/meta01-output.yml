@@ -1,0 +1,8 @@
+# indent/invalid/meta01-input.yml
+key: &anchor
+    !!map
+    a: b
+...
+key: !!map
+    &anchor
+    a: b

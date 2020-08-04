@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-default/M5C3-input.yaml
+literal: |8
+        value
+folded:
+        !foo
+                >24
+                        value

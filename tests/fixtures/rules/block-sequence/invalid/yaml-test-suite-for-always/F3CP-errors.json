@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Must use block style sequences.",
+        "line": 3,
+        "column": 6
+    },
+    {
+        "message": "Must use block style sequences.",
+        "line": 3,
+        "column": 18
+    }
+]

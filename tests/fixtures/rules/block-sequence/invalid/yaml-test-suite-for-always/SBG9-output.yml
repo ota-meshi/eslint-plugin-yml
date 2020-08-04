@@ -1,0 +1,2 @@
+# block-sequence/invalid/yaml-test-suite-for-always/SBG9-input.yaml
+{a: [b, c], [d, e]: f}

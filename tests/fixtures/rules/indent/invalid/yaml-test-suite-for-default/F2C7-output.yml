@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-default/F2C7-input.yaml
+-       &a !!str a
+-       !!int 2
+-       !!int &c 4
+-       &d d

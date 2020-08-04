@@ -1,0 +1,7 @@
+# block-mapping/invalid/yaml-test-suite-for-never/M5C3-input.yaml
+literal: |2
+  value
+folded:
+   !foo
+  >1
+ value

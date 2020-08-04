@@ -1,0 +1,3 @@
+# block-sequence/invalid/yaml-test-suite-for-always/F3CP-input.yaml
+---
+{ a: [b, c, { d: [e, f] } ] }

@@ -1,0 +1,5 @@
+# block-sequence/invalid/yaml-test-suite-for-always/CT4Q-input.yaml
+[
+? foo
+ bar : baz
+]

@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-default/CN3R-input.yaml
+&flowseq [
+        a: b,
+        &c c: d,
+        { &e e: f },
+        &g { g: h }
+]
