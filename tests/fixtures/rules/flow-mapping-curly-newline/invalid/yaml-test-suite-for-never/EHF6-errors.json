@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Unexpected line break after this opening brace.",
+        "line": 2,
+        "column": 7
+    },
+    {
+        "message": "Unexpected line break before this closing brace.",
+        "line": 5,
+        "column": 1
+    }
+]

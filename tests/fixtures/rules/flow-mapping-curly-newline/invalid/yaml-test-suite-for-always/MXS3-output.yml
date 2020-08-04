@@ -1,0 +1,4 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/MXS3-input.yaml
+- {
+        a: b
+}

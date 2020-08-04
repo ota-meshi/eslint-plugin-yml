@@ -4,7 +4,6 @@ sidebarDepth: 0
 title: "yml/spaced-comment"
 description: "enforce consistent spacing after the `#` in a comment"
 ---
----
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/spaced-comment"

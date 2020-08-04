@@ -1,0 +1,4 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/54T7-input.yaml
+{
+        foo: you, bar: far
+}

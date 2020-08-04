@@ -30,6 +30,9 @@ export function createRule(
     }
 }
 
+type CoreRuleListener = {
+    [key: string]: (node: any) => void
+}
 /**
  * Define the wrapped core rule.
  */
@@ -38,7 +41,7 @@ export function defineWrapperListener(
     context: RuleContext,
     proxyOptions: {
         options: any[]
-        createListenerProxy?: (listener: RuleListener) => RuleListener
+        createListenerProxy?: (listener: CoreRuleListener) => RuleListener
     },
 ): RuleListener {
     if (!context.parserServices.isYAML) {
@@ -51,7 +54,8 @@ export function defineWrapperListener(
     }) as RuleListener
 
     const yamlListener =
-        proxyOptions.createListenerProxy?.(listener) ?? listener
+        proxyOptions.createListenerProxy?.(listener as CoreRuleListener) ??
+        listener
 
     return yamlListener
 }

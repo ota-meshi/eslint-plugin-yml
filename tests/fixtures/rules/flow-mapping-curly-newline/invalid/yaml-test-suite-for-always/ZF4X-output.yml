@@ -1,0 +1,8 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/ZF4X-input.yaml
+Mark McGwire: {
+        hr: 65, avg: 0.278
+}
+Sammy Sosa: {
+    hr: 63,
+    avg: 0.288
+  }

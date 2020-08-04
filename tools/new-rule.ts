@@ -35,7 +35,7 @@ const logger = console
         ruleFile,
         `
 import type { AST } from "yaml-eslint-parser"
-import coreRule from "eslint/src/rules/${ruleId}"
+import coreRule from "eslint/lib/rules/${ruleId}"
 import { createRule, defineWrapperListener } from "../utils"
 import {
     hasTabIndent,
@@ -57,7 +57,10 @@ export default createRule("${ruleId}", {
         if (!context.parserServices.isYAML) {
             return {}
         }
-        return defineWrapperListener(coreRule, context, context.options)
+
+        return defineWrapperListener(coreRule, context, {
+            options: context.options,
+        })
     },
 })
 `,

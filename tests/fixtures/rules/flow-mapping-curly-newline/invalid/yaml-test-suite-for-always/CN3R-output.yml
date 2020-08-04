@@ -1,0 +1,11 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/CN3R-input.yaml
+&flowseq [
+ a: b,
+ &c c: d,
+ {
+          &e e: f 
+ },
+ &g {
+          g: h 
+ }
+]

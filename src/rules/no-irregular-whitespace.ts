@@ -15,7 +15,7 @@ export default createRule("no-irregular-whitespace", {
         docs: {
             description: "disallow irregular whitespace",
             categories: ["recommended"],
-            extensionRule: true,
+            extensionRule: "no-irregular-whitespace",
         },
         schema: [
             {
@@ -39,6 +39,9 @@ export default createRule("no-irregular-whitespace", {
         type: "problem",
     },
     create(context) {
+        if (!context.parserServices.isYAML) {
+            return {}
+        }
         // Module store of error indexes that we have found
         let errorIndexes: number[] = []
 

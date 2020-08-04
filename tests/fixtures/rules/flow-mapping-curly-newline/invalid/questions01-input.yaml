@@ -1,0 +1,6 @@
+# {"options": ["never"]}
+{
+? explicit: entry,
+implicit: entry,
+?
+}

@@ -1,0 +1,10 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/UT92-input.yaml
+---
+{
+         matches
+% : 20 
+}
+...
+---
+# Empty
+...

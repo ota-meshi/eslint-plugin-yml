@@ -1,0 +1,4 @@
+# {"options": ["always"]}
+- [ YAML : separate ]
+- [ : empty key entry ]
+- [ {JSON: like}:adjacent ]

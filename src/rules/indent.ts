@@ -2,6 +2,7 @@ import type { AST } from "yaml-eslint-parser"
 import { createRule } from "../utils"
 import { hasTabIndent, getNumOfIndent } from "../utils/yaml"
 import type { YAMLToken, Fix, RuleFixer } from "../types"
+import { isHyphen, isQuestion, isColon } from "../utils/ast-utils"
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -48,40 +49,12 @@ type LineIndentLastScalarData = {
     expectedIndent: number
 }
 
-/**
- * Check whether the given token is a question.
- * @param token The token to check.
- * @returns `true` if the token is a question.
- */
-function isQuestion(token: YAMLToken | null): token is YAMLToken {
-    return token != null && token.type === "Punctuator" && token.value === "?"
-}
-
-/**
- * Check whether the given token is a hyphen.
- * @param token The token to check.
- * @returns `true` if the token is a hyphen.
- */
-function isHyphen(token: YAMLToken | null): token is YAMLToken {
-    return token != null && token.type === "Punctuator" && token.value === "-"
-}
-
-/**
- * Check whether the given token is a colon.
- * @param token The token to check.
- * @returns `true` if the token is a colon.
- */
-function isColon(token: YAMLToken | null): token is YAMLToken {
-    return token != null && token.type === "Punctuator" && token.value === ":"
-}
-
 export default createRule("indent", {
     meta: {
         docs: {
             description: "enforce consistent indentation",
             categories: null,
             extensionRule: false,
-            // extensionRule: true,
         },
         fixable: "whitespace",
         schema: [
@@ -97,7 +70,6 @@ export default createRule("indent", {
         type: "layout",
     },
     create(context) {
-        // const sourceCode = context.getSourceCode()
         if (!context.parserServices.isYAML) {
             return {}
         }

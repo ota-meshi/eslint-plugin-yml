@@ -1,0 +1,5 @@
+# flow-mapping-curly-newline/invalid/questions01-input.yaml
+{? explicit: entry,
+implicit: entry,
+?
+}

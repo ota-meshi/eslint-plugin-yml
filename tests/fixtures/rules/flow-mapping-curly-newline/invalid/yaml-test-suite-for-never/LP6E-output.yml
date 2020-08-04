@@ -1,0 +1,6 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-never/LP6E-input.yaml
+- [a, b , c ]
+- { "a"  : b
+   , c : 'd' ,
+   e   : "f"}
+- [      ]

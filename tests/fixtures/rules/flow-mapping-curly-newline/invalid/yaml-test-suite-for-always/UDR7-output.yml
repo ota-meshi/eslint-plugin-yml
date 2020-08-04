@@ -1,0 +1,5 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-always/UDR7-input.yaml
+sequence: [ one, two, ]
+mapping: {
+         sky: blue, sea: green 
+}

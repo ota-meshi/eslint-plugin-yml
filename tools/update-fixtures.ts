@@ -37,3 +37,13 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "flow-mapping-curly-newline",
+    {
+        default: [],
+        always: ["always"],
+        never: ["never"],
+    },
+    { force: true },
+)

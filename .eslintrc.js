@@ -19,6 +19,7 @@ module.exports = {
         "no-warning-comments": "warn",
         "no-lonely-if": "off",
         "@mysticatea/ts/ban-ts-ignore": "off",
+        "new-cap": "off",
     },
     overrides: [
         {

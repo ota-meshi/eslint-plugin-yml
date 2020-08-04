@@ -1,0 +1,5 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-never/4ABK-input.yaml
+{unquoted : "separate",
+http://foo.com,
+omitted value:,
+: omitted key,}

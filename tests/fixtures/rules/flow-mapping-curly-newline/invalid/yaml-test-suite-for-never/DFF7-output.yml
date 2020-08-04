@@ -1,0 +1,5 @@
+# flow-mapping-curly-newline/invalid/yaml-test-suite-for-never/DFF7-input.yaml
+{? explicit: entry,
+implicit: entry,
+?
+}
