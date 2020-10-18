@@ -14,9 +14,9 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
-        "paths": {
-            "*": ["typings/*"]
-        },
+        // "paths": {
+        //     "*": ["typings/*"]
+        // },
         "esModuleInterop": true,
         "outDir": "lib"
     },
@@ -25,7 +25,7 @@
         "tests/src/**/*",
         "tests/utils/**/*",
         "tools/**/*",
-        "typings/**/*"
+        // "typings/**/*"
     ],
     "exclude": ["lib/**/*"]
 }

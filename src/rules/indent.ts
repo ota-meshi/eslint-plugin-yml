@@ -240,7 +240,7 @@ export default createRule("indent", {
                     }
                 }
             },
-            // eslint-disable-next-line complexity
+            // eslint-disable-next-line complexity -- X(
             YAMLPair(node) {
                 const pairFirst = sourceCode.getFirstToken(node)
                 let questionToken: YAMLToken | null = null
@@ -373,12 +373,12 @@ export default createRule("indent", {
             },
         }
 
-        /* eslint-disable complexity */
+        /* eslint-disable complexity -- X( */
         /**
          * Process the expected indent for given line tokens
          */
         function processExpectedIndent(
-            /* eslint-enable complexity */
+            /* eslint-enable complexity -- X( */
             lineTokens: YAMLToken[],
         ): LineIndentStep1 {
             const lastToken = lineTokens[lineTokens.length - 1]

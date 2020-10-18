@@ -29,6 +29,7 @@ const OPTIONS_ENUM: Option[] = ["always", "never", "ignore"]
  * Parse options
  */
 function parseOptions(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- option
     option: any,
 ): {
     singleline: Option

@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-explicit-any: off -- util */
 import type {
     RuleListener,
     RuleModule,
@@ -28,7 +29,9 @@ export function createRule(
                 ruleName,
             },
         },
-        create: rule.create as any,
+        create(ctx) {
+            return rule.create(ctx as any)
+        },
     }
 }
 
@@ -50,7 +53,8 @@ export function defineWrapperListener(
         return {}
     }
     const listener = coreRule.create({
-        // @ts-expect-error
+        // @ts-expect-error -- proto
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- proto
         __proto__: context,
         options: proxyOptions.options,
     }) as RuleListener
@@ -99,4 +103,20 @@ export function isNode(data: any): boolean {
         typeof data.range[0] === "number" &&
         typeof data.range[1] === "number"
     )
+}
+
+let ruleMap: Map<string, Rule.RuleModule> | null = null
+
+/**
+ * Get the core rule implementation from the rule name
+ */
+export function getCoreRule(ruleName: string): Rule.RuleModule {
+    let map: Map<string, Rule.RuleModule>
+    if (ruleMap) {
+        map = ruleMap
+    } else {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires -- load eslint
+        ruleMap = map = new (require("eslint").Linter)().getRules()
+    }
+    return map.get(ruleName)!
 }

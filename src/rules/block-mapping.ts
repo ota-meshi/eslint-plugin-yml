@@ -13,21 +13,22 @@ import {
 // Helpers
 // ----------------------------------------------------------------------
 
-type Option = "always" | "never" | "ignore"
-const OPTIONS_ENUM: Option[] = ["always", "never", "ignore"]
+type OptionType = "always" | "never" | "ignore"
+const OPTIONS_ENUM: OptionType[] = ["always", "never", "ignore"]
 
 /**
  * Parse options
  */
 function parseOptions(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- option
     option: any,
 ): {
-    singleline: Option
-    multiline: Option
+    singleline: OptionType
+    multiline: OptionType
 } {
     const opt: {
-        singleline: Option
-        multiline: Option
+        singleline: OptionType
+        multiline: OptionType
     } = {
         singleline: "ignore",
         multiline: "always",
@@ -35,8 +36,8 @@ function parseOptions(
 
     if (option) {
         if (typeof option === "string") {
-            opt.singleline = option as Option
-            opt.multiline = option as Option
+            opt.singleline = option as OptionType
+            opt.multiline = option as OptionType
         } else {
             if (typeof option.singleline === "string") {
                 opt.singleline = option.singleline

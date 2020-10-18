@@ -1,3 +1,4 @@
+const path = require("path")
 const { rules } = require("../../lib/utils/rules")
 
 function ruleToLink({
@@ -14,6 +15,15 @@ module.exports = {
     description: "ESLint plugin provides linting rules for YAML",
     serviceWorker: true,
     evergreen: true,
+    configureWebpack(_config, _isServer) {
+        return {
+            resolve: {
+                alias: {
+                    eslint: path.resolve(__dirname, "./shim/eslint"),
+                },
+            },
+        }
+    },
 
     head: [
         // ["link", { rel: "icon", type: "image/png", href: "/logo.png" }]
@@ -47,7 +57,7 @@ module.exports = {
                         .filter(
                             (rule) =>
                                 !rule.meta.docs.extensionRule &&
-                                !rule.meta.deprecated
+                                !rule.meta.deprecated,
                         )
                         .map(ruleToLink),
                 },
@@ -58,7 +68,7 @@ module.exports = {
                         .filter(
                             (rule) =>
                                 rule.meta.docs.extensionRule &&
-                                !rule.meta.deprecated
+                                !rule.meta.deprecated,
                         )
                         .map(ruleToLink),
                 },

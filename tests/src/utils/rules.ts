@@ -12,12 +12,12 @@ function getDirRules() {
     const rulesRoot = path.resolve(__dirname, "../../../src/rules")
     const result = fs.readdirSync(rulesRoot)
     const rules: { [key: string]: RuleModule } = {}
-    for (const name of result) {
-        const ruleName = name.replace(/\.ts$/u, "")
+    for (const fname of result) {
+        const ruleName = fname.replace(/\.ts$/u, "")
         const ruleId = `yml/${ruleName}`
 
-        // eslint-disable-next-line @mysticatea/ts/no-require-imports
-        const rule = require(path.join(rulesRoot, name)).default
+        // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires -- tests
+        const rule = require(path.join(rulesRoot, fname)).default
         rules[ruleId] = rule
     }
     return rules

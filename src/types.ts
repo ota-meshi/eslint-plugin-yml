@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/naming-convention: off, @typescript-eslint/no-explicit-any: off -- for type */
 import type { JSONSchema4 } from "json-schema"
 import type { Rule } from "eslint"
 import type { AST } from "yaml-eslint-parser"
@@ -86,6 +87,7 @@ export interface RuleContext {
     report(descriptor: ReportDescriptor): void
 }
 
+// eslint-disable-next-line @typescript-eslint/no-namespace -- for type
 export declare namespace SourceCode {
     export function splitLines(text: string): string[]
 }
@@ -123,7 +125,7 @@ export interface SourceCode {
 
     getLocFromIndex(index: number): AST.Position
 
-    getIndexFromLoc(location: AST.Position): number
+    getIndexFromLoc(loc: AST.Position): number
 
     // Inherited methods from TokenStore
     // ---------------------------------

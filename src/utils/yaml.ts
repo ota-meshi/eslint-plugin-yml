@@ -5,7 +5,7 @@ import type { RuleContext, YAMLNodeOrToken, Fix, RuleFixer } from "../types"
  * Check if you are using tabs for indentation.
  * If you're using tabs, you're not sure if your YAML was parsed successfully, so almost all rules stop auto-fix.
  */
-export function hasTabIndent(context: RuleContext) {
+export function hasTabIndent(context: RuleContext): boolean {
     for (const line of context.getSourceCode().getLines()) {
         if (/^\s*\t/u.test(line)) {
             return true
@@ -25,10 +25,10 @@ export function calcExpectIndentForPairs(
     context: RuleContext,
 ): string | null {
     const sourceCode = context.getSourceCode()
-    let parent = mapping.parent
-    if (parent.type === "YAMLWithMeta") {
-        const before = sourceCode.getTokenBefore(parent)
-        if (before == null || before.loc.end.line < parent.loc.start.line) {
+    let parentNode = mapping.parent
+    if (parentNode.type === "YAMLWithMeta") {
+        const before = sourceCode.getTokenBefore(parentNode)
+        if (before == null || before.loc.end.line < parentNode.loc.start.line) {
             // | &a {
             // |   foo: bar}
             // or
@@ -36,14 +36,14 @@ export function calcExpectIndentForPairs(
             // |   {
             // |     foo: bar}
             return calcExpectIndentFromBaseNode(
-                parent,
+                parentNode,
                 mapping.pairs[0],
                 context,
             )
         }
-        parent = parent.parent
+        parentNode = parentNode.parent
     }
-    if (parent.type === "YAMLDocument") {
+    if (parentNode.type === "YAMLDocument") {
         // document root
         // | foo: bar
         // or
@@ -61,7 +61,7 @@ export function calcExpectIndentForPairs(
         }
         return mappingIndent
     }
-    if (parent.type === "YAMLSequence") {
+    if (parentNode.type === "YAMLSequence") {
         const hyphen = sourceCode.getTokenBefore(mapping)
         if (hyphen?.value !== "-") {
             return null // unknown
@@ -86,14 +86,14 @@ export function calcExpectIndentForPairs(
         // |   x: y
         return getActualIndent(mapping, context)
     }
-    if (parent.type !== "YAMLPair") {
+    if (parentNode.type !== "YAMLPair") {
         return null
     }
 
     // YAMLPair
     // | key:
     // |   foo: bar
-    return calcExpectIndentFromBaseNode(parent, mapping.pairs[0], context)
+    return calcExpectIndentFromBaseNode(parentNode, mapping.pairs[0], context)
 }
 /**
  * Calculate the required indentation for a given YAMLSequence entries.
@@ -103,10 +103,10 @@ export function calcExpectIndentForEntries(
     context: RuleContext,
 ): string | null {
     const sourceCode = context.getSourceCode()
-    let parent = sequence.parent
-    if (parent.type === "YAMLWithMeta") {
-        const before = sourceCode.getTokenBefore(parent)
-        if (before == null || before.loc.end.line < parent.loc.start.line) {
+    let parentNode = sequence.parent
+    if (parentNode.type === "YAMLWithMeta") {
+        const before = sourceCode.getTokenBefore(parentNode)
+        if (before == null || before.loc.end.line < parentNode.loc.start.line) {
             // | &a [
             // |   foo]
             // or
@@ -114,14 +114,14 @@ export function calcExpectIndentForEntries(
             // |   [
             // |     foo]
             return calcExpectIndentFromBaseNode(
-                parent,
+                parentNode,
                 sequence.entries[0],
                 context,
             )
         }
-        parent = parent.parent
+        parentNode = parentNode.parent
     }
-    if (parent.type === "YAMLDocument") {
+    if (parentNode.type === "YAMLDocument") {
         // document root
         // | [foo]
         const sequenceIndent = getActualIndent(sequence, context)
@@ -137,7 +137,7 @@ export function calcExpectIndentForEntries(
         }
         return sequenceIndent
     }
-    if (parent.type === "YAMLSequence") {
+    if (parentNode.type === "YAMLSequence") {
         const hyphen = sourceCode.getTokenBefore(sequence)
         if (hyphen?.value !== "-") {
             return null // unknown
@@ -164,14 +164,18 @@ export function calcExpectIndentForEntries(
         // |   foo
         return getActualIndent(sequence, context)
     }
-    if (parent.type !== "YAMLPair") {
+    if (parentNode.type !== "YAMLPair") {
         return null
     }
 
     // YAMLPair
     // | key:
     // |   foo: bar
-    return calcExpectIndentFromBaseNode(parent, sequence.entries[0], context)
+    return calcExpectIndentFromBaseNode(
+        parentNode,
+        sequence.entries[0],
+        context,
+    )
 }
 
 /**
@@ -224,7 +228,7 @@ export function getActualIndentFromLine(
 /**
  * Returns the indent that is incremented.
  */
-export function incIndent(indent: string, context: RuleContext) {
+export function incIndent(indent: string, context: RuleContext): string {
     const numOfIndent = getNumOfIndent(context)
     const add =
         numOfIndent === 2
@@ -238,7 +242,7 @@ export function incIndent(indent: string, context: RuleContext) {
 /**
  * Returns the indent that is incremented.
  */
-export function decIndent(indent: string, context: RuleContext) {
+export function decIndent(indent: string, context: RuleContext): string {
     const numOfIndent = getNumOfIndent(context)
     return " ".repeat(indent.length - numOfIndent)
 }
@@ -257,7 +261,7 @@ export function getNumOfIndent(
 /**
  * Check if the indent is increasing.
  */
-export function compareIndent(a: string, b: string) {
+export function compareIndent(a: string, b: string): number {
     const minLen = Math.min(a.length, b.length)
     for (let index = 0; index < minLen; index++) {
         if (a[index] !== b[index]) {
@@ -280,8 +284,13 @@ export function isKeyNode(node: AST.YAMLContent | AST.YAMLWithMeta): boolean {
 /**
  * Unwrap meta
  */
-export function unwrapMeta(node: AST.YAMLContent | AST.YAMLWithMeta | null) {
-    if (node?.type === "YAMLWithMeta") {
+export function unwrapMeta(
+    node: AST.YAMLContent | AST.YAMLWithMeta | null,
+): AST.YAMLContent | null {
+    if (!node) {
+        return node
+    }
+    if (node.type === "YAMLWithMeta") {
         return node.value
     }
     return node
@@ -395,9 +404,9 @@ export function* processIndentFix(
     function* fixIndent(indent: string, n: AST.YAMLNode) {
         const prevToken = sourceCode.getTokenBefore(n, {
             includeComments: true,
-        })
+        })!
         yield fixer.replaceTextRange(
-            [prevToken!.range[1], n.range[0]],
+            [prevToken.range[1], n.range[0]],
             `\n${indent}`,
         )
     }
