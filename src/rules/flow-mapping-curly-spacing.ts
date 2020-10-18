@@ -1,5 +1,10 @@
-import coreRule from "eslint/lib/rules/object-curly-spacing"
-import { createRule, defineWrapperListener, getProxyNode } from "../utils"
+import {
+    createRule,
+    defineWrapperListener,
+    getProxyNode,
+    getCoreRule,
+} from "../utils"
+const coreRule = getCoreRule("object-curly-spacing")
 
 export default createRule("flow-mapping-curly-spacing", {
     meta: {

@@ -1,3 +1,4 @@
+/* eslint node/no-unsupported-features/es-syntax: off -- not node */
 import pako from "../../../../node_modules/pako"
 
 /**
@@ -30,12 +31,12 @@ export function serializeState(state) {
         (typeof window !== "undefined" && window.btoa(compressedString)) ||
         compressedString
 
-    //eslint-disable-next-line no-console
+    //eslint-disable-next-line no-console -- demo
     console.log(
         `The compress rate of serialized string: ${(
             (100 * base64.length) /
             jsonString.length
-        ).toFixed(1)}% (${jsonString.length}B → ${base64.length}B)`
+        ).toFixed(1)}% (${jsonString.length}B → ${base64.length}B)`,
     )
 
     return base64

@@ -1,3 +1,4 @@
+/* eslint node/no-unsupported-features/es-syntax: off -- not node */
 import pako from "../../../../node_modules/pako"
 
 /**
@@ -36,6 +37,7 @@ export function deserializeState(serializedString) {
             }
         }
     } catch (error) {
+        // eslint-disable-next-line no-console -- demo
         console.error(error)
     }
 

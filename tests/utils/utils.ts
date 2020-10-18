@@ -1,17 +1,18 @@
 import fs from "fs"
 import path from "path"
 import assert from "assert"
-import { RuleTester, Linter } from "eslint"
-// @ts-ignore
+import type { RuleTester } from "eslint"
+import { Linter } from "eslint"
+// @ts-expect-error for test
 import { SourceCodeFixer } from "eslint/lib/linter"
 import { parseForESLint, getStaticYAMLValue } from "yaml-eslint-parser"
-// eslint-disable-next-line @mysticatea/ts/no-require-imports
+// eslint-disable-next-line @typescript-eslint/no-require-imports -- tests
 import plugin = require("../../src/index")
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string
  */
-export function unIndent(strings: readonly string[]) {
+export function unIndent(strings: readonly string[]): string {
     const templateValue = strings[0]
     const lines = templateValue.split("\n")
     const minLineIndent = getMinIndent(lines)
@@ -22,7 +23,12 @@ export function unIndent(strings: readonly string[]) {
 /**
  * for `code` and `output`
  */
-export function unIndentCodeAndOutput([code]: readonly string[]) {
+export function unIndentCodeAndOutput([code]: readonly string[]): (
+    args: readonly string[],
+) => {
+    code: string
+    output: string
+} {
     const codeLines = code.split("\n")
     const codeMinLineIndent = getMinIndent(codeLines)
 
@@ -57,7 +63,7 @@ function getMinIndent(lines: string[]) {
  */
 export function loadTestCases(
     ruleName: string,
-    _options?: {},
+    _options?: any,
     additionals?: {
         valid?: (RuleTester.ValidTestCase | string)[]
         invalid?: RuleTester.InvalidTestCase[]
@@ -180,7 +186,7 @@ export function makeSuiteTests(
     ruleName: string,
     optionsList: { [name: string]: any[] },
     { force }: { force?: boolean } = {},
-) {
+): void {
     const suiteFixtureRoot = path.resolve(
         __dirname,
         "../fixtures/yaml-test-suite/",
@@ -328,9 +334,9 @@ function verify(
 
 function getLinter(ruleName: string) {
     const linter = new Linter()
-    // @ts-expect-error
+    // @ts-expect-error for test
     linter.defineParser("yaml-eslint-parser", { parseForESLint })
-    // @ts-expect-error
+    // @ts-expect-error for test
     linter.defineRule(ruleName, plugin.rules[ruleName])
 
     return linter
@@ -339,8 +345,7 @@ function getLinter(ruleName: string) {
 function getConfig(ruleName: string, inputFile: string) {
     const filename = inputFile.slice(inputFile.indexOf(ruleName))
     const code0 = fs.readFileSync(inputFile, "utf8")
-    let code
-    let config
+    let code, config
     let configFile: string = inputFile.replace(/input\.ya?ml$/u, "config.json")
     if (!exists(configFile)) {
         configFile = path.join(path.dirname(inputFile), "_config.json")

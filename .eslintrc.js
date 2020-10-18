@@ -6,56 +6,85 @@ module.exports = {
     parserOptions: {
         sourceType: "script",
         ecmaVersion: 2020,
+        project: require.resolve("./tsconfig.json"),
     },
     extends: [
-        "plugin:@mysticatea/es2015",
-        "plugin:@mysticatea/+node",
-        "plugin:@mysticatea/+eslint-plugin",
         "plugin:jsonc/recommended-with-jsonc",
         "plugin:jsonc/auto-config",
+        "plugin:@ota-meshi/recommended",
+        "plugin:@ota-meshi/+node",
+        "plugin:@ota-meshi/+typescript",
+        "plugin:@ota-meshi/+eslint-plugin",
+        "plugin:@ota-meshi/+vue2",
+        "plugin:@ota-meshi/+prettier",
+        "plugin:@ota-meshi/+json",
     ],
     rules: {
         "require-jsdoc": "error",
         "no-warning-comments": "warn",
         "no-lonely-if": "off",
-        "@mysticatea/ts/ban-ts-ignore": "off",
         "new-cap": "off",
+        "no-shadow": "off",
     },
     overrides: [
         {
             files: ["*.ts"],
-            rules: {
-                // "@mysticatea/ts/no-require-imports": "off",
-                // "@mysticatea/ts/no-var-requires": "off",
-                "@mysticatea/node/no-missing-import": "off",
-                "no-implicit-globals": "off",
-                "@mysticatea/node/no-extraneous-import": "off",
-            },
+            parser: "@typescript-eslint/parser",
             parserOptions: {
                 sourceType: "module",
-                project: "./tsconfig.json",
+                project: require.resolve("./tsconfig.json"),
+            },
+            rules: {
+                "@typescript-eslint/naming-convention": [
+                    "error",
+                    {
+                        selector: "default",
+                        format: ["camelCase"],
+                        leadingUnderscore: "allow",
+                        trailingUnderscore: "allow",
+                    },
+                    {
+                        selector: "variable",
+                        format: ["camelCase", "UPPER_CASE"],
+                        leadingUnderscore: "allow",
+                        trailingUnderscore: "allow",
+                    },
+                    {
+                        selector: "typeLike",
+                        format: ["PascalCase"],
+                    },
+                    {
+                        selector: "property",
+                        format: null,
+                    },
+                    {
+                        selector: "method",
+                        format: null,
+                    },
+                ],
+                "@typescript-eslint/no-non-null-assertion": "off",
             },
         },
         {
             files: ["src/rules/**"],
             rules: {
-                "@mysticatea/eslint-plugin/report-message-format": [
-                    "error",
-                    "[^a-z].*\\.$",
-                ],
-                "@mysticatea/eslint-plugin/require-meta-docs-url": "off",
+                // "@mysticatea/eslint-plugin/report-message-format": [
+                //     "error",
+                //     "[^a-z].*\\.$",
+                // ],
+                // "@mysticatea/eslint-plugin/require-meta-docs-url": "off",
             },
         },
         {
             files: ["scripts/**/*.ts", "tests/**/*.ts"],
+            parser: "@typescript-eslint/parser",
+            parserOptions: {
+                sourceType: "module",
+                project: require.resolve("./tsconfig.json"),
+            },
             rules: {
                 "require-jsdoc": "off",
                 "no-console": "off",
-
-                // error
-                "@mysticatea/eslint-plugin/consistent-output": "off",
-                "@mysticatea/eslint-plugin/prefer-output-null": "off",
-                "@mysticatea/eslint-plugin/test-case-property-ordering": "off",
             },
         },
         {
@@ -79,14 +108,6 @@ module.exports = {
             },
             rules: {
                 "require-jsdoc": "off",
-                "@mysticatea/vue/html-closing-bracket-newline": "off",
-                "@mysticatea/vue/max-attributes-per-line": "off",
-                "@mysticatea/vue/comma-dangle": "off",
-                "@mysticatea/vue/html-indent": "off",
-                "@mysticatea/vue/html-self-closing": "off",
-                "@mysticatea/node/no-unsupported-features/es-syntax": "off",
-                "@mysticatea/node/no-missing-import": "off",
-                "@mysticatea/node/no-missing-require": "off",
             },
         },
     ],
