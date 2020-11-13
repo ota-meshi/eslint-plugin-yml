@@ -1,5 +1,6 @@
 /* eslint node/no-unsupported-features/es-syntax: off -- not node */
 import * as coreRules from "../../../../node_modules/eslint4b/dist/core-rules"
+// eslint-disable-next-line node/no-missing-import -- no build
 import plugin from "../../../../"
 
 const CATEGORY_TITLES = {
