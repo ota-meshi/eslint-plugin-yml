@@ -24,7 +24,7 @@
         "src/**/*",
         "tests/src/**/*",
         "tests/utils/**/*",
-        "tools/**/*",
+        "tools/**/*"
         // "typings/**/*"
     ],
     "exclude": ["lib/**/*"]
