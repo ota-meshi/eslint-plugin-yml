@@ -53,7 +53,7 @@ export interface RuleMetaData {
 
 export interface PartialRuleModule {
     meta: PartialRuleMetaData
-    create(context: RuleContext): RuleListener
+    create(context: RuleContext, params: { customBlock: boolean }): RuleListener
 }
 
 export interface PartialRuleMetaData {
@@ -80,6 +80,7 @@ export interface RuleContext {
     parserPath: string
     parserServices: {
         isYAML?: true
+        parseError?: any
     }
     getAncestors(): AST.YAMLNode[]
     getFilename(): string

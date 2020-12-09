@@ -7,6 +7,7 @@ import type {
 } from "../types"
 import type { Rule } from "eslint"
 import type { AST } from "yaml-eslint-parser"
+import * as yamlESLintParser from "yaml-eslint-parser"
 import debug from "debug"
 const log = debug("eslint-plugin-yml:utils/index")
 
@@ -29,8 +30,32 @@ export function createRule(
                 ruleName,
             },
         },
-        create(ctx) {
-            return rule.create(ctx as any)
+        create(context: Rule.RuleContext): any {
+            if (
+                typeof context.parserServices.defineCustomBlocksVisitor ===
+                "function"
+            ) {
+                return context.parserServices.defineCustomBlocksVisitor(
+                    context,
+                    yamlESLintParser,
+                    {
+                        target(lang: string | null) {
+                            if (lang) {
+                                return /^ya?ml$/i.test(lang)
+                            }
+                            return false
+                        },
+                        create(blockContext: Rule.RuleContext) {
+                            return rule.create(blockContext as any, {
+                                customBlock: true,
+                            })
+                        },
+                    },
+                )
+            }
+            return rule.create(context as any, {
+                customBlock: false,
+            })
         },
     }
 }

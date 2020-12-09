@@ -5,7 +5,8 @@ import type { RuleTester } from "eslint"
 import { Linter } from "eslint"
 // @ts-expect-error for test
 import { SourceCodeFixer } from "eslint/lib/linter"
-import { parseForESLint, getStaticYAMLValue } from "yaml-eslint-parser"
+import * as yamlESLintParser from "yaml-eslint-parser"
+import * as vueESLintParser from "vue-eslint-parser"
 // eslint-disable-next-line @typescript-eslint/no-require-imports -- tests
 import plugin = require("../../src/index")
 
@@ -89,8 +90,14 @@ export function loadTestCases(
 
     const invalid = listupInput(invalidFixtureRoot).map((inputFile) => {
         const config = getConfig(ruleName, inputFile)
-        const errorFile = inputFile.replace(/input\.ya?ml$/u, "errors.json")
-        const outputFile = inputFile.replace(/input\.ya?ml$/u, "output.yml")
+        const errorFile = inputFile.replace(
+            /input\.(?:ya?ml|vue)$/u,
+            "errors.json",
+        )
+        const outputFile = inputFile.replace(
+            /input\.(?:ya?ml|vue)$/u,
+            isYaml(inputFile) ? "output.yml" : "output.vue",
+        )
         let errors
         try {
             errors = fs.readFileSync(errorFile, "utf8")
@@ -133,13 +140,23 @@ export function loadTestCases(
     }
     if (invalid.some((test) => test.output)) {
         describe(`Output test for ${ruleName}`, () => {
-            for (const test of invalid) {
+            for (const test of invalid.filter(({ filename }) =>
+                isYaml(filename),
+            )) {
                 it(test.filename, () => {
-                    const input = parseForESLint(test.code)
-                    const output = parseForESLint(test.output)
+                    const input = yamlESLintParser.parseForESLint(test.code)
+                    const output = yamlESLintParser.parseForESLint(test.output)
                     assert.strictEqual(
-                        JSON.stringify(getStaticYAMLValue(input.ast), null, 2),
-                        JSON.stringify(getStaticYAMLValue(output.ast), null, 2),
+                        JSON.stringify(
+                            yamlESLintParser.getStaticYAMLValue(input.ast),
+                            null,
+                            2,
+                        ),
+                        JSON.stringify(
+                            yamlESLintParser.getStaticYAMLValue(output.ast),
+                            null,
+                            2,
+                        ),
                     )
                 })
             }
@@ -162,7 +179,11 @@ function* itrListupInput(rootDir: string): IterableIterator<string> {
             continue
         }
         const abs = path.join(rootDir, filename)
-        if (filename.endsWith("input.yml") || filename.endsWith("input.yaml")) {
+        if (
+            filename.endsWith("input.yml") ||
+            filename.endsWith("input.yaml") ||
+            filename.endsWith("input.vue")
+        ) {
             yield abs
         } else if (fs.statSync(abs).isDirectory()) {
             yield* itrListupInput(abs)
@@ -224,7 +245,9 @@ export function makeSuiteTests(
                     rules: {
                         [ruleName]: ["error", ...options],
                     },
-                    parser: "yaml-eslint-parser",
+                    parser: isYaml(inputFile)
+                        ? "yaml-eslint-parser"
+                        : "vue-eslint-parser",
                     settings: {
                         yml: { indent: 8 },
                     },
@@ -275,8 +298,11 @@ function writeFixtures(
     { force }: { force?: boolean } = {},
 ) {
     const linter = getLinter(ruleName)
-    const errorFile = inputFile.replace(/input\.ya?ml$/u, "errors.json")
-    const outputFile = inputFile.replace(/input\.ya?ml$/u, "output.yml")
+    const errorFile = inputFile.replace(/input\.(?:ya?ml|vue)$/u, "errors.json")
+    const outputFile = inputFile.replace(
+        /input\.(?:ya?ml|vue)$/u,
+        isYaml(inputFile) ? "output.yml" : "output.vue",
+    )
 
     const config = getConfig(ruleName, inputFile)
 
@@ -286,7 +312,9 @@ function writeFixtures(
             rules: {
                 [ruleName]: ["error", ...(config.options || [])],
             },
-            parser: "yaml-eslint-parser",
+            parser: isYaml(inputFile)
+                ? "yaml-eslint-parser"
+                : "vue-eslint-parser",
             settings: {
                 yml: { indent: 8 },
             },
@@ -335,7 +363,8 @@ function verify(
 function getLinter(ruleName: string) {
     const linter = new Linter()
     // @ts-expect-error for test
-    linter.defineParser("yaml-eslint-parser", { parseForESLint })
+    linter.defineParser("yaml-eslint-parser", yamlESLintParser)
+    linter.defineParser("vue-eslint-parser", vueESLintParser as any)
     // @ts-expect-error for test
     linter.defineRule(ruleName, plugin.rules[ruleName])
 
@@ -346,7 +375,10 @@ function getConfig(ruleName: string, inputFile: string) {
     const filename = inputFile.slice(inputFile.indexOf(ruleName))
     const code0 = fs.readFileSync(inputFile, "utf8")
     let code, config
-    let configFile: string = inputFile.replace(/input\.ya?ml$/u, "config.json")
+    let configFile: string = inputFile.replace(
+        /input\.(?:ya?ml|vue)$/u,
+        "config.json",
+    )
     if (!exists(configFile)) {
         configFile = path.join(path.dirname(inputFile), "_config.json")
     }
@@ -354,16 +386,28 @@ function getConfig(ruleName: string, inputFile: string) {
         config = JSON.parse(fs.readFileSync(configFile, "utf8"))
     }
     if (config && typeof config === "object") {
-        code = `# ${filename}\n${code0}`
-        return Object.assign({}, config, { code, filename })
+        code = isYaml(inputFile)
+            ? `# ${filename}\n${code0}`
+            : `<!--${filename}-->\n${code0}`
+        return Object.assign(
+            isVue(inputFile)
+                ? { parser: require.resolve("vue-eslint-parser") }
+                : {},
+            config,
+            { code, filename },
+        )
     }
     // inline config
-    const configStr = /^#([^\n]+?)\n/u.exec(code0)
+    const configStr = isYaml(inputFile)
+        ? /^#([^\n]+?)\n/u.exec(code0)
+        : /^<!--(.*?)-->/u.exec(code0)
     if (!configStr) {
         fs.writeFileSync(inputFile, `# {}\n${code0}`, "utf8")
         throw new Error("missing config")
     } else {
-        code = code0.replace(/^#([^\n]+?)\n/u, `# ${filename}\n`)
+        code = isYaml(inputFile)
+            ? code0.replace(/^#([^\n]+?)\n/u, `# ${filename}\n`)
+            : code0.replace(/^<!--(.*?)-->/u, `<!--${filename}-->`)
         try {
             config = configStr ? JSON.parse(configStr[1]) : {}
         } catch (e) {
@@ -371,5 +415,19 @@ function getConfig(ruleName: string, inputFile: string) {
         }
     }
 
-    return Object.assign({}, config, { code, filename })
+    return Object.assign(
+        isVue(inputFile)
+            ? { parser: require.resolve("vue-eslint-parser") }
+            : {},
+        config,
+        { code, filename },
+    )
+}
+
+function isYaml(fileName: string) {
+    return fileName.endsWith(".yml") || fileName.endsWith(".yaml")
+}
+
+function isVue(fileName: string) {
+    return fileName.endsWith(".vue")
 }

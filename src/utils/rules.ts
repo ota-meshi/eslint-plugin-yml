@@ -8,6 +8,7 @@ import flowSequenceBracketSpacing from "../rules/flow-sequence-bracket-spacing"
 import indent from "../rules/indent"
 import keyNameCasing from "../rules/key-name-casing"
 import noIrregularWhitespace from "../rules/no-irregular-whitespace"
+import noParsingErrorInVueCustomBlock from "../rules/no-parsing-error-in-vue-custom-block"
 import noTabIndent from "../rules/no-tab-indent"
 import spacedComment from "../rules/spaced-comment"
 
@@ -21,6 +22,7 @@ export const rules = [
     indent,
     keyNameCasing,
     noIrregularWhitespace,
+    noParsingErrorInVueCustomBlock,
     noTabIndent,
     spacedComment,
 ] as RuleModule[]
