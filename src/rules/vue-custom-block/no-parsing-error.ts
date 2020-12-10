@@ -1,10 +1,10 @@
 import type { AST } from "yaml-eslint-parser"
-import { createRule } from "../utils"
+import { createRule } from "../../utils"
 
-export default createRule("no-parsing-error-in-vue-custom-block", {
+export default createRule("vue-custom-block/no-parsing-error", {
     meta: {
         docs: {
-            description: "disallow parsing errors in vue custom blocks",
+            description: "disallow parsing errors in Vue custom blocks",
             categories: ["recommended"],
             extensionRule: false,
         },
