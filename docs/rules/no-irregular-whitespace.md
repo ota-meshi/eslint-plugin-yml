@@ -35,8 +35,8 @@ c: d
 ```json
 {
   "yml/no-irregular-whitespace": ["error", {
-        "skipQuotedScalars": true,
-        "skipComments": false
+    "skipQuotedScalars": true,
+    "skipComments": false
   }]
 }
 ```

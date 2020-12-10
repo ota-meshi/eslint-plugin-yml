@@ -33,7 +33,7 @@ This rule aims to use consistent style of block or flow styles.
 
 ## :wrench: Options
 
-```json
+```json5
 {
   "yml/block-mapping": ["error", "always" | "never"],
   // or

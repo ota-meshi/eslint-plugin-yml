@@ -16,6 +16,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/block-mapping](./block-mapping.md) | require or disallow block style mappings. | :wrench: |  |
 | [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: |  |
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
+| [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |
 | [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: |
 
 ## Extension Rules
