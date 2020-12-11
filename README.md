@@ -19,6 +19,8 @@ This ESLint plugin provides linting rules for [YAML].
 - You can use ESLint to lint [YAML].
 - You can find out the problem with your [YAML] files.
 - Supports [Vue SFC](https://vue-loader.vuejs.org/spec.html) custom blocks such as `<i18n lang="yaml">`.
+- Supports ESLint directives. e.g. `# eslint-disable-next-line`
+- You can check your code in real-time using the ESLint editor integrations.
 
 You can check on the [Online DEMO](https://ota-meshi.github.io/eslint-plugin-yml/playground/).
 
