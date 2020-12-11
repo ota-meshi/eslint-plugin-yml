@@ -119,6 +119,7 @@ The rules with the following star :star: are included in the config.
 | [yml/block-mapping](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping.html) | require or disallow block style mappings. | :wrench: |  |
 | [yml/block-sequence](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence.html) | require or disallow block style sequences. | :wrench: |  |
 | [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  |
+| [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |
 | [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: |
 
 ### Extension Rules

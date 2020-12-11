@@ -6,6 +6,7 @@ import flowMappingCurlySpacing from "../rules/flow-mapping-curly-spacing"
 import flowSequenceBracketNewline from "../rules/flow-sequence-bracket-newline"
 import flowSequenceBracketSpacing from "../rules/flow-sequence-bracket-spacing"
 import indent from "../rules/indent"
+import keyNameCasing from "../rules/key-name-casing"
 import noIrregularWhitespace from "../rules/no-irregular-whitespace"
 import noTabIndent from "../rules/no-tab-indent"
 import spacedComment from "../rules/spaced-comment"
@@ -18,6 +19,7 @@ export const rules = [
     flowSequenceBracketNewline,
     flowSequenceBracketSpacing,
     indent,
+    keyNameCasing,
     noIrregularWhitespace,
     noTabIndent,
     spacedComment,

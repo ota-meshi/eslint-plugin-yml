@@ -36,7 +36,7 @@ c: [
 
 ## :wrench: Options
 
-```json
+```json5
 {
   "yml/block-sequence": ["error", "always" | "never"],
   // or
