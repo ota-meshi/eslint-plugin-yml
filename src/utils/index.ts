@@ -39,12 +39,7 @@ export function createRule(
                     context,
                     yamlESLintParser,
                     {
-                        target(lang: string | null) {
-                            if (lang) {
-                                return /^ya?ml$/i.test(lang)
-                            }
-                            return false
-                        },
+                        target: ["yaml", "yml"],
                         create(blockContext: Rule.RuleContext) {
                             return rule.create(blockContext as any, {
                                 customBlock: true,
