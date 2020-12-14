@@ -18,6 +18,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |
 | [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: |
+| [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: |
 
 ## Extension Rules
 

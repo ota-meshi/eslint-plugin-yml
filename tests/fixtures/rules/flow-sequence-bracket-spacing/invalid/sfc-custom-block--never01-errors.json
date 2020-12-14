@@ -1,0 +1,7 @@
+[
+    {
+        "message": "There should be no space before ']'.",
+        "line": 4,
+        "column": 10
+    }
+]

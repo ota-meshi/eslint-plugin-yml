@@ -16,6 +16,13 @@
 
 This ESLint plugin provides linting rules for [YAML].
 
+- You can use ESLint to lint [YAML].
+- You can find out the problem with your [YAML] files.
+- Supports [Vue SFC](https://vue-loader.vuejs.org/spec.html) custom blocks such as `<i18n lang="yaml">`.  
+  Requirements `vue-eslint-parser` v7.3.0 and above.
+- Supports ESLint directives. e.g. `# eslint-disable-next-line`
+- You can check your code in real-time using the ESLint editor integrations.
+
 You can check on the [Online DEMO](https://ota-meshi.github.io/eslint-plugin-yml/playground/).
 
 <!--DOCS_IGNORE_START-->
@@ -121,6 +128,7 @@ The rules with the following star :star: are included in the config.
 | [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |
 | [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: |
+| [yml/vue-custom-block/no-parsing-error](https://ota-meshi.github.io/eslint-plugin-yml/rules/vue-custom-block/no-parsing-error.html) | disallow parsing errors in Vue custom blocks |  | :star: |
 
 ### Extension Rules
 

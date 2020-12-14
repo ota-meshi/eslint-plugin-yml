@@ -42,12 +42,25 @@ export default {
         dark: {
             type: Boolean,
         },
+        language: {
+            type: String,
+            default: "json",
+        },
+        fileName: {
+            type: String,
+            default: "a.json",
+        },
+        parser: {
+            type: String,
+            default: "jsonc-eslint-parser",
+        },
     },
 
     data() {
         return {
             eslint4b: null,
-            parseForESLint: null,
+            yamlESLintParser: null,
+            vueESLintParser: null,
             format: {
                 insertSpaces: true,
                 tabSize: 2,
@@ -84,29 +97,26 @@ export default {
                     SharedArrayBuffer: false,
                 },
                 rules: this.rules,
-                parser: "yaml-eslint-parser",
+                parser: this.parser,
                 parserOptions: {
                     sourceType: "script",
                     ecmaVersion: 2020,
                 },
             }
         },
-        fileName() {
-            return "a.yml"
-        },
-        language() {
-            return "yaml"
-        },
         linter() {
-            if (!this.eslint4b || !this.parseForESLint) {
+            if (
+                !this.eslint4b ||
+                !this.yamlESLintParser ||
+                !this.vueESLintParser
+            ) {
                 return null
             }
             const Linter = this.eslint4b
 
             const linter = new Linter()
-            linter.defineParser("yaml-eslint-parser", {
-                parseForESLint: this.parseForESLint,
-            })
+            linter.defineParser("yaml-eslint-parser", this.yamlESLintParser)
+            linter.defineParser("vue-eslint-parser", this.vueESLintParser)
 
             for (const k of Object.keys(plugin.rules)) {
                 const rule = plugin.rules[k]
@@ -119,12 +129,18 @@ export default {
 
     async mounted() {
         // Load linter asynchronously.
-        const [{ default: eslint4b }, { parseForESLint }] = await Promise.all([
+        const [
+            { default: eslint4b },
+            yamlESLintParser,
+            vueESLintParser,
+        ] = await Promise.all([
             import("eslint4b"),
             import("yaml-eslint-parser"),
+            import("espree").then(() => import("vue-eslint-parser")),
         ])
         this.eslint4b = eslint4b
-        this.parseForESLint = parseForESLint
+        this.yamlESLintParser = yamlESLintParser
+        this.vueESLintParser = vueESLintParser
 
         const editor = this.$refs.editor
 

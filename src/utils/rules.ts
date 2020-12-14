@@ -10,6 +10,7 @@ import keyNameCasing from "../rules/key-name-casing"
 import noIrregularWhitespace from "../rules/no-irregular-whitespace"
 import noTabIndent from "../rules/no-tab-indent"
 import spacedComment from "../rules/spaced-comment"
+import vueCustomBlockNoParsingError from "../rules/vue-custom-block/no-parsing-error"
 
 export const rules = [
     blockMapping,
@@ -23,4 +24,5 @@ export const rules = [
     noIrregularWhitespace,
     noTabIndent,
     spacedComment,
+    vueCustomBlockNoParsingError,
 ] as RuleModule[]

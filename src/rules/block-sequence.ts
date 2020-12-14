@@ -345,7 +345,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
             includeComments: true,
         })
         if (!openPrevToken) {
-            yield fixer.removeRange([0, open.range[1]])
+            yield fixer.removeRange([sourceCode.ast.range[0], open.range[1]])
         } else if (openPrevToken.loc.end.line < open.loc.start.line) {
             yield fixer.removeRange([openPrevToken.range[1], open.range[1]])
         } else {

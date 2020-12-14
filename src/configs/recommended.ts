@@ -7,5 +7,6 @@ export = {
         // eslint-plugin-yml rules
         "yml/no-irregular-whitespace": "error",
         "yml/no-tab-indent": "error",
+        "yml/vue-custom-block/no-parsing-error": "error",
     },
 }
