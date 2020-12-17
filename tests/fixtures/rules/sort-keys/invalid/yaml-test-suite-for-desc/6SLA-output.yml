@@ -1,0 +1,3 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/6SLA-input.yaml
+'x\ny:z\tx $%^&*()x': 24
+"foo\nbar:baz\tx \\$%^&*()x": 23

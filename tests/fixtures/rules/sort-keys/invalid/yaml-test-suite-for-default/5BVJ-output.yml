@@ -1,0 +1,7 @@
+# sort-keys/invalid/yaml-test-suite-for-default/5BVJ-input.yaml
+folded: >
+  some
+  text
+literal: |
+  some
+  text

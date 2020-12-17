@@ -1,0 +1,7 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/4CQQ-input.yaml
+quoted: "So does this
+  quoted scalar.\n"
+plain:
+  This unquoted scalar
+  spans many lines.
+

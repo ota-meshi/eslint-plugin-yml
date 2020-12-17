@@ -1,0 +1,6 @@
+# sort-keys/invalid/natural-input.yml
+
+$: 1
+_: 2
+A: 3
+a: 4

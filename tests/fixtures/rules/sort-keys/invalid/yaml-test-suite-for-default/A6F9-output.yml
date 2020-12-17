@@ -1,0 +1,7 @@
+# sort-keys/invalid/yaml-test-suite-for-default/A6F9-input.yaml
+clip: |
+  text
+strip: |-
+  text
+keep: |+
+  text

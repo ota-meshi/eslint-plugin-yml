@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Expected mapping keys to be in ascending order. 'Fatal' should be before 'User'.",
+        "line": 17,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in ascending order. 'code' should be before 'line'.",
+        "line": 22,
+        "column": 5
+    },
+    {
+        "message": "Expected mapping keys to be in ascending order. 'code' should be before 'line'.",
+        "line": 26,
+        "column": 5
+    }
+]

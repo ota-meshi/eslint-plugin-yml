@@ -1,0 +1,30 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/UGM3-input.yaml
+--- !<tag:clarkevans.com,2002:invoice>
+date   : 2001-01-23
+invoice: 34843
+bill-to: &id001
+    family : Dumars
+    given  : Chris
+    address:
+        city    : Royal Oak
+        lines: |
+            458 Walkman Dr.
+            Suite #292
+        state   : MI
+        postal  : 48046
+product:
+    - sku         : BL394D
+      quantity    : 4
+      description : Basketball
+      price       : 450.00
+    - sku         : BL4438H
+      quantity    : 1
+      description : Super Hoop
+      price       : 2392.00
+ship-to: *id001
+tax  : 251.42
+total: 4443.52
+comments:
+    Late afternoon is best.
+    Backup contact is Nancy
+    Billsmer @ 338-4338.

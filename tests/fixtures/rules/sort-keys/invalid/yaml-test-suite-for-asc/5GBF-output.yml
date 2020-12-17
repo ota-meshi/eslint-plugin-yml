@@ -1,0 +1,9 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/5GBF-input.yaml
+Chomping: |
+  Clipped empty lines
+Folding:
+  "Empty line
+   	
+  as a line feed"
+ 
+

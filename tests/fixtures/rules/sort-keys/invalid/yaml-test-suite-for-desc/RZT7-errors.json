@@ -1,0 +1,42 @@
+[
+    {
+        "message": "Expected mapping keys to be in descending order. 'User' should be before 'Time'.",
+        "line": 4,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'Warning' should be before 'User'.",
+        "line": 5,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'User' should be before 'Time'.",
+        "line": 10,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'Warning' should be before 'User'.",
+        "line": 11,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'User' should be before 'Date'.",
+        "line": 16,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'Stack' should be before 'Fatal'.",
+        "line": 19,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'line' should be before 'file'.",
+        "line": 21,
+        "column": 5
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'line' should be before 'file'.",
+        "line": 25,
+        "column": 5
+    }
+]

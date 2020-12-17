@@ -1,0 +1,4 @@
+# sort-keys/invalid/yaml-test-suite-for-default/SYW4-input.yaml
+avg: 0.278 # Batting average
+hr:  65    # Home runs
+rbi: 147   # Runs Batted In

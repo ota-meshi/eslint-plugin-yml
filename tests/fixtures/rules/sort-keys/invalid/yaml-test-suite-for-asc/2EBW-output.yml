@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/2EBW-input.yaml
+?foo: safe question mark
+a!"#$%&'()*+,-./09:;<=>?@AZ[\]^_`az{|}~: safe
+:foo: safe colon
+-foo: safe dash
+this is#not: a comment

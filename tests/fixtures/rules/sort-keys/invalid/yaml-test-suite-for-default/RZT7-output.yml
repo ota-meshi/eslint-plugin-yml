@@ -1,0 +1,27 @@
+# sort-keys/invalid/yaml-test-suite-for-default/RZT7-input.yaml
+---
+Time: 2001-11-23 15:01:42 -5
+User: ed
+Warning:
+  This is an error message
+  for the log file
+---
+Time: 2001-11-23 15:02:31 -5
+User: ed
+Warning:
+  A slightly different error
+  message.
+---
+Date: 2001-11-23 15:03:17 -5
+Fatal:
+  Unknown variable "bar"
+User: ed
+Stack:
+  - code: |
+      x = MoreObject("345\n")
+    file: TopClass.py
+    line: 23
+  - code: |-
+      foo = bar
+    file: MoreClass.py
+    line: 58

@@ -1,0 +1,4 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/KMK3-input.yaml
+baz: 2
+foo:
+  bar: 1

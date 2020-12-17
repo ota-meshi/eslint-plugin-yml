@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Expected mapping keys to be in ascending order. 'control' should be before 'unicode'.",
+        "line": 3,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in ascending order. 'quoted' should be before 'single'.",
+        "line": 7,
+        "column": 1
+    }
+]

@@ -1,0 +1,3 @@
+# sort-keys/invalid/case-sensitive-false-input.yml
+
+{a: 1, A: 2, B: 3, b: 4, c: 5, C: 6}

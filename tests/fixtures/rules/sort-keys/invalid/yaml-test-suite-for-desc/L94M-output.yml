@@ -1,0 +1,5 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/L94M-input.yaml
+? c
+: !!str d
+? !!str a
+: !!int 47

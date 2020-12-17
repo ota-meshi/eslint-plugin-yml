@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Expected mapping keys to be in descending order. 'quantity' should be before 'item'.",
+        "line": 5,
+        "column": 3
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'quantity' should be before 'item'.",
+        "line": 7,
+        "column": 3
+    },
+    {
+        "message": "Expected mapping keys to be in descending order. 'quantity' should be before 'item'.",
+        "line": 9,
+        "column": 3
+    }
+]

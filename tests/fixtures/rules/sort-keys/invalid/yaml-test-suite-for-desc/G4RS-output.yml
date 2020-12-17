@@ -1,0 +1,8 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/G4RS-input.yaml
+unicode: "Sosa did fine.\u263A"
+hex esc: "\x0d\x0a is \r\n"
+control: "\b1998\t1999\t2000\n"
+
+single: '"Howdy!" he cried.'
+quoted: ' # Not a ''comment''.'
+tie-fighter: '|\-*-/|'

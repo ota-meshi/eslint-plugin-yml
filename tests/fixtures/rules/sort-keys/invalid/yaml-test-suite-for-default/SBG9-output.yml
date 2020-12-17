@@ -1,0 +1,2 @@
+# sort-keys/invalid/yaml-test-suite-for-default/SBG9-input.yaml
+{ [d, e]: f,a: [b, c]}

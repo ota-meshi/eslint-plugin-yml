@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected mapping keys to be in descending order. 'e 42' should be before 'a true'.",
+        "line": 6,
+        "column": 3
+    }
+]

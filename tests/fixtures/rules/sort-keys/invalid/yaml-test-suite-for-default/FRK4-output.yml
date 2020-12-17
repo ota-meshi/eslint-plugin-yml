@@ -1,0 +1,5 @@
+# sort-keys/invalid/yaml-test-suite-for-default/FRK4-input.yaml
+{
+  : bar,
+  ? foo :,
+}

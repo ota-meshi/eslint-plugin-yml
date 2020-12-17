@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/DFF7-input.yaml
+{
+implicit: entry,
+? explicit: entry,
+?
+}

@@ -1,0 +1,3 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/ZH7C-input.yaml
+c: &d d
+&a a: b

@@ -1,0 +1,8 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/2XXW-input.yaml
+# Sets are represented as a
+# Mapping where each key is
+# associated with a null value
+--- !!set
+? Sammy Sosa
+? Mark McGwire
+? Ken Griff

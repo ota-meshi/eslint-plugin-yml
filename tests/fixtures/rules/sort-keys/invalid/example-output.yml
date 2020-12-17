@@ -1,0 +1,13 @@
+# sort-keys/invalid/example-input.yml
+
+# ✗ BAD
+bad:
+  a: 1
+  c: 3
+  b: 2
+# ✓ GOOD
+good:
+  a: 1
+  b: 2
+  c: 3
+

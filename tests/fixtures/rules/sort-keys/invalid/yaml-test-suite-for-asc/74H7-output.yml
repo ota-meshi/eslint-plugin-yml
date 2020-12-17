@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/74H7-input.yaml
+!!int 23: !!bool false
+!!str a: b
+c: !!int 42
+e: !!str f
+g: h

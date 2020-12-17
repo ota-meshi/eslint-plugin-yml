@@ -139,6 +139,7 @@ The rules with the following star :star: are included in the config.
 | [yml/flow-sequence-bracket-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-newline.html) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: |  |
 | [yml/flow-sequence-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-spacing.html) | enforce consistent spacing inside flow sequence brackets | :wrench: |  |
 | [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: |
+| [yml/sort-keys](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-keys.html) | require mapping keys to be sorted | :wrench: |  |
 | [yml/spaced-comment](https://ota-meshi.github.io/eslint-plugin-yml/rules/spaced-comment.html) | enforce consistent spacing after the `#` in a comment | :wrench: |  |
 
 <!--RULES_TABLE_END-->

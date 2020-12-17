@@ -1,0 +1,7 @@
+# sort-keys/invalid/yaml-test-suite-for-default/M5C3-input.yaml
+folded:
+   !foo
+  >1
+ value
+literal: |2
+  value

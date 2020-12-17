@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-default/FBC9-input.yaml
+safe: a!"#$%&'()*+,-./09:;<=>?@AZ[\]^_`az{|}~
+     !"#$%&'()*+,-./09:;<=>?@AZ[\]^_`az{|}~
+safe colon: :foo
+safe question mark: ?foo
+safe dash: -foo

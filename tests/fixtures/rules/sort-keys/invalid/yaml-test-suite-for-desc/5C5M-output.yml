@@ -1,0 +1,3 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/5C5M-input.yaml
+- { three: four , one : two , }
+- {seven : eight,five: six}
