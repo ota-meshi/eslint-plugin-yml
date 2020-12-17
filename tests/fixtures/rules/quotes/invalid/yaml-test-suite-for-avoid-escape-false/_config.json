@@ -1,0 +1,12 @@
+{
+    "options": [
+        {
+            "avoidEscape": false
+        }
+    ],
+    "settings": {
+        "yml": {
+            "indent": 8
+        }
+    }
+}

@@ -87,3 +87,24 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "quotes",
+    {
+        default: [],
+        double: [{ prefer: "double" }],
+        single: [{ prefer: "single" }],
+        "avoid-escape-false": [{ avoidEscape: false }],
+    },
+    { force: true },
+)
+
+makeSuiteTests(
+    "plain-scalar",
+    {
+        default: [],
+        always: ["always"],
+        never: ["never"],
+    },
+    { force: true },
+)

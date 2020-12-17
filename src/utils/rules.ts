@@ -9,6 +9,8 @@ import indent from "../rules/indent"
 import keyNameCasing from "../rules/key-name-casing"
 import noIrregularWhitespace from "../rules/no-irregular-whitespace"
 import noTabIndent from "../rules/no-tab-indent"
+import plainScalar from "../rules/plain-scalar"
+import quotes from "../rules/quotes"
 import sortKeys from "../rules/sort-keys"
 import spacedComment from "../rules/spaced-comment"
 import vueCustomBlockNoParsingError from "../rules/vue-custom-block/no-parsing-error"
@@ -24,6 +26,8 @@ export const rules = [
     keyNameCasing,
     noIrregularWhitespace,
     noTabIndent,
+    plainScalar,
+    quotes,
     sortKeys,
     spacedComment,
     vueCustomBlockNoParsingError,

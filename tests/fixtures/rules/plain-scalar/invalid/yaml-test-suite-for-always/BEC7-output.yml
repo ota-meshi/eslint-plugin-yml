@@ -1,0 +1,5 @@
+# plain-scalar/invalid/yaml-test-suite-for-always/BEC7-input.yaml
+%YAML 1.3 # Attempt parsing
+          # with a warning
+---
+foo

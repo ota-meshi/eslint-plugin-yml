@@ -1,0 +1,4 @@
+# quotes/invalid/yaml-test-suite-for-single/6LVF-input.yaml
+%FOO  bar baz # Should be ignored
+              # with a warning.
+--- 'foo'

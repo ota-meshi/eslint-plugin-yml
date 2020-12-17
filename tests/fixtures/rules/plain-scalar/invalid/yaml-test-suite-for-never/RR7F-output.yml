@@ -1,0 +1,4 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/RR7F-input.yaml
+"a": 4.2
+? 23
+: "d"

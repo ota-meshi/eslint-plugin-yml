@@ -1,0 +1,9 @@
+# plain-scalar/invalid/yaml-test-suite-for-default/6WLZ-input.yaml
+# Private
+---
+!foo bar
+...
+# Global
+%TAG ! tag:example.com,2000:app/
+---
+!foo bar

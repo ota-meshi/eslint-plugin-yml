@@ -1,0 +1,3 @@
+# quotes/invalid/yaml-test-suite-for-avoid-escape-false/6SLA-input.yaml
+"foo\nbar:baz\tx \\$%^&*()x": 23
+"x\\ny:z\\tx $%^&*()x": 24

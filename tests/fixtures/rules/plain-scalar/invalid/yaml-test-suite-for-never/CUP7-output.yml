@@ -1,0 +1,3 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/CUP7-input.yaml
+"anchored": !local &anchor "value"
+"alias": *anchor

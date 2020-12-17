@@ -1,0 +1,9 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/7BUB-input.yaml
+---
+"hr":
+  - "Mark McGwire"
+  # Following node labeled SS
+  - &SS "Sammy Sosa"
+"rbi":
+  - *SS # Subsequent occurrence
+  - "Ken Griffey"

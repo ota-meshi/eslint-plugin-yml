@@ -1,0 +1,2 @@
+# quotes/invalid/yaml-test-suite-for-avoid-escape-false/6H3V-input.yaml
+"foo: bar\\": baz'

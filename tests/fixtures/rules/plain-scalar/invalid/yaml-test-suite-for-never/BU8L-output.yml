@@ -1,0 +1,4 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/BU8L-input.yaml
+"key": &anchor
+ !!map
+  "a": "b"

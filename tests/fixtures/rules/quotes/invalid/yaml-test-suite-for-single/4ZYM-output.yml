@@ -1,0 +1,8 @@
+# quotes/invalid/yaml-test-suite-for-single/4ZYM-input.yaml
+plain: text
+  lines
+quoted: 'text
+  	lines'
+block: |
+  text
+   	lines

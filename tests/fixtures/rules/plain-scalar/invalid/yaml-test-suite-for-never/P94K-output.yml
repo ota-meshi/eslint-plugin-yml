@@ -1,0 +1,6 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/P94K-input.yaml
+"key":    # Comment
+        # lines
+  "value"
+
+

@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Strings must use singlequote.",
+        "line": 2,
+        "column": 9
+    },
+    {
+        "message": "Strings must use singlequote.",
+        "line": 4,
+        "column": 11
+    }
+]

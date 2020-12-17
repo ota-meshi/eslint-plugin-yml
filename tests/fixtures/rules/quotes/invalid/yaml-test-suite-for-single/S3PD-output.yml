@@ -1,0 +1,5 @@
+# quotes/invalid/yaml-test-suite-for-single/S3PD-input.yaml
+plain key: in-line value
+: # Both empty
+'quoted key':
+- entry

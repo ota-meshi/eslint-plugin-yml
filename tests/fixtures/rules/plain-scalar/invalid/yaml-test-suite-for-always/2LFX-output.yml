@@ -1,0 +1,5 @@
+# plain-scalar/invalid/yaml-test-suite-for-always/2LFX-input.yaml
+%FOO  bar baz # Should be ignored
+              # with a warning.
+---
+foo

@@ -1,0 +1,6 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/C2DT-input.yaml
+{
+"adjacent":"value",
+"readable": "value",
+"empty":
+}

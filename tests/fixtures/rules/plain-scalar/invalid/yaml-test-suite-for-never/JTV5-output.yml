@@ -1,0 +1,4 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/JTV5-input.yaml
+? "a true"
+: "null d"
+? "e 42"

@@ -1,0 +1,6 @@
+# quotes/invalid/yaml-test-suite-for-double/Q88A-input.yaml
+- [ a, b ]
+- { a: b }
+- "a"
+- "b"
+- c

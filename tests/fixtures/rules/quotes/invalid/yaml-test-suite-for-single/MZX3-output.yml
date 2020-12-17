@@ -1,0 +1,7 @@
+# quotes/invalid/yaml-test-suite-for-single/MZX3-input.yaml
+- plain
+- 'double quoted'
+- 'single quoted'
+- >
+  block
+- plain again

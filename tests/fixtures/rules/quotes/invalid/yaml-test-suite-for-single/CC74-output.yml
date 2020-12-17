@@ -1,0 +1,4 @@
+# quotes/invalid/yaml-test-suite-for-single/CC74-input.yaml
+%TAG !e! tag:example.com,2000:app/
+---
+!e!foo 'bar'

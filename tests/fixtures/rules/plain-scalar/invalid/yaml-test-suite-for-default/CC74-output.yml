@@ -1,0 +1,4 @@
+# plain-scalar/invalid/yaml-test-suite-for-default/CC74-input.yaml
+%TAG !e! tag:example.com,2000:app/
+---
+!e!foo bar

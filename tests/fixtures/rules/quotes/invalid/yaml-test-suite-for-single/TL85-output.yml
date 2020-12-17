@@ -1,0 +1,8 @@
+# quotes/invalid/yaml-test-suite-for-single/TL85-input.yaml
+'
+  foo 
+ 
+  	 bar
+
+  baz
+'

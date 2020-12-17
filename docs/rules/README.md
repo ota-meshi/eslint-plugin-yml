@@ -18,6 +18,8 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |
 | [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: |
+| [yml/plain-scalar](./plain-scalar.md) | require plain scalars instead of quotes scalars | :wrench: |  |
+| [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: |  |
 | [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: |
 
 ## Extension Rules

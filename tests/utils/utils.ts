@@ -316,7 +316,7 @@ function writeFixtures(
     if (force || !exists(errorFile)) {
         fs.writeFileSync(
             errorFile,
-            JSON.stringify(
+            `${JSON.stringify(
                 result.map((m) => ({
                     message: m.message,
                     line: m.line,
@@ -324,7 +324,7 @@ function writeFixtures(
                 })),
                 null,
                 4,
-            ),
+            )}\n`,
             "utf8",
         )
     }

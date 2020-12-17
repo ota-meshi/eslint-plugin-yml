@@ -1,0 +1,9 @@
+# quotes/invalid/yaml-test-suite-for-single/6WPF-input.yaml
+---
+'
+  foo 
+ 
+    bar
+
+  baz
+'
