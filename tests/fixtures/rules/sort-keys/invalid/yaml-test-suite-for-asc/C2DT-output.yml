@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/C2DT-input.yaml
+{
+"adjacent":value,
+"empty":,
+"readable": value
+}

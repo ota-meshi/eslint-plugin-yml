@@ -1,0 +1,5 @@
+# sort-keys/invalid/yaml-test-suite-for-default/Z67P-input.yaml
+folded: !foo >1
+ value
+literal: |2
+  value

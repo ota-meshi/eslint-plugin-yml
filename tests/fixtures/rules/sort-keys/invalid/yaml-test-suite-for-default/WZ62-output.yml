@@ -1,0 +1,5 @@
+# sort-keys/invalid/yaml-test-suite-for-default/WZ62-input.yaml
+{
+  !!str : bar,
+  foo : !!str,
+}

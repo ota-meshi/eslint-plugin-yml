@@ -1,0 +1,20 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/F8F9-input.yaml
+ # Strip
+  # Comments:
+strip: |-
+  # text
+  
+ # Keep
+  # comments:
+
+keep: |+
+  # text
+
+ # Clip
+  # comments:
+
+clip: |
+  # text
+ 
+ # Trail
+  # comments.

@@ -1,0 +1,5 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/RLU9-input.yaml
+bar:
+  - 44
+foo:
+- 42

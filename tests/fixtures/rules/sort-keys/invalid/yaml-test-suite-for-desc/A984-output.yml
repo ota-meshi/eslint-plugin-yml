@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/A984-input.yaml
+d:
+ e
+  f
+a: b
+ c

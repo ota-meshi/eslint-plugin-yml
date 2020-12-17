@@ -52,7 +52,7 @@ export default {
         },
         parser: {
             type: String,
-            default: "jsonc-eslint-parser",
+            default: "yaml-eslint-parser",
         },
     },
 

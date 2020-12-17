@@ -1,0 +1,8 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/HMK4-input.yaml
+stats: |
+  65 Home Runs
+  0.278 Batting Average
+name: Mark McGwire
+accomplishment: >
+  Mark set a major league
+  home run record in 1998.

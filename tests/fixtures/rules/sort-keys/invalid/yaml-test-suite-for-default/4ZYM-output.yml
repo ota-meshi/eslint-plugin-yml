@@ -1,0 +1,8 @@
+# sort-keys/invalid/yaml-test-suite-for-default/4ZYM-input.yaml
+block: |
+  text
+   	lines
+plain: text
+  lines
+quoted: "text
+  	lines"

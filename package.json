@@ -1,94 +1,96 @@
 {
-  "name": "eslint-plugin-yml",
-  "version": "0.2.0",
-  "description": "This ESLint plugin provides linting rules for YAML.",
-  "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
-  "scripts": {
-    "prebuild": "npm run -s clean",
-    "build": "npm run build:ts",
-    "build:ts": "tsc --project ./tsconfig.build.json",
-    "clean": "rimraf .nyc_output dist coverage",
-    "lint": "eslint \"tests\" \"src\" \"docs/.vuepress\" --ext .js,.vue,.ts,.json",
-    "eslint-fix": "eslint \"tests\" \"src\" \"docs/.vuepress\" --ext .js,.vue,.ts,.json --fix",
-    "pretest:base": "cross-env DEBUG=eslint-plugin-yml*",
-    "test:base": "mocha --require ts-node/register \"tests/src/**/*.ts\" --reporter dot --timeout 60000",
-    "test": "npm run test:base",
-    "cover": "nyc --reporter=lcov npm run test:base",
-    "test:debug": "mocha --require ts-node/register --inspect \"tests/src/**/*.ts\" --reporter dot",
-    "update": "node --require ts-node/register ./tools/update.ts && npm run eslint-fix && npm run cover",
-    "new": "ts-node ./tools/new-rule.ts",
-    "predocs:watch": "npm run build:ts",
-    "docs:watch": "vuepress dev --debug docs",
-    "docs:build": "npm run build:ts && vuepress build docs --no-cache",
-    "preversion": "npm test && npm run update && git add .",
-    "version": "npm run eslint-fix && git add .",
-    "update-fixtures": "ts-node ./tools/update-fixtures.ts && npm run eslint-fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ota-meshi/eslint-plugin-yml.git"
-  },
-  "keywords": [
-    "eslint",
-    "eslintplugin",
-    "eslint-plugin",
-    "yaml",
-    "yml"
-  ],
-  "author": "Yosuke Ota",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ota-meshi/eslint-plugin-yml/issues"
-  },
-  "homepage": "https://ota-meshi.github.io/eslint-plugin-yml/",
-  "peerDependencies": {
-    "eslint": ">=6.0.0"
-  },
-  "dependencies": {
-    "debug": "^4.1.1",
-    "lodash": "^4.17.19",
-    "yaml-eslint-parser": "^0.0.7"
-  },
-  "devDependencies": {
-    "@ota-meshi/eslint-plugin": "^0.0.6",
-    "@types/debug": "^4.1.5",
-    "@types/eslint": "^7.2.0",
-    "@types/eslint-scope": "^3.7.0",
-    "@types/eslint-visitor-keys": "^1.0.0",
-    "@types/estree": "^0.0.45",
-    "@types/lodash": "^4.14.158",
-    "@types/mocha": "^7.0.2",
-    "@types/node": "^14.0.13",
-    "@types/semver": "^7.3.1",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
-    "babel-eslint": "^10.1.0",
-    "cross-env": "^7.0.2",
-    "eslint": "^7.3.0",
-    "eslint-config-prettier": "^6.13.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-eslint-plugin": "^2.3.0",
-    "eslint-plugin-jsonc": "^0.3.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-vue": "^7.0.1",
-    "eslint4b": "^7.3.1",
-    "espree": "^7.1.0",
-    "mocha": "^7.0.0",
-    "nyc": "^15.1.0",
-    "prettier": "^2.0.5",
-    "raw-loader": "^4.0.1",
-    "semver": "^7.3.2",
-    "stylelint": "^13.6.1",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-plugin-stylus": "^0.9.0",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.5",
-    "vue-eslint-editor": "^1.1.0",
-    "vue-eslint-parser": "^7.3.0",
-    "vuepress": "^1.5.2"
-  }
+    "name": "eslint-plugin-yml",
+    "version": "0.2.0",
+    "description": "This ESLint plugin provides linting rules for YAML.",
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "prebuild": "npm run -s clean",
+        "build": "npm run build:ts",
+        "build:ts": "tsc --project ./tsconfig.build.json",
+        "clean": "rimraf .nyc_output dist coverage",
+        "lint": "eslint \"tests\" \"src\" \"docs/.vuepress\" --ext .js,.vue,.ts,.json",
+        "eslint-fix": "eslint \"tests\" \"src\" \"docs/.vuepress\" --ext .js,.vue,.ts,.json --fix",
+        "pretest:base": "cross-env DEBUG=eslint-plugin-yml*",
+        "test:base": "mocha --require ts-node/register \"tests/src/**/*.ts\" --reporter dot --timeout 60000",
+        "test": "npm run test:base",
+        "cover": "nyc --reporter=lcov npm run test:base",
+        "test:debug": "mocha --require ts-node/register --inspect \"tests/src/**/*.ts\" --reporter dot",
+        "update": "node --require ts-node/register ./tools/update.ts && npm run eslint-fix && npm run cover",
+        "new": "ts-node ./tools/new-rule.ts",
+        "predocs:watch": "npm run build:ts",
+        "docs:watch": "vuepress dev --debug docs",
+        "docs:build": "npm run build:ts && vuepress build docs --no-cache",
+        "preversion": "npm test && npm run update && git add .",
+        "version": "npm run eslint-fix && git add .",
+        "update-fixtures": "ts-node ./tools/update-fixtures.ts && npm run eslint-fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ota-meshi/eslint-plugin-yml.git"
+    },
+    "keywords": [
+        "eslint",
+        "eslintplugin",
+        "eslint-plugin",
+        "yaml",
+        "yml"
+    ],
+    "author": "Yosuke Ota",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ota-meshi/eslint-plugin-yml/issues"
+    },
+    "homepage": "https://ota-meshi.github.io/eslint-plugin-yml/",
+    "peerDependencies": {
+        "eslint": ">=6.0.0"
+    },
+    "dependencies": {
+        "debug": "^4.1.1",
+        "lodash": "^4.17.19",
+        "natural-compare": "^1.4.0",
+        "yaml-eslint-parser": "^0.0.7"
+    },
+    "devDependencies": {
+        "@ota-meshi/eslint-plugin": "^0.0.6",
+        "@types/debug": "^4.1.5",
+        "@types/eslint": "^7.2.0",
+        "@types/eslint-scope": "^3.7.0",
+        "@types/eslint-visitor-keys": "^1.0.0",
+        "@types/estree": "^0.0.45",
+        "@types/lodash": "^4.14.158",
+        "@types/mocha": "^7.0.2",
+        "@types/natural-compare": "^1.4.0",
+        "@types/node": "^14.0.13",
+        "@types/semver": "^7.3.1",
+        "@typescript-eslint/eslint-plugin": "^4.4.1",
+        "@typescript-eslint/parser": "^4.4.1",
+        "babel-eslint": "^10.1.0",
+        "cross-env": "^7.0.2",
+        "eslint": "^7.3.0",
+        "eslint-config-prettier": "^6.13.0",
+        "eslint-plugin-eslint-comments": "^3.2.0",
+        "eslint-plugin-eslint-plugin": "^2.3.0",
+        "eslint-plugin-jsonc": "^0.3.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-vue": "^7.0.1",
+        "eslint4b": "^7.3.1",
+        "espree": "^7.1.0",
+        "mocha": "^7.0.0",
+        "nyc": "^15.1.0",
+        "prettier": "^2.0.5",
+        "raw-loader": "^4.0.1",
+        "semver": "^7.3.2",
+        "stylelint": "^13.6.1",
+        "stylelint-config-standard": "^20.0.0",
+        "stylelint-plugin-stylus": "^0.9.0",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.9.5",
+        "vue-eslint-editor": "^1.1.0",
+        "vue-eslint-parser": "^7.3.0",
+        "vuepress": "^1.5.2"
+    }
 }

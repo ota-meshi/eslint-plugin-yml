@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Expected mapping keys to be in ascending order. 'bad' should be before 'good'.",
+        "line": 10,
+        "column": 1
+    },
+    {
+        "message": "Expected mapping keys to be in ascending order. 'b' should be before 'c'.",
+        "line": 13,
+        "column": 3
+    }
+]

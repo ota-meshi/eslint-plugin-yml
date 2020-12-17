@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/2EBW-input.yaml
+this is#not: a comment
+a!"#$%&'()*+,-./09:;<=>?@AZ[\]^_`az{|}~: safe
+?foo: safe question mark
+:foo: safe colon
+-foo: safe dash

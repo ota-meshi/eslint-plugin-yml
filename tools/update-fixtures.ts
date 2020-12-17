@@ -77,3 +77,13 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "sort-keys",
+    {
+        default: [],
+        desc: ["desc"],
+        asc: ["asc"],
+    },
+    { force: true },
+)

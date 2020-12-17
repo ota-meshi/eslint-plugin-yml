@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-default/ZF4X-input.yaml
+Mark McGwire: { avg: 0.278,hr: 65}
+Sammy Sosa: {
+    avg: 0.288,
+    hr: 63
+  }

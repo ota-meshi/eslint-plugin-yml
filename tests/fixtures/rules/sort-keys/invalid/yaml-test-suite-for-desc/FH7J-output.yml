@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/FH7J-input.yaml
+- !!str
+-
+  b: !!str
+  !!null : a
+- !!str : !!null

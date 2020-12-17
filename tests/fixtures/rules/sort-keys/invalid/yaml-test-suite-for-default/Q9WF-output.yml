@@ -1,0 +1,7 @@
+# sort-keys/invalid/yaml-test-suite-for-default/Q9WF-input.yaml
+{ first: Sammy, last: Sosa }:
+  avg: # Average
+   0.278
+# Statistics:
+  hr:  # Home runs
+     65

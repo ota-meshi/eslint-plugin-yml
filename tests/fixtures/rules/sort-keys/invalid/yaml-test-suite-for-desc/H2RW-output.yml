@@ -1,0 +1,13 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/H2RW-input.yaml
+text: |
+  a
+    
+  b
+
+  c
+ 
+  d
+foo: 1
+
+bar: 2
+    

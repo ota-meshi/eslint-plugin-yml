@@ -1,0 +1,16 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/RZP5-input.yaml
+? # lala
+ - seq1
+: # lala
+ - #lala
+  seq2
+a: "double
+  quotes" # lala
+b: plain
+ value  # lala
+c  : #lala
+  d
+e: &node # lala
+ - x: y
+block: > # lala
+  abcde

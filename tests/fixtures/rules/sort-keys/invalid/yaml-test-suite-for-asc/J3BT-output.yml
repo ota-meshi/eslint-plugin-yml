@@ -1,0 +1,7 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/J3BT-input.yaml
+# Tabs and spaces
+block:	|
+  void main() {
+  	printf("Hello, world!\n");
+  }
+quoted: "Quoted 	"

@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected mapping keys to be in ascending order. 'clip' should be before 'strip'.",
+        "line": 10,
+        "column": 1
+    }
+]

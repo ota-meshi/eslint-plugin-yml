@@ -146,17 +146,9 @@ export function loadTestCases(
                 it(test.filename, () => {
                     const input = yamlESLintParser.parseForESLint(test.code)
                     const output = yamlESLintParser.parseForESLint(test.output)
-                    assert.strictEqual(
-                        JSON.stringify(
-                            yamlESLintParser.getStaticYAMLValue(input.ast),
-                            null,
-                            2,
-                        ),
-                        JSON.stringify(
-                            yamlESLintParser.getStaticYAMLValue(output.ast),
-                            null,
-                            2,
-                        ),
+                    assert.deepStrictEqual(
+                        yamlESLintParser.getStaticYAMLValue(input.ast),
+                        yamlESLintParser.getStaticYAMLValue(output.ast),
                     )
                 })
             }

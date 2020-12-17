@@ -1,0 +1,3 @@
+# sort-keys/invalid/yaml-test-suite-for-default/9SHH-input.yaml
+double: "text"
+single: 'text'

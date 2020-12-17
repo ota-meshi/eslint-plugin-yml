@@ -1,0 +1,9 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/9U5K-input.yaml
+---
+# Products purchased
+- quantity: 1
+  item    : Super Hoop
+- quantity: 4
+  item    : Basketball
+- quantity: 1
+  item    : Big Shoes

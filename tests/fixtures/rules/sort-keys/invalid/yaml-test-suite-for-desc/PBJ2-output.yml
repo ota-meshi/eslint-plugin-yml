@@ -1,0 +1,9 @@
+# sort-keys/invalid/yaml-test-suite-for-desc/PBJ2-input.yaml
+national:
+  - New York Mets
+  - Chicago Cubs
+  - Atlanta Braves
+american:
+  - Boston Red Sox
+  - Detroit Tigers
+  - New York Yankees

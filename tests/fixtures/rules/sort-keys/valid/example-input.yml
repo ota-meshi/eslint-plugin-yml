@@ -1,0 +1,13 @@
+# {"options": []}
+
+# ✗ BAD
+bad:
+  a: 1
+  b: 2
+  c: 3
+
+# ✓ GOOD
+good:
+  a: 1
+  b: 2
+  c: 3

@@ -1,0 +1,15 @@
+# sort-keys/invalid/yaml-test-suite-for-asc/C4HZ-input.yaml
+%TAG ! tag:clarkevans.com,2002:
+--- !shape
+  # Use the ! handle for presenting
+  # tag:clarkevans.com,2002:circle
+- !circle
+  center: &ORIGIN {x: 73, y: 129}
+  radius: 7
+- !line
+  finish: { x: 89, y: 102 }
+  start: *ORIGIN
+- !label
+  color: 0xFFEEBB
+  start: *ORIGIN
+  text: Pretty vector drawing.

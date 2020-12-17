@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected mapping keys to be in descending order. 'x\\ny:z\\tx $%^&*()x' should be before 'foo\nbar:baz\tx \\$%^&*()x'.",
+        "line": 3,
+        "column": 1
+    }
+]

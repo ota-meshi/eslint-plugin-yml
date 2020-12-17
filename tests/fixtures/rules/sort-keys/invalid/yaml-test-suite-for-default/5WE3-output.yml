@@ -1,0 +1,6 @@
+# sort-keys/invalid/yaml-test-suite-for-default/5WE3-input.yaml
+? |
+  block key
+: - one # Explicit compact
+  - two # block value
+? explicit key # Empty value

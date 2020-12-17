@@ -1,0 +1,8 @@
+{
+    "options": ["asc"],
+    "settings": {
+        "yml": {
+            "indent": 8
+        }
+    }
+}

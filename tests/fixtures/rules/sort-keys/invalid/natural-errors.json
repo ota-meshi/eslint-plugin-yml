@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected mapping keys to be in natural ascending order. '_' should be before 'A'.",
+        "line": 5,
+        "column": 1
+    }
+]
