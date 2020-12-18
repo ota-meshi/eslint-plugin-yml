@@ -1,7 +1,5 @@
 {
-    "options": [
-        "never"
-    ],
+    "options": ["never"],
     "settings": {
         "yml": {
             "indent": 8
