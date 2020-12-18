@@ -1,0 +1,3 @@
+# plain-scalar/invalid/yaml-test-suite-for-default/KSS4-input.yaml
+--- quoted string
+--- &node foo

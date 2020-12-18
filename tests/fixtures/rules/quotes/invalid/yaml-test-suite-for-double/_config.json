@@ -1,0 +1,12 @@
+{
+    "options": [
+        {
+            "prefer": "double"
+        }
+    ],
+    "settings": {
+        "yml": {
+            "indent": 8
+        }
+    }
+}

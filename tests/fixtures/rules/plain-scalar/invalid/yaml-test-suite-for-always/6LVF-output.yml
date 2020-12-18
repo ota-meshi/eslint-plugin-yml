@@ -1,0 +1,4 @@
+# plain-scalar/invalid/yaml-test-suite-for-always/6LVF-input.yaml
+%FOO  bar baz # Should be ignored
+              # with a warning.
+--- foo

@@ -1,0 +1,5 @@
+# quotes/invalid/yaml-test-suite-for-single/S4JQ-input.yaml
+# Assuming conventional resolution:
+- '12'
+- 12
+- ! 12

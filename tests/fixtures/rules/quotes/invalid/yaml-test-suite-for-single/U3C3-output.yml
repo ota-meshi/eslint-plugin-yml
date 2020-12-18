@@ -1,0 +1,4 @@
+# quotes/invalid/yaml-test-suite-for-single/U3C3-input.yaml
+%TAG !yaml! tag:yaml.org,2002:
+---
+!yaml!str 'foo'

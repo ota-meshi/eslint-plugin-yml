@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Must use quoted style scalar.",
+        "line": 2,
+        "column": 10
+    },
+    {
+        "message": "Must use quoted style scalar.",
+        "line": 3,
+        "column": 4
+    },
+    {
+        "message": "Must use quoted style scalar.",
+        "line": 5,
+        "column": 4
+    }
+]

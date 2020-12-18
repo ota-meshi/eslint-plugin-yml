@@ -1,0 +1,6 @@
+# quotes/invalid/yaml-test-suite-for-single/LE5A-input.yaml
+- !!str 'a'
+- 'b'
+- &anchor 'c'
+- *anchor
+- !!str

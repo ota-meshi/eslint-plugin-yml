@@ -1,0 +1,5 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/RLU9-input.yaml
+"foo":
+- 42
+"bar":
+  - 44

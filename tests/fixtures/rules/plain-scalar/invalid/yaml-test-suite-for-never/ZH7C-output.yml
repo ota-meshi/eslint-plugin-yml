@@ -1,0 +1,3 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/ZH7C-input.yaml
+&a "a": "b"
+"c": &d "d"

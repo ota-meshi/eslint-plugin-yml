@@ -1,0 +1,7 @@
+# quotes/invalid/yaml-test-suite-for-single/4ABK-input.yaml
+{
+unquoted : 'separate',
+http://foo.com,
+omitted value:,
+: omitted key,
+}

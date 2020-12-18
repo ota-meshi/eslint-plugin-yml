@@ -1,0 +1,7 @@
+# plain-scalar/invalid/yaml-test-suite-for-never/9FMG-input.yaml
+"a":
+  "b":
+    "c": "d"
+  "e":
+    "f": "g"
+"h": "i"

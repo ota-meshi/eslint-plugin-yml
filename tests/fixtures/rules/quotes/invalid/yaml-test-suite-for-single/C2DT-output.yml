@@ -1,0 +1,6 @@
+# quotes/invalid/yaml-test-suite-for-single/C2DT-input.yaml
+{
+'adjacent':value,
+'readable': value,
+'empty':
+}

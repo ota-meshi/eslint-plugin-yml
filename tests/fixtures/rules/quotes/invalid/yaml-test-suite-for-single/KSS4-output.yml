@@ -1,0 +1,4 @@
+# quotes/invalid/yaml-test-suite-for-single/KSS4-input.yaml
+--- 'quoted
+string'
+--- &node foo

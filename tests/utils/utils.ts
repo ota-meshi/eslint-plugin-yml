@@ -262,7 +262,7 @@ export function makeSuiteTests(
                 if (!exists(configFile) || force) {
                     fs.writeFileSync(
                         configFile,
-                        JSON.stringify(
+                        `${JSON.stringify(
                             {
                                 options,
                                 settings: {
@@ -271,7 +271,7 @@ export function makeSuiteTests(
                             },
                             null,
                             4,
-                        ),
+                        )}\n`,
                         "utf8",
                     )
                 }
@@ -316,7 +316,7 @@ function writeFixtures(
     if (force || !exists(errorFile)) {
         fs.writeFileSync(
             errorFile,
-            JSON.stringify(
+            `${JSON.stringify(
                 result.map((m) => ({
                     message: m.message,
                     line: m.line,
@@ -324,7 +324,7 @@ function writeFixtures(
                 })),
                 null,
                 4,
-            ),
+            )}\n`,
             "utf8",
         )
     }
