@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-align-value/ZWK4-input.yaml
+---
+a:         1
+? b
+&anchor c: 3

@@ -1,0 +1,2 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-false-after-colon-false/SBG9-input.yaml
+{a: [b, c], [d, e]:f}

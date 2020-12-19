@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Extra space before value for key 'key'.",
+        "line": 2,
+        "column": 4
+    }
+]

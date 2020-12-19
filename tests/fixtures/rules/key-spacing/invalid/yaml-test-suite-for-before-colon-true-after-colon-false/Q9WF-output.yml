@@ -1,0 +1,7 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/Q9WF-input.yaml
+{ first : Sammy, last : Sosa } :
+# Statistics:
+  hr :  # Home runs
+     65
+  avg : # Average
+   0.278

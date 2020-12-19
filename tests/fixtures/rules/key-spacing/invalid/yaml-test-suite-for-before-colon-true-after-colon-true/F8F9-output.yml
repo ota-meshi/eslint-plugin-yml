@@ -1,0 +1,20 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/F8F9-input.yaml
+ # Strip
+  # Comments:
+strip : |-
+  # text
+  
+ # Clip
+  # comments:
+
+clip : |
+  # text
+ 
+ # Keep
+  # comments:
+
+keep : |+
+  # text
+
+ # Trail
+  # comments.

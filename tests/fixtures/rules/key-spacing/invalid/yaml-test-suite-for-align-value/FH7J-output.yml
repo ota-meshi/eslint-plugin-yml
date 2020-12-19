@@ -1,0 +1,6 @@
+# key-spacing/invalid/yaml-test-suite-for-align-value/FH7J-input.yaml
+- !!str
+-
+  !!null : a
+  b:      !!str
+- !!str : !!null

@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Extra space after key 'foo'.",
+        "line": 3,
+        "column": 6
+    },
+    {
+        "message": "Missing space before value for key 'foo'.",
+        "line": 3,
+        "column": 9
+    }
+]

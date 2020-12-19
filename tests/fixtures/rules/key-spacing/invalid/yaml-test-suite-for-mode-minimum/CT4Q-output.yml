@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-mode-minimum/CT4Q-input.yaml
+[
+? foo
+ bar: baz
+]

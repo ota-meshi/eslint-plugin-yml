@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-false-after-colon-true/6BCT-input.yaml
+- foo:	bar
+- - baz
+  -	baz

@@ -1,0 +1,22 @@
+[
+    {
+        "message": "Missing space after key 'sequence'.",
+        "line": 2,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'mapping'.",
+        "line": 3,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'sky'.",
+        "line": 3,
+        "column": 12
+    },
+    {
+        "message": "Missing space after key 'sea'.",
+        "line": 3,
+        "column": 23
+    }
+]

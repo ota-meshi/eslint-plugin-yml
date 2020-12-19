@@ -2,6 +2,6 @@
 -
     "flow in block"
 - >
-        Block scalar
+ Block scalar
 - !!map # Block collection
-        foo : bar
+  foo : bar

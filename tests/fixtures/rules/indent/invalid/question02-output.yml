@@ -1,0 +1,9 @@
+# indent/invalid/question02-input.yml
+---
+{
+    foo: bar
+}
+---
+-   "foo": "foo"
+-   ?   "foo"
+    :   "foo"

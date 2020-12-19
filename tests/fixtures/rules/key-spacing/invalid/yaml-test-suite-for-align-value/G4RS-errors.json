@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Missing space before value for key 'single'.",
+        "line": 6,
+        "column": 9
+    },
+    {
+        "message": "Missing space before value for key 'quoted'.",
+        "line": 7,
+        "column": 9
+    }
+]

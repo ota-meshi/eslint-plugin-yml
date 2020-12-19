@@ -1,0 +1,9 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/M29M-input.yaml
+a : |
+ ab
+ 
+ cd
+ ef
+ 
+
+...

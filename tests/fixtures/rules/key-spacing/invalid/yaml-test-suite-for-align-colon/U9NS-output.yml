@@ -1,0 +1,11 @@
+# key-spacing/invalid/yaml-test-suite-for-align-colon/U9NS-input.yaml
+---
+time  : 20:03:20
+player: Sammy Sosa
+action: strike (miss)
+...
+---
+time  : 20:03:47
+player: Sammy Sosa
+action: grand slam
+...

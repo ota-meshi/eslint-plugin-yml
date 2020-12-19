@@ -18,7 +18,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |
 | [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: |
-| [yml/plain-scalar](./plain-scalar.md) | require plain scalars instead of quotes scalars | :wrench: |  |
+| [yml/plain-scalar](./plain-scalar.md) | require or disallow plain style scalar. | :wrench: |  |
 | [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: |  |
 | [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: |
 
@@ -30,6 +30,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/flow-mapping-curly-spacing](./flow-mapping-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |  |
 | [yml/flow-sequence-bracket-newline](./flow-sequence-bracket-newline.md) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: |  |
 | [yml/flow-sequence-bracket-spacing](./flow-sequence-bracket-spacing.md) | enforce consistent spacing inside flow sequence brackets | :wrench: |  |
+| [yml/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  |
 | [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: |
 | [yml/sort-keys](./sort-keys.md) | require mapping keys to be sorted | :wrench: |  |
 | [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: |  |

@@ -177,8 +177,10 @@ export default createRule("indent", {
             }
         }
 
+        const documents: AST.YAMLDocument[] = []
         return {
             YAMLDocument(node) {
+                documents.push(node)
                 const first = sourceCode.getFirstToken(node, ITERATION_OPTS)
                 if (!first) {
                     return
@@ -705,18 +707,36 @@ export default createRule("indent", {
             lineIndents: (LineIndentStep2 | undefined)[],
         ) {
             const { line, expectedIndent } = lineIndent
+            const document =
+                documents.find(
+                    (doc) =>
+                        doc.loc.start.line <= line && line <= doc.loc.end.line,
+                ) || sourceCode.ast
 
-            let startLine = 0
-            let endLine: number = sourceCode.lines.length
+            let startLine = document.loc.start.line
+            let endLine = document.loc.end.line
             // find fixing start line
-            for (let lineIndex = line - 1; lineIndex >= 0; lineIndex--) {
+            for (
+                let lineIndex = line - 1;
+                lineIndex >= document.loc.start.line;
+                lineIndex--
+            ) {
                 const li = lineIndents[lineIndex]
-                if (li && li.expectedIndent < expectedIndent) {
+                if (!li) {
+                    continue
+                }
+                if (li.expectedIndent < expectedIndent) {
                     // outdent
 
                     // If the fixed indent becomes incorrect compared to the actual indent of the previous line, the process is stopped.
                     if (expectedIndent <= li.actualIndent) {
                         return null
+                    }
+                    for (const mark of li.markData) {
+                        if (mark.actualOffset !== mark.expectedOffset) {
+                            // If the mark indentation on the previous line needs to be fixed, the process will stop.
+                            return null
+                        }
                     }
                     startLine = lineIndex + 1
                     break
@@ -725,10 +745,13 @@ export default createRule("indent", {
             // find fixing end line
             for (
                 let lineIndex = line + 1;
-                lineIndex <= sourceCode.lines.length;
+                lineIndex <= document.loc.end.line;
                 lineIndex++
             ) {
                 const li = lineIndents[lineIndex]
+                if (!li) {
+                    continue
+                }
                 if (li && li.expectedIndent < expectedIndent) {
                     // outdent
 

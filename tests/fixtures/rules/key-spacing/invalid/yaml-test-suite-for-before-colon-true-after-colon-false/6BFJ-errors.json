@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Missing space after key '&key [ &item a, b, c ]'.",
+        "line": 4,
+        "column": 22
+    }
+]

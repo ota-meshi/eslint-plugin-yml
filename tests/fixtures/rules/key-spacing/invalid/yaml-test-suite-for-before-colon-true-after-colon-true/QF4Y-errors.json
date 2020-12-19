@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Missing space after key 'foo'.",
+        "line": 3,
+        "column": 1
+    }
+]

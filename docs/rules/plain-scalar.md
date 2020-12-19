@@ -2,11 +2,11 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/plain-scalar"
-description: "require plain scalars instead of quotes scalars"
+description: "require or disallow plain style scalar."
 ---
 # yml/plain-scalar
 
-> require plain scalars instead of quotes scalars
+> require or disallow plain style scalar.
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

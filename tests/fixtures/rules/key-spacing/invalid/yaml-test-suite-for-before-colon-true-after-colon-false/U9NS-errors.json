@@ -1,0 +1,32 @@
+[
+    {
+        "message": "Missing space after key 'time'.",
+        "line": 3,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'player'.",
+        "line": 4,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'action'.",
+        "line": 5,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'time'.",
+        "line": 8,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'player'.",
+        "line": 9,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'action'.",
+        "line": 10,
+        "column": 1
+    }
+]

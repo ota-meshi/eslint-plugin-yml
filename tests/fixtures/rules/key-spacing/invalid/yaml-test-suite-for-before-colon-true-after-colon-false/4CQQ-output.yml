@@ -1,0 +1,7 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/4CQQ-input.yaml
+plain :
+  This unquoted scalar
+  spans many lines.
+
+quoted : "So does this
+  quoted scalar.\n"

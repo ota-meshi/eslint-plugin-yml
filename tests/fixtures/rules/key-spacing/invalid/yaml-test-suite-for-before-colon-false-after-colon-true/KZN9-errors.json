@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Extra space after key 'YAML'.",
+        "line": 2,
+        "column": 9
+    },
+    {
+        "message": "Missing space before value for key '{JSON: like}'.",
+        "line": 4,
+        "column": 18
+    }
+]

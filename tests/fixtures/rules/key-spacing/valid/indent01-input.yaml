@@ -1,0 +1,11 @@
+# {"options": [ { "beforeColon": false, "afterColon": false } ]}
+---
+? foo
+: bar
+---
+?   foo
+:   bar
+---
+-   "GOOD": "foo"
+-   ?   "GOOD"
+    :   "foo"

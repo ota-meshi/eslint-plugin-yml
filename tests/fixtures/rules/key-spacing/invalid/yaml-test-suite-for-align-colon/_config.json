@@ -1,0 +1,12 @@
+{
+    "options": [
+        {
+            "align": "colon"
+        }
+    ],
+    "settings": {
+        "yml": {
+            "indent": 8
+        }
+    }
+}

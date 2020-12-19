@@ -1,0 +1,6 @@
+# key-spacing/invalid/yaml-test-suite-for-default/P94K-input.yaml
+key: # Comment
+        # lines
+  value
+
+

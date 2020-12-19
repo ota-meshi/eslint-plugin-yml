@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-mode-minimum/JQ4R-input.yaml
+block sequence:
+  - one
+  - two: three

@@ -1,0 +1,6 @@
+# key-spacing/invalid/yaml-test-suite-for-align-value/DFF7-input.yaml
+{
+? explicit: entry,
+implicit:   entry,
+?
+}

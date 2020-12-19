@@ -1,0 +1,22 @@
+[
+    {
+        "message": "Extra space before value for key 'hr'.",
+        "line": 4,
+        "column": 5
+    },
+    {
+        "message": "Extra space before value for key 'avg'.",
+        "line": 5,
+        "column": 6
+    },
+    {
+        "message": "Extra space before value for key 'hr'.",
+        "line": 8,
+        "column": 5
+    },
+    {
+        "message": "Extra space before value for key 'avg'.",
+        "line": 9,
+        "column": 6
+    }
+]

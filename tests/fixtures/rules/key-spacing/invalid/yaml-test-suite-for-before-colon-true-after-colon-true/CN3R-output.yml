@@ -1,0 +1,7 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/CN3R-input.yaml
+&flowseq [
+ a : b,
+ &c c : d,
+ { &e e : f },
+ &g { g : h }
+]

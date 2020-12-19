@@ -1,0 +1,8 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/J7PZ-input.yaml
+# Ordered maps are represented as
+# A sequence of mappings, with
+# each mapping having one key
+--- !!omap
+- Mark McGwire : 65
+- Sammy Sosa : 63
+- Ken Griffy : 58

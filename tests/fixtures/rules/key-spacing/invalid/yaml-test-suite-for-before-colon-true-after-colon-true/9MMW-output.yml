@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/9MMW-input.yaml
+- [ YAML : separate ]
+- [ : empty key entry ]
+- [ "JSON like" : adjacent ]

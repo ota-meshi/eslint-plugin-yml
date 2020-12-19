@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Missing space after key 'adjacent'.",
+        "line": 3,
+        "column": 1
+    },
+    {
+        "message": "Missing space before value for key 'adjacent'.",
+        "line": 3,
+        "column": 12
+    },
+    {
+        "message": "Missing space after key 'readable'.",
+        "line": 4,
+        "column": 1
+    }
+]

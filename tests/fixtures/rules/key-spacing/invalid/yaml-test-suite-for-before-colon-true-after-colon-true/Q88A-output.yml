@@ -1,0 +1,6 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/Q88A-input.yaml
+- [ a, b ]
+- { a : b }
+- "a"
+- 'b'
+- c

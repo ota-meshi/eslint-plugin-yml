@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/6JWB-input.yaml
+foo : !!seq
+  - !!str a
+  - !!map
+    key : !!str value

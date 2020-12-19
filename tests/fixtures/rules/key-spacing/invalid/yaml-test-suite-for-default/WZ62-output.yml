@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-default/WZ62-input.yaml
+{
+  foo: !!str,
+  !!str : bar,
+}

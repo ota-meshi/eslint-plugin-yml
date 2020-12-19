@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Missing space after key 'strip'.",
+        "line": 2,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'clip'.",
+        "line": 4,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'keep'.",
+        "line": 6,
+        "column": 1
+    }
+]

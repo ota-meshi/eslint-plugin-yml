@@ -1,0 +1,82 @@
+[
+    {
+        "message": "Missing space after key 'Time'.",
+        "line": 3,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'User'.",
+        "line": 4,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'Warning'.",
+        "line": 5,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'Time'.",
+        "line": 9,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'User'.",
+        "line": 10,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'Warning'.",
+        "line": 11,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'Date'.",
+        "line": 15,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'User'.",
+        "line": 16,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'Fatal'.",
+        "line": 17,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'Stack'.",
+        "line": 19,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'file'.",
+        "line": 20,
+        "column": 5
+    },
+    {
+        "message": "Missing space after key 'line'.",
+        "line": 21,
+        "column": 5
+    },
+    {
+        "message": "Missing space after key 'code'.",
+        "line": 22,
+        "column": 5
+    },
+    {
+        "message": "Missing space after key 'file'.",
+        "line": 24,
+        "column": 5
+    },
+    {
+        "message": "Missing space after key 'line'.",
+        "line": 25,
+        "column": 5
+    },
+    {
+        "message": "Missing space after key 'code'.",
+        "line": 26,
+        "column": 5
+    }
+]

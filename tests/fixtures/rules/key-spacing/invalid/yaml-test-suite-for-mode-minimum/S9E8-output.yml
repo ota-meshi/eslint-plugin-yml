@@ -1,0 +1,8 @@
+# key-spacing/invalid/yaml-test-suite-for-mode-minimum/S9E8-input.yaml
+sequence:
+- one
+- two
+mapping:
+  ? sky
+  : blue
+  sea: green

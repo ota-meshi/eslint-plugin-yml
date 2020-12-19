@@ -2,6 +2,7 @@ import type { RuleFixer, SourceCode } from "../types"
 import naturalCompare from "natural-compare"
 import type { AST } from "yaml-eslint-parser"
 import { createRule } from "../utils"
+import { isComma } from "../utils/ast-utils"
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -243,7 +244,7 @@ export default createRule("sort-keys", {
 
             const afterCommaToken = sourceCode.getTokenAfter(node)
             const moveTargetBeforeToken = sourceCode.getTokenBefore(moveTarget)!
-            if (afterCommaToken && afterCommaToken.value === ",") {
+            if (isComma(afterCommaToken)) {
                 // e.g. |/**/ key: value,|
                 removeRange = [
                     beforeCommaToken.range[1],
@@ -254,7 +255,7 @@ export default createRule("sort-keys", {
             } else {
                 // e.g. |,/**/ key: value|
                 removeRange = [beforeCommaToken.range[0], node.range[1]]
-                if (moveTargetBeforeToken.value === ",") {
+                if (isComma(moveTargetBeforeToken)) {
                     // { a: 1 , target : 2 , c : 3 }
                     //       ^ insert
                     insertCode = sourceCode.text.slice(...removeRange)

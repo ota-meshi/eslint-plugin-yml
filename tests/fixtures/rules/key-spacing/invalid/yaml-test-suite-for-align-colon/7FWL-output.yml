@@ -1,0 +1,3 @@
+# key-spacing/invalid/yaml-test-suite-for-align-colon/7FWL-input.yaml
+!<tag:yaml.org,2002:str> foo:
+  !<!bar> baz

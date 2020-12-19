@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Missing space after key 'a'.",
+        "line": 3,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'd'.",
+        "line": 3,
+        "column": 15
+    }
+]

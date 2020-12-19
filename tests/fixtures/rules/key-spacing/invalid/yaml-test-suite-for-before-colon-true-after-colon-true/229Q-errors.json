@@ -1,0 +1,52 @@
+[
+    {
+        "message": "Missing space after key 'name'.",
+        "line": 3,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'hr'.",
+        "line": 4,
+        "column": 3
+    },
+    {
+        "message": "Extra space before value for key 'hr'.",
+        "line": 4,
+        "column": 5
+    },
+    {
+        "message": "Missing space after key 'avg'.",
+        "line": 5,
+        "column": 3
+    },
+    {
+        "message": "Extra space before value for key 'avg'.",
+        "line": 5,
+        "column": 6
+    },
+    {
+        "message": "Missing space after key 'name'.",
+        "line": 7,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'hr'.",
+        "line": 8,
+        "column": 3
+    },
+    {
+        "message": "Extra space before value for key 'hr'.",
+        "line": 8,
+        "column": 5
+    },
+    {
+        "message": "Missing space after key 'avg'.",
+        "line": 9,
+        "column": 3
+    },
+    {
+        "message": "Extra space before value for key 'avg'.",
+        "line": 9,
+        "column": 6
+    }
+]

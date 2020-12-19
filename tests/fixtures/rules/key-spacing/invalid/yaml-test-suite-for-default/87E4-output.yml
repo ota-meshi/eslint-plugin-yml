@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-default/87E4-input.yaml
+'implicit block key': [
+  'implicit flow key': value,
+ ]

@@ -1,0 +1,7 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-false-after-colon-false/LP6E-input.yaml
+- [a, b , c ]
+- { "a":b
+   , c: 'd' ,
+   e: "f"
+  }
+- [      ]

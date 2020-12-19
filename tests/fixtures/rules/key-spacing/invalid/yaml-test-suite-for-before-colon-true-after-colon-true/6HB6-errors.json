@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Missing space after key 'Not indented'.",
+        "line": 5,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'By one space'.",
+        "line": 6,
+        "column": 2
+    },
+    {
+        "message": "Missing space after key 'Flow style'.",
+        "line": 9,
+        "column": 2
+    }
+]

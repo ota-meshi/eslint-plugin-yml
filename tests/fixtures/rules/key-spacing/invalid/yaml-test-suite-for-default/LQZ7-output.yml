@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-default/LQZ7-input.yaml
+"implicit block key": [
+  "implicit flow key": value,
+ ]

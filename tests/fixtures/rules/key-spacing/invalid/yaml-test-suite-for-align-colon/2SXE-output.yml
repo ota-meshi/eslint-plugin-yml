@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-align-colon/2SXE-input.yaml
+&a: key: &a value
+foo    :
+  *a:

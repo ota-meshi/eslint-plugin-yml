@@ -1,0 +1,3 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/UDR7-input.yaml
+sequence : [ one, two, ]
+mapping : { sky : blue, sea : green }
