@@ -20,6 +20,7 @@ module.exports = {
         "plugin:@ota-meshi/+json",
     ],
     rules: {
+        "eslint-comments/no-unused-disable": "error",
         "require-jsdoc": "error",
         "no-warning-comments": "warn",
         "no-lonely-if": "off",

@@ -1,0 +1,7 @@
+# {"options": [ { "beforeColon": false, "afterColon": false } ]}
+{
+    {a: b}
+    : c
+}
+---
+{a: b} : c

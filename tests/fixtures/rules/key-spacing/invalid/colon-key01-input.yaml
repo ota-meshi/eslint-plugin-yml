@@ -1,0 +1,3 @@
+# {"options": [ { "beforeColon": true, "afterColon": false } ]}
+- foo: bar
+- foo ::::: bar

@@ -1,0 +1,6 @@
+# key-spacing/invalid/map-key01-input.yaml
+{
+    {a: b}:c
+}
+---
+{a: b}: c

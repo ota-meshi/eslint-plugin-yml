@@ -413,37 +413,6 @@ function create(context: RuleContext): RuleListener {
                     if (isQuestion(before)) {
                         return false
                     }
-                    if (
-                        property.key.type === "YAMLMapping" &&
-                        property.key.style === "block"
-                    ) {
-                        return false
-                    }
-                    if (
-                        property.value.type === "YAMLMapping" &&
-                        property.value.style === "block"
-                    ) {
-                        return false
-                    }
-                    if (property.key.type === "YAMLSequence") {
-                        return false
-                    }
-                    if (
-                        property.value.type === "YAMLSequence" &&
-                        property.value.style === "block"
-                    ) {
-                        return false
-                    }
-                    if (property.key.type === "YAMLScalar") {
-                        if (
-                            property.key.style === "plain" &&
-                            typeof property.key.value === "string" &&
-                            property.key.loc.start.line <
-                                property.key.loc.end.line
-                        ) {
-                            return false
-                        }
-                    }
                 }
             }
         } else {
@@ -506,19 +475,12 @@ function create(context: RuleContext): RuleListener {
                 ) {
                     return false
                 }
-                if (
-                    property.key.style === "literal" ||
-                    property.key.style === "folded"
-                ) {
-                    return false
-                }
             }
         }
 
         return true
     }
 
-    /* eslint-disable complexity -- ignore */
     /**
      * Reports an appropriately-formatted error if spacing is incorrect on one
      * side of the colon.
@@ -530,7 +492,6 @@ function create(context: RuleContext): RuleListener {
      * @returns {void}
      */
     function report(
-        /* eslint-enable complexity -- ignore */
         property: YAMLKeyValuePair,
         side: "key" | "value",
         whitespace: string,
@@ -546,6 +507,23 @@ function create(context: RuleContext): RuleListener {
             includeComments: true,
         })!
 
+        const invalid =
+            (mode === "strict"
+                ? diff !== 0
+                : // mode === "minimum"
+                  diff < 0 || (diff > 0 && expected === 0)) &&
+            !(expected && containsLineTerminator(whitespace))
+
+        if (!invalid) {
+            return
+        }
+        if (
+            !canChangeSpaces(property, side) ||
+            (expected === 0 && !canRemoveSpaces(property, side, whitespace)) ||
+            (whitespace.length === 0 && !canInsertSpaces(property, side))
+        ) {
+            return
+        }
         const { locStart, locEnd, missingLoc } =
             side === "key"
                 ? {
@@ -558,30 +536,16 @@ function create(context: RuleContext): RuleListener {
                       locEnd: tokenAfterColon.loc.start,
                       missingLoc: tokenAfterColon.loc,
                   }
-        const loc = diff > 0 ? { start: locStart, end: locEnd } : missingLoc
-
-        const invalid =
-            ((diff && mode === "strict") ||
-                (diff < 0 && mode === "minimum") ||
-                (diff > 0 && !expected && mode === "minimum")) &&
-            !(expected && containsLineTerminator(whitespace))
-        if (!invalid) {
-            return
-        }
-        if (
-            !canChangeSpaces(property, side) ||
-            (expected === 0 && !canRemoveSpaces(property, side, whitespace)) ||
-            (whitespace.length === 0 && !canInsertSpaces(property, side))
-        ) {
-            return
-        }
-        let messageId = ""
-
-        if (diff > 0) {
-            messageId = side === "key" ? "extraKey" : "extraValue"
-        } else {
-            messageId = side === "key" ? "missingKey" : "missingValue"
-        }
+        const { loc, messageId } =
+            diff > 0
+                ? {
+                      loc: { start: locStart, end: locEnd },
+                      messageId: side === "key" ? "extraKey" : "extraValue",
+                  }
+                : {
+                      loc: missingLoc,
+                      messageId: side === "key" ? "missingKey" : "missingValue",
+                  }
 
         context.report({
             node: property[side],
@@ -592,21 +556,17 @@ function create(context: RuleContext): RuleListener {
             },
             fix(fixer) {
                 if (diff > 0) {
-                    let range: AST.Range
-
                     // Remove whitespace
                     if (side === "key") {
-                        range = [
+                        return fixer.removeRange([
                             tokenBeforeColon.range[1],
                             tokenBeforeColon.range[1] + diff,
-                        ]
-                    } else {
-                        range = [
-                            tokenAfterColon.range[0] - diff,
-                            tokenAfterColon.range[0],
-                        ]
+                        ])
                     }
-                    return fixer.removeRange(range)
+                    return fixer.removeRange([
+                        tokenAfterColon.range[0] - diff,
+                        tokenAfterColon.range[0],
+                    ])
                 }
                 const spaces = " ".repeat(-diff)
                 // Add whitespace
