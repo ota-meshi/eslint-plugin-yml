@@ -74,7 +74,6 @@ export function defineWrapperListener(
     }
     const listener = coreRule.create({
         // @ts-expect-error -- proto
-        // eslint-disable-next-line @typescript-eslint/naming-convention -- proto
         __proto__: context,
         options: proxyOptions.options,
     }) as RuleListener

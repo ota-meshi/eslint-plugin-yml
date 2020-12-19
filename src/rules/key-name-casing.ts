@@ -27,22 +27,18 @@ export default createRule("key-name-casing", {
                         type: "boolean",
                         default: true,
                     },
-                    // eslint-disable-next-line @typescript-eslint/naming-convention -- option
                     PascalCase: {
                         type: "boolean",
                         default: false,
                     },
-                    // eslint-disable-next-line @typescript-eslint/naming-convention -- option
                     SCREAMING_SNAKE_CASE: {
                         type: "boolean",
                         default: false,
                     },
-                    // eslint-disable-next-line @typescript-eslint/naming-convention -- option
                     "kebab-case": {
                         type: "boolean",
                         default: false,
                     },
-                    // eslint-disable-next-line @typescript-eslint/naming-convention -- option
                     snake_case: {
                         type: "boolean",
                         default: false,
