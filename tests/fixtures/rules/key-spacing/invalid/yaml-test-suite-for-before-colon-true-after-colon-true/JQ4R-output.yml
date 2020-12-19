@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/JQ4R-input.yaml
+block sequence :
+  - one
+  - two : three

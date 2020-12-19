@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Extra space after key 'implicit block key'.",
+        "line": 2,
+        "column": 19
+    },
+    {
+        "message": "Extra space after key 'implicit flow key'.",
+        "line": 3,
+        "column": 20
+    }
+]

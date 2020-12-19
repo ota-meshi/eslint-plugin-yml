@@ -1,0 +1,32 @@
+[
+    {
+        "message": "Missing space before value for key 'Time'.",
+        "line": 3,
+        "column": 7
+    },
+    {
+        "message": "Missing space before value for key 'User'.",
+        "line": 4,
+        "column": 7
+    },
+    {
+        "message": "Missing space before value for key 'Time'.",
+        "line": 9,
+        "column": 7
+    },
+    {
+        "message": "Missing space before value for key 'User'.",
+        "line": 10,
+        "column": 7
+    },
+    {
+        "message": "Missing space before value for key 'Date'.",
+        "line": 15,
+        "column": 7
+    },
+    {
+        "message": "Missing space before value for key 'User'.",
+        "line": 16,
+        "column": 7
+    }
+]

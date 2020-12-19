@@ -1,0 +1,3 @@
+# key-spacing/invalid/yaml-test-suite-for-align-colon/UDR7-input.yaml
+sequence: [ one, two, ]
+mapping : { sky: blue, sea: green }

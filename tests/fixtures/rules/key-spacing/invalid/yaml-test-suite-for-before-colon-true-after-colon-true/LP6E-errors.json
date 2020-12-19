@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Extra space after key 'a'.",
+        "line": 3,
+        "column": 8
+    },
+    {
+        "message": "Extra space after key 'e'.",
+        "line": 5,
+        "column": 5
+    }
+]

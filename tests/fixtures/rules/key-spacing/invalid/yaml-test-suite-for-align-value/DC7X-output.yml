@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-align-value/DC7X-input.yaml
+a:   b	
+seq:	
+ - a	
+c: d	#X

@@ -45,3 +45,12 @@ export function isHyphen(token: YAMLToken | null): token is YAMLToken {
 export function isColon(token: YAMLToken | null): token is YAMLToken {
     return token != null && token.type === "Punctuator" && token.value === ":"
 }
+
+/**
+ * Check whether the given token is a comma.
+ * @param token The token to check.
+ * @returns `true` if the token is a comma.
+ */
+export function isComma(token: YAMLToken | null): token is YAMLToken {
+    return token != null && token.type === "Punctuator" && token.value === ","
+}

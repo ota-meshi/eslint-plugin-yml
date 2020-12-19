@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Missing space after key 'x\\ny:z\\tx $%^&*()x'.",
+        "line": 3,
+        "column": 1
+    }
+]

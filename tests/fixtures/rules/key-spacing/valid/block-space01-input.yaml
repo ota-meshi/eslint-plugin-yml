@@ -1,0 +1,18 @@
+# {"options": [ { "beforeColon": false, "afterColon": false } ]}
+- &a foo
+- a: a
+  "b": b
+  'c': c
+  *a : d
+- a: "a"
+  "b": "b"
+  'c': "c"
+  *a : "d"
+- a: 'a'
+  "b": 'b'
+  'c': 'c'
+  *a : 'd'
+- a: *a
+  "b": *a
+  'c': *a
+  *a : *a

@@ -1,6 +1,7 @@
 import type { AST } from "yaml-eslint-parser"
 import type { YAMLNodeOrToken, RuleFixer, Fix, RuleContext } from "../types"
 import { createRule } from "../utils"
+import { isComma } from "../utils/ast-utils"
 import {
     calcExpectIndentForPairs,
     hasTabIndent,
@@ -325,7 +326,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowMapping, context: RuleContext) {
         for (const pair of node.pairs) {
             const prevToken = sourceCode.getTokenBefore(pair, {
                 includeComments: true,
-                filter: (token) => token.value !== ",",
+                filter: (token) => !isComma(token),
             })!
             yield* removeComma(prev, prevToken)
             yield fixer.replaceTextRange(
@@ -345,7 +346,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowMapping, context: RuleContext) {
             for (const token of sourceCode.getTokensBetween(a, b, {
                 includeComments: true,
             })) {
-                if (token.value === ",") {
+                if (isComma(token)) {
                     yield fixer.remove(token)
                 }
             }

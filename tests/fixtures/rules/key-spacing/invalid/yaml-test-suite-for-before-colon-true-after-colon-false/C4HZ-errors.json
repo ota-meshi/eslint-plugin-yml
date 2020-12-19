@@ -1,0 +1,57 @@
+[
+    {
+        "message": "Missing space after key 'center'.",
+        "line": 7,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'x'.",
+        "line": 7,
+        "column": 20
+    },
+    {
+        "message": "Missing space after key 'y'.",
+        "line": 7,
+        "column": 27
+    },
+    {
+        "message": "Missing space after key 'radius'.",
+        "line": 8,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'start'.",
+        "line": 10,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'finish'.",
+        "line": 11,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'x'.",
+        "line": 11,
+        "column": 13
+    },
+    {
+        "message": "Missing space after key 'y'.",
+        "line": 11,
+        "column": 20
+    },
+    {
+        "message": "Missing space after key 'start'.",
+        "line": 13,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'color'.",
+        "line": 14,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'text'.",
+        "line": 15,
+        "column": 3
+    }
+]

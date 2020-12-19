@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/RR7F-input.yaml
+a : 4.2
+? 23
+: d

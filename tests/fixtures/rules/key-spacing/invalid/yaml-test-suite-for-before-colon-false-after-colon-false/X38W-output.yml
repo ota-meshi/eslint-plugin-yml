@@ -1,0 +1,2 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-false-after-colon-false/X38W-input.yaml
+{ &a [a, &b b]:*b, *a : [c, *b, d]}

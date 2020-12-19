@@ -1,0 +1,27 @@
+[
+    {
+        "message": "Missing space after key '&a5 !!str key5'.",
+        "line": 15,
+        "column": 11
+    },
+    {
+        "message": "Missing space after key 'a6'.",
+        "line": 17,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key '&anchor6 b6'.",
+        "line": 18,
+        "column": 10
+    },
+    {
+        "message": "Missing space after key '&a8 !!str key8'.",
+        "line": 21,
+        "column": 11
+    },
+    {
+        "message": "Missing space after key '!!str &a10 key10'.",
+        "line": 24,
+        "column": 12
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "message": "Extra space after key 'top1'.",
+        "line": 2,
+        "column": 7
+    },
+    {
+        "message": "Extra space after key 'key1'.",
+        "line": 3,
+        "column": 9
+    },
+    {
+        "message": "Extra space after key 'top2'.",
+        "line": 4,
+        "column": 7
+    },
+    {
+        "message": "Extra space after key 'key2'.",
+        "line": 5,
+        "column": 9
+    },
+    {
+        "message": "Extra space after key 'top5'.",
+        "line": 10,
+        "column": 5
+    },
+    {
+        "message": "Extra space after key '&anchor6 'key6''.",
+        "line": 13,
+        "column": 18
+    }
+]

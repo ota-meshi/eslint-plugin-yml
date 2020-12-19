@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Extra space after key 'item'.",
+        "line": 4,
+        "column": 7
+    },
+    {
+        "message": "Extra space after key 'item'.",
+        "line": 6,
+        "column": 7
+    },
+    {
+        "message": "Extra space after key 'item'.",
+        "line": 8,
+        "column": 7
+    }
+]

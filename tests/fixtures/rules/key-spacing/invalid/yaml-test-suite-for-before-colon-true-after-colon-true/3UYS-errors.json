@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Missing space after key 'escaped slash'.",
+        "line": 2,
+        "column": 1
+    }
+]

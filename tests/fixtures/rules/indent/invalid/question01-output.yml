@@ -1,0 +1,3 @@
+# indent/invalid/question01-input.yml
+-   ?   "foo"
+    :   "bar"

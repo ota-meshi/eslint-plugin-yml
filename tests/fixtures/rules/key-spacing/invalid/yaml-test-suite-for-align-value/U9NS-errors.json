@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Missing space before value for key 'time'.",
+        "line": 3,
+        "column": 7
+    },
+    {
+        "message": "Missing space before value for key 'time'.",
+        "line": 8,
+        "column": 7
+    }
+]

@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-align-colon/L9U5-input.yaml
+implicit block key: [
+  implicit flow key: value,
+ ]

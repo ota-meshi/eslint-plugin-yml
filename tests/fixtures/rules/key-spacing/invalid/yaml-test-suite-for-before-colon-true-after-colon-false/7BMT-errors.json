@@ -1,0 +1,62 @@
+[
+    {
+        "message": "Missing space after key 'top1'.",
+        "line": 3,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key '&k1 key1'.",
+        "line": 4,
+        "column": 7
+    },
+    {
+        "message": "Missing space after key 'top2'.",
+        "line": 5,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'key2'.",
+        "line": 6,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'top3'.",
+        "line": 7,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key '&k3 key3'.",
+        "line": 8,
+        "column": 7
+    },
+    {
+        "message": "Missing space after key 'top4'.",
+        "line": 9,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key '&k4 key4'.",
+        "line": 10,
+        "column": 7
+    },
+    {
+        "message": "Missing space after key 'top5'.",
+        "line": 11,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'key5'.",
+        "line": 12,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'top6'.",
+        "line": 13,
+        "column": 1
+    },
+    {
+        "message": "Missing space after key 'top7'.",
+        "line": 15,
+        "column": 1
+    }
+]

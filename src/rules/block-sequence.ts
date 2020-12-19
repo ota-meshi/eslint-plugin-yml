@@ -17,6 +17,7 @@ import type {
     YAMLNodeOrToken,
     SourceCode,
 } from "../types"
+import { isComma } from "../utils/ast-utils"
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -355,7 +356,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
         for (const entry of node.entries) {
             const prevToken = sourceCode.getTokenBefore(entry, {
                 includeComments: true,
-                filter: (token) => token.value !== ",",
+                filter: (token) => !isComma(token),
             })!
             yield* removeComma(prev, prevToken)
             yield fixer.replaceTextRange(
@@ -376,7 +377,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
             for (const token of sourceCode.getTokensBetween(a, b, {
                 includeComments: true,
             })) {
-                if (token.value === ",") {
+                if (isComma(token)) {
                     yield fixer.remove(token)
                 }
             }

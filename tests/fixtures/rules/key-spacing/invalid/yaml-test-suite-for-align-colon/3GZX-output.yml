@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-align-colon/3GZX-input.yaml
+First occurrence : &anchor Foo
+Second occurrence: *anchor
+Override anchor  : &anchor Bar
+Reuse anchor     : *anchor

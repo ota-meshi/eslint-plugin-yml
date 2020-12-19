@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-false-after-colon-false/87E4-input.yaml
+'implicit block key': [
+  'implicit flow key':value,
+ ]

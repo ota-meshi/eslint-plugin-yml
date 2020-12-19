@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Extra space after key '!<tag:yaml.org,2002:str> foo'.",
+        "line": 2,
+        "column": 29
+    }
+]

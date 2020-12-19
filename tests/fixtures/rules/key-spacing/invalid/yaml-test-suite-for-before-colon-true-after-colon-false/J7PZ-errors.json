@@ -1,0 +1,17 @@
+[
+    {
+        "message": "Missing space after key 'Mark McGwire'.",
+        "line": 6,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'Sammy Sosa'.",
+        "line": 7,
+        "column": 3
+    },
+    {
+        "message": "Missing space after key 'Ken Griffy'.",
+        "line": 8,
+        "column": 3
+    }
+]

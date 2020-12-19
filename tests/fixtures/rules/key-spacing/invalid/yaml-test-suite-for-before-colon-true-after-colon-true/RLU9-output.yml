@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/RLU9-input.yaml
+foo :
+- 42
+bar :
+  - 44

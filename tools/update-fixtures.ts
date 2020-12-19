@@ -108,3 +108,26 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "key-spacing",
+    {
+        default: [],
+        "before-colon-false-after-colon-true": [
+            { beforeColon: false, afterColon: true },
+        ],
+        "before-colon-true-after-colon-true": [
+            { beforeColon: true, afterColon: true },
+        ],
+        "before-colon-false-after-colon-false": [
+            { beforeColon: false, afterColon: false },
+        ],
+        "before-colon-true-after-colon-false": [
+            { beforeColon: true, afterColon: false },
+        ],
+        "mode-minimum": [{ mode: "minimum" }],
+        "align-value": [{ align: "value" }],
+        "align-colon": [{ align: "colon" }],
+    },
+    { force: true },
+)

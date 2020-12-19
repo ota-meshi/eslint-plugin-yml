@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-mode-minimum/HMQ5-input.yaml
+!!str &a1 "foo":
+  !!str bar
+&a2 baz: *a1

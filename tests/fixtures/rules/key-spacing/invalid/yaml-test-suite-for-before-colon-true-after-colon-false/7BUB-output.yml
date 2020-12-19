@@ -1,0 +1,9 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/7BUB-input.yaml
+---
+hr :
+  - Mark McGwire
+  # Following node labeled SS
+  - &SS Sammy Sosa
+rbi :
+  - *SS # Subsequent occurrence
+  - Ken Griffey

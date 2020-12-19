@@ -1,0 +1,13 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/H2RW-input.yaml
+foo : 1
+
+bar : 2
+    
+text : |
+  a
+    
+  b
+
+  c
+ 
+  d

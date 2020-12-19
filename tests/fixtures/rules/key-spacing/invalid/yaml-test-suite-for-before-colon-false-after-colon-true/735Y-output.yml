@@ -1,0 +1,7 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-false-after-colon-true/735Y-input.yaml
+-
+  "flow in block"
+- >
+ Block scalar
+- !!map # Block collection
+  foo: bar

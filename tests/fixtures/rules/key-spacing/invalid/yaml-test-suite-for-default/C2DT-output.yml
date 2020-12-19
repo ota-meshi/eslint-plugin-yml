@@ -1,0 +1,6 @@
+# key-spacing/invalid/yaml-test-suite-for-default/C2DT-input.yaml
+{
+"adjacent": value,
+"readable": value,
+"empty":
+}

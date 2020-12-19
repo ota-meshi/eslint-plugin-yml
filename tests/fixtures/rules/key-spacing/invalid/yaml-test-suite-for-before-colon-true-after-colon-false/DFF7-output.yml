@@ -1,0 +1,6 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/DFF7-input.yaml
+{
+? explicit : entry,
+implicit : entry,
+?
+}

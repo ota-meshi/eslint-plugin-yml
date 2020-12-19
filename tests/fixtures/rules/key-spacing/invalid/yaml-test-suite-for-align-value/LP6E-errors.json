@@ -1,0 +1,27 @@
+[
+    {
+        "message": "Extra space after key 'a'.",
+        "line": 3,
+        "column": 8
+    },
+    {
+        "message": "Extra space after key 'c'.",
+        "line": 4,
+        "column": 7
+    },
+    {
+        "message": "Missing space before value for key 'c'.",
+        "line": 4,
+        "column": 10
+    },
+    {
+        "message": "Extra space after key 'e'.",
+        "line": 5,
+        "column": 5
+    },
+    {
+        "message": "Missing space before value for key 'e'.",
+        "line": 5,
+        "column": 10
+    }
+]

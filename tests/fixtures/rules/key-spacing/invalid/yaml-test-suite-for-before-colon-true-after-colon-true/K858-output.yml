@@ -1,0 +1,7 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/K858-input.yaml
+strip : >-
+
+clip : >
+
+keep : |+
+

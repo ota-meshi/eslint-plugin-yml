@@ -1,0 +1,6 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/A984-input.yaml
+a : b
+ c
+d :
+ e
+  f

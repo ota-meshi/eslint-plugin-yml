@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-align-colon/6BCT-input.yaml
+- foo:	bar
+- - baz
+  -	baz

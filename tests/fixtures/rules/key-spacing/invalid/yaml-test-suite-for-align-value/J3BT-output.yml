@@ -1,0 +1,7 @@
+# key-spacing/invalid/yaml-test-suite-for-align-value/J3BT-input.yaml
+# Tabs and spaces
+quoted: "Quoted 	"
+block:	 |
+  void main() {
+  	printf("Hello, world!\n");
+  }

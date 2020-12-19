@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-mode-minimum/KZN9-input.yaml
+- [ YAML: separate ]
+- [ : empty key entry ]
+- [ {JSON: like}: adjacent ]

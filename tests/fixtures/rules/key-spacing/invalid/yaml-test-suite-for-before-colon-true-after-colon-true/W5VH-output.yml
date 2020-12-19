@@ -1,0 +1,3 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/W5VH-input.yaml
+a : &:@*!$"<foo>: scalar a
+b : *:@*!$"<foo>:

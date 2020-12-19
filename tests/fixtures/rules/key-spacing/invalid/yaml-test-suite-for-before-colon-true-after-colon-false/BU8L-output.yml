@@ -1,0 +1,4 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-false/BU8L-input.yaml
+key : &anchor
+ !!map
+  a : b

@@ -1,0 +1,5 @@
+# key-spacing/invalid/yaml-test-suite-for-before-colon-true-after-colon-true/7Z25-input.yaml
+---
+scalar1
+...
+key : value
