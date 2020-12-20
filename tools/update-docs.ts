@@ -3,7 +3,7 @@ import fs from "fs"
 import { rules } from "../src/utils/rules"
 import type { RuleModule } from "../src/types"
 
-//eslint-disable-next-line require-jsdoc
+//eslint-disable-next-line require-jsdoc -- tool
 function formatItems(items: string[]) {
     if (items.length <= 2) {
         return items.join(" and ")
@@ -13,7 +13,7 @@ function formatItems(items: string[]) {
     }`
 }
 
-//eslint-disable-next-line require-jsdoc
+//eslint-disable-next-line require-jsdoc -- tool
 function yamlValue(val: any) {
     if (typeof val === "string") {
         return `"${val.replace(/\\/gu, "\\\\").replace(/"/gu, '\\"')}"`
@@ -24,9 +24,12 @@ function yamlValue(val: any) {
 const ROOT = path.resolve(__dirname, "../docs/rules")
 
 class DocFile {
-    private rule: RuleModule
-    private filePath: string
+    private readonly rule: RuleModule
+
+    private readonly filePath: string
+
     private content: string
+
     public constructor(rule: RuleModule) {
         this.rule = rule
         this.filePath = path.join(ROOT, `${rule.meta.docs.ruleName}.md`)
@@ -64,7 +67,6 @@ class DocFile {
         } else {
             if (categories) {
                 const presets = []
-                // eslint-disable-next-line @mysticatea/ts/require-array-sort-compare
                 for (const cat of categories.sort()) {
                     presets.push(`\`"plugin:yml/${cat}"\``)
                 }
@@ -167,7 +169,7 @@ ${
             .map((key) => `${key}: ${yamlValue((fileIntro as any)[key])}`)
             .join("\n")}\n---\n`
 
-        const fileIntroPattern = /^---\n(.*\n)+---\n*/gu
+        const fileIntroPattern = /^---\n(.*\n)+?---\n*/gu
 
         if (fileIntroPattern.test(this.content)) {
             this.content = this.content.replace(fileIntroPattern, computed)
@@ -179,7 +181,7 @@ ${
     }
 
     public write() {
-        // eslint-disable-next-line @mysticatea/ts/no-require-imports
+        // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- tool
         const isWin = require("os").platform().startsWith("win")
 
         this.content = this.content.replace(/\r?\n/gu, isWin ? "\r\n" : "\n")
