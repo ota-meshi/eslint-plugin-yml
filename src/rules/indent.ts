@@ -230,6 +230,9 @@ export default createRule("indent", {
                     const first = sourceCode.getFirstToken(node)
                     processNodeList(node.entries, first, null, 0)
                     for (const entry of node.entries) {
+                        if (!entry) {
+                            continue
+                        }
                         const hyphen = sourceCode.getTokenBefore(
                             entry,
                             isHyphen,

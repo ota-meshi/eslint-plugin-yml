@@ -1,7 +1,0 @@
-[
-    {
-        "message": "Expected mapping keys to be in ascending order. 'Override anchor' should be before 'Second occurrence'.",
-        "line": 4,
-        "column": 1
-    }
-]

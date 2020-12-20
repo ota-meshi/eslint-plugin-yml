@@ -131,3 +131,34 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "require-string-key",
+    {
+        default: [],
+    },
+    { force: true },
+)
+
+makeSuiteTests(
+    "no-empty-key",
+    {
+        default: [],
+    },
+    { force: true },
+)
+
+makeSuiteTests(
+    "no-empty-mapping-value",
+    {
+        default: [],
+    },
+    { force: true },
+)
+makeSuiteTests(
+    "no-empty-sequence-entry",
+    {
+        default: [],
+    },
+    { force: true },
+)

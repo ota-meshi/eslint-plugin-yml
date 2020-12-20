@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Empty mapping keys are forbidden.",
+        "line": 4,
+        "column": 3
+    },
+    {
+        "message": "Empty mapping keys are forbidden.",
+        "line": 6,
+        "column": 3
+    }
+]

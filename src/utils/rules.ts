@@ -8,10 +8,14 @@ import flowSequenceBracketSpacing from "../rules/flow-sequence-bracket-spacing"
 import indent from "../rules/indent"
 import keyNameCasing from "../rules/key-name-casing"
 import keySpacing from "../rules/key-spacing"
+import noEmptyKey from "../rules/no-empty-key"
+import noEmptyMappingValue from "../rules/no-empty-mapping-value"
+import noEmptySequenceEntry from "../rules/no-empty-sequence-entry"
 import noIrregularWhitespace from "../rules/no-irregular-whitespace"
 import noTabIndent from "../rules/no-tab-indent"
 import plainScalar from "../rules/plain-scalar"
 import quotes from "../rules/quotes"
+import requireStringKey from "../rules/require-string-key"
 import sortKeys from "../rules/sort-keys"
 import spacedComment from "../rules/spaced-comment"
 import vueCustomBlockNoParsingError from "../rules/vue-custom-block/no-parsing-error"
@@ -26,10 +30,14 @@ export const rules = [
     indent,
     keyNameCasing,
     keySpacing,
+    noEmptyKey,
+    noEmptyMappingValue,
+    noEmptySequenceEntry,
     noIrregularWhitespace,
     noTabIndent,
     plainScalar,
     quotes,
+    requireStringKey,
     sortKeys,
     spacedComment,
     vueCustomBlockNoParsingError,

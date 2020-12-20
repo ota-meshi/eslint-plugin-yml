@@ -17,9 +17,13 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: |  |
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |
+| [yml/no-empty-key](./no-empty-key.md) | disallow empty mapping keys |  | :star: |
+| [yml/no-empty-mapping-value](./no-empty-mapping-value.md) | disallow empty mapping values |  | :star: |
+| [yml/no-empty-sequence-entry](./no-empty-sequence-entry.md) | disallow empty sequence entries |  | :star: |
 | [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: |
 | [yml/plain-scalar](./plain-scalar.md) | require or disallow plain style scalar. | :wrench: |  |
 | [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: |  |
+| [yml/require-string-key](./require-string-key.md) | disallow mapping keys other than strings |  |  |
 | [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: |
 
 ## Extension Rules

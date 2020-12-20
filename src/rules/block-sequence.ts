@@ -401,6 +401,10 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
                 }
             } else if (entry.type === "YAMLSequence") {
                 for (const e of entry.entries) {
+                    if (!e) {
+                        // Cannot cover because entry is YAMLFlowSequence
+                        continue
+                    }
                     yield* processIndentFix(fixer, baseIndent, e, context)
                 }
             }
@@ -417,7 +421,15 @@ function buildFixBlockToFlow(
 ) {
     const sourceCode = context.getSourceCode()
     return function* (fixer: RuleFixer): IterableIterator<Fix> {
-        const entries = [...node.entries]
+        const entries = node.entries.filter(
+            (
+                e: AST.YAMLContent | AST.YAMLWithMeta | null,
+            ): e is AST.YAMLContent | AST.YAMLWithMeta => e != null,
+        )
+        if (entries.length !== node.entries.length) {
+            // cannot convert
+            return
+        }
         const firstEntry = entries.shift()!
         const lastEntry = entries.pop()
 

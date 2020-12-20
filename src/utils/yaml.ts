@@ -1,5 +1,6 @@
 import type { AST } from "yaml-eslint-parser"
 import type { RuleContext, YAMLNodeOrToken, Fix, RuleFixer } from "../types"
+import { isHyphen } from "./ast-utils"
 
 /**
  * Check if you are using tabs for indentation.
@@ -63,7 +64,7 @@ export function calcExpectIndentForPairs(
     }
     if (parentNode.type === "YAMLSequence") {
         const hyphen = sourceCode.getTokenBefore(mapping)
-        if (hyphen?.value !== "-") {
+        if (!isHyphen(hyphen)) {
             return null // unknown
         }
         if (hyphen.loc.start.line === mapping.loc.start.line) {
@@ -99,7 +100,7 @@ export function calcExpectIndentForPairs(
  * Calculate the required indentation for a given YAMLSequence entries.
  */
 export function calcExpectIndentForEntries(
-    sequence: AST.YAMLSequence,
+    sequence: AST.YAMLFlowSequence,
     context: RuleContext,
 ): string | null {
     const sourceCode = context.getSourceCode()
@@ -139,7 +140,7 @@ export function calcExpectIndentForEntries(
     }
     if (parentNode.type === "YAMLSequence") {
         const hyphen = sourceCode.getTokenBefore(sequence)
-        if (hyphen?.value !== "-") {
+        if (!isHyphen(hyphen)) {
             return null // unknown
         }
         if (hyphen.loc.start.line === sequence.loc.start.line) {
@@ -342,6 +343,9 @@ export function* processIndentFix(
             }
         } else if (contentNode.type === "YAMLSequence") {
             for (const e of contentNode.entries) {
+                if (!e) {
+                    continue
+                }
                 yield* processIndentFix(fixer, nextBaseIndent, e, context)
             }
         }

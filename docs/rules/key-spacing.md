@@ -22,7 +22,6 @@ This rule enforces consistent spacing between keys and values in mapping pairs. 
 {
   # ✓ GOOD
   "GOOD": "foo",
-
   # ✗ BAD
   "BAD" :"bar"
 }
