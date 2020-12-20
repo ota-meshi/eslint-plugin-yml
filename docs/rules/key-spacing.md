@@ -10,26 +10,6 @@ description: "enforce consistent spacing between keys and values in mapping pair
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-## :book: Rule Details
-
-This rule enforces consistent spacing between keys and values in mapping pairs. In the case of long lines, it is acceptable to add a new line wherever whitespace is allowed.
-
-<eslint-code-block fix>
-
-```yaml
-# eslint yml/key-spacing: 'error'
----
-{
-  # ✓ GOOD
-  "GOOD": "foo",
-
-  # ✗ BAD
-  "BAD" :"bar"
-}
----
-# ✓ GOOD
-- "GOOD": "foo"
-- ? "GOOD"
   : "foo"
 
 ```

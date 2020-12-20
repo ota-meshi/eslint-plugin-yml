@@ -112,87 +112,106 @@ export default createRule("sort-keys", {
         const minKeys: number = options && options.minKeys
         const orderValidator = buildValidator(order, insensitive, natural)
 
-        type Stack = {
-            upper: Stack | null
-            prevList: { name: string; node: AST.YAMLPair }[]
-            numKeys: number
-            curPair?: {
-                node: AST.YAMLPair
-                aliases: string[]
-            }
+        type PairData = {
+            name: string
+            node: AST.YAMLPair
+            anchors: Set<string>
+            aliases: Set<string>
         }
-        let stack: Stack = { upper: null, prevList: [], numKeys: 0 }
+        type MappingStack = {
+            upper: MappingStack | null
+            prevList: PairData[]
+            numKeys: number
+        }
+        let mappingStack: MappingStack = {
+            upper: null,
+            prevList: [],
+            numKeys: 0,
+        }
 
-        let anchors: Record<string, AST.YAMLAnchor[]> = {}
+        type PairStack = {
+            upper: PairStack | null
+            anchors: Set<string>
+            aliases: Set<string>
+        }
+        let pairStack: PairStack = {
+            upper: null,
+            anchors: new Set<string>(),
+            aliases: new Set<string>(),
+        }
 
         /**
          * Check order
          */
-        function isValidOrder(
-            prevData: { name: string; node: AST.YAMLPair },
-            thisData: { name: string; node: AST.YAMLPair },
-        ) {
+        function isValidOrder(prevData: PairData, thisData: PairData) {
             if (orderValidator(prevData.name, thisData.name)) {
                 return true
             }
 
-            if (stack.curPair && stack.curPair.node === thisData.node) {
-                for (const aliasName of stack.curPair.aliases) {
-                    for (const anchor of anchors[aliasName] || []) {
-                        if (
-                            prevData.node.range[0] <= anchor.range[0] &&
-                            anchor.range[1] <= prevData.node.range[1]
-                        ) {
-                            // The current order is correct for handling anchors.
-                            return true
-                        }
-                    }
+            for (const aliasName of thisData.aliases) {
+                if (prevData.anchors.has(aliasName)) {
+                    // The current order is correct for handling anchors.
+                    return true
+                }
+            }
+            for (const anchorName of thisData.anchors) {
+                if (prevData.aliases.has(anchorName)) {
+                    // The current order is correct for handling anchors.
+                    return true
                 }
             }
             return false
         }
 
         return {
-            YAMLDocument() {
-                anchors = {}
-            },
-            YAMLAnchor(node: AST.YAMLAnchor) {
-                const list = anchors[node.name] || (anchors[node.name] = [])
-                list.push(node)
-            },
             YAMLMapping(node: AST.YAMLMapping) {
-                stack = {
-                    upper: stack,
+                mappingStack = {
+                    upper: mappingStack,
                     prevList: [],
                     numKeys: node.pairs.length,
                 }
             },
 
             "YAMLMapping:exit"() {
-                stack = stack.upper!
+                mappingStack = mappingStack.upper!
             },
-            YAMLPair(node: AST.YAMLPair) {
-                stack.curPair = { node, aliases: [] }
+            YAMLPair() {
+                pairStack = {
+                    upper: pairStack,
+                    anchors: new Set<string>(),
+                    aliases: new Set<string>(),
+                }
+            },
+            YAMLAnchor(node: AST.YAMLAnchor) {
+                if (pairStack) {
+                    pairStack.anchors.add(node.name)
+                }
             },
             YAMLAlias(node: AST.YAMLAlias) {
-                if (stack.curPair) {
-                    stack.curPair.aliases.push(node.name)
+                if (pairStack) {
+                    pairStack.aliases.add(node.name)
                 }
             },
             "YAMLPair:exit"(node: AST.YAMLPair) {
+                const { anchors, aliases } = pairStack
+                pairStack = pairStack.upper!
+                pairStack.anchors = new Set([...pairStack.anchors, ...anchors])
+                pairStack.aliases = new Set([...pairStack.aliases, ...aliases])
                 if (!node.key && !node.value) {
                     // ignore
                     return
                 }
-                const prevList = stack.prevList
-                const numKeys = stack.numKeys
+                const prevList = mappingStack.prevList
+                const numKeys = mappingStack.numKeys
                 const thisName = getPropertyName(node, sourceCode)
                 const thisData = {
                     name: thisName,
                     node,
+                    anchors,
+                    aliases,
                 }
 
-                stack.prevList = [thisData, ...prevList]
+                mappingStack.prevList = [thisData, ...prevList]
                 if (prevList.length === 0 || numKeys < minKeys) {
                     return
                 }

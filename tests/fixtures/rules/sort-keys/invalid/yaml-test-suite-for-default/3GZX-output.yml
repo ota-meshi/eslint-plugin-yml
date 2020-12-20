@@ -1,5 +1,0 @@
-# sort-keys/invalid/yaml-test-suite-for-default/3GZX-input.yaml
-First occurrence: &anchor Foo
-Override anchor: &anchor Bar
-Second occurrence: *anchor
-Reuse anchor: *anchor
