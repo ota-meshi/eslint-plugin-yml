@@ -28,16 +28,12 @@ This rule will enforce consistency of spacing after the start of a comment `#`. 
 
 ## :wrench: Options
 
-```json
-{
-  "yml/spaced-comment": ["error",
-    "always" | "never",
-    {
-      "exceptions": [],
-      "markers": []
-    }
-  ]
-}
+```yaml
+"yml/spaced-comment":
+  - "error"
+  - "always" | "never"
+  - "exceptions": []
+    "markers": []
 ```
 
 - First option

@@ -30,19 +30,13 @@ This rule enforces consistent spacing inside flow sequence brackets.
 
 ## :wrench: Options
 
-Nothing.
-
-```json
-{
-  "yml/flow-sequence-bracket-spacing": ["error",
-    "always" | "never",
-    {
-      "singleValue": true,
-      "objectsInArrays": true,
-      "arraysInArrays": true
-    }
-  ]
-}
+```yaml
+"yml/flow-sequence-bracket-spacing":
+  - "error",
+  - "always" | "never"
+  - "singleValue": true
+    "objectsInArrays": true
+    "arraysInArrays": true
 ```
 
 Same as [array-bracket-spacing] rule option. See [here](https://eslint.org/docs/rules/array-bracket-spacing#options) for details.

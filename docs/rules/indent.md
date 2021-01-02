@@ -40,10 +40,10 @@ This rule reports enforces a consistent indentation style. The default style is 
 
 ## :wrench: Options
 
-```json
-{
-  "yml/indent": ["error", 2]
-}
+```yaml
+"yml/indent":
+  - "error"
+  - 2
 ```
 
 Specify the number of indents.

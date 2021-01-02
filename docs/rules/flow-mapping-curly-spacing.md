@@ -30,18 +30,12 @@ This rule enforces consistent spacing inside braces of flow mappings.
 
 ## :wrench: Options
 
-Nothing.
-
-```json
-{
-  "yml/flow-mapping-curly-spacing": ["error",
-    "always" | "never",
-    {
-      "arraysInObjects": false,
-      "objectsInObjects": false
-    }
-  ]
-}
+```yaml
+"yml/flow-mapping-curly-spacing":
+  - "error",
+  - "always" | "never"
+  - "arraysInObjects": false
+    "objectsInObjects": false
 ```
 
 Same as [object-curly-spacing] rule option. See [here](https://eslint.org/docs/rules/object-curly-spacing#options) for details. 

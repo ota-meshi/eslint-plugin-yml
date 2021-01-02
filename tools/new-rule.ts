@@ -117,12 +117,10 @@ This rule reports ???.
 
 Nothing.
 
-\`\`\`json
-{
-  "yml/${ruleId}": ["error", {
-   
-  }]
-}
+\`\`\`yaml
+"yml/${ruleId}":
+  - "error"
+  - "opt"
 \`\`\`
 
 Same as [${ruleId}] rule option. See [here](https://eslint.org/docs/rules/${ruleId}#options) for details. 

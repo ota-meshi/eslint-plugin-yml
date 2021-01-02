@@ -33,15 +33,15 @@ This rule aims to use consistent style of block or flow styles.
 
 ## :wrench: Options
 
-```json5
-{
-  "yml/block-mapping": ["error", "always" | "never"],
-  // or
-  "yml/block-mapping": ["error", {
-    "singleline": "always" | "never" | "ignore",
+```yaml
+"yml/block-mapping":
+  - "error"
+  - "always" | "never"
+# or
+"yml/block-mapping":
+  - "error"
+  - "singleline": "always" | "never" | "ignore"
     "multiline": "always" | "never" | "ignore"
-  }]
-}
 ```
 
 - Styles

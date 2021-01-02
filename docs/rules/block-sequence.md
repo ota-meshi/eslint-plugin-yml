@@ -36,15 +36,15 @@ c: [
 
 ## :wrench: Options
 
-```json5
-{
-  "yml/block-sequence": ["error", "always" | "never"],
-  // or
-  "yml/block-sequence": ["error", {
-    "singleline": "always" | "never" | "ignore",
+```yaml
+"yml/block-sequence":
+  - "error"
+  - "always" | "never"
+# or
+"yml/block-sequence":
+  - "error"
+  - "singleline": "always" | "never" | "ignore"
     "multiline": "always" | "never" | "ignore"
-  }]
-}
 ```
 
 - Styles

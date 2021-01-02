@@ -31,19 +31,15 @@ This rule enforces a naming convention to key names.
 
 ## :wrench: Options
 
-Nothing.
-
-```json5
-{
-  "yml/key-name-casing": ["error", {
-    "camelCase": true,
-    "PascalCase": false,
-    "SCREAMING_SNAKE_CASE": false,
-    "kebab-case": false,
-    "snake_case": false,
+```yaml
+"yml/key-name-casing":
+  - "error"
+  - "camelCase": true
+    "PascalCase": false
+    "SCREAMING_SNAKE_CASE": false
+    "kebab-case": false
+    "snake_case": false
     "ignores": []
-  }]
-}
 ```
 
 - `"camelCase"` ... if `true`, allows camelCase naming. default `true`

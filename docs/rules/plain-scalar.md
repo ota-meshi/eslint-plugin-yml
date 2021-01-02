@@ -30,12 +30,10 @@ GOOD: GOOD
 
 ## :wrench: Options
 
-Nothing.
-
-```json
-{
-  "yml/plain-scalar": ["error", "always" | "never"]
-}
+```yaml
+"yml/plain-scalar":
+  - "error"
+  - "always" | "never"
 ```
 
 - `"always"` ... Enforce the use of plain style scalars.

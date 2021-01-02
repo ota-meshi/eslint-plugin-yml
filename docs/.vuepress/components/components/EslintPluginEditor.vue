@@ -44,11 +44,11 @@ export default {
         },
         language: {
             type: String,
-            default: "json",
+            default: "yaml",
         },
         fileName: {
             type: String,
-            default: "a.json",
+            default: "a.yaml",
         },
         parser: {
             type: String,
@@ -156,6 +156,13 @@ export default {
                 {
                     validate: false,
                 },
+            )
+
+            monaco.languages.register({ id: "yaml" })
+            monaco.languages.setMonarchTokensProvider(
+                "yaml",
+                require("monaco-editor/esm/vs/basic-languages/yaml/yaml")
+                    .language,
             )
         })
         editor.$watch("codeEditor", () => {

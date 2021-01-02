@@ -36,17 +36,16 @@ This rule enforces consistent line breaks inside braces of flow mappings.
 
 ## :wrench: Options
 
-```json
-{
-  "yml/flow-mapping-curly-newline": ["error",
-    "always" | "never" |
-    {
-       "multiline": true,
-       "minProperties": 1,
-       "consistent": true
-    }
-  ]
-}
+```yaml
+"yml/flow-mapping-curly-newline":
+  - "error",
+  - "always" | "never"
+# or
+"yml/flow-mapping-curly-newline":
+  - "error",
+  - "multiline": true
+    "minProperties": 1
+    "consistent": true
 ```
 
 Same as [object-curly-newline] rule option. See [here](https://eslint.org/docs/rules/object-curly-newline#options) for details. 

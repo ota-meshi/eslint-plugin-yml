@@ -37,19 +37,15 @@ This rule enforces consistent spacing between keys and values in mapping pairs. 
 
 ## :wrench: Options
 
-Nothing.
-
-```json5
-{
-  "yml/key-spacing": ["error", {
-    "beforeColon": false,
-    "afterColon": true,
-    "mode": "strict" | "minimum",
-    // "align": "value" | "colon",
-    // "singleLine": {},
-    // "multiLine": {}
-  }]
-}
+```yaml
+"yml/key-spacing":
+  - "error"
+  - "beforeColon": false
+    "afterColon": true
+    "mode": "strict" | "minimum"
+    # "align": "value" | "colon"
+    # "singleLine": {}
+    # "multiLine": {}
 ```
 
 Same as [key-spacing] rule option. See [here](https://eslint.org/docs/rules/key-spacing#options) for details.

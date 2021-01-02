@@ -32,13 +32,11 @@ c: d
 
 ## :wrench: Options
 
-```json
-{
-  "yml/no-irregular-whitespace": ["error", {
-    "skipQuotedScalars": true,
+```yaml
+"yml/no-irregular-whitespace":
+  - "error"
+  - "skipQuotedScalars": true
     "skipComments": false
-  }]
-}
 ```
 
 - `skipQuotedScalars` ... if `true`, allows any whitespace characters in quoted scalars. default `true`

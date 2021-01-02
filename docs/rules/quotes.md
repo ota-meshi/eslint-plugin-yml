@@ -30,15 +30,11 @@ This rule enforces the consistent use of either double or single quotes.
 
 ## :wrench: Options
 
-Nothing.
-
-```json5
-{
-  "yml/quotes": ["error", {
-    "prefer": "double" | "single",
+```yaml
+"yml/quotes":
+  - "error"
+  - "prefer": "double" | "single"
     "avoidEscape": true
-  }]
-}
 ```
 
 - `prefer`
