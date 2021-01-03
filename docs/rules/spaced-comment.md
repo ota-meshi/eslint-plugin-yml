@@ -16,6 +16,8 @@ This rule will enforce consistency of spacing after the start of a comment `#`. 
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/spaced-comment: 'error'
 
@@ -30,10 +32,10 @@ This rule will enforce consistency of spacing after the start of a comment `#`. 
 
 ```yaml
 "yml/spaced-comment":
-  - "error"
-  - "always" # or "never"
-  - "exceptions": []
-    "markers": []
+  - error
+  - always # or "never"
+  - exceptions: []
+    markers: []
 ```
 
 - First option

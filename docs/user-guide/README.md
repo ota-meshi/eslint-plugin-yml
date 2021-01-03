@@ -65,11 +65,11 @@ Example **.vscode/settings.json**:
 
 ```json
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "yaml"
-  ]
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "yaml"
+    ]
 }
 ```
 

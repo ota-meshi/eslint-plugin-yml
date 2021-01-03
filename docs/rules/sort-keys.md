@@ -16,6 +16,8 @@ This rule checks all pair definitions of mapping and verifies that all keys are 
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/sort-keys: 'error'
 

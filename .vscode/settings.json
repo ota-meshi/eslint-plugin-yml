@@ -5,7 +5,8 @@
     "vue",
     "typescript",
     "json",
-    "jsonc"
+    "jsonc",
+    "markdown"
   ],
   "typescript.validate.enable": true,
   "javascript.validate.enable": false,

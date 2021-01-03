@@ -16,6 +16,8 @@ This rule reports empty mapping keys.
 
 <eslint-code-block>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/no-empty-key: 'error'
 

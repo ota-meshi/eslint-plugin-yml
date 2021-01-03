@@ -16,6 +16,8 @@ This rule aims to use consistent style of block or flow styles.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/block-mapping: 'error'
 
@@ -35,13 +37,14 @@ This rule aims to use consistent style of block or flow styles.
 
 ```yaml
 "yml/block-mapping":
-  - "error"
-  - "always" # or "never"
+  - error
+  - always # or "never"
+---
 # or
 "yml/block-mapping":
-  - "error"
-  - "singleline": "always" # or "never" or "ignore"
-    "multiline": "always" # or "never" or "ignore"
+  - error
+  - singleline: always # or "never" or "ignore"
+    multiline: always # or "never" or "ignore"
 ```
 
 - Styles
@@ -57,6 +60,8 @@ This rule aims to use consistent style of block or flow styles.
 ### `"always"`
 
 <eslint-code-block fix>
+
+<!-- eslint-skip -->
 
 ```yaml
 # eslint yml/block-mapping: ['error', 'always']
@@ -76,6 +81,8 @@ This rule aims to use consistent style of block or flow styles.
 ### `"never"`
 
 <eslint-code-block fix>
+
+<!-- eslint-skip -->
 
 ```yaml
 # eslint yml/block-mapping: ['error', 'never']

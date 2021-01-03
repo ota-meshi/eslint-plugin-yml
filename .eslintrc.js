@@ -16,8 +16,10 @@ module.exports = {
         "plugin:@ota-meshi/+typescript",
         "plugin:@ota-meshi/+eslint-plugin",
         "plugin:@ota-meshi/+vue2",
-        "plugin:@ota-meshi/+prettier",
         "plugin:@ota-meshi/+json",
+        "plugin:@ota-meshi/+yaml",
+        "plugin:@ota-meshi/+md",
+        "plugin:@ota-meshi/+prettier",
     ],
     rules: {
         "eslint-comments/no-unused-disable": "error",
@@ -26,8 +28,6 @@ module.exports = {
         "no-lonely-if": "off",
         "new-cap": "off",
         "no-shadow": "off",
-
-        "jsonc/array-bracket-newline": "off",
     },
     overrides: [
         {

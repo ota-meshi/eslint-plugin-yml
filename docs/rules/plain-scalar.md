@@ -16,6 +16,8 @@ This rule aims to use consistent style of plain or quoted styles.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/plain-scalar: 'error'
 
@@ -32,8 +34,8 @@ GOOD: GOOD
 
 ```yaml
 "yml/plain-scalar":
-  - "error"
-  - "always" # or "never"
+  - error
+  - always # or "never"
 ```
 
 - `"always"` ... Enforce the use of plain style scalars.

@@ -16,6 +16,8 @@ This rule disallows tabs for indentation.
 
 <eslint-code-block>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/no-tab-indent: 'error'
 

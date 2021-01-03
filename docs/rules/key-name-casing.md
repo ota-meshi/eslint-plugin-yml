@@ -14,6 +14,8 @@ This rule enforces a naming convention to key names.
 
 <eslint-code-block>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/key-name-casing: 'error'
 
@@ -33,13 +35,13 @@ This rule enforces a naming convention to key names.
 
 ```yaml
 "yml/key-name-casing":
-  - "error"
-  - "camelCase": true
-    "PascalCase": false
-    "SCREAMING_SNAKE_CASE": false
-    "kebab-case": false
-    "snake_case": false
-    "ignores": []
+  - error
+  - camelCase: true
+    PascalCase: false
+    SCREAMING_SNAKE_CASE: false
+    kebab-case: false
+    snake_case: false
+    ignores: []
 ```
 
 - `"camelCase"` ... if `true`, allows camelCase naming. default `true`

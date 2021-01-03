@@ -3,6 +3,8 @@
 /node_modules
 /tests/fixtures/integrations
 /tests/fixtures/**/*.vue
+/tests/fixtures/**/*.yaml
+/tests/fixtures/**/*.yml
 /assets
 /dist
 /docs/.vuepress/dist

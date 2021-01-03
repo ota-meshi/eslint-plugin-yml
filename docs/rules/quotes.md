@@ -16,6 +16,8 @@ This rule enforces the consistent use of either double or single quotes.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/quotes: 'error'
 
@@ -31,10 +33,10 @@ This rule enforces the consistent use of either double or single quotes.
 ## :wrench: Options
 
 ```yaml
-"yml/quotes":
-  - "error"
-  - "prefer": "double" # or "single"
-    "avoidEscape": true
+yml/quotes:
+  - error
+  - prefer: double # or "single"
+    avoidEscape: true
 ```
 
 - `prefer`

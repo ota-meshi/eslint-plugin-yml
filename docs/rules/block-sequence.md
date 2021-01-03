@@ -16,6 +16,8 @@ This rule aims to use consistent style of block or flow styles.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/block-sequence: 'error'
 
@@ -38,13 +40,14 @@ c: [
 
 ```yaml
 "yml/block-sequence":
-  - "error"
-  - "always" # or "never"
+  - error
+  - always # or "never"
+---
 # or
 "yml/block-sequence":
-  - "error"
-  - "singleline": "always" # or "never" or "ignore"
-    "multiline": "always" # or "never" or "ignore"
+  - error
+  - singleline: always # or "never" or "ignore"
+    multiline: always # or "never" or "ignore"
 ```
 
 - Styles
@@ -60,6 +63,8 @@ c: [
 ### `"always"`
 
 <eslint-code-block fix>
+
+<!-- eslint-skip -->
 
 ```yaml
 # eslint yml/block-sequence: ['error', 'always']
@@ -82,6 +87,8 @@ c: [
 ### `"never"`
 
 <eslint-code-block fix>
+
+<!-- eslint-skip -->
 
 ```yaml
 # eslint yml/block-sequence: ['error', 'never']

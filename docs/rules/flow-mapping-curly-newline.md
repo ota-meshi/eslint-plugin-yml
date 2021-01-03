@@ -16,6 +16,8 @@ This rule enforces consistent line breaks inside braces of flow mappings.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/flow-mapping-curly-newline: 'error'
 
@@ -38,17 +40,18 @@ This rule enforces consistent line breaks inside braces of flow mappings.
 
 ```yaml
 "yml/flow-mapping-curly-newline":
-  - "error",
-  - "always" # or "never"
+  - error
+  - always # or "never"
+---
 # or
 "yml/flow-mapping-curly-newline":
-  - "error",
-  - "multiline": true
-    "minProperties": 1
-    "consistent": true
+  - error
+  - multiline: true
+    minProperties: 1
+    consistent: true
 ```
 
-Same as [object-curly-newline] rule option. See [here](https://eslint.org/docs/rules/object-curly-newline#options) for details. 
+Same as [object-curly-newline] rule option. See [here](https://eslint.org/docs/rules/object-curly-newline#options) for details.
 
 ## :couple: Related rules
 

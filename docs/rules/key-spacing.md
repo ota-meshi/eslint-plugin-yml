@@ -16,6 +16,8 @@ This rule enforces consistent spacing between keys and values in mapping pairs. 
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/key-spacing: 'error'
 ---
@@ -39,10 +41,10 @@ This rule enforces consistent spacing between keys and values in mapping pairs. 
 
 ```yaml
 "yml/key-spacing":
-  - "error"
-  - "beforeColon": false
-    "afterColon": true
-    "mode": "strict" # or "minimum"
+  - error
+  - beforeColon: false
+    afterColon: true
+    mode: strict # or "minimum"
     # "align": "value" or "colon"
     # "singleLine": {}
     # "multiLine": {}

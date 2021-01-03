@@ -101,6 +101,8 @@ This rule reports ???.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 \`\`\`yaml
 # eslint yml/${ruleId}: 'error'
 

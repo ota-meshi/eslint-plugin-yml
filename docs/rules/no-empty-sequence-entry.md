@@ -16,6 +16,8 @@ This rule reports empty sequence entries.
 
 <eslint-code-block>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/no-empty-sequence-entry: 'error'
 

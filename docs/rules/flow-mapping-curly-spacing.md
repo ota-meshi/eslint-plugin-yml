@@ -16,6 +16,8 @@ This rule enforces consistent spacing inside braces of flow mappings.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/flow-mapping-curly-spacing: 'error'
 
@@ -32,13 +34,13 @@ This rule enforces consistent spacing inside braces of flow mappings.
 
 ```yaml
 "yml/flow-mapping-curly-spacing":
-  - "error",
-  - "always" # or "never"
-  - "arraysInObjects": false
-    "objectsInObjects": false
+  - error
+  - always # or "never"
+  - arraysInObjects: false
+    objectsInObjects: false
 ```
 
-Same as [object-curly-spacing] rule option. See [here](https://eslint.org/docs/rules/object-curly-spacing#options) for details. 
+Same as [object-curly-spacing] rule option. See [here](https://eslint.org/docs/rules/object-curly-spacing#options) for details.
 
 ## :couple: Related rules
 

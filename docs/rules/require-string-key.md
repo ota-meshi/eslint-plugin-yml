@@ -14,6 +14,8 @@ This rule reports mapping keys defined with an other than a string.
 
 <eslint-code-block>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/require-string-key: 'error'
 

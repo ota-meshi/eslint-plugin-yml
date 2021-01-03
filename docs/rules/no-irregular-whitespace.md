@@ -17,6 +17,8 @@ description: "disallow irregular whitespace"
 
 <eslint-code-block>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/no-irregular-whitespace: 'error'
 
@@ -34,9 +36,9 @@ c: d
 
 ```yaml
 "yml/no-irregular-whitespace":
-  - "error"
-  - "skipQuotedScalars": true
-    "skipComments": false
+  - error
+  - skipQuotedScalars: true
+    skipComments: false
 ```
 
 - `skipQuotedScalars` ... if `true`, allows any whitespace characters in quoted scalars. default `true`
@@ -45,6 +47,8 @@ c: d
 ### `"skipQuotedScalars": true` (default)
 
 <eslint-code-block>
+
+<!-- eslint-skip -->
 
 ```yml
 # eslint yml/no-irregular-whitespace: [error, {skipQuotedScalars: true}]
@@ -61,6 +65,8 @@ c: d
 
 <eslint-code-block>
 
+<!-- eslint-skip -->
+
 ```yml
 # eslint yml/no-irregular-whitespace: [error, {skipQuotedScalars: false}]
 # ✗ BAD
@@ -75,6 +81,8 @@ c: d
 ### `"skipComments": true`
 
 <eslint-code-block>
+
+<!-- eslint-skip -->
 
 ```yml
 # eslint yml/no-irregular-whitespace: [error, {skipComments: true}]

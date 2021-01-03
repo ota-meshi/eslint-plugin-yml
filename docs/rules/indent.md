@@ -16,6 +16,8 @@ This rule reports enforces a consistent indentation style. The default style is 
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/indent: 'error'
 
@@ -41,8 +43,8 @@ This rule reports enforces a consistent indentation style. The default style is 
 ## :wrench: Options
 
 ```yaml
-"yml/indent":
-  - "error"
+yml/indent:
+  - error
   - 2
 ```
 

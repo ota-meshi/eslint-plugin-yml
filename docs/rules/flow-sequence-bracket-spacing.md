@@ -16,6 +16,8 @@ This rule enforces consistent spacing inside flow sequence brackets.
 
 <eslint-code-block fix>
 
+<!-- eslint-skip -->
+
 ```yaml
 # eslint yml/flow-sequence-bracket-spacing: 'error'
 
@@ -32,11 +34,11 @@ This rule enforces consistent spacing inside flow sequence brackets.
 
 ```yaml
 "yml/flow-sequence-bracket-spacing":
-  - "error",
-  - "always" # or "never"
-  - "singleValue": true
-    "objectsInArrays": true
-    "arraysInArrays": true
+  - error
+  - always # or "never"
+  - singleValue: true
+    objectsInArrays: true
+    arraysInArrays: true
 ```
 
 Same as [array-bracket-spacing] rule option. See [here](https://eslint.org/docs/rules/array-bracket-spacing#options) for details.
