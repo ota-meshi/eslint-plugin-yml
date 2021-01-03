@@ -33,7 +33,7 @@ This rule enforces consistent spacing inside flow sequence brackets.
 ```yaml
 "yml/flow-sequence-bracket-spacing":
   - "error",
-  - "always" | "never"
+  - "always" # or "never"
   - "singleValue": true
     "objectsInArrays": true
     "arraysInArrays": true

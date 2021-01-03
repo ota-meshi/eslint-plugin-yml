@@ -44,12 +44,12 @@ This rule enforces line breaks after opening and before closing flow sequence br
 ```yaml
 "yml/flow-sequence-bracket-newline":
   - "error"
-  - "always" | "never" | "consistent"
+  - "always" # or "never" or "consistent"
   - "multiline": true
     "minItems": null
 ```
 
-Same as [array-bracket-newline] rule option. See [here](https://eslint.org/docs/rules/array-bracket-newline#options) for details. 
+Same as [array-bracket-newline] rule option. See [here](https://eslint.org/docs/rules/array-bracket-newline#options) for details.
 
 ## :couple: Related rules
 

@@ -42,8 +42,8 @@ This rule enforces consistent spacing between keys and values in mapping pairs. 
   - "error"
   - "beforeColon": false
     "afterColon": true
-    "mode": "strict" | "minimum"
-    # "align": "value" | "colon"
+    "mode": "strict" # or "minimum"
+    # "align": "value" or "colon"
     # "singleLine": {}
     # "multiLine": {}
 ```

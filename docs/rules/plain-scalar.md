@@ -33,7 +33,7 @@ GOOD: GOOD
 ```yaml
 "yml/plain-scalar":
   - "error"
-  - "always" | "never"
+  - "always" # or "never"
 ```
 
 - `"always"` ... Enforce the use of plain style scalars.

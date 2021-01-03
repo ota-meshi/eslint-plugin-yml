@@ -31,7 +31,7 @@ This rule will enforce consistency of spacing after the start of a comment `#`. 
 ```yaml
 "yml/spaced-comment":
   - "error"
-  - "always" | "never"
+  - "always" # or "never"
   - "exceptions": []
     "markers": []
 ```

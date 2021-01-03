@@ -33,7 +33,7 @@ This rule enforces consistent spacing inside braces of flow mappings.
 ```yaml
 "yml/flow-mapping-curly-spacing":
   - "error",
-  - "always" | "never"
+  - "always" # or "never"
   - "arraysInObjects": false
     "objectsInObjects": false
 ```

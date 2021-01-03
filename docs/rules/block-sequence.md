@@ -39,12 +39,12 @@ c: [
 ```yaml
 "yml/block-sequence":
   - "error"
-  - "always" | "never"
+  - "always" # or "never"
 # or
 "yml/block-sequence":
   - "error"
-  - "singleline": "always" | "never" | "ignore"
-    "multiline": "always" | "never" | "ignore"
+  - "singleline": "always" # or "never" or "ignore"
+    "multiline": "always" # or "never" or "ignore"
 ```
 
 - Styles

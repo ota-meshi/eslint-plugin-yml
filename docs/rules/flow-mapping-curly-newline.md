@@ -39,7 +39,7 @@ This rule enforces consistent line breaks inside braces of flow mappings.
 ```yaml
 "yml/flow-mapping-curly-newline":
   - "error",
-  - "always" | "never"
+  - "always" # or "never"
 # or
 "yml/flow-mapping-curly-newline":
   - "error",

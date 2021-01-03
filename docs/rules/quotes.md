@@ -33,7 +33,7 @@ This rule enforces the consistent use of either double or single quotes.
 ```yaml
 "yml/quotes":
   - "error"
-  - "prefer": "double" | "single"
+  - "prefer": "double" # or "single"
     "avoidEscape": true
 ```
 

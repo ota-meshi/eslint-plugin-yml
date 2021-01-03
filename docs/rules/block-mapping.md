@@ -36,12 +36,12 @@ This rule aims to use consistent style of block or flow styles.
 ```yaml
 "yml/block-mapping":
   - "error"
-  - "always" | "never"
+  - "always" # or "never"
 # or
 "yml/block-mapping":
   - "error"
-  - "singleline": "always" | "never" | "ignore"
-    "multiline": "always" | "never" | "ignore"
+  - "singleline": "always" # or "never" or "ignore"
+    "multiline": "always" # or "never" or "ignore"
 ```
 
 - Styles
