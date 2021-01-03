@@ -78,7 +78,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-vue": "^7.0.1",
-        "eslint-plugin-yml": "file:.",
+        "eslint-plugin-yml": "^0.3.0",
         "eslint4b": "^7.3.1",
         "espree": "^7.1.0",
         "mocha": "^7.0.0",
