@@ -521,35 +521,36 @@ export default createRule("indent", {
             lineIndents: (LineIndentStep1 | undefined)[],
         ) {
             const results: (LineIndentStep2 | undefined)[] = []
-            let nextIndent: LineIndentStep2 | null = null
-            for (let line = sourceCode.lines.length; line >= 0; line--) {
-                const lineIndent = lineIndents[line]
+            const commentLines: {
+                range: [number, number]
+                commentLineIndents: LineIndentStep1[]
+            }[] = []
+            for (const lineIndent of lineIndents) {
                 if (!lineIndent) {
                     continue
                 }
-                if (lineIndent.expectedIndent == null) {
-                    if (lineIndent.firstToken.type === "Block") {
-                        const expectedIndent: number | null =
-                            nextIndent != null
-                                ? nextIndent.expectedIndent
-                                : null
-                        if (expectedIndent != null) {
-                            nextIndent = results[line] = {
-                                line,
-                                expectedIndent,
-                                actualIndent: lineIndent.actualIndent,
-                                markData: lineIndent.markData,
-                            }
-                        }
+                const line = lineIndent.line
+                if (lineIndent.firstToken.type === "Block") {
+                    const last = commentLines[commentLines.length - 1]
+                    if (last && last.range[1] === line - 1) {
+                        last.range[1] = line
+                        last.commentLineIndents.push(lineIndent)
+                    } else {
+                        commentLines.push({
+                            range: [line, line],
+                            commentLineIndents: [lineIndent],
+                        })
                     }
-                } else {
-                    const indent = (results[line] = {
+                } else if (lineIndent.expectedIndent != null) {
+                    const indent = {
                         line,
                         expectedIndent: lineIndent.expectedIndent,
                         actualIndent: lineIndent.actualIndent,
                         markData: lineIndent.markData,
-                    })
-                    nextIndent = indent
+                    }
+                    if (!results[line]) {
+                        results[line] = indent
+                    }
                     if (lineIndent.lastScalar) {
                         const scalarNode = lineIndent.lastScalar.node
                         if (
@@ -577,7 +578,119 @@ export default createRule("indent", {
                 }
             }
 
+            processComments(commentLines, lineIndents)
+
             return results
+
+            /**
+             * Process comments.
+             */
+            function processComments(
+                commentLines: {
+                    range: [number, number]
+                    commentLineIndents: LineIndentStep1[]
+                }[],
+                lineIndents: (LineIndentStep1 | undefined)[],
+            ) {
+                for (const { range, commentLineIndents } of commentLines) {
+                    let prev: LineIndentStep2 | undefined = results
+                        .slice(0, range[0])
+                        .filter((data) => data)
+                        .pop()
+                    const next: LineIndentStep2 | undefined = results
+                        .slice(range[1] + 1)
+                        .filter((data) => data)
+                        .shift()
+
+                    if (isBlockLiteral(prev)) {
+                        prev = undefined
+                    }
+
+                    const expectedIndents: number[] = []
+                    let either: LineIndentStep2 | undefined
+                    if (prev && next) {
+                        expectedIndents.unshift(next.expectedIndent)
+                        if (next.expectedIndent < prev.expectedIndent) {
+                            let indent = next.expectedIndent + numOfIndent
+                            while (indent <= prev.expectedIndent) {
+                                expectedIndents.unshift(indent)
+                                indent += numOfIndent
+                            }
+                        }
+                    } else if ((either = prev || next)) {
+                        expectedIndents.unshift(either.expectedIndent)
+                        if (!next) {
+                            let indent = either.expectedIndent - numOfIndent
+                            while (indent >= 0) {
+                                expectedIndents.push(indent)
+                                indent -= numOfIndent
+                            }
+                        }
+                    }
+                    if (!expectedIndents.length) {
+                        continue
+                    }
+
+                    let expectedIndent = expectedIndents[0]
+                    for (const commentLineIndent of commentLineIndents) {
+                        if (results[commentLineIndent.line]) {
+                            continue
+                        }
+                        expectedIndent = Math.min(
+                            expectedIndents.find((indent, index) => {
+                                if (indent <= commentLineIndent.actualIndent) {
+                                    return true
+                                }
+                                const prev = expectedIndents[index + 1] ?? -1
+                                return (
+                                    prev < commentLineIndent.actualIndent &&
+                                    commentLineIndent.actualIndent < indent
+                                )
+                            }) ?? expectedIndent,
+                            expectedIndent,
+                        )
+                        results[commentLineIndent.line] = {
+                            line: commentLineIndent.line,
+                            expectedIndent,
+                            actualIndent: commentLineIndent.actualIndent,
+                            markData: commentLineIndent.markData,
+                        }
+                    }
+                }
+
+                /**
+                 * Checks whether given prev data is block literal
+                 */
+                function isBlockLiteral(
+                    prev: LineIndentStep2 | undefined,
+                ): boolean {
+                    if (!prev) {
+                        return false
+                    }
+                    for (let prevLine = prev.line; prevLine >= 0; prevLine--) {
+                        const prevLineIndent = lineIndents[prev.line]
+                        if (!prevLineIndent) {
+                            continue
+                        }
+                        if (prevLineIndent.lastScalar) {
+                            const scalarNode = prevLineIndent.lastScalar.node
+                            if (
+                                scalarNode.style === "literal" ||
+                                scalarNode.style === "folded"
+                            ) {
+                                if (
+                                    scalarNode.loc.start.line <= prev.line &&
+                                    prev.line <= scalarNode.loc.end.line
+                                ) {
+                                    return true
+                                }
+                            }
+                        }
+                        return false
+                    }
+                    return false
+                }
+            }
 
             /**
              * Process block literal
