@@ -1,0 +1,16 @@
+# indent/invalid/comments02-input.yml
+a:
+  b:
+    c: 1
+  # d: 2
+  e: 3
+f:
+  g:
+    h: 1
+    # i: 2
+  j: 3
+k:
+  l:
+    m: 1
+  # n: 2
+  o: 3
