@@ -162,3 +162,23 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "block-sequence-hyphen-indicator-newline",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)
+
+makeSuiteTests(
+    "block-mapping-question-indicator-newline",
+    {
+        default: [],
+        never: ["never"],
+        always: ["always"],
+    },
+    { force: true },
+)

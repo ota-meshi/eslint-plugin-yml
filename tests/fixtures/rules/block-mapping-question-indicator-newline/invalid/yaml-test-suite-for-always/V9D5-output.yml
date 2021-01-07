@@ -1,0 +1,5 @@
+# block-mapping-question-indicator-newline/invalid/yaml-test-suite-for-always/V9D5-input.yaml
+- sun: yellow
+- ?
+    earth: blue
+  : moon: white

@@ -13,7 +13,9 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
+| [yml/block-mapping-question-indicator-newline](./block-mapping-question-indicator-newline.md) | enforce consistent line breaks after `?` indicator | :wrench: |  |
 | [yml/block-mapping](./block-mapping.md) | require or disallow block style mappings. | :wrench: |  |
+| [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md) | enforce consistent line breaks after `-` indicator | :wrench: |  |
 | [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: |  |
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |

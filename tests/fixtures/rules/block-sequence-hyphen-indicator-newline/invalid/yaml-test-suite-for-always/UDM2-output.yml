@@ -1,0 +1,3 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/UDM2-input.yaml
+-
+  { url: http://example.org }

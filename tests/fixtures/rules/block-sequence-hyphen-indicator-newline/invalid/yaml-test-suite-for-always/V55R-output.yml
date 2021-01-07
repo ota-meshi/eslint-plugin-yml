@@ -1,0 +1,9 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/V55R-input.yaml
+-
+  &a a
+-
+  &b b
+-
+  *a
+-
+  *b

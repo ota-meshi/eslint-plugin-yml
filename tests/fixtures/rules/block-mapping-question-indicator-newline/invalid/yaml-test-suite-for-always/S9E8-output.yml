@@ -1,0 +1,9 @@
+# block-mapping-question-indicator-newline/invalid/yaml-test-suite-for-always/S9E8-input.yaml
+sequence:
+- one
+- two
+mapping:
+  ?
+    sky
+  : blue
+  sea : green

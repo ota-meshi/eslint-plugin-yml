@@ -475,6 +475,12 @@ function create(context: RuleContext): RuleListener {
                 ) {
                     return false
                 }
+                if (
+                    property.key.style === "folded" ||
+                    property.key.style === "literal"
+                ) {
+                    return false
+                }
             }
         }
 

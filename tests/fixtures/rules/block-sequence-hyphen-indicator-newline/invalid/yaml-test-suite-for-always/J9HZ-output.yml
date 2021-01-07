@@ -1,0 +1,13 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/J9HZ-input.yaml
+---
+hr: # 1998 hr ranking
+  -
+    Mark McGwire
+  -
+    Sammy Sosa
+rbi:
+  # 1998 rbi ranking
+  -
+    Sammy Sosa
+  -
+    Ken Griffey

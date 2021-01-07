@@ -123,7 +123,9 @@ The rules with the following star :star: are included in the config.
 
 | Rule ID | Description | Fixable | RECOMMENDED |
 |:--------|:------------|:-------:|:-----------:|
+| [yml/block-mapping-question-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-question-indicator-newline.html) | enforce consistent line breaks after `?` indicator | :wrench: |  |
 | [yml/block-mapping](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping.html) | require or disallow block style mappings. | :wrench: |  |
+| [yml/block-sequence-hyphen-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence-hyphen-indicator-newline.html) | enforce consistent line breaks after `-` indicator | :wrench: |  |
 | [yml/block-sequence](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence.html) | require or disallow block style sequences. | :wrench: |  |
 | [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |
@@ -164,6 +166,10 @@ Please use GitHub's Issues/PRs.
 
 - `npm test` runs tests and measures coverage.  
 - `npm run update` runs in order to update readme and recommended configuration.  
+
+### Working With Rules
+
+This plugin uses [yaml-eslint-parser](https://github.com/ota-meshi/yaml-eslint-parser) for the parser. Check [here](https://ota-meshi.github.io/yaml-eslint-parser/) to find out about AST.
 
 <!--DOCS_IGNORE_END-->
 

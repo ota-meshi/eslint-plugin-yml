@@ -1,0 +1,8 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/SKE5-input.yaml
+---
+seq:
+ &anchor
+-
+  a
+-
+  b

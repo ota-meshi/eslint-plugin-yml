@@ -1,0 +1,7 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/K4SU-input.yaml
+-
+  foo
+-
+  bar
+-
+  42

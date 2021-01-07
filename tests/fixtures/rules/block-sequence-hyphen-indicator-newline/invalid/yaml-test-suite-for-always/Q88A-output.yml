@@ -1,0 +1,11 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/Q88A-input.yaml
+-
+  [ a, b ]
+-
+  { a: b }
+-
+  "a"
+-
+  'b'
+-
+  c

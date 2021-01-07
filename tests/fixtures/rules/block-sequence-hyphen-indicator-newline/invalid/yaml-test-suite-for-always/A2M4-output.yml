@@ -1,0 +1,9 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/A2M4-input.yaml
+? a
+: -
+    b
+  -
+     -
+       c
+     -
+       d

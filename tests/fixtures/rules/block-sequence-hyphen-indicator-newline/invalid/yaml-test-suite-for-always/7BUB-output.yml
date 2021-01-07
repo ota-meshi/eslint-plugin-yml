@@ -1,0 +1,13 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/7BUB-input.yaml
+---
+hr:
+  -
+    Mark McGwire
+  # Following node labeled SS
+  -
+    &SS Sammy Sosa
+rbi:
+  -
+    *SS # Subsequent occurrence
+  -
+    Ken Griffey
