@@ -1,7 +1,7 @@
 import type { AST } from "yaml-eslint-parser"
 import type { YAMLNodeOrToken, RuleFixer, Fix, RuleContext } from "../types"
 import { createRule } from "../utils"
-import { isComma } from "../utils/ast-utils"
+import { isColon, isComma } from "../utils/ast-utils"
 import {
     calcExpectIndentForPairs,
     hasTabIndent,
@@ -333,6 +333,15 @@ function buildFixFlowToBlock(node: AST.YAMLFlowMapping, context: RuleContext) {
                 [prevToken.range[1], pair.range[0]],
                 `\n${expectIndent}`,
             )
+            const colonToken = sourceCode.getTokenAfter(pair.key!, isColon)!
+            if (
+                colonToken.range[1] ===
+                sourceCode.getTokenAfter(colonToken, {
+                    includeComments: true,
+                })!.range[0]
+            ) {
+                yield fixer.insertTextAfter(colonToken, " ")
+            }
             yield* processIndentFix(fixer, expectIndent, pair.value!, context)
             prev = pair
         }
