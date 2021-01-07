@@ -1,0 +1,7 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/6JWB-input.yaml
+foo: !!seq
+  -
+    !!str a
+  -
+    !!map
+    key: !!str value

@@ -1,0 +1,3 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/MXS3-input.yaml
+-
+  {a: b}

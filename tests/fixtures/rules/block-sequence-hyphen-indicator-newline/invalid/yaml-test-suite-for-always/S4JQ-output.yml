@@ -1,0 +1,8 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/S4JQ-input.yaml
+# Assuming conventional resolution:
+-
+  "12"
+-
+  12
+-
+  ! 12

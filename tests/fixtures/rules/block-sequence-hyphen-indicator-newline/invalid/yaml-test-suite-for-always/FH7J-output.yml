@@ -1,0 +1,8 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/FH7J-input.yaml
+-
+  !!str
+-
+  !!null : a
+  b: !!str
+-
+  !!str : !!null

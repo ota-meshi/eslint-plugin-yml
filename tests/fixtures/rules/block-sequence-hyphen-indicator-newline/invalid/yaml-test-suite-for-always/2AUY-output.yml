@@ -1,0 +1,9 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/2AUY-input.yaml
+ -
+   !!str a
+ -
+   b
+ -
+   !!int 42
+ -
+   d

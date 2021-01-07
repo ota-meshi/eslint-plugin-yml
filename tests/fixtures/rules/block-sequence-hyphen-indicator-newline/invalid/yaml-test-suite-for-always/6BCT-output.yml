@@ -1,0 +1,8 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/6BCT-input.yaml
+-
+  foo:	 bar
+-
+  -
+    baz
+  -
+    baz

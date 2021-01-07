@@ -1,0 +1,7 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/KZN9-input.yaml
+-
+  [ YAML : separate ]
+-
+  [ : empty key entry ]
+-
+  [ {JSON: like}:adjacent ]

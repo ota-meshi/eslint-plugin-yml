@@ -1,0 +1,6 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/DC7X-input.yaml
+a: b	
+seq:	
+ -
+   a	
+c: d	#X

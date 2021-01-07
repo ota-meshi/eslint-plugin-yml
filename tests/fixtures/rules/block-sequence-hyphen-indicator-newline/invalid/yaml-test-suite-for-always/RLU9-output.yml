@@ -1,0 +1,7 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/RLU9-input.yaml
+foo:
+-
+  42
+bar:
+  -
+    44

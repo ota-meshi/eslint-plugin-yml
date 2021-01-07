@@ -1,0 +1,5 @@
+# block-mapping-question-indicator-newline/invalid/yaml-test-suite-for-always/6M2F-input.yaml
+?
+  &a a
+: &b b
+: *a

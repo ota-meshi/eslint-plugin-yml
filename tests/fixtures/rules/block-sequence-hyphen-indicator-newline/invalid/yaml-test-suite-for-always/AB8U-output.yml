@@ -1,0 +1,4 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/AB8U-input.yaml
+-
+  single multiline
+ - sequence entry

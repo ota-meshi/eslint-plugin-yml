@@ -1,0 +1,15 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/4QFQ-input.yaml
+-
+  |
+ detected
+-
+  >
+ 
+  
+  # detected
+-
+  |1
+  explicit
+-
+  >
+ detected

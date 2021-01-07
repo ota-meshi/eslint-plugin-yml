@@ -1,0 +1,5 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/Z9M4-input.yaml
+%TAG !e! tag:example.com,2000:app/
+---
+-
+  !e!foo "bar"

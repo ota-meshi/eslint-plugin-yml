@@ -1,0 +1,7 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-always/D83L-input.yaml
+-
+  |2-
+  explicit indent and chomp
+-
+  |-2
+  chomp and explicit indent
