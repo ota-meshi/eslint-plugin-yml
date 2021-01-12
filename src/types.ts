@@ -136,7 +136,7 @@ export interface SourceCode {
         options?: { includeComments?: boolean },
     ): YAMLToken | null
 
-    getFirstToken(node: AST.YAMLNode): YAMLToken
+    getFirstToken(node: AST.YAMLNode): AST.Token
     getFirstToken(
         node: AST.YAMLNode,
         options?: CursorWithSkipOptions,
@@ -147,7 +147,7 @@ export interface SourceCode {
         options?: CursorWithCountOptions,
     ): YAMLToken[]
 
-    getLastToken(node: AST.YAMLNode): YAMLToken
+    getLastToken(node: AST.YAMLNode): AST.Token
     getLastToken(
         node: AST.YAMLNode,
         options?: CursorWithSkipOptions,
@@ -158,6 +158,7 @@ export interface SourceCode {
         options?: CursorWithCountOptions,
     ): YAMLToken[]
 
+    getTokenBefore(node: YAMLNodeOrToken): AST.Token | null
     getTokenBefore(
         node: YAMLNodeOrToken,
         options?: CursorWithSkipOptions,
@@ -168,6 +169,7 @@ export interface SourceCode {
         options?: CursorWithCountOptions,
     ): YAMLToken[]
 
+    getTokenAfter(node: YAMLNodeOrToken): AST.Token | null
     getTokenAfter(
         node: YAMLNodeOrToken,
         options?: CursorWithSkipOptions,

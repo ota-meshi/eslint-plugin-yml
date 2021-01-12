@@ -1,4 +1,6 @@
+import type { AST } from "yaml-eslint-parser"
 import { createRule } from "../utils"
+import { isHyphen } from "../utils/ast-utils"
 
 export default createRule("block-sequence-hyphen-indicator-newline", {
     meta: {
@@ -9,8 +11,13 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
         },
         fixable: "whitespace",
         schema: [
+            { enum: ["always", "never"] },
             {
-                enum: ["always", "never"],
+                type: "object",
+                properties: {
+                    nestedHyphen: { enum: ["always", "never"] },
+                },
+                additionalProperties: false,
             },
         ],
         messages: {
@@ -26,7 +33,21 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
         if (!context.parserServices.isYAML) {
             return {}
         }
-        const option: "never" | "always" = context.options[0] || "never"
+        const style: "never" | "always" = context.options[0] || "never"
+        const nestedHyphenStyle: "never" | "always" =
+            context.options[1]?.nestedHyphen || "always"
+
+        /**
+         * Get style from given hyphen
+         */
+        function getStyleOption(hyphen: AST.Token): "never" | "always" {
+            const next = sourceCode.getTokenAfter(hyphen)
+            if (next && isHyphen(next)) {
+                return nestedHyphenStyle
+            }
+
+            return style
+        }
 
         return {
             YAMLSequence(node) {
@@ -45,7 +66,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
                     const hasNewline =
                         hyphen.loc.end.line < entry.loc.start.line
                     if (hasNewline) {
-                        if (option === "never") {
+                        if (getStyleOption(hyphen) === "never") {
                             context.report({
                                 loc: hyphen.loc,
                                 messageId: "unexpectedLinebreakAfterIndicator",
@@ -65,7 +86,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
                             })
                         }
                     } else {
-                        if (option === "always") {
+                        if (getStyleOption(hyphen) === "always") {
                             context.report({
                                 loc: hyphen.loc,
                                 messageId: "expectedLinebreakAfterIndicator",

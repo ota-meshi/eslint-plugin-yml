@@ -167,8 +167,8 @@ makeSuiteTests(
     "block-sequence-hyphen-indicator-newline",
     {
         default: [],
-        never: ["never"],
-        always: ["always"],
+        never: ["never", { nestedHyphen: "never" }],
+        always: ["always", { nestedHyphen: "always" }],
     },
     { force: true },
 )
