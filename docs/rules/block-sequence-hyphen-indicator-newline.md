@@ -37,10 +37,15 @@ This rule aims to enforce consistent line breaks after `-` indicator.
 "yml/block-sequence-hyphen-indicator-newline":
   - error
   - never # or "always" 
+  - nestedHyphen: always # or "never"
 ```
 
-- `"always"` ... Requires line breaks after after `-` indicator of block style sequences.
-- `"never"` ... Disallow line breaks after after `-` indicator of block style sequences.
+- Styles
+  - `"always"` ... Requires line breaks after after `-` indicator of block style sequences.
+  - `"never"` ... Disallow line breaks after after `-` indicator of block style sequences.
+
+- Properties
+  - `nestedHyphen` ... Specifies the style to apply to nested hyphens. default `"always"`
 
 ## :couple: Related rules
 

@@ -56,7 +56,10 @@ export default createRule("no-empty-sequence-entry", {
         /**
          * Get hyphen token from given entry index
          */
-        function getHyphen(node: AST.YAMLBlockSequence, index: number) {
+        function getHyphen(
+            node: AST.YAMLBlockSequence,
+            index: number,
+        ): AST.Token | null {
             if (index === 0) {
                 const token = sourceCode.getFirstToken(node)
                 return isHyphen(token) ? token : null

@@ -1,5 +1,10 @@
 {
-    "options": ["never"],
+    "options": [
+        "never",
+        {
+            "nestedHyphen": "never"
+        }
+    ],
     "settings": {
         "yml": {
             "indent": 8

@@ -1,0 +1,8 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-default/W42U-input.yaml
+- # Empty
+- |
+ block node
+-
+  - one # Compact
+  - two # sequence
+- one: two # Compact mapping
