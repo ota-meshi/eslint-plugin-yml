@@ -9,8 +9,6 @@ module.exports = {
         project: require.resolve("./tsconfig.json"),
     },
     extends: [
-        "plugin:jsonc/recommended-with-jsonc",
-        "plugin:jsonc/auto-config",
         "plugin:@ota-meshi/recommended",
         "plugin:@ota-meshi/+node",
         "plugin:@ota-meshi/+typescript",
