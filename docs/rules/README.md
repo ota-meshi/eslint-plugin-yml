@@ -19,6 +19,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: |  |
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |
+| [yml/no-empty-document](./no-empty-document.md) | disallow empty document |  | :star: |
 | [yml/no-empty-key](./no-empty-key.md) | disallow empty mapping keys |  | :star: |
 | [yml/no-empty-mapping-value](./no-empty-mapping-value.md) | disallow empty mapping values |  | :star: |
 | [yml/no-empty-sequence-entry](./no-empty-sequence-entry.md) | disallow empty sequence entries |  | :star: |

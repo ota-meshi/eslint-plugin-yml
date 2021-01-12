@@ -182,3 +182,11 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "no-empty-document",
+    {
+        default: [],
+    },
+    { force: true },
+)

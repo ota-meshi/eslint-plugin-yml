@@ -38,9 +38,11 @@ Nothing.
 
 - [yml/no-empty-mapping-value]
 - [yml/no-empty-sequence-entry]
+- [yml/no-empty-document]
 
 [yml/no-empty-mapping-value]: ./no-empty-mapping-value.md
 [yml/no-empty-sequence-entry]: ./no-empty-sequence-entry.md
+[yml/no-empty-document]: ./no-empty-document.md
 
 ## Implementation
 

@@ -130,6 +130,7 @@ The rules with the following star :star: are included in the config.
 | [yml/block-sequence](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence.html) | require or disallow block style sequences. | :wrench: |  |
 | [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  |
 | [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |
+| [yml/no-empty-document](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-document.html) | disallow empty document |  | :star: |
 | [yml/no-empty-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-key.html) | disallow empty mapping keys |  | :star: |
 | [yml/no-empty-mapping-value](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-mapping-value.html) | disallow empty mapping values |  | :star: |
 | [yml/no-empty-sequence-entry](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-sequence-entry.html) | disallow empty sequence entries |  | :star: |
