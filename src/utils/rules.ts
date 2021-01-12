@@ -10,6 +10,7 @@ import flowSequenceBracketSpacing from "../rules/flow-sequence-bracket-spacing"
 import indent from "../rules/indent"
 import keyNameCasing from "../rules/key-name-casing"
 import keySpacing from "../rules/key-spacing"
+import noEmptyDocument from "../rules/no-empty-document"
 import noEmptyKey from "../rules/no-empty-key"
 import noEmptyMappingValue from "../rules/no-empty-mapping-value"
 import noEmptySequenceEntry from "../rules/no-empty-sequence-entry"
@@ -34,6 +35,7 @@ export const rules = [
     indent,
     keyNameCasing,
     keySpacing,
+    noEmptyDocument,
     noEmptyKey,
     noEmptyMappingValue,
     noEmptySequenceEntry,

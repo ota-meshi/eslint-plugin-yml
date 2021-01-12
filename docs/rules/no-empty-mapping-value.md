@@ -38,9 +38,11 @@ Nothing.
 
 - [yml/no-empty-key]
 - [yml/no-empty-sequence-entry]
+- [yml/no-empty-document]
 
 [yml/no-empty-key]: ./no-empty-key.md
 [yml/no-empty-sequence-entry]: ./no-empty-sequence-entry.md
+[yml/no-empty-document]: ./no-empty-document.md
 
 ## Implementation
 

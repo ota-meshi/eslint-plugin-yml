@@ -5,6 +5,7 @@ export = {
     extends: [baseExtend],
     rules: {
         // eslint-plugin-yml rules
+        "yml/no-empty-document": "error",
         "yml/no-empty-key": "error",
         "yml/no-empty-mapping-value": "error",
         "yml/no-empty-sequence-entry": "error",
