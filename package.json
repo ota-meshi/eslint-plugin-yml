@@ -51,7 +51,7 @@
         "debug": "^4.1.1",
         "lodash": "^4.17.19",
         "natural-compare": "^1.4.0",
-        "yaml-eslint-parser": "^0.2.0"
+        "yaml-eslint-parser": "^0.3.2"
     },
     "devDependencies": {
         "@ota-meshi/eslint-plugin": "^0.0.9",
