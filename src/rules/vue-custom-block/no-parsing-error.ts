@@ -5,7 +5,7 @@ export default createRule("vue-custom-block/no-parsing-error", {
     meta: {
         docs: {
             description: "disallow parsing errors in Vue custom blocks",
-            categories: ["recommended"],
+            categories: ["recommended", "standard"],
             extensionRule: false,
         },
         schema: [],

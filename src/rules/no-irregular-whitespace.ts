@@ -14,7 +14,7 @@ export default createRule("no-irregular-whitespace", {
     meta: {
         docs: {
             description: "disallow irregular whitespace",
-            categories: ["recommended"],
+            categories: ["recommended", "standard"],
             extensionRule: "no-irregular-whitespace",
         },
         schema: [

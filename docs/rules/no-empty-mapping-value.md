@@ -8,7 +8,7 @@ description: "disallow empty mapping values"
 
 > disallow empty mapping values
 
-- :gear: This rule is included in `"plugin:yml/recommended"`.
+- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
 
 ## :book: Rule Details
 

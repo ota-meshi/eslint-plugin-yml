@@ -4,7 +4,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
     meta: {
         docs: {
             description: "enforce consistent line breaks after `-` indicator",
-            categories: null,
+            categories: ["standard"],
             extensionRule: false,
         },
         fixable: "whitespace",

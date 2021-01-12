@@ -119,7 +119,7 @@ export default createRule("spaced-comment", {
         docs: {
             description:
                 "enforce consistent spacing after the `#` in a comment",
-            categories: null,
+            categories: ["standard"],
             extensionRule: "spaced-comment",
         },
         fixable: "whitespace",

@@ -5,7 +5,7 @@ export default createRule("no-empty-key", {
     meta: {
         docs: {
             description: "disallow empty mapping keys",
-            categories: ["recommended"],
+            categories: ["recommended", "standard"],
             extensionRule: false,
         },
         schema: [],

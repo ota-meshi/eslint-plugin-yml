@@ -7,9 +7,10 @@ const isWin = os.platform().startsWith("win")
 
 const RULESET_NAME = {
     recommended: "../src/configs/recommended.ts",
+    standard: "../src/configs/standard.ts",
 }
 
-for (const rec of ["recommended"] as const) {
+for (const rec of ["recommended", "standard"] as const) {
     let content = `
 import path from "path"
 const base = require.resolve("./base")

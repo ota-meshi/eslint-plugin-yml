@@ -5,7 +5,7 @@ export default createRule("no-tab-indent", {
     meta: {
         docs: {
             description: "disallow tabs for indentation.",
-            categories: ["recommended"],
+            categories: ["recommended", "standard"],
             extensionRule: false,
         },
         schema: [],

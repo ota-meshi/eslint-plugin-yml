@@ -5,7 +5,7 @@ export default createRule("no-empty-mapping-value", {
     meta: {
         docs: {
             description: "disallow empty mapping values",
-            categories: ["recommended"],
+            categories: ["recommended", "standard"],
             extensionRule: false,
         },
         schema: [],

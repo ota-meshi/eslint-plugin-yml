@@ -5,7 +5,7 @@ export default createRule("no-empty-document", {
     meta: {
         docs: {
             description: "disallow empty document",
-            categories: ["recommended"],
+            categories: ["recommended", "standard"],
             extensionRule: false,
         },
         schema: [],

@@ -81,7 +81,7 @@ export default createRule("block-sequence", {
     meta: {
         docs: {
             description: "require or disallow block style sequences.",
-            categories: null,
+            categories: ["standard"],
             extensionRule: false,
         },
         fixable: "code",

@@ -6,7 +6,7 @@ export default createRule("no-empty-sequence-entry", {
     meta: {
         docs: {
             description: "disallow empty sequence entries",
-            categories: ["recommended"],
+            categories: ["recommended", "standard"],
             extensionRule: false,
         },
         schema: [],

@@ -8,6 +8,7 @@ description: "enforce consistent spacing between keys and values in mapping pair
 
 > enforce consistent spacing between keys and values in mapping pairs
 
+- :gear: This rule is included in `"plugin:yml/standard"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details

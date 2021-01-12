@@ -72,7 +72,7 @@ export default createRule("block-mapping", {
     meta: {
         docs: {
             description: "require or disallow block style mappings.",
-            categories: null,
+            categories: ["standard"],
             extensionRule: false,
         },
         fixable: "code",

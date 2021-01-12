@@ -8,7 +8,7 @@ description: "disallow empty document"
 
 > disallow empty document
 
-- :gear: This rule is included in `"plugin:yml/recommended"`.
+- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
 
 ## :book: Rule Details
 

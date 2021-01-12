@@ -8,7 +8,7 @@ export default createRule("quotes", {
         docs: {
             description:
                 "enforce the consistent use of either double, or single quotes",
-            categories: null,
+            categories: ["standard"],
             extensionRule: false,
         },
         fixable: "code",

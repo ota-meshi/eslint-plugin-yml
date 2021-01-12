@@ -1,11 +1,11 @@
 import type { RuleModule } from "../src/types"
 import { rules } from "../src/utils/rules"
 
-//eslint-disable-next-line require-jsdoc
+//eslint-disable-next-line require-jsdoc -- tool
 export default function renderRulesTableContent(
     categoryLevel: number,
     buildRulePath = (ruleName: string) => `./${ruleName}.md`,
-) {
+): string {
     const pluginRules = rules.filter(
         (rule) => !rule.meta.deprecated && !rule.meta.docs.extensionRule,
     )
@@ -17,7 +17,7 @@ export default function renderRulesTableContent(
 
     // -----------------------------------------------------------------------------
 
-    //eslint-disable-next-line require-jsdoc
+    //eslint-disable-next-line require-jsdoc -- tool
     function toRuleRow(rule: RuleModule) {
         const fixableMark = rule.meta.fixable ? ":wrench:" : ""
         const recommendedMark =
@@ -25,15 +25,20 @@ export default function renderRulesTableContent(
             rule.meta.docs.categories.includes("recommended")
                 ? ":star:"
                 : ""
+        const standardMark =
+            rule.meta.docs.categories &&
+            rule.meta.docs.categories.includes("standard")
+                ? ":star:"
+                : ""
         const link = `[${rule.meta.docs.ruleId}](${buildRulePath(
             rule.meta.docs.ruleName || "",
         )})`
         const description = rule.meta.docs.description || "(no description)"
 
-        return `| ${link} | ${description} | ${fixableMark} | ${recommendedMark} |`
+        return `| ${link} | ${description} | ${fixableMark} | ${recommendedMark} | ${standardMark} |`
     }
 
-    //eslint-disable-next-line require-jsdoc
+    //eslint-disable-next-line require-jsdoc -- tool
     function toDeprecatedRuleRow(rule: RuleModule) {
         const link = `[${rule.meta.docs.ruleId}](${buildRulePath(
             rule.meta.docs.ruleName || "",
@@ -50,14 +55,14 @@ export default function renderRulesTableContent(
     let rulesTableContent = `
 #${"#".repeat(categoryLevel)} YAML Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED |
-|:--------|:------------|:-------:|:-----------:|
+| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
+|:--------|:------------|:-------:|:-----------:|:--------:|
 ${pluginRules.map(toRuleRow).join("\n")}
 
 #${"#".repeat(categoryLevel)} Extension Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED |
-|:--------|:------------|:-------:|:-----------:|
+| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
+|:--------|:------------|:-------:|:-----------:|:--------:|
 ${extensionRules.map(toRuleRow).join("\n")}
 `
 
