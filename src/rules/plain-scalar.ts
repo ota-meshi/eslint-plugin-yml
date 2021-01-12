@@ -37,7 +37,7 @@ export default createRule("plain-scalar", {
     meta: {
         docs: {
             description: "require or disallow plain style scalar.",
-            categories: null,
+            categories: ["standard"],
             extensionRule: false,
         },
         fixable: "code",

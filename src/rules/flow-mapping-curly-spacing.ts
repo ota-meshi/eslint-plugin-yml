@@ -10,7 +10,7 @@ export default createRule("flow-mapping-curly-spacing", {
     meta: {
         docs: {
             description: "enforce consistent spacing inside braces",
-            categories: null,
+            categories: ["standard"],
             extensionRule: "object-curly-spacing",
         },
         fixable: coreRule.meta!.fixable,

@@ -8,7 +8,7 @@ description: "disallow irregular whitespace"
 
 > disallow irregular whitespace
 
-- :gear: This rule is included in `"plugin:yml/recommended"`.
+- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
 
 ## :book: Rule Details
 

@@ -1,12 +1,13 @@
 import path from "path"
 import fs from "fs"
+import type { RuleModule } from "../../src/types"
 
 /**
  * Get the all rules
  * @returns {Array} The all rules
  */
 function readRules() {
-    const rules = []
+    const rules: RuleModule[] = []
     const rulesLibRoot = path.resolve(__dirname, "../../src/rules")
     for (const name of fs
         .readdirSync(rulesLibRoot)

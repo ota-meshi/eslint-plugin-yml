@@ -53,7 +53,7 @@ export default createRule("indent", {
     meta: {
         docs: {
             description: "enforce consistent indentation",
-            categories: null,
+            categories: ["standard"],
             extensionRule: false,
         },
         fixable: "whitespace",

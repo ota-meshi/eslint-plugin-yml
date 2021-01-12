@@ -26,7 +26,7 @@ module.exports = {
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',
-    'plugin:yml/recommended'
+    'plugin:yml/standard'
   ],
   rules: {
     // override/add rules settings here, such as:
@@ -38,7 +38,8 @@ module.exports = {
 This plugin provides configs:
 
 - `plugin:yml/base` ... Configuration to enable correct YAML parsing.
-- `plugin:yml/recommended` ... Recommended configuration.
+- `plugin:yml/recommended` ... Above, plus rules to prevent errors or unintended behavior.
+- `plugin:yml/standard` ... Above, plus rules to enforce the common stylistic conventions.
 
 See [the rule list](../rules/README.md) to get the `rules` that this plugin provides.
 

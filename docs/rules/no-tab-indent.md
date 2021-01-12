@@ -8,7 +8,7 @@ description: "disallow tabs for indentation."
 
 > disallow tabs for indentation.
 
-- :gear: This rule is included in `"plugin:yml/recommended"`.
+- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
 
 ## :book: Rule Details
 

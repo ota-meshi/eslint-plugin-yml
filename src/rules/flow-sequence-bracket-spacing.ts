@@ -11,7 +11,7 @@ export default createRule("flow-sequence-bracket-spacing", {
         docs: {
             description:
                 "enforce consistent spacing inside flow sequence brackets",
-            categories: null,
+            categories: ["standard"],
             extensionRule: "array-bracket-spacing",
         },
         fixable: coreRule.meta!.fixable,

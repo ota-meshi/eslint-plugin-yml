@@ -5,7 +5,7 @@ export default createRule("block-mapping-question-indicator-newline", {
     meta: {
         docs: {
             description: "enforce consistent line breaks after `?` indicator",
-            categories: null,
+            categories: ["standard"],
             extensionRule: false,
         },
         fixable: "whitespace",
