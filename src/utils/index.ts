@@ -9,6 +9,7 @@ import type { Rule } from "eslint"
 import type { AST } from "yaml-eslint-parser"
 import * as yamlESLintParser from "yaml-eslint-parser"
 import debug from "debug"
+import path from "path"
 const log = debug("eslint-plugin-yml:utils/index")
 
 /**
@@ -33,7 +34,8 @@ export function createRule(
         create(context: Rule.RuleContext): any {
             if (
                 typeof context.parserServices.defineCustomBlocksVisitor ===
-                "function"
+                    "function" &&
+                path.extname(context.getFilename()) === ".vue"
             ) {
                 return context.parserServices.defineCustomBlocksVisitor(
                     context,
