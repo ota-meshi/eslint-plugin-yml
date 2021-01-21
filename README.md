@@ -12,7 +12,7 @@
 [![Build Status](https://github.com/ota-meshi/eslint-plugin-yml/workflows/CI/badge.svg?branch=master)](https://github.com/ota-meshi/eslint-plugin-yml/actions?query=workflow%3ACI)
 [![Coverage Status](https://coveralls.io/repos/github/ota-meshi/eslint-plugin-yml/badge.svg?branch=master)](https://coveralls.io/github/ota-meshi/eslint-plugin-yml?branch=master)
 
-## Features
+## :name_badge: Features
 
 This ESLint plugin provides linting rules for [YAML].
 
@@ -28,24 +28,24 @@ You can check on the [Online DEMO](https://ota-meshi.github.io/eslint-plugin-yml
 
 <!--DOCS_IGNORE_START-->
 
-## Documentation
+## :book: Documentation
 
 See [documents](https://ota-meshi.github.io/eslint-plugin-yml/).
 
-## Installation
+## :cd: Installation
 
 ```bash
 npm install --save-dev eslint eslint-plugin-yml
 ```
 
 > **Requirements**
-> 
+>
 > - ESLint v6.0.0 and above
 > - Node.js v8.10.0 and above
 
 <!--DOCS_IGNORE_END-->
 
-## Usage
+## :book: Usage
 
 <!--USAGE_SECTION_START-->
 <!--USAGE_GUIDE_START-->
@@ -89,7 +89,7 @@ eslint --ext .js,.yaml,.yml src
 eslint "src/**/*.{js,yaml,yml}"
 ```
 
-## Editor Integrations
+## :computer: Editor Integrations
 
 ### Visual Studio Code
 
@@ -112,7 +112,7 @@ Example **.vscode/settings.json**:
 <!--USAGE_GUIDE_END-->
 <!--USAGE_SECTION_END-->
 
-## Rules
+## :white_check_mark: Rules
 
 <!--RULES_SECTION_START-->
 
@@ -159,7 +159,7 @@ The rules with the following star :star: are included in the config.
 
 <!--DOCS_IGNORE_START-->
 
-## Contributing
+## :beers: Contributing
 
 Welcome contributing!
 
@@ -179,13 +179,12 @@ This plugin uses [yaml-eslint-parser](https://github.com/ota-meshi/yaml-eslint-p
 ## :couple: Related Packages
 
 - [eslint-plugin-jsonc](https://github.com/ota-meshi/eslint-plugin-jsonc) ... ESLint plugin for JSON, JSON with comments (JSONC) and JSON5.
-<!-- - [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml) ... ESLint plugin for YAML. -->
 - [eslint-plugin-toml](https://github.com/ota-meshi/eslint-plugin-toml) ... ESLint plugin for TOML.
 - [jsonc-eslint-parser](https://github.com/ota-meshi/jsonc-eslint-parser) ... JSON, JSONC and JSON5 parser for use with ESLint plugins.
 - [yaml-eslint-parser](https://github.com/ota-meshi/yaml-eslint-parser) ... YAML parser for use with ESLint plugins.
 - [toml-eslint-parser](https://github.com/ota-meshi/toml-eslint-parser) ... TOML parser for use with ESLint plugins.
 
-## License
+## :lock: License
 
 See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
 

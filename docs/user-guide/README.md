@@ -1,17 +1,19 @@
 # User Guide
 
-## Installation
+## :cd: Installation
 
 ```bash
 npm install --save-dev eslint eslint-plugin-yml
 ```
 
 ::: tip Requirements
+
 - ESLint v6.0.0 and above
 - Node.js v8.10.0 and above
+
 :::
 
-## Usage
+## :book: Usage
 
 <!--USAGE_GUIDE_START-->
 
@@ -54,7 +56,7 @@ eslint --ext .js,.yaml,.yml src
 eslint "src/**/*.{js,yaml,yml}"
 ```
 
-## Editor Integrations
+## :computer: Editor Integrations
 
 ### Visual Studio Code
 
