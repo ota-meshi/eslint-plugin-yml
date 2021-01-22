@@ -54,7 +54,7 @@
         "yaml-eslint-parser": "^0.3.2"
     },
     "devDependencies": {
-        "@ota-meshi/eslint-plugin": "^0.0.9",
+        "@ota-meshi/eslint-plugin": "^0.0.11",
         "@types/debug": "^4.1.5",
         "@types/eslint": "^7.2.0",
         "@types/eslint-scope": "^3.7.0",
@@ -77,8 +77,9 @@
         "eslint-plugin-markdown": "^2.0.0-0",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-regexp": "^0.1.1",
         "eslint-plugin-vue": "^7.0.1",
-        "eslint-plugin-yml": "^0.3.0",
+        "eslint-plugin-yml": "^0.6.2",
         "eslint4b": "^7.3.1",
         "espree": "^7.1.0",
         "mocha": "^7.0.0",
