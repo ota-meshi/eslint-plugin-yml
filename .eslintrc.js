@@ -26,6 +26,7 @@ module.exports = {
         "no-lonely-if": "off",
         "new-cap": "off",
         "no-shadow": "off",
+        "jsonc/array-element-newline": "off",
     },
     overrides: [
         {
