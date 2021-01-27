@@ -177,16 +177,29 @@ function initOptions(
 const ON_SCHEMA = {
     enum: ["colon", "value"],
 }
-const PROPERTIES_SCHEMA = {
-    mode: {
-        enum: ["strict", "minimum"],
+const OBJECT_WITHOUT_ON_SCHEMA = {
+    type: "object",
+    properties: {
+        mode: {
+            enum: ["strict", "minimum"],
+        },
+        beforeColon: {
+            type: "boolean",
+        },
+        afterColon: {
+            type: "boolean",
+        },
     },
-    beforeColon: {
-        type: "boolean",
+    additionalProperties: false,
+}
+
+const ALIGN_OBJECT_SCHEMA = {
+    type: "object",
+    properties: {
+        on: ON_SCHEMA,
+        ...OBJECT_WITHOUT_ON_SCHEMA.properties,
     },
-    afterColon: {
-        type: "boolean",
-    },
+    additionalProperties: false,
 }
 
 export default createRule("key-spacing", {
@@ -205,49 +218,23 @@ export default createRule("key-spacing", {
                         type: "object",
                         properties: {
                             align: {
-                                anyOf: [
-                                    ON_SCHEMA,
-                                    {
-                                        type: "object",
-                                        properties: {
-                                            on: ON_SCHEMA,
-                                            ...PROPERTIES_SCHEMA,
-                                        },
-                                        additionalProperties: false,
-                                    },
-                                ],
+                                anyOf: [ON_SCHEMA, ALIGN_OBJECT_SCHEMA],
                             },
-                            ...PROPERTIES_SCHEMA,
+                            ...OBJECT_WITHOUT_ON_SCHEMA.properties,
                         },
                         additionalProperties: false,
                     },
                     {
                         type: "object",
                         properties: {
-                            singleLine: {
-                                type: "object",
-                                properties: {
-                                    ...PROPERTIES_SCHEMA,
-                                },
-                                additionalProperties: false,
-                            },
+                            singleLine: OBJECT_WITHOUT_ON_SCHEMA,
                             multiLine: {
                                 type: "object",
                                 properties: {
                                     align: {
-                                        anyOf: [
-                                            ON_SCHEMA,
-                                            {
-                                                type: "object",
-                                                properties: {
-                                                    on: ON_SCHEMA,
-                                                    ...PROPERTIES_SCHEMA,
-                                                },
-                                                additionalProperties: false,
-                                            },
-                                        ],
+                                        anyOf: [ON_SCHEMA, ALIGN_OBJECT_SCHEMA],
                                     },
-                                    ...PROPERTIES_SCHEMA,
+                                    ...OBJECT_WITHOUT_ON_SCHEMA.properties,
                                 },
                                 additionalProperties: false,
                             },
@@ -257,28 +244,9 @@ export default createRule("key-spacing", {
                     {
                         type: "object",
                         properties: {
-                            singleLine: {
-                                type: "object",
-                                properties: {
-                                    ...PROPERTIES_SCHEMA,
-                                },
-                                additionalProperties: false,
-                            },
-                            multiLine: {
-                                type: "object",
-                                properties: {
-                                    ...PROPERTIES_SCHEMA,
-                                },
-                                additionalProperties: false,
-                            },
-                            align: {
-                                type: "object",
-                                properties: {
-                                    on: ON_SCHEMA,
-                                    ...PROPERTIES_SCHEMA,
-                                },
-                                additionalProperties: false,
-                            },
+                            singleLine: OBJECT_WITHOUT_ON_SCHEMA,
+                            multiLine: OBJECT_WITHOUT_ON_SCHEMA,
+                            align: ALIGN_OBJECT_SCHEMA,
                         },
                         additionalProperties: false,
                     },
