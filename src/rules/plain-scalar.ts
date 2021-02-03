@@ -9,7 +9,7 @@ const SYMBOLS = new Set([
     "{",
     "}",
     // sequence
-    "-",
+    // "-",
     "[",
     "]",
     ",",
@@ -62,10 +62,15 @@ export default createRule("plain-scalar", {
         function canToPlain(
             node: AST.YAMLDoubleQuotedScalar | AST.YAMLSingleQuotedScalar,
         ) {
-            for (const char of node.value) {
+            for (let index = 0; index < node.value.length; index++) {
+                const char = node.value[index]
                 if (SYMBOLS.has(char)) {
                     return false
                 }
+            }
+            if (/^\s*-\s+/u.test(node.value)) {
+                // “-” indicator
+                return false
             }
             const parent =
                 node.parent.type === "YAMLWithMeta"
