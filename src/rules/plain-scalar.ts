@@ -4,7 +4,7 @@ import { createRule } from "../utils"
 
 const SYMBOLS = new Set([
     // mapping
-    "?",
+    // "?",
     ":",
     "{",
     "}",
@@ -22,9 +22,9 @@ const SYMBOLS = new Set([
     "|",
     "+",
     // tags
-    "!",
-    "<",
-    ">",
+    // "!",
+    // "<",
+    // ">",
     // directives
     "%",
     // quoted
@@ -56,21 +56,40 @@ export default createRule("plain-scalar", {
 
         const sourceCode = context.getSourceCode()
 
+        /* eslint-disable complexity -- X( */
         /**
          * Check if it can be converted to plain.
          */
         function canToPlain(
+            /* eslint-enable complexity -- X( */
             node: AST.YAMLDoubleQuotedScalar | AST.YAMLSingleQuotedScalar,
         ) {
+            if (node.value !== node.value.trim()) {
+                return false
+            }
             for (let index = 0; index < node.value.length; index++) {
                 const char = node.value[index]
                 if (SYMBOLS.has(char)) {
                     return false
                 }
-            }
-            if (/^\s*-\s+/u.test(node.value)) {
-                // “-” indicator
-                return false
+                if (index === 0) {
+                    if (char === "-" || char === "?") {
+                        const next = node.value[index + 1]
+                        if (next && !next.trim()) {
+                            // "-" indicator or "?" indicator
+                            return false
+                        }
+                    } else if (char === "!") {
+                        const next = node.value[index + 1]
+                        if (
+                            next &&
+                            (!next.trim() || next === "!" || next === "<")
+                        ) {
+                            // "!" indicator
+                            return false
+                        }
+                    }
+                }
             }
             const parent =
                 node.parent.type === "YAMLWithMeta"
