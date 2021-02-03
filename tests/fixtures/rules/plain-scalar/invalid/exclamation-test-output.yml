@@ -1,0 +1,6 @@
+# plain-scalar/invalid/exclamation-test-input.yml
+a!a: b !b
+a!!a: b !!b
+a!! a: b !! b
+a!<a>: b !<b>
+a! <a>: b ! <b>

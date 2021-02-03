@@ -1,0 +1,6 @@
+# plain-scalar/invalid/question-test-input.yml
+?a: b
+"? a": b
+?? a: b
+a?a: b
+a ? a: b
