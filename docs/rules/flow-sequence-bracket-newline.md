@@ -45,7 +45,7 @@ This rule enforces line breaks after opening and before closing flow sequence br
 ## :wrench: Options
 
 ```yaml
-"yml/flow-sequence-bracket-newline":
+yml/flow-sequence-bracket-newline:
   - error
   - always # or "never" or "consistent"
   - multiline: true

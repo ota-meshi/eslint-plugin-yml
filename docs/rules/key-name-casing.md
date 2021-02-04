@@ -34,7 +34,7 @@ This rule enforces a naming convention to key names.
 ## :wrench: Options
 
 ```yaml
-"yml/key-name-casing":
+yml/key-name-casing:
   - error
   - camelCase: true
     PascalCase: false

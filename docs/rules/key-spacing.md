@@ -41,7 +41,7 @@ This rule enforces consistent spacing between keys and values in mapping pairs. 
 ## :wrench: Options
 
 ```yaml
-"yml/key-spacing":
+yml/key-spacing:
   - error
   - beforeColon: false
     afterColon: true

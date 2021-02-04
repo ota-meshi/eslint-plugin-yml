@@ -35,7 +35,7 @@ This rule aims to enforce consistent line breaks after `-` indicator.
 ## :wrench: Options
 
 ```yaml
-"yml/block-sequence-hyphen-indicator-newline":
+yml/block-sequence-hyphen-indicator-newline:
   - error
   - never # or "always" 
   - nestedHyphen: always # or "never"

@@ -35,7 +35,7 @@ c: d
 ## :wrench: Options
 
 ```yaml
-"yml/no-irregular-whitespace":
+yml/no-irregular-whitespace:
   - error
   - skipQuotedScalars: true
     skipComments: false

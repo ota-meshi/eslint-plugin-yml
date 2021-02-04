@@ -34,7 +34,7 @@ This rule enforces consistent spacing inside braces of flow mappings.
 ## :wrench: Options
 
 ```yaml
-"yml/flow-mapping-curly-spacing":
+yml/flow-mapping-curly-spacing:
   - error
   - always # or "never"
   - arraysInObjects: false

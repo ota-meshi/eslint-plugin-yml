@@ -34,7 +34,7 @@ This rule enforces consistent spacing inside flow sequence brackets.
 ## :wrench: Options
 
 ```yaml
-"yml/flow-sequence-bracket-spacing":
+yml/flow-sequence-bracket-spacing:
   - error
   - always # or "never"
   - singleValue: true
