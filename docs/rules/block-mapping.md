@@ -37,12 +37,12 @@ This rule aims to use consistent style of block or flow styles.
 ## :wrench: Options
 
 ```yaml
-"yml/block-mapping":
+yml/block-mapping:
   - error
   - always # or "never"
 ---
 # or
-"yml/block-mapping":
+yml/block-mapping:
   - error
   - singleline: always # or "never" or "ignore"
     multiline: always # or "never" or "ignore"

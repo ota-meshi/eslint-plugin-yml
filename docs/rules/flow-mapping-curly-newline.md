@@ -40,12 +40,12 @@ This rule enforces consistent line breaks inside braces of flow mappings.
 ## :wrench: Options
 
 ```yaml
-"yml/flow-mapping-curly-newline":
+yml/flow-mapping-curly-newline:
   - error
   - always # or "never"
 ---
 # or
-"yml/flow-mapping-curly-newline":
+yml/flow-mapping-curly-newline:
   - error
   - multiline: true
     minProperties: 1

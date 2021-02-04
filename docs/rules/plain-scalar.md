@@ -34,7 +34,7 @@ GOOD: GOOD
 ## :wrench: Options
 
 ```yaml
-"yml/plain-scalar":
+yml/plain-scalar:
   - error
   - always # or "never"
 ```

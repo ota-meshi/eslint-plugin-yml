@@ -40,12 +40,12 @@ c: [
 ## :wrench: Options
 
 ```yaml
-"yml/block-sequence":
+yml/block-sequence:
   - error
   - always # or "never"
 ---
 # or
-"yml/block-sequence":
+yml/block-sequence:
   - error
   - singleline: always # or "never" or "ignore"
     multiline: always # or "never" or "ignore"
