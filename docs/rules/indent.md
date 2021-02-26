@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/indent"
 description: "enforce consistent indentation"
+since: "v0.1.0"
 ---
 # yml/indent
 
@@ -57,7 +58,12 @@ Specify the number of indents.
 
 [indent]: https://eslint.org/docs/rules/indent
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.1.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/indent.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/indent.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/indent.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/indent)

@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/vue-custom-block/no-parsing-error"
 description: "disallow parsing errors in Vue custom blocks"
+since: "v0.2.0"
 ---
 # yml/vue-custom-block/no-parsing-error
 
@@ -38,7 +39,12 @@ This rule reports YAML parsing errors in Vue custom blocks.
 
 Nothing.
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.2.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/vue-custom-block/no-parsing-error.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/vue-custom-block/no-parsing-error.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/vue-custom-block/no-parsing-error.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/vue-custom-block/no-parsing-error)

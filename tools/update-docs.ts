@@ -3,7 +3,7 @@ import fs from "fs"
 import { rules } from "../src/utils/rules"
 import type { RuleModule } from "../src/types"
 
-//eslint-disable-next-line require-jsdoc -- tool
+//eslint-disable-next-line require-jsdoc -- tools
 function formatItems(items: string[]) {
     if (items.length <= 2) {
         return items.join(" and ")
@@ -13,8 +13,8 @@ function formatItems(items: string[]) {
     }`
 }
 
-//eslint-disable-next-line require-jsdoc -- tool
-function yamlValue(val: any) {
+//eslint-disable-next-line require-jsdoc -- tools
+function yamlValue(val: unknown) {
     if (typeof val === "string") {
         return `"${val.replace(/\\/gu, "\\\\").replace(/"/gu, '\\"')}"`
     }
@@ -23,6 +23,23 @@ function yamlValue(val: any) {
 
 const ROOT = path.resolve(__dirname, "../docs/rules")
 
+//eslint-disable-next-line require-jsdoc -- tools
+function pickSince(content: string): string | null {
+    const fileIntro = /^---\n(.*\n)+---\n*/g.exec(content)
+    if (fileIntro) {
+        const since = /since: "?(v\d+\.\d+\.\d+)"?/.exec(fileIntro[0])
+        if (since) {
+            return since[1]
+        }
+    }
+    // eslint-disable-next-line no-process-env -- ignore
+    if (process.env.IN_VERSION_SCRIPT) {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- ignore
+        return `v${require("../package.json").version}`
+    }
+    return null
+}
+
 class DocFile {
     private readonly rule: RuleModule
 
@@ -30,10 +47,13 @@ class DocFile {
 
     private content: string
 
+    private readonly since: string | null
+
     public constructor(rule: RuleModule) {
         this.rule = rule
         this.filePath = path.join(ROOT, `${rule.meta.docs.ruleName}.md`)
         this.content = fs.readFileSync(this.filePath, "utf8")
+        this.since = pickSince(this.content)
     }
 
     public static read(rule: RuleModule) {
@@ -67,6 +87,7 @@ class DocFile {
         } else {
             if (categories) {
                 const presets = []
+                // eslint-disable-next-line @typescript-eslint/require-array-sort-compare -- ignore
                 for (const cat of categories.sort()) {
                     presets.push(`\`"plugin:yml/${cat}"\``)
                 }
@@ -82,13 +103,18 @@ class DocFile {
                 "- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.",
             )
         }
+        if (!this.since) {
+            notes.unshift(
+                `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>`,
+            )
+        }
 
         // Add an empty line after notes.
         if (notes.length >= 1) {
             notes.push("", "")
         }
 
-        const headerPattern = /(?:^|\n)#.+\n+[^\n]*\n+(?:- .+\n+)*\n*/u
+        const headerPattern = /#.+\n+[^\n]*\n+(?:- .+\n+)*\n*/u
 
         const header = `${title}\n\n${notes.join("\n")}`
         if (headerPattern.test(this.content)) {
@@ -102,11 +128,20 @@ class DocFile {
 
     public updateFooter() {
         const { ruleName, extensionRule } = this.rule.meta.docs
-        const footerPattern = /## Implementation[\s\S]+$/u
-        const footer = `## Implementation
+        const footerPattern = /## (?:(?::mag:)? ?Implementation|:rocket: Version).+$/s
+        const footer = `${
+            this.since
+                ? `## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml ${this.since}
+
+`
+                : ""
+        }## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/${ruleName}.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/${ruleName}.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/${ruleName}.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/${ruleName})
 ${
     extensionRule
         ? `
@@ -164,6 +199,7 @@ ${
             sidebarDepth: 0,
             title: ruleId,
             description,
+            ...(this.since ? { since: this.since } : {}),
         }
         const computed = `---\n${Object.keys(fileIntro)
             .map((key) => `${key}: ${yamlValue((fileIntro as any)[key])}`)
@@ -181,7 +217,7 @@ ${
     }
 
     public write() {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- tool
+        // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires -- tools
         const isWin = require("os").platform().startsWith("win")
 
         this.content = this.content.replace(/\r?\n/gu, isWin ? "\r\n" : "\n")

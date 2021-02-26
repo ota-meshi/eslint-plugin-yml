@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/block-sequence-hyphen-indicator-newline"
 description: "enforce consistent line breaks after `-` indicator"
+since: "v0.5.0"
 ---
 # yml/block-sequence-hyphen-indicator-newline
 
@@ -55,7 +56,12 @@ yml/block-sequence-hyphen-indicator-newline:
 - [yml/key-spacing](./key-spacing.md)
 - [yml/block-mapping-question-indicator-newline](./block-mapping-question-indicator-newline.md)
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.5.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/block-sequence-hyphen-indicator-newline.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-sequence-hyphen-indicator-newline.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-sequence-hyphen-indicator-newline.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/block-sequence-hyphen-indicator-newline)

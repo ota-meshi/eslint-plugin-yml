@@ -23,8 +23,8 @@
         "predocs:watch": "npm run build:ts",
         "docs:watch": "vuepress dev --debug docs",
         "docs:build": "npm run build:ts && vuepress build docs --no-cache",
-        "preversion": "npm test && npm run update && git add .",
-        "version": "npm run eslint-fix && git add .",
+        "preversion": "npm test && git add .",
+        "version": "env-cmd -e version npm run update && git add .",
         "update-fixtures": "ts-node ./tools/update-fixtures.ts && npm run eslint-fix"
     },
     "repository": {
@@ -69,6 +69,7 @@
         "@typescript-eslint/parser": "^4.4.1",
         "babel-eslint": "^10.1.0",
         "cross-env": "^7.0.2",
+        "env-cmd": "^10.1.0",
         "eslint": "^7.3.0",
         "eslint-config-prettier": "^8.0.0",
         "eslint-plugin-eslint-comments": "^3.2.0",

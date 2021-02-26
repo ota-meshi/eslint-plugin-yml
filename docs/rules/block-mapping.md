@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/block-mapping"
 description: "require or disallow block style mappings."
+since: "v0.1.0"
 ---
 # yml/block-mapping
 
@@ -107,7 +108,12 @@ yml/block-mapping:
 
 [yml/block-sequence]: ./block-sequence.md
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.1.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/block-mapping.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-mapping.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-mapping.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/block-mapping)

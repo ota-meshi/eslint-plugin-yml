@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/key-name-casing"
 description: "enforce naming convention to key names"
+since: "v0.2.0"
 ---
 # yml/key-name-casing
 
@@ -51,7 +52,12 @@ yml/key-name-casing:
 - `"snake_case"` ... if `true`, allows snake_case naming. default `false`
 - `"ignores"` ... you can specify the patterns to ignore in the array.
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.2.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/key-name-casing.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/key-name-casing.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/key-name-casing.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/key-name-casing)

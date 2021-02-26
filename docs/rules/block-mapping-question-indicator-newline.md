@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/block-mapping-question-indicator-newline"
 description: "enforce consistent line breaks after `?` indicator"
+since: "v0.5.0"
 ---
 # yml/block-mapping-question-indicator-newline
 
@@ -54,7 +55,12 @@ yml/block-mapping-question-indicator-newline:
 - [yml/key-spacing](./key-spacing.md)
 - [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md)
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.5.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/block-mapping-question-indicator-newline.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-mapping-question-indicator-newline.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-mapping-question-indicator-newline.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/block-mapping-question-indicator-newline)

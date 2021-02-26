@@ -3,7 +3,20 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/spaced-comment"
 description: "enforce consistent spacing after the `#` in a comment"
+since: "v0.1.0"
 ---
+---
+pageClass: "rule-details"
+sidebarDepth: 0
+title: "yml/spaced-comment"
+description: "enforce consistent spacing after the `# yml/spaced-comment
+
+> enforce consistent spacing after the `#` in a comment
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :gear: This rule is included in `"plugin:yml/standard"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 # yml/spaced-comment
 
 > enforce consistent spacing after the `#` in a comment
@@ -54,9 +67,14 @@ See also [here](https://eslint.org/docs/rules/spaced-comment#options).
 
 [spaced-comment]: https://eslint.org/docs/rules/spaced-comment
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.1.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/spaced-comment.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/spaced-comment.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/spaced-comment.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/spaced-comment)
 
 <sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/spaced-comment)</sup>

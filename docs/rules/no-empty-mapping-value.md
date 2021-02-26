@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/no-empty-mapping-value"
 description: "disallow empty mapping values"
+since: "v0.3.0"
 ---
 # yml/no-empty-mapping-value
 
@@ -44,7 +45,12 @@ Nothing.
 [yml/no-empty-sequence-entry]: ./no-empty-sequence-entry.md
 [yml/no-empty-document]: ./no-empty-document.md
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.3.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/no-empty-mapping-value.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/no-empty-mapping-value.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/no-empty-mapping-value.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/no-empty-mapping-value)

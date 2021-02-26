@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/quotes"
 description: "enforce the consistent use of either double, or single quotes"
+since: "v0.3.0"
 ---
 # yml/quotes
 
@@ -53,7 +54,12 @@ yml/quotes:
 [quotes]: https://eslint.org/docs/rules/quotes
 [yml/plain-scalar]: ./plain-scalar.md
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.3.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/quotes.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/quotes.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/quotes.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/quotes)

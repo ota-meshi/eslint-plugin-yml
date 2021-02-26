@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/key-spacing"
 description: "enforce consistent spacing between keys and values in mapping pairs"
+since: "v0.3.0"
 ---
 # yml/key-spacing
 
@@ -59,9 +60,14 @@ Same as [key-spacing] rule option. See [here](https://eslint.org/docs/rules/key-
 
 [key-spacing]: https://eslint.org/docs/rules/key-spacing
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.3.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/key-spacing.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/key-spacing.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/key-spacing.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/key-spacing)
 
 <sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/key-spacing)</sup>

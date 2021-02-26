@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/sort-keys"
 description: "require mapping keys to be sorted"
+since: "v0.3.0"
 ---
 # yml/sort-keys
 
@@ -46,9 +47,14 @@ Same as [sort-keys] rule option. See [here](https://eslint.org/docs/rules/sort-k
 
 [sort-keys]: https://eslint.org/docs/rules/sort-keys
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.3.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/sort-keys.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/sort-keys.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/sort-keys.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/sort-keys)
 
 <sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/sort-keys)</sup>

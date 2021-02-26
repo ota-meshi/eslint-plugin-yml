@@ -3,6 +3,7 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/block-sequence"
 description: "require or disallow block style sequences."
+since: "v0.1.0"
 ---
 # yml/block-sequence
 
@@ -117,7 +118,12 @@ d:
 
 [yml/block-mapping]: ./block-mapping.md
 
-## Implementation
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.1.0
+
+## :mag: Implementation
 
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/block-sequence.ts)
-- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-sequence.js)
+- [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/block-sequence.ts)
+- [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/block-sequence)
