@@ -202,6 +202,7 @@ ${
             ...(this.since ? { since: this.since } : {}),
         }
         const computed = `---\n${Object.keys(fileIntro)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- tool
             .map((key) => `${key}: ${yamlValue((fileIntro as any)[key])}`)
             .join("\n")}\n---\n`
 

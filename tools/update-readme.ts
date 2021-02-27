@@ -44,7 +44,7 @@ fs.writeFileSync(
             "",
         )
         .replace(/\(https:\/\/ota-meshi.github.io\/eslint-plugin-yml/gu, "(.")
-        .replace(/\n\n\n+/gu, "\n\n"),
+        .replace(/\n{3,}/gu, "\n\n"),
     "utf8",
 )
 

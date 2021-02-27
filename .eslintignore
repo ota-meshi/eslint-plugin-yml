@@ -1,5 +1,6 @@
 /.nyc_output
 /coverage
+/lib
 /node_modules
 /tests/fixtures/integrations
 /tests/fixtures/**/*.vue
@@ -9,3 +10,6 @@
 /dist
 /docs/.vuepress/dist
 /docs/.vuepress/components/demo/demo-code.js
+!/.github
+!/.vscode
+!/docs/.vuepress
