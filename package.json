@@ -54,7 +54,7 @@
         "yaml-eslint-parser": "^0.3.2"
     },
     "devDependencies": {
-        "@ota-meshi/eslint-plugin": "^0.1.0",
+        "@ota-meshi/eslint-plugin": "^0.2.0",
         "@types/debug": "^4.1.5",
         "@types/eslint": "^7.2.0",
         "@types/eslint-scope": "^3.7.0",

@@ -316,7 +316,7 @@ function canFixToFlow(
     for (const entry of node.entries) {
         const value = unwrapMeta(entry)
         if (value && value.type === "YAMLScalar" && value.style === "plain") {
-            if (/[,]/u.test(value.strValue)) {
+            if (value.strValue.includes(",")) {
                 // The value will change after conversion.
                 return false
             }
