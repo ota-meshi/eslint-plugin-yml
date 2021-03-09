@@ -1,0 +1,7 @@
+# block-sequence/invalid/flow-seq-in-flow-map03-input.yml
+  - {
+      a:
+        {
+          b: 42
+        }
+    } 

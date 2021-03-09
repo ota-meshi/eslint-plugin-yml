@@ -1,0 +1,9 @@
+# block-sequence/invalid/flow-seq-in-flow-map04-input.yml
+  - {
+      a:
+        {
+          b:
+            42
+        }
+    }
+

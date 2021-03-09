@@ -9,6 +9,7 @@ import * as yamlESLintParser from "yaml-eslint-parser"
 import * as vueESLintParser from "vue-eslint-parser"
 // eslint-disable-next-line @typescript-eslint/no-require-imports -- tests
 import plugin = require("../../src/index")
+import type { YMLSettings } from "../../src/types"
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string
@@ -102,7 +103,7 @@ export function loadTestCases(
         try {
             errors = fs.readFileSync(errorFile, "utf8")
         } catch (e) {
-            writeFixtures(ruleName, inputFile)
+            writeFixtures(ruleName, inputFile, config?.settings?.yml)
             errors = fs.readFileSync(errorFile, "utf8")
         }
         config.errors = JSON.parse(errors)
@@ -111,7 +112,7 @@ export function loadTestCases(
             try {
                 output = fs.readFileSync(outputFile, "utf8")
             } catch (e) {
-                writeFixtures(ruleName, inputFile)
+                writeFixtures(ruleName, inputFile, config?.settings?.yml)
                 output = fs.readFileSync(outputFile, "utf8")
             }
             config.output = output
@@ -276,9 +277,14 @@ export function makeSuiteTests(
                     )
                 }
                 fs.writeFileSync(inputFile, code0, "utf8")
-                writeFixtures(ruleName, inputFile, {
-                    force,
-                })
+                writeFixtures(
+                    ruleName,
+                    inputFile,
+                    { indent: 8 },
+                    {
+                        force,
+                    },
+                )
             }
         }
     }
@@ -287,6 +293,7 @@ export function makeSuiteTests(
 function writeFixtures(
     ruleName: string,
     inputFile: string,
+    ymlSettings: YMLSettings,
     { force }: { force?: boolean } = {},
 ) {
     const linter = getLinter(ruleName)
@@ -308,7 +315,7 @@ function writeFixtures(
                 ? "yaml-eslint-parser"
                 : "vue-eslint-parser",
             settings: {
-                yml: { indent: 8 },
+                yml: ymlSettings,
             },
         },
         config.filename,

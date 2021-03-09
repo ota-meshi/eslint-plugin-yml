@@ -1,0 +1,9 @@
+# block-mapping/invalid/flow-map-in-flow-map01-input.yml
+  a:
+    {
+      b:
+        {
+          c: 42
+        }
+    }
+

@@ -1,5 +1,11 @@
 import type { AST } from "yaml-eslint-parser"
-import type { RuleContext, YAMLNodeOrToken, Fix, RuleFixer } from "../types"
+import type {
+    RuleContext,
+    YAMLNodeOrToken,
+    Fix,
+    RuleFixer,
+    SourceCode,
+} from "../types"
 import { isHyphen } from "./ast-utils"
 
 /**
@@ -333,13 +339,30 @@ export function* processIndentFix(
         let nextBaseIndent = baseIndent
         const expectValueIndent = incIndent(baseIndent, context)
         if (actualIndent != null) {
-            yield* fixIndent(expectValueIndent, contentNode)
+            yield fixIndent(fixer, sourceCode, expectValueIndent, contentNode)
             nextBaseIndent = expectValueIndent
         }
 
         if (contentNode.type === "YAMLMapping") {
             for (const p of contentNode.pairs) {
                 yield* processIndentFix(fixer, nextBaseIndent, p, context)
+            }
+            if (contentNode.style === "flow") {
+                const close = sourceCode.getLastToken(contentNode)
+                if (close.value === "}") {
+                    const closeActualIndent = getActualIndent(close, context)
+                    if (
+                        closeActualIndent != null &&
+                        compareIndent(closeActualIndent, nextBaseIndent) < 0
+                    ) {
+                        yield fixIndent(
+                            fixer,
+                            sourceCode,
+                            nextBaseIndent,
+                            close,
+                        )
+                    }
+                }
             }
         } else if (contentNode.type === "YAMLSequence") {
             for (const e of contentNode.entries) {
@@ -362,7 +385,7 @@ export function* processIndentFix(
                 nextBaseIndent = actualIndent
             } else {
                 const expectMetaIndent = incIndent(baseIndent, context)
-                yield* fixIndent(expectMetaIndent, metaNode)
+                yield fixIndent(fixer, sourceCode, expectMetaIndent, metaNode)
                 nextBaseIndent = expectMetaIndent
             }
         }
@@ -388,7 +411,7 @@ export function* processIndentFix(
                 nextBaseIndent = actualIndent
             } else {
                 const expectKeyIndent = incIndent(baseIndent, context)
-                yield* fixIndent(expectKeyIndent, pairNode)
+                yield fixIndent(fixer, sourceCode, expectKeyIndent, pairNode)
                 nextBaseIndent = expectKeyIndent
             }
         }
@@ -401,17 +424,22 @@ export function* processIndentFix(
             )
         }
     }
+}
 
-    /**
-     * Fix indent
-     */
-    function* fixIndent(indent: string, n: AST.YAMLNode) {
-        const prevToken = sourceCode.getTokenBefore(n, {
-            includeComments: true,
-        })!
-        yield fixer.replaceTextRange(
-            [prevToken.range[1], n.range[0]],
-            `\n${indent}`,
-        )
-    }
+/**
+ * Fix indent
+ */
+export function fixIndent(
+    fixer: RuleFixer,
+    sourceCode: SourceCode,
+    indent: string,
+    node: YAMLNodeOrToken,
+): Fix {
+    const prevToken = sourceCode.getTokenBefore(node, {
+        includeComments: true,
+    })!
+    return fixer.replaceTextRange(
+        [prevToken.range[1], node.range[0]],
+        `\n${indent}`,
+    )
 }
