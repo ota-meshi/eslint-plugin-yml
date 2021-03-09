@@ -9,6 +9,7 @@ import {
     compareIndent,
     unwrapMeta,
     processIndentFix,
+    fixIndent,
 } from "../utils/yaml"
 import type {
     RuleContext,
@@ -394,10 +395,35 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
                 yield* processIndentFix(fixer, baseIndent, entry.value, context)
             } else if (entry.type === "YAMLMapping") {
                 for (const p of entry.pairs) {
-                    if (!p.value) {
-                        continue
+                    if (p.range[0] === entry.range[0]) {
+                        if (p.value) {
+                            yield* processIndentFix(
+                                fixer,
+                                baseIndent,
+                                p.value,
+                                context,
+                            )
+                        }
+                    } else {
+                        yield* processIndentFix(fixer, baseIndent, p, context)
                     }
-                    yield* processIndentFix(fixer, baseIndent, p.value, context)
+                }
+                if (entry.style === "flow") {
+                    const close = sourceCode.getLastToken(entry)
+                    if (close.value === "}") {
+                        const actualIndent = getActualIndent(close, context)
+                        if (
+                            actualIndent != null &&
+                            compareIndent(actualIndent, baseIndent) < 0
+                        ) {
+                            yield fixIndent(
+                                fixer,
+                                sourceCode,
+                                baseIndent,
+                                close,
+                            )
+                        }
+                    }
                 }
             } else if (entry.type === "YAMLSequence") {
                 for (const e of entry.entries) {
