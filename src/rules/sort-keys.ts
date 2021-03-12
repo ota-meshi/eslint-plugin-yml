@@ -8,6 +8,41 @@ import { isComma } from "../utils/ast-utils"
 // Helpers
 //------------------------------------------------------------------------------
 
+type UserOptions = CompatibleWithESLintOptions | PatternOption[]
+
+type OrderTypeOption = "asc" | "desc"
+type CompatibleWithESLintOptions =
+    | []
+    | [OrderTypeOption]
+    | [
+          OrderTypeOption,
+          {
+              caseSensitive?: boolean
+              natural?: boolean
+              minKeys?: number
+          },
+      ]
+type PatternOption = {
+    pathPattern: string
+    hasProperties: string[]
+    order:
+        | {
+              type?: OrderTypeOption
+              caseSensitive?: boolean
+              natural?: boolean
+          }
+        | string[]
+    minKeys?: number
+}
+type ParsedOption = {
+    isTargetMapping: (node: AST.YAMLMapping) => boolean
+    ignore: (s: string) => boolean
+    isValidOrder: Validator
+    minKeys: number
+    orderText: string
+}
+type Validator = (a: string, b: string) => boolean
+
 /**
  * Checks whether the given string is new line.
  */
@@ -36,9 +71,29 @@ function getPropertyName(node: AST.YAMLPair, sourceCode: SourceCode): string {
 }
 
 /**
+ * Check if given options are CompatibleWithESLintOptions
+ */
+function isCompatibleWithESLintOptions(
+    options: UserOptions,
+): options is CompatibleWithESLintOptions {
+    if (options.length === 0) {
+        return true
+    }
+    if (typeof options[0] === "string" || options[0] == null) {
+        return true
+    }
+
+    return false
+}
+
+/**
  * Build function which check that the given 2 names are in specific order.
  */
-function buildValidator(order: Option, insensitive: boolean, natural: boolean) {
+function buildValidatorFromType(
+    order: OrderTypeOption,
+    insensitive: boolean,
+    natural: boolean,
+): Validator {
     let compare = natural
         ? ([a, b]: string[]) => naturalCompare(a, b) <= 0
         : ([a, b]: string[]) => a <= b
@@ -54,8 +109,112 @@ function buildValidator(order: Option, insensitive: boolean, natural: boolean) {
     return (a: string, b: string) => compare([a, b])
 }
 
-const allowOptions = ["asc", "desc"] as const
-type Option = typeof allowOptions[number]
+/**
+ * Parse options
+ */
+function parseOptions(
+    options: UserOptions,
+    sourceCode: SourceCode,
+): ParsedOption[] {
+    if (isCompatibleWithESLintOptions(options)) {
+        const type: OrderTypeOption = options[0] ?? "asc"
+        const obj = options[1] ?? {}
+        const insensitive = obj.caseSensitive === false
+        const natural = Boolean(obj.natural)
+        const minKeys: number = obj.minKeys ?? 2
+        return [
+            {
+                isTargetMapping: () => true, // all
+                ignore: () => false,
+                isValidOrder: buildValidatorFromType(
+                    type,
+                    insensitive,
+                    natural,
+                ),
+                minKeys,
+                orderText: `${natural ? "natural " : ""}${
+                    insensitive ? "insensitive " : ""
+                }${type}ending`,
+            },
+        ]
+    }
+
+    return options.map((opt) => {
+        const order = opt.order
+        const pathPattern = new RegExp(opt.pathPattern)
+        const hasProperties = opt.hasProperties ?? []
+        const minKeys: number = opt.minKeys ?? 2
+        if (!Array.isArray(order)) {
+            const type: OrderTypeOption = order.type ?? "asc"
+            const insensitive = order.caseSensitive === false
+            const natural = Boolean(order.natural)
+
+            return {
+                isTargetMapping,
+                ignore: () => false,
+                isValidOrder: buildValidatorFromType(
+                    type,
+                    insensitive,
+                    natural,
+                ),
+                minKeys,
+                orderText: `${natural ? "natural " : ""}${
+                    insensitive ? "insensitive " : ""
+                }${type}ending`,
+            }
+        }
+        return {
+            isTargetMapping,
+            ignore: (s) => !order.includes(s),
+            isValidOrder(a, b) {
+                const aIndex = order.indexOf(a)
+                const bIndex = order.indexOf(b)
+                return aIndex <= bIndex
+            },
+            minKeys,
+            orderText: "specified",
+        }
+
+        /**
+         * Checks whether given node is verify target
+         */
+        function isTargetMapping(node: AST.YAMLMapping) {
+            if (hasProperties.length > 0) {
+                const names = new Set(
+                    node.pairs.map((p) => getPropertyName(p, sourceCode)),
+                )
+                if (!hasProperties.every((name) => names.has(name))) {
+                    return false
+                }
+            }
+
+            let path = ""
+            let curr: AST.YAMLNode = node
+            let p: AST.YAMLNode | null = curr.parent
+            while (p) {
+                if (p.type === "YAMLPair") {
+                    const name = getPropertyName(p, sourceCode)
+                    if (/^[a-z$_][\w$]*$/iu.test(name)) {
+                        path = `.${name}${path}`
+                    } else {
+                        path = `[${name}]${path}`
+                    }
+                } else if (p.type === "YAMLSequence") {
+                    const index = p.entries.indexOf(curr as never)
+                    path = `[${index}]${path}`
+                }
+                curr = p
+                p = curr.parent
+            }
+            if (path.startsWith(".")) {
+                path = path.slice(1)
+            }
+            return pathPattern.test(path)
+        }
+    })
+}
+
+const allowOrderTypes: OrderTypeOption[] = ["asc", "desc"]
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -69,33 +228,84 @@ export default createRule("sort-keys", {
             extensionRule: "sort-keys",
         },
         fixable: "code",
-        schema: [
-            {
-                enum: allowOptions,
-            },
-            {
-                type: "object",
-                properties: {
-                    caseSensitive: {
-                        type: "boolean",
-                        default: true,
+
+        schema: {
+            oneOf: [
+                {
+                    type: "array",
+                    items: {
+                        type: "object",
+                        properties: {
+                            pathPattern: { type: "string" },
+                            hasProperties: {
+                                type: "array",
+                                items: { type: "string" },
+                            },
+                            order: {
+                                oneOf: [
+                                    {
+                                        type: "array",
+                                        items: { type: "string" },
+                                        uniqueItems: true,
+                                    },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            type: {
+                                                enum: allowOrderTypes,
+                                            },
+                                            caseSensitive: {
+                                                type: "boolean",
+                                            },
+                                            natural: {
+                                                type: "boolean",
+                                            },
+                                        },
+                                        additionalProperties: false,
+                                    },
+                                ],
+                            },
+                            minKeys: {
+                                type: "integer",
+                                minimum: 2,
+                            },
+                        },
+                        required: ["pathPattern", "order"],
+                        additionalProperties: false,
                     },
-                    natural: {
-                        type: "boolean",
-                        default: false,
-                    },
-                    minKeys: {
-                        type: "integer",
-                        minimum: 2,
-                        default: 2,
-                    },
+                    minItems: 1,
                 },
-                additionalProperties: false,
-            },
-        ],
+                // For options compatible with the ESLint core.
+                {
+                    type: "array",
+                    items: [
+                        {
+                            enum: allowOrderTypes,
+                        },
+                        {
+                            type: "object",
+                            properties: {
+                                caseSensitive: {
+                                    type: "boolean",
+                                },
+                                natural: {
+                                    type: "boolean",
+                                },
+                                minKeys: {
+                                    type: "integer",
+                                    minimum: 2,
+                                },
+                            },
+                            additionalProperties: false,
+                        },
+                    ],
+                    additionalItems: false,
+                },
+            ],
+        },
         messages: {
             sortKeys:
-                "Expected mapping keys to be in {{natural}}{{insensitive}}{{order}}ending order. '{{thisName}}' should be before '{{prevName}}'.",
+                "Expected mapping keys to be in {{orderText}} order. '{{thisName}}' should be before '{{prevName}}'.",
         },
         type: "suggestion",
     },
@@ -105,12 +315,7 @@ export default createRule("sort-keys", {
             return {}
         }
         // Parse options.
-        const order: Option = context.options[0] || "asc"
-        const options = context.options[1]
-        const insensitive: boolean = options && options.caseSensitive === false
-        const natural: boolean = options && options.natural
-        const minKeys: number = options && options.minKeys
-        const orderValidator = buildValidator(order, insensitive, natural)
+        const parsedOptions = parseOptions(context.options, sourceCode)
 
         type PairData = {
             name: string
@@ -122,11 +327,13 @@ export default createRule("sort-keys", {
             upper: MappingStack | null
             prevList: PairData[]
             numKeys: number
+            option: ParsedOption | null
         }
         let mappingStack: MappingStack = {
             upper: null,
             prevList: [],
             numKeys: 0,
+            option: null,
         }
 
         type PairStack = {
@@ -143,8 +350,12 @@ export default createRule("sort-keys", {
         /**
          * Check order
          */
-        function isValidOrder(prevData: PairData, thisData: PairData) {
-            if (orderValidator(prevData.name, thisData.name)) {
+        function isValidOrder(
+            prevData: PairData,
+            thisData: PairData,
+            option: ParsedOption,
+        ) {
+            if (option.isValidOrder(prevData.name, thisData.name)) {
                 return true
             }
 
@@ -169,6 +380,9 @@ export default createRule("sort-keys", {
                     upper: mappingStack,
                     prevList: [],
                     numKeys: node.pairs.length,
+                    option:
+                        parsedOptions.find((o) => o.isTargetMapping(node)) ||
+                        null,
                 }
             },
 
@@ -201,9 +415,16 @@ export default createRule("sort-keys", {
                     // ignore
                     return
                 }
+                const option = mappingStack.option
+                if (!option) {
+                    return
+                }
+                const thisName = getPropertyName(node, sourceCode)
+                if (option.ignore(thisName)) {
+                    return
+                }
                 const prevList = mappingStack.prevList
                 const numKeys = mappingStack.numKeys
-                const thisName = getPropertyName(node, sourceCode)
                 const thisData = {
                     name: thisName,
                     node,
@@ -212,25 +433,23 @@ export default createRule("sort-keys", {
                 }
 
                 mappingStack.prevList = [thisData, ...prevList]
-                if (prevList.length === 0 || numKeys < minKeys) {
+                if (prevList.length === 0 || numKeys < option.minKeys) {
                     return
                 }
 
-                if (!isValidOrder(prevList[0], thisData)) {
+                if (!isValidOrder(prevList[0], thisData, option)) {
                     context.report({
                         loc: node.key?.loc ?? node.loc,
                         messageId: "sortKeys",
                         data: {
                             thisName,
                             prevName: prevList[0].name,
-                            order,
-                            insensitive: insensitive ? "insensitive " : "",
-                            natural: natural ? "natural " : "",
+                            orderText: option.orderText,
                         },
                         *fix(fixer) {
                             let moveTarget = prevList[0].node
                             for (const prev of prevList) {
-                                if (isValidOrder(prev, thisData)) {
+                                if (isValidOrder(prev, thisData, option)) {
                                     break
                                 } else {
                                     moveTarget = prev.node

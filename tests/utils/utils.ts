@@ -144,7 +144,7 @@ export function loadTestCases(
             for (const test of invalid.filter(({ filename }) =>
                 isYaml(filename),
             )) {
-                it(test.filename, () => {
+                it(test.filename || test.code, () => {
                     const input = yamlESLintParser.parseForESLint(test.code)
                     const output = yamlESLintParser.parseForESLint(test.output)
                     assert.deepStrictEqual(
@@ -424,7 +424,7 @@ function getConfig(ruleName: string, inputFile: string) {
 }
 
 function isYaml(fileName: string) {
-    return fileName.endsWith(".yml") || fileName.endsWith(".yaml")
+    return !fileName || fileName.endsWith(".yml") || fileName.endsWith(".yaml")
 }
 
 function isVue(fileName: string) {
