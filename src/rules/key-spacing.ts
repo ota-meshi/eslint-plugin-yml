@@ -23,7 +23,7 @@ type YAMLKeyValuePair = AST.YAMLPair & {
  * @returns {boolean} True if str contains a line terminator.
  */
 function containsLineTerminator(str: string): boolean {
-    return /[\r\n\u2028\u2029]/u.test(str)
+    return /[\n\r\u2028\u2029]/u.test(str)
 }
 
 /**
