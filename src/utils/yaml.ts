@@ -229,7 +229,7 @@ export function getActualIndentFromLine(
 ): string {
     const sourceCode = context.getSourceCode()
     const lineText = sourceCode.getLines()[line - 1]
-    return /^[^\S\r\n\u2028\u2029]*/u.exec(lineText)![0]
+    return /^[^\S\n\r\u2028\u2029]*/u.exec(lineText)![0]
 }
 
 /**

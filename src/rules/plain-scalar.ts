@@ -161,7 +161,7 @@ export default createRule("plain-scalar", {
                     return fixer.replaceText(
                         node,
                         `"${text
-                            .replace(/([\\"])/gu, "\\$1")
+                            .replace(/(["\\])/gu, "\\$1")
                             .replace(/\r?\n|[\u2028\u2029]/gu, "\\n")}"`,
                     )
                 },

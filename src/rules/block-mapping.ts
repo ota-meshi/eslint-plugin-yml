@@ -286,7 +286,7 @@ function canFixToFlow(mappingInfo: Stack, node: AST.YAMLBlockMapping) {
                 // have invalid char
                 return false
             }
-            if (/[},]/u.test(key.strValue)) {
+            if (/[,}]/u.test(key.strValue)) {
                 // The value will change after conversion.
                 return false
             }

@@ -194,7 +194,7 @@ function parseOptions(
             while (p) {
                 if (p.type === "YAMLPair") {
                     const name = getPropertyName(p, sourceCode)
-                    if (/^[a-z$_][\w$]*$/iu.test(name)) {
+                    if (/^[$_a-z][\w$]*$/iu.test(name)) {
                         path = `.${name}${path}`
                     } else {
                         path = `[${name}]${path}`
