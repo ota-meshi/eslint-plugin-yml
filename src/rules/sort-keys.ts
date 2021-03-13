@@ -197,7 +197,7 @@ function parseOptions(
                     if (/^[$_a-z][\w$]*$/iu.test(name)) {
                         path = `.${name}${path}`
                     } else {
-                        path = `[${name}]${path}`
+                        path = `[${JSON.stringify(name)}]${path}`
                     }
                 } else if (p.type === "YAMLSequence") {
                     const index = p.entries.indexOf(curr as never)
