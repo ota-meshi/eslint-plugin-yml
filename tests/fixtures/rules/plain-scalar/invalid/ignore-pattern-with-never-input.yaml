@@ -1,0 +1,7 @@
+# {"options":[ "never", { "ignorePatterns": ["[gG]ood"] } ]}
+{
+  hello: Hello!,
+  goodbye: Goodbye!,
+  good-morning: Good Morning,
+  how-are-you: How are you doing?
+}
