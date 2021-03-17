@@ -226,6 +226,7 @@ export default createRule("sort-keys", {
             description: "require mapping keys to be sorted",
             categories: null,
             extensionRule: "sort-keys",
+            layout: false,
         },
         fixable: "code",
 

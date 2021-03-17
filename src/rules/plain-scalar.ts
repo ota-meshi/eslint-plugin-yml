@@ -55,6 +55,7 @@ export default createRule("plain-scalar", {
             description: "require or disallow plain style scalar.",
             categories: ["standard"],
             extensionRule: false,
+            layout: false, // This rule does not conflict with Prettier.
         },
         fixable: "code",
         schema: [

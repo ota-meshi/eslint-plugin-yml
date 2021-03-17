@@ -74,6 +74,7 @@ export default createRule("block-mapping", {
             description: "require or disallow block style mappings.",
             categories: ["standard"],
             extensionRule: false,
+            layout: false, // This rule does not conflict with Prettier.
         },
         fixable: "code",
         schema: [

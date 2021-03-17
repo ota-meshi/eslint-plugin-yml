@@ -84,6 +84,7 @@ export default createRule("block-sequence", {
             description: "require or disallow block style sequences.",
             categories: ["standard"],
             extensionRule: false,
+            layout: false, // This rule does not conflict with Prettier.
         },
         fixable: "code",
         schema: [

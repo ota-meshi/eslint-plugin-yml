@@ -7,6 +7,7 @@ export default createRule("no-tab-indent", {
             description: "disallow tabs for indentation.",
             categories: ["recommended", "standard"],
             extensionRule: false,
+            layout: false,
         },
         schema: [],
         messages: {

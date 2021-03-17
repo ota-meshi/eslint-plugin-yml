@@ -8,6 +8,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
             description: "enforce consistent line breaks after `-` indicator",
             categories: ["standard"],
             extensionRule: false,
+            layout: true,
         },
         fixable: "whitespace",
         schema: [

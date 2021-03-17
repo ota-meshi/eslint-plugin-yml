@@ -16,6 +16,7 @@ export default createRule("no-irregular-whitespace", {
             description: "disallow irregular whitespace",
             categories: ["recommended", "standard"],
             extensionRule: "no-irregular-whitespace",
+            layout: false,
         },
         schema: [
             {

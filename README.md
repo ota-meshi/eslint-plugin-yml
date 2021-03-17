@@ -88,6 +88,7 @@ This plugin provides configs:
 - `plugin:yml/base` ... Configuration to enable correct YAML parsing.
 - `plugin:yml/recommended` ... Above, plus rules to prevent errors or unintended behavior.
 - `plugin:yml/standard` ... Above, plus rules to enforce the common stylistic conventions.
+- `plugin:yml/prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](https://ota-meshi.github.io/eslint-plugin-yml/rules/) to get the `rules` that this plugin provides.
 

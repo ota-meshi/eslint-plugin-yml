@@ -8,6 +8,7 @@ export default createRule("no-empty-sequence-entry", {
             description: "disallow empty sequence entries",
             categories: ["recommended", "standard"],
             extensionRule: false,
+            layout: false,
         },
         schema: [],
         messages: {

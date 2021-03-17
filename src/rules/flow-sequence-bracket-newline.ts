@@ -25,6 +25,7 @@ export default createRule("flow-sequence-bracket-newline", {
                 "enforce linebreaks after opening and before closing flow sequence brackets",
             categories: ["standard"],
             extensionRule: "array-bracket-newline",
+            layout: true,
         },
         fixable: "whitespace",
         schema: [
