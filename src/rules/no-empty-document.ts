@@ -7,6 +7,7 @@ export default createRule("no-empty-document", {
             description: "disallow empty document",
             categories: ["recommended", "standard"],
             extensionRule: false,
+            layout: false,
         },
         schema: [],
         messages: {

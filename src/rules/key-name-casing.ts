@@ -18,6 +18,7 @@ export default createRule("key-name-casing", {
             description: "enforce naming convention to key names",
             categories: null,
             extensionRule: false,
+            layout: false,
         },
         schema: [
             {
@@ -59,7 +60,7 @@ export default createRule("key-name-casing", {
             doesNotMatchFormat:
                 "Key name `{{name}}` must match one of the following formats: {{formats}}",
         },
-        type: "layout",
+        type: "suggestion",
     },
     create(context) {
         if (!context.parserServices.isYAML) {

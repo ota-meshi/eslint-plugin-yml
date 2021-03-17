@@ -209,6 +209,7 @@ export default createRule("key-spacing", {
                 "enforce consistent spacing between keys and values in mapping pairs",
             categories: ["standard"],
             extensionRule: "key-spacing",
+            layout: true,
         },
         fixable: "whitespace",
         schema: [

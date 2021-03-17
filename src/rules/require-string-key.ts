@@ -7,6 +7,7 @@ export default createRule("require-string-key", {
             description: "disallow mapping keys other than strings",
             categories: null,
             extensionRule: false,
+            layout: false,
         },
         schema: [],
         messages: {

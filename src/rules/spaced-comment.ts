@@ -121,6 +121,7 @@ export default createRule("spaced-comment", {
                 "enforce consistent spacing after the `#` in a comment",
             categories: ["standard"],
             extensionRule: "spaced-comment",
+            layout: false, // This rule does not conflict with Prettier.
         },
         fixable: "whitespace",
         schema: [

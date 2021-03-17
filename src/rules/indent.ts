@@ -55,6 +55,7 @@ export default createRule("indent", {
             description: "enforce consistent indentation",
             categories: ["standard"],
             extensionRule: false,
+            layout: true,
         },
         fixable: "whitespace",
         schema: [

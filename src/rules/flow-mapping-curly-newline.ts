@@ -109,6 +109,7 @@ export default createRule("flow-mapping-curly-newline", {
             description: "enforce consistent line breaks inside braces",
             categories: ["standard"],
             extensionRule: "object-curly-newline",
+            layout: true,
         },
         fixable: "whitespace",
         schema: [OPTION_VALUE],

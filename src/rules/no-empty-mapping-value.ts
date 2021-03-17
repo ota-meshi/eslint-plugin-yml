@@ -7,6 +7,7 @@ export default createRule("no-empty-mapping-value", {
             description: "disallow empty mapping values",
             categories: ["recommended", "standard"],
             extensionRule: false,
+            layout: false,
         },
         schema: [],
         messages: {

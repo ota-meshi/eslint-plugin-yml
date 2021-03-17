@@ -10,6 +10,7 @@ export default createRule("quotes", {
                 "enforce the consistent use of either double, or single quotes",
             categories: ["standard"],
             extensionRule: false,
+            layout: true,
         },
         fixable: "code",
         schema: [
