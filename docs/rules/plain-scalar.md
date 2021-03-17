@@ -38,10 +38,14 @@ GOOD: GOOD
 yml/plain-scalar:
   - error
   - always # or "never"
+  - ignorePatterns:
+    - "[\\v\\f\\u0085\\u00a0\\u1680\\u180e\\u2000-\\u200b\\u2028\\u2029\\u202f\\u205f\\u3000\\ufeff]"
 ```
 
 - `"always"` ... Enforce the use of plain style scalars.
 - `"never"` ... Disallow the use of plain style scalars.
+- `ignorePatterns` ... Specify the pattern to be excluded from the check as an array.  
+    If `"always"`, the default is `[ "[\\v\\f\\u0085\\u00a0\\u1680\\u180e\\u2000-\\u200b\\u2028\\u2029\\u202f\\u205f\\u3000\\ufeff]" ]`. It to ignores irregular whitespace.
 
 ## :couple: Related rules
 

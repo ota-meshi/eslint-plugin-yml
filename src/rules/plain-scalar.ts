@@ -33,6 +33,22 @@ const SYMBOLS = new Set([
     "\\",
 ])
 
+/**
+ * String list to RegExp list
+ */
+function toRegExps(patterns: string[]) {
+    return patterns.map((p) => new RegExp(p, "u"))
+}
+
+/**
+ * Checks whether given node is string value scalar
+ */
+function isStringScalar(
+    node: AST.YAMLScalar,
+): node is AST.YAMLScalar & { value: string } {
+    return typeof node.value === "string"
+}
+
 export default createRule("plain-scalar", {
     meta: {
         docs: {
@@ -41,7 +57,19 @@ export default createRule("plain-scalar", {
             extensionRule: false,
         },
         fixable: "code",
-        schema: [{ enum: ["always", "never"] }],
+        schema: [
+            { enum: ["always", "never"] },
+            {
+                type: "object",
+                properties: {
+                    ignorePatterns: {
+                        type: "array",
+                        items: { type: "string" },
+                    },
+                },
+                additionalProperties: false,
+            },
+        ],
         messages: {
             required: "Must use plain style scalar.",
             disallow: "Must use quoted style scalar.",
@@ -53,6 +81,15 @@ export default createRule("plain-scalar", {
             return {}
         }
         const option: "always" | "never" = context.options[0] || "always"
+        const ignorePatterns: RegExp[] = toRegExps(
+            context.options[1]?.ignorePatterns ??
+                (option === "always"
+                    ? [
+                          // Irregular white spaces
+                          String.raw`[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u2028\u2029\u202f\u205f\u3000\ufeff]`,
+                      ]
+                    : []),
+        )
 
         const sourceCode = context.getSourceCode()
 
@@ -114,7 +151,7 @@ export default createRule("plain-scalar", {
         /**
          * Verify node for `always`
          */
-        function verifyAlways(node: AST.YAMLScalar) {
+        function verifyAlways(node: AST.YAMLScalar & { value: string }) {
             if (
                 node.style !== "double-quoted" &&
                 node.style !== "single-quoted"
@@ -147,8 +184,8 @@ export default createRule("plain-scalar", {
         /**
          * Verify node for `never`
          */
-        function verifyNever(node: AST.YAMLScalar) {
-            if (node.style !== "plain" || typeof node.value !== "string") {
+        function verifyNever(node: AST.YAMLScalar & { value: string }) {
+            if (node.style !== "plain") {
                 return
             }
 
@@ -169,7 +206,19 @@ export default createRule("plain-scalar", {
         }
 
         return {
-            YAMLScalar: option === "always" ? verifyAlways : verifyNever,
+            YAMLScalar(node: AST.YAMLScalar) {
+                if (!isStringScalar(node)) {
+                    return
+                }
+                if (ignorePatterns.some((p) => p.test(node.value))) {
+                    return
+                }
+                if (option === "always") {
+                    verifyAlways(node)
+                } else {
+                    verifyNever(node)
+                }
+            },
         }
     },
 })

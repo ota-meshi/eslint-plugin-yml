@@ -1,0 +1,7 @@
+# plain-scalar/invalid/ignore-pattern-input.yaml
+{
+  hello: Hello!,
+  "goodbye": "Goodbye!",
+  "good-morning": "Good Morning",
+  how-are-you: How are you doing?
+}
