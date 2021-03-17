@@ -26,6 +26,19 @@ This ESLint plugin provides linting rules for [YAML].
 
 You can check on the [Online DEMO](https://ota-meshi.github.io/eslint-plugin-yml/playground/).
 
+## :question: How is it different from other YAML plugins?
+
+### Plugins that do not use AST
+
+e.g. [eslint-plugin-yaml](https://www.npmjs.com/package/eslint-plugin-yaml)
+
+These plugins use the processor to parse and return the results independently, without providing the ESLint engine with AST and source code text.
+
+Plugins don't provide AST, so you can't use directive comments (e.g. `# eslint-disable`).  
+Plugins don't provide source code text, so you can't use it with plugins and rules that use text (e.g. [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier), [eol-last](https://eslint.org/docs/rules/eol-last)).  
+
+**eslint-plugin-yml** works by providing AST and source code text to ESLint.
+
 <!--DOCS_IGNORE_START-->
 
 ## :book: Documentation
@@ -157,7 +170,21 @@ The rules with the following star :star: are included in the config.
 <!--RULES_TABLE_END-->
 <!--RULES_SECTION_END-->
 
+## :rocket: To Do More Verification
+
+### Verify using JSON Schema
+
+You can verify using JSON Schema by checking and installing [eslint-plugin-json-schema-validator].
+
+### Verify the [Vue I18n] message resource files
+
+You can verify the message files by checking and installing [@intlify/eslint-plugin-vue-i18n].
+
 <!--DOCS_IGNORE_START-->
+
+<!-- ## :traffic_light: Semantic Versioning Policy
+
+**eslint-plugin-jsonc** follows [Semantic Versioning](http://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy). -->
 
 ## :beers: Contributing
 
@@ -190,3 +217,6 @@ This plugin uses [yaml-eslint-parser](https://github.com/ota-meshi/yaml-eslint-p
 See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
 
 [YAML]: https://yaml.org/
+[eslint-plugin-json-schema-validator]: https://github.com/ota-meshi/eslint-plugin-json-schema-validator
+[@intlify/eslint-plugin-vue-i18n]: https://github.com/intlify/eslint-plugin-vue-i18n
+[Vue I18n]: https://github.com/intlify/vue-i18n-next
