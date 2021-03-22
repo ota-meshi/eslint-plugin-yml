@@ -39,10 +39,7 @@ fs.writeFileSync(
             /<!--USAGE_SECTION_START-->[\s\S]*<!--USAGE_SECTION_END-->/u,
             "See [User Guide](./user-guide/README.md).",
         )
-        .replace(
-            /<!--DOCS_IGNORE_START-->([\s\S]*?)<!--DOCS_IGNORE_END-->/gu,
-            "",
-        )
+        .replace(/<!--DOCS_IGNORE_START-->[\s\S]*?<!--DOCS_IGNORE_END-->/gu, "")
         .replace(/\(https:\/\/ota-meshi.github.io\/eslint-plugin-yml/gu, "(.")
         .replace(/\n{3,}/gu, "\n\n"),
     "utf8",
