@@ -398,14 +398,14 @@ function getConfig(ruleName: string, inputFile: string) {
     }
     // inline config
     const configStr = isYaml(inputFile)
-        ? /^#([^\n]+?)\n/u.exec(code0)
+        ? /^#([^\n]+)\n/u.exec(code0)
         : /^<!--(.*?)-->/u.exec(code0)
     if (!configStr) {
         fs.writeFileSync(inputFile, `# {}\n${code0}`, "utf8")
         throw new Error("missing config")
     } else {
         code = isYaml(inputFile)
-            ? code0.replace(/^#([^\n]+?)\n/u, `# ${filename}\n`)
+            ? code0.replace(/^#([^\n]+)\n/u, `# ${filename}\n`)
             : code0.replace(/^<!--(.*?)-->/u, `<!--${filename}-->`)
         try {
             config = configStr ? JSON.parse(configStr[1]) : {}
