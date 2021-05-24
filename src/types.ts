@@ -118,9 +118,10 @@ export interface SourceCode {
 
     getAllComments(): AST.Comment[]
 
-    getComments(
-        node: YAMLNodeOrToken,
-    ): { leading: AST.Comment[]; trailing: AST.Comment[] }
+    getComments(node: YAMLNodeOrToken): {
+        leading: AST.Comment[]
+        trailing: AST.Comment[]
+    }
 
     getNodeByRangeIndex(index: number): AST.YAMLNode | null
 

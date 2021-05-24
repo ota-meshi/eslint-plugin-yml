@@ -46,6 +46,29 @@ This plugin provides configs:
 
 See [the rule list](../rules/README.md) to get the `rules` that this plugin provides.
 
+#### Parser Configuration
+
+If you have specified a parser, you need to configure a parser for `.yaml`.
+
+For example, if you are using the `"@babel/eslint-parser"`, configure it as follows:
+
+```js
+module.exports = {
+  // ...
+  extends: ["plugin:yml/standard"],
+  // ...
+  parser: "@babel/eslint-parser",
+  // Add an `overrides` section to add a parser configuration for YAML.
+  overrides: [
+    {
+      files: ["*.yaml", "*.yml"],
+      parser: "yaml-eslint-parser",
+    },
+  ],
+  // ...
+};
+```
+
 ### Running ESLint from the command line
 
 If you want to run `eslint` from the command line, make sure you include the `.yaml` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
