@@ -362,9 +362,8 @@ export default createRule("indent", {
                         tokensOnSameLine.push(token)
                     } else {
                         // New line is detected, so validate the tokens.
-                        const lineIndent = processExpectedIndent(
-                            tokensOnSameLine,
-                        )
+                        const lineIndent =
+                            processExpectedIndent(tokensOnSameLine)
                         lineIndentsWk[lineIndent.line] = lineIndent
                         tokensOnSameLine = [token]
                     }

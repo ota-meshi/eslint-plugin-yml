@@ -598,9 +598,7 @@ export default createRule("sort-keys", {
         /**
          * Get range from given pair
          */
-        function getPairRangeForBlock(
-            node: AST.YAMLPair,
-        ): {
+        function getPairRangeForBlock(node: AST.YAMLPair): {
             loc: AST.SourceLocation
             range: AST.Range
             indentColumn: number
