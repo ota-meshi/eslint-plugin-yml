@@ -34,16 +34,18 @@ ESLint core `spaced-comment` rule don't work well in YAML. Turn off that rule in
 Use the `overrides` setting to apply these only to YAML files:
 
 ```js
-overrides: [
-  {
-    files: ['*.yaml', '*.yml'],
-    parser: 'yaml-eslint-parser',
-    rules: {
-      'spaced-comment': ['off'],
-      'yml/spaced-comment': ['error']
-    }
-  }
-],
+module.exports = {
+  overrides: [
+    {
+      files: ["*.yaml", "*.yml"],
+      parser: "yaml-eslint-parser",
+      rules: {
+        "spaced-comment": ["off"],
+        "yml/spaced-comment": ["error"],
+      },
+    },
+  ],
+};
 ```
 
 ## :wrench: Options
