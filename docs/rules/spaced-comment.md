@@ -33,13 +33,17 @@ This rule will enforce consistency of spacing after the start of a comment `#`. 
 ESLint core `spaced-comment` rule don't work well in YAML. Turn off that rule in YAML files and use `yml/spaced-comment` rule.  
 Use the `overrides` setting to apply these only to YAML files:
 
-```yaml
-overrides: 
-  - 
-    files: ["*.yaml", "*.yml"]
-    rules: 
-        spaced-comment: off
-        yml/spaced-comment: error
+```js
+overrides: [
+  {
+    files: ['*.yaml', '*.yml'],
+    parser: 'yaml-eslint-parser',
+    rules: {
+      'spaced-comment': ['off'],
+      'yml/spaced-comment': ['error']
+    }
+  }
+],
 ```
 
 ## :wrench: Options
