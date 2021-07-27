@@ -2,7 +2,7 @@ import type { RuleFixer, SourceCode } from "../types"
 import naturalCompare from "natural-compare"
 import type { AST } from "yaml-eslint-parser"
 import { createRule } from "../utils"
-import { isComma } from "../utils/ast-utils"
+import { isComma, isCommentToken } from "../utils/ast-utils"
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -604,25 +604,24 @@ export default createRule("sort-keys", {
             indentColumn: number
         } {
             let endOfRange: number, end: AST.Position
-            if (node.loc.end.column > 0) {
-                const afterToken = sourceCode.getTokenAfter(node)
-                if (
-                    !afterToken ||
-                    node.loc.end.line < afterToken.loc.start.line
-                ) {
-                    const line = sourceCode.lines[node.loc.end.line - 1]
-                    end = {
-                        line: node.loc.end.line,
-                        column: line.length,
-                    }
-                    endOfRange = sourceCode.getIndexFromLoc(end)
-                } else {
-                    endOfRange = node.range[1]
-                    end = node.loc.end
+            const afterToken = sourceCode.getTokenAfter(node, {
+                includeComments: true,
+                filter: (t) =>
+                    !isCommentToken(t) || node.loc.end.line < t.loc.start.line,
+            })
+            if (!afterToken || node.loc.end.line < afterToken.loc.start.line) {
+                const line = afterToken
+                    ? afterToken.loc.start.line - 1
+                    : node.loc.end.line
+                const lineText = sourceCode.lines[line - 1]
+                end = {
+                    line,
+                    column: lineText.length,
                 }
+                endOfRange = sourceCode.getIndexFromLoc(end)
             } else {
-                endOfRange = getNewlineStartIndex(node.range[1])
-                end = sourceCode.getLocFromIndex(endOfRange)
+                endOfRange = node.range[1]
+                end = node.loc.end
             }
 
             const beforeToken = sourceCode.getTokenBefore(node)
@@ -630,21 +629,15 @@ export default createRule("sort-keys", {
                 const next = sourceCode.getTokenAfter(beforeToken, {
                     includeComments: true,
                 })!
-                if (beforeToken.loc.end.line < next.loc.start.line) {
+                if (
+                    beforeToken.loc.end.line < next.loc.start.line ||
+                    beforeToken.loc.end.line < node.loc.start.line
+                ) {
                     const start = {
-                        line: next.loc.start.line,
-                        column: 0,
-                    }
-                    const startOfRange = sourceCode.getIndexFromLoc(start)
-                    return {
-                        range: [startOfRange, endOfRange],
-                        loc: { start, end },
-                        indentColumn: next.loc.start.column,
-                    }
-                }
-                if (beforeToken.loc.end.line < node.loc.start.line) {
-                    const start = {
-                        line: node.loc.start.line,
+                        line:
+                            beforeToken.loc.end.line < next.loc.start.line
+                                ? next.loc.start.line
+                                : node.loc.start.line,
                         column: 0,
                     }
                     const startOfRange = sourceCode.getIndexFromLoc(start)
