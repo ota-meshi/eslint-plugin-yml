@@ -20,4 +20,16 @@ describe("Integration with eslint-plugin-yml", () => {
         assert.strictEqual(r.results.length, 2)
         assert.strictEqual(r.errorCount, 0)
     })
+
+    // https://github.com/ota-meshi/eslint-plugin-yml/issues/89
+    it("should lint without error when use the 'no-multi-spaces' rule and block node together.", () => {
+        const engine = new CLIEngine({
+            cwd: TEST_CWD,
+            extensions: [".yml"],
+        })
+        engine.addPlugin("eslint-plugin-yml", plugin)
+        const r = engine.executeOnFiles(["issue89/src"])
+        assert.strictEqual(r.results.length, 1)
+        assert.strictEqual(r.errorCount, 0)
+    })
 })

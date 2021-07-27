@@ -48,7 +48,7 @@
         "debug": "^4.1.1",
         "lodash": "^4.17.19",
         "natural-compare": "^1.4.0",
-        "yaml-eslint-parser": "^0.3.2"
+        "yaml-eslint-parser": "^0.4.0"
     },
     "peerDependencies": {
         "eslint": ">=6.0.0"

@@ -1,0 +1,85 @@
+common:
+  close: Close the modal
+  incompatibility: Incompatibility
+  pause: Pause
+  reset: Reset
+  resume: Resume
+  warning: Warning
+footer:
+  credits: Potato credits to {robynn} and {hels}
+  hels: HelS
+  made: Made with ❤️ by {praz}
+  praz: PraZ
+  robynn: Robynn Frauhn
+info:
+  developer:
+    contact: contact me
+    content: >-
+      This app is my gift to a lovely and wholesome community that helped me a
+      lot. It is also a sandbox that allowed me to experiment with technologies
+      I like. I tried to make it as accessible as possible. However there might
+      be bugs, and if you find any, you can {contact}. If you are a developer,
+      you can also {contribute}. Finally, if you want to contribute in another
+      way, you can always {kofi}.
+    contribute: contribute
+    kofi: offer me a coffee
+    title: A word from the developer
+  origin:
+    content: >-
+      A lot of small potatoes from the marvelous community of Robynn Frauhn were
+      used to the Pomodoro technique to help them work. As in Robynn's oasis,
+      potatoes reign, they decided to replace tomates in their technique. This
+      is how was born the Potato technique and its Potato Timer.
+    title: The origin of the Potato Timer
+  technique:
+    content: >-
+      The Pomodoro technique is a time management technique. It consists of
+      defining periods of work, separated by smaller periods of pause. Before
+      starting, several tasks should be planned, so they can be worked on during
+      work time. It can be split in 5 steps:
+    steps:
+      - Defining the task to work on.
+      - Setup a work timer (25 minutes).
+      - Work on the task for 25 minutes.
+      - Take a 5 minute break.
+      - Start over with a 15-30 minute pause on the 4th cycle.
+    title: The Pomodoro technique
+  title: What is Potato Timer ?
+not-found: Not found
+notification:
+  api-unavailable: >-
+    Your device or browser is not compatible with notifications. You will not
+    receive any when it's time to take a break or get back to work.
+  permission-warning: >-
+    You didn't allow the app to send you notifications. You may miss the moment
+    to take a break !
+  request-permission: Allow notifications
+options:
+  change-language: Change language — currently {current}
+  change-theme: Change theme — currently {current}
+  info: About the app
+  title: Options
+reset:
+  cancel: Cancel
+  confirm: Reset
+  message: There is a potato running, are you sure you want to reset?
+settings:
+  cancel: Cancel
+  long-pause: Final pause duration (minutes)
+  pause-time: Pause potato duration (minutes)
+  reset: Restore default durations
+  save: Save
+  title: Settings
+  work-time: Work potato duration (minutes)
+steps:
+  done: We're done !
+  pause: Time to chill...
+  ready: Ready to start ?
+  work: Let's get to work !
+tasks:
+  add: Add task
+  delete: Delete task "{task}"
+  empty: No task to work on.
+theme:
+  dark: Dark
+  light: Light

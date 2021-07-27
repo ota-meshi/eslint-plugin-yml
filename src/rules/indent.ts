@@ -717,7 +717,7 @@ export default createRule("indent", {
 
                 for (
                     let scalarLine = lineIndent.line + 1;
-                    scalarLine < scalarNode.loc.end.line; // target is end - 1
+                    scalarLine <= scalarNode.loc.end.line;
                     scalarLine++
                 ) {
                     const actualLineIndent = getActualLineIndent(scalarLine)
