@@ -9,8 +9,8 @@ import type { YAMLNodeOrToken } from "../types"
 const ALL_IRREGULARS =
     /[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u2028\u2029\u202f\u205f\u3000\ufeff]/u
 const IRREGULAR_WHITESPACE =
-    /[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u202f\u205f\u3000\ufeff]+/gmu
-const IRREGULAR_LINE_TERMINATORS = /[\u2028\u2029]/gmu
+    /[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u202f\u205f\u3000\ufeff]+/gu
+const IRREGULAR_LINE_TERMINATORS = /[\u2028\u2029]/gu
 
 export default createRule("no-irregular-whitespace", {
     meta: {
