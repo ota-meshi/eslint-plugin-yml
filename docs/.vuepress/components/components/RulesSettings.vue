@@ -1,5 +1,44 @@
 <template>
     <div class="rules-settings">
+        <div class="tools">
+            <div
+                class="tools-title"
+                @click="state.toolsClose = !state.toolsClose"
+            >
+                Tools
+                <button
+                    class="tools-button"
+                    :class="{ 'tools-button--close': state.toolsClose }"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="10"
+                        viewBox="0 0 10 10"
+                        width="10"
+                    >
+                        <path d="M2.5 10l5-5-5-5v10z" fill="#ddd" />
+                    </svg>
+                </button>
+            </div>
+            <template v-if="!state.toolsClose">
+                <div class="tool">
+                    <button class="tool-button" @click="onAllOffClick">
+                        Turn OFF All Rules
+                    </button>
+                </div>
+                <div class="tool">
+                    <label>
+                        <span class="tool-label">Filter:</span>
+                        <input
+                            v-model="filterValue"
+                            type="search"
+                            placeholder="Rule Filter"
+                            class="tool-form"
+                        />
+                    </label>
+                </div>
+            </template>
+        </div>
         <ul class="categories">
             <template v-for="category in categories">
                 <li
@@ -56,7 +95,7 @@
                         class="rules"
                     >
                         <li
-                            v-for="rule in category.rules"
+                            v-for="rule in filterRules(category.rules)"
                             :key="rule.ruleId"
                             class="rule"
                             :class="rule.classes"
@@ -78,7 +117,6 @@
                                     viewBox="0 0 100 100"
                                     width="15"
                                     height="15"
-                                    class="icon outbound"
                                 >
                                     <path
                                         fill="currentColor"
@@ -110,7 +148,6 @@ export default {
     },
     data() {
         return {
-            categories,
             categoryState: Object.fromEntries(
                 categories.map((c) => {
                     return [
@@ -121,13 +158,35 @@ export default {
                     ]
                 }),
             ),
+            state: {
+                toolsClose: true,
+            },
+            filterValue: "",
         }
     },
-    watch: {},
+    computed: {
+        categories() {
+            return categories.map((c) => {
+                let rules = this.filterRules(c.rules)
+                if (this.filterValue) {
+                    rules = rules.filter((r) =>
+                        r.ruleId.includes(this.filterValue),
+                    )
+                }
+                return {
+                    ...c,
+                    rules,
+                }
+            })
+        },
+    },
     methods: {
+        filterRules(rules) {
+            return rules.filter((rule) => rule.ruleId !== "jsonc/auto")
+        },
         onAllClick(category, e) {
             const rules = Object.assign({}, this.rules)
-            for (const rule of category.rules) {
+            for (const rule of this.filterRules(category.rules)) {
                 if (e.target.checked) {
                     rules[rule.ruleId] = "error"
                 } else {
@@ -135,6 +194,9 @@ export default {
                 }
             }
             this.$emit("update:rules", rules)
+        },
+        onAllOffClick() {
+            this.$emit("update:rules", {})
         },
         onClick(ruleId, e) {
             const rules = Object.assign({}, this.rules)
@@ -153,6 +215,54 @@ export default {
 </script>
 
 <style scoped>
+.tools {
+    background-color: #222;
+}
+
+.tool {
+    display: flex;
+}
+
+.tool,
+.tools-title {
+    padding: 4px;
+}
+
+.tool > label {
+    display: flex;
+    width: 100%;
+}
+
+.tool > button {
+    margin: auto;
+}
+
+.tool-label {
+    width: 3.5rem;
+    flex-shrink: 0;
+}
+
+.tool-form {
+    width: 100%;
+}
+
+.tools-button {
+    background-color: transparent;
+    color: #ddd;
+    border: none;
+    appearance: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.tools-button--close {
+    transform: rotate(90deg);
+}
+
+.filter .tool-label {
+    color: #ddd;
+}
+
 .categories {
     font-size: 14px;
     list-style-type: none;
@@ -166,7 +276,7 @@ export default {
 .category-button {
     position: absolute;
     left: -12px;
-    top: 2px;
+    top: 4px;
     background-color: transparent;
     color: #ddd;
     border: none;
@@ -184,6 +294,16 @@ export default {
     font-weight: bold;
 }
 
+.eslint-plugin-yml__category .category-title,
+.eslint-plugin-yml__rule a {
+    color: #f8c555;
+}
+
+.eslint-category .category-title,
+.eslint-rule a {
+    color: #8080f2;
+}
+
 .rules {
     padding-left: 0;
 }
@@ -198,13 +318,11 @@ export default {
 
 .rule a {
     margin-left: auto;
+    display: inline-flex;
+    align-items: center;
 }
 
 a {
     text-decoration: none;
-}
-
-.eslint-plugin-yml__category {
-    color: #f8c555;
 }
 </style>
