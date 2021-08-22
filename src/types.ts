@@ -47,6 +47,7 @@ export interface RuleMetaData {
     }
     messages: { [messageId: string]: string }
     fixable?: "code" | "whitespace"
+    hasSuggestions?: boolean
     schema: JSONSchema4 | JSONSchema4[]
     deprecated?: boolean
     type: "problem" | "suggestion" | "layout"
@@ -68,6 +69,7 @@ export interface PartialRuleMetaData {
     }
     messages: { [messageId: string]: string }
     fixable?: "code" | "whitespace"
+    hasSuggestions?: boolean
     schema: JSONSchema4 | JSONSchema4[]
     deprecated?: boolean
     type: "problem" | "suggestion" | "layout"
