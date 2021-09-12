@@ -815,10 +815,12 @@ export default createRule("indent", {
             }
         }
 
+        /* eslint-disable complexity -- X */
         /**
          * Build the fixer function that makes collect indentation.
          */
         function buildFix(
+            /* eslint-enable complexity -- X */
             lineIndent: LineIndentStep2,
             lineIndents: (LineIndentStep2 | undefined)[],
         ) {
@@ -877,6 +879,22 @@ export default createRule("indent", {
                     }
                     endLine = lineIndex - 1
                     break
+                }
+            }
+            for (let lineIndex = startLine; lineIndex <= endLine; lineIndex++) {
+                const li = lineIndents[lineIndex]
+                if (li?.indentBlockScalar) {
+                    const blockLiteral = li.indentBlockScalar.node
+                    const diff = li.expectedIndent - li.actualIndent
+                    const mark = sourceCode.getFirstToken(blockLiteral)!
+                    const num = /\d+/u.exec(mark.value)?.[0]
+                    if (num != null) {
+                        const newIndent = Number(num) + diff
+                        if (newIndent >= 10) {
+                            // The new indentation indicator is too big
+                            return null
+                        }
+                    }
                 }
             }
             return function* (fixer: RuleFixer): IterableIterator<Fix> {
@@ -948,7 +966,7 @@ export default createRule("indent", {
                     mark,
                     mark.value.replace(
                         /\d+/u,
-                        (num) => `${Number(num) + diff}`,
+                        (num: string) => `${Number(num) + diff}`,
                     ),
                 )
             }

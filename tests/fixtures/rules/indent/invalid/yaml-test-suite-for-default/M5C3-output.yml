@@ -2,6 +2,6 @@
 literal: |8
         value
 folded:
-        !foo
-                >24
-                        value
+   !foo
+  >1
+ value

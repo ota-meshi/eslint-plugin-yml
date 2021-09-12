@@ -17,7 +17,7 @@
         "test:base": "mocha --require ts-node/register \"tests/src/**/*.ts\" --reporter dot --timeout 60000",
         "test": "npm run test:base",
         "cover": "nyc --reporter=lcov npm run test:base",
-        "test:debug": "mocha --require ts-node/register \"tests/src/**/*.ts\" --reporter dot",
+        "test:debug": "mocha --require ts-node/register/transpile-only \"tests/src/**/*.ts\" --reporter dot",
         "update": "node --require ts-node/register ./tools/update.ts && npm run eslint-fix && npm run cover",
         "new": "ts-node ./tools/new-rule.ts",
         "predocs:watch": "npm run build:ts",
