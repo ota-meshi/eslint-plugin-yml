@@ -187,7 +187,7 @@ function exists(f: string) {
     try {
         fs.statSync(f)
         return true
-    } catch (error) {
+    } catch (error: any) {
         if (error.code === "ENOENT") {
             return false
         }
@@ -408,7 +408,7 @@ function getConfig(ruleName: string, inputFile: string) {
             : code0.replace(/^<!--(.*?)-->/u, `<!--${filename}-->`)
         try {
             config = configStr ? JSON.parse(configStr[1]) : {}
-        } catch (e) {
+        } catch (e: any) {
             throw new Error(`${e.message} in @ ${inputFile}`)
         }
     }
