@@ -1,5 +1,5 @@
 # indent/invalid/yaml-test-suite-for-default/D83L-input.yaml
--       |16-
-                explicit indent and chomp
--       |-16
-                chomp and explicit indent
+- |2-
+  explicit indent and chomp
+- |-2
+  chomp and explicit indent
