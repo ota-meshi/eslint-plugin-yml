@@ -67,7 +67,6 @@
         "@types/semver": "^7.3.1",
         "@typescript-eslint/eslint-plugin": "^5.0.0",
         "@typescript-eslint/parser": "^5.0.0",
-        "babel-eslint": "^10.1.0",
         "cross-env": "^7.0.2",
         "env-cmd": "^10.1.0",
         "eslint": "^8.0.0",
