@@ -6,6 +6,9 @@
     "files": [
         "lib"
     ],
+    "engines": {
+        "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+    },
     "scripts": {
         "prebuild": "npm run -s clean",
         "build": "npm run build:ts",
@@ -45,10 +48,10 @@
     },
     "homepage": "https://ota-meshi.github.io/eslint-plugin-yml/",
     "dependencies": {
-        "debug": "^4.1.1",
-        "lodash": "^4.17.19",
+        "debug": "^4.3.2",
+        "lodash": "^4.17.21",
         "natural-compare": "^1.4.0",
-        "yaml-eslint-parser": "^0.4.0"
+        "yaml-eslint-parser": "^0.5.0"
     },
     "peerDependencies": {
         "eslint": ">=6.0.0"
@@ -77,6 +80,7 @@
         "eslint-plugin-jsonc": "^2.0.0",
         "eslint-plugin-markdown": "^2.0.0-0",
         "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-node-dependencies": "^0.6.0",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-regexp": "^1.0.0",
         "eslint-plugin-vue": "^8.0.0",
