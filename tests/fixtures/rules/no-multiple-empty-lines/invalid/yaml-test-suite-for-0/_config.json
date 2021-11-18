@@ -1,0 +1,12 @@
+{
+    "options": [
+        {
+            "max": 0
+        }
+    ],
+    "settings": {
+        "yml": {
+            "indent": 8
+        }
+    }
+}

@@ -1,0 +1,5 @@
+# no-multiple-empty-lines/invalid/yaml-test-suite-for-0/K858-input.yaml
+strip: >-
+clip: >
+keep: |+
+

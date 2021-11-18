@@ -1,0 +1,7 @@
+# no-multiple-empty-lines/invalid/yaml-test-suite-for-0/M29M-input.yaml
+a: |
+ ab
+ 
+ cd
+ ef
+...

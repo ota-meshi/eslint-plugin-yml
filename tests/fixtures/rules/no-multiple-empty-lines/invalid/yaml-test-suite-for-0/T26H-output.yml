@@ -1,0 +1,9 @@
+# no-multiple-empty-lines/invalid/yaml-test-suite-for-0/T26H-input.yaml
+--- |
+ 
+  
+  literal
+   
+  
+  text
+ # Comment

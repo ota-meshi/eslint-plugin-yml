@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Too many blank lines at the end of file. Max of 1 allowed.",
+        "line": 6,
+        "column": 1
+    }
+]

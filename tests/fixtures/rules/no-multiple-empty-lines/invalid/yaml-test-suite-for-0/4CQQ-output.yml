@@ -1,0 +1,6 @@
+# no-multiple-empty-lines/invalid/yaml-test-suite-for-0/4CQQ-input.yaml
+plain:
+  This unquoted scalar
+  spans many lines.
+quoted: "So does this
+  quoted scalar.\n"
