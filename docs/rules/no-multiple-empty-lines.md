@@ -3,12 +3,12 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/no-multiple-empty-lines"
 description: "disallow multiple empty lines"
+since: "v0.12.0"
 ---
 # yml/no-multiple-empty-lines
 
 > disallow multiple empty lines
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -62,6 +62,10 @@ Same as [no-multiple-empty-lines] rule option. See [here](https://eslint.org/doc
 - [no-multiple-empty-lines]
 
 [no-multiple-empty-lines]: https://eslint.org/docs/rules/no-multiple-empty-lines
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.12.0
 
 ## :mag: Implementation
 
