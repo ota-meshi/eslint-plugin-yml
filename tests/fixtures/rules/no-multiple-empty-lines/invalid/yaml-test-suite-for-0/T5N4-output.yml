@@ -1,0 +1,4 @@
+# no-multiple-empty-lines/invalid/yaml-test-suite-for-0/T5N4-input.yaml
+--- |
+ literal
+ 	text

@@ -1,0 +1,16 @@
+# no-multiple-empty-lines/invalid/yaml-test-suite-for-0/F8F9-input.yaml
+ # Strip
+  # Comments:
+strip: |-
+  # text
+ # Clip
+  # comments:
+clip: |
+  # text
+ # Keep
+  # comments:
+keep: |+
+  # text
+
+ # Trail
+  # comments.

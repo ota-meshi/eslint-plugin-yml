@@ -190,3 +190,14 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "no-multiple-empty-lines",
+    {
+        default: [],
+        0: [{ max: 0 }],
+        1: [{ max: 1 }],
+        3: [{ max: 3 }],
+    },
+    { force: true },
+)

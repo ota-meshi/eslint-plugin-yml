@@ -39,5 +39,6 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/flow-sequence-bracket-spacing](./flow-sequence-bracket-spacing.md) | enforce consistent spacing inside flow sequence brackets | :wrench: |  | :star: |
 | [yml/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
 | [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: | :star: |
+| [yml/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines | :wrench: |  |  |
 | [yml/sort-keys](./sort-keys.md) | require mapping keys to be sorted | :wrench: |  |  |
 | [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: |  | :star: |

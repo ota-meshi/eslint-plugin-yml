@@ -15,6 +15,7 @@ import noEmptyKey from "../rules/no-empty-key"
 import noEmptyMappingValue from "../rules/no-empty-mapping-value"
 import noEmptySequenceEntry from "../rules/no-empty-sequence-entry"
 import noIrregularWhitespace from "../rules/no-irregular-whitespace"
+import noMultipleEmptyLines from "../rules/no-multiple-empty-lines"
 import noTabIndent from "../rules/no-tab-indent"
 import plainScalar from "../rules/plain-scalar"
 import quotes from "../rules/quotes"
@@ -40,6 +41,7 @@ export const rules = [
     noEmptyMappingValue,
     noEmptySequenceEntry,
     noIrregularWhitespace,
+    noMultipleEmptyLines,
     noTabIndent,
     plainScalar,
     quotes,

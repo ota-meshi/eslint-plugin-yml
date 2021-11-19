@@ -188,6 +188,7 @@ The rules with the following star :star: are included in the config.
 | [yml/flow-sequence-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-spacing.html) | enforce consistent spacing inside flow sequence brackets | :wrench: |  | :star: |
 | [yml/key-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-spacing.html) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
 | [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: | :star: |
+| [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: |  |  |
 | [yml/sort-keys](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-keys.html) | require mapping keys to be sorted | :wrench: |  |  |
 | [yml/spaced-comment](https://ota-meshi.github.io/eslint-plugin-yml/rules/spaced-comment.html) | enforce consistent spacing after the `#` in a comment | :wrench: |  | :star: |
 

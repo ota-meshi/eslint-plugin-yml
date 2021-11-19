@@ -13,6 +13,7 @@ export = {
         "yml/flow-sequence-bracket-spacing": "off",
         "yml/indent": "off",
         "yml/key-spacing": "off",
+        "yml/no-multiple-empty-lines": "off",
         "yml/quotes": "off",
     },
 }

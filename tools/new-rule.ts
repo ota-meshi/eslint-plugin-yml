@@ -107,7 +107,7 @@ This rule reports ???.
 # eslint yml/${ruleId}: 'error'
 
 # ✓ GOOD
-"GOOD": "foo",
+"GOOD": "foo"
 
 # ✗ BAD
 "BAD": "bar"

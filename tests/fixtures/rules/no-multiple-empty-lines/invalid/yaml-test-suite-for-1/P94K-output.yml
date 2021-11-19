@@ -1,0 +1,5 @@
+# no-multiple-empty-lines/invalid/yaml-test-suite-for-1/P94K-input.yaml
+key:    # Comment
+        # lines
+  value
+

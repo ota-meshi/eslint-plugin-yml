@@ -1,0 +1,12 @@
+[
+    {
+        "message": "More than 1 blank line not allowed.",
+        "line": 7,
+        "column": 1
+    },
+    {
+        "message": "More than 1 blank line not allowed.",
+        "line": 10,
+        "column": 1
+    }
+]
