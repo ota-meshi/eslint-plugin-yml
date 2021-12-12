@@ -1,7 +1,8 @@
 module.exports = {
-    extends: ["stylelint-config-recommended-vue", "stylelint-config-standard"],
+    extends: ["stylelint-config-standard", "stylelint-config-recommended-vue"],
     rules: {
         "no-descending-specificity": null,
         indentation: null,
+        "selector-class-pattern": null,
     },
 }

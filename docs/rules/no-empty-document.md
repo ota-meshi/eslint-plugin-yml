@@ -23,7 +23,7 @@ This rule reports empty mapping documents.
 # eslint yml/no-empty-document: 'error'
 ---
 # ✓ GOOD
-"GOOD": "foo",
+"GOOD": "foo"
 ...
 ---
 # ✗ BAD

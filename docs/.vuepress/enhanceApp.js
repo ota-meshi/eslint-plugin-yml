@@ -1,4 +1,4 @@
-/* eslint node/no-unsupported-features/es-syntax: off -- not node */
+// eslint-disable-next-line node/no-unsupported-features/es-syntax -- DEMO
 export default () =>
     // {
     //     Vue, // the version of Vue being used in the VuePress app
@@ -10,6 +10,12 @@ export default () =>
         if (typeof window !== "undefined") {
             if (typeof window.global === "undefined") {
                 window.global = {}
+            }
+            if (typeof window.process === "undefined") {
+                window.process = {
+                    env: {},
+                    cwd: () => undefined,
+                }
             }
         }
     }

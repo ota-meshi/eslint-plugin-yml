@@ -21,7 +21,15 @@ module.exports = {
             resolve: {
                 alias: {
                     module: require.resolve("./shim/module"),
-                    eslint: path.resolve(__dirname, "./shim/eslint"),
+                    eslint$: path.resolve(__dirname, "./shim/eslint"),
+                    esquery: path.resolve(
+                        __dirname,
+                        "../../node_modules/esquery/dist/esquery.min.js",
+                    ),
+                    "@eslint/eslintrc/universal": path.resolve(
+                        __dirname,
+                        "../../node_modules/@eslint/eslintrc/dist/eslintrc-universal.cjs",
+                    ),
                 },
             },
         }
@@ -63,18 +71,24 @@ module.exports = {
                         )
                         .map(ruleToLink),
                 },
-                {
-                    title: "Extension Rules",
-                    collapsable: false,
-                    children: rules
-                        .filter(
-                            (rule) =>
-                                rule.meta.docs.extensionRule &&
-                                !rule.meta.deprecated,
-                        )
-                        .map(ruleToLink),
-                },
-
+                ...(rules.some(
+                    (rule) =>
+                        rule.meta.docs.extensionRule && !rule.meta.deprecated,
+                )
+                    ? [
+                          {
+                              title: "Extension Rules",
+                              collapsable: false,
+                              children: rules
+                                  .filter(
+                                      (rule) =>
+                                          rule.meta.docs.extensionRule &&
+                                          !rule.meta.deprecated,
+                                  )
+                                  .map(ruleToLink),
+                          },
+                      ]
+                    : []),
                 // Rules in no category.
                 ...(rules.some((rule) => rule.meta.deprecated)
                     ? [

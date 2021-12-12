@@ -17,6 +17,7 @@
 
 <script>
 import EslintEditor from "vue-eslint-editor"
+import { Linter } from "eslint/lib/linter"
 import plugin from "../../../.."
 
 export default {
@@ -58,7 +59,6 @@ export default {
 
     data() {
         return {
-            eslint4b: null,
             yamlESLintParser: null,
             vueESLintParser: null,
             format: {
@@ -100,20 +100,14 @@ export default {
                 parser: this.parser,
                 parserOptions: {
                     sourceType: "script",
-                    ecmaVersion: 2020,
+                    ecmaVersion: 2021,
                 },
             }
         },
         linter() {
-            if (
-                !this.eslint4b ||
-                !this.yamlESLintParser ||
-                !this.vueESLintParser
-            ) {
+            if (!this.yamlESLintParser || !this.vueESLintParser) {
                 return null
             }
-            const Linter = this.eslint4b
-
             const linter = new Linter()
             linter.defineParser("yaml-eslint-parser", this.yamlESLintParser)
             linter.defineParser("vue-eslint-parser", this.vueESLintParser)
@@ -128,14 +122,11 @@ export default {
     },
 
     async mounted() {
-        // Load linter asynchronously.
-        const [{ default: eslint4b }, yamlESLintParser, vueESLintParser] =
-            await Promise.all([
-                import("eslint4b"),
-                import("yaml-eslint-parser"),
-                import("espree").then(() => import("vue-eslint-parser")),
-            ])
-        this.eslint4b = eslint4b
+        // Load parser asynchronously.
+        const [yamlESLintParser, vueESLintParser] = await Promise.all([
+            import("yaml-eslint-parser"),
+            import("espree").then(() => import("vue-eslint-parser")),
+        ])
         this.yamlESLintParser = yamlESLintParser
         this.vueESLintParser = vueESLintParser
 
