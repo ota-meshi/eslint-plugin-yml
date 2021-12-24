@@ -42,6 +42,7 @@
         "yml"
     ],
     "author": "Yosuke Ota",
+    "funding": "https://github.com/sponsors/ota-meshi",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/ota-meshi/eslint-plugin-yml/issues"
