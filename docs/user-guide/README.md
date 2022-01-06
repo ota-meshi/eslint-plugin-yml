@@ -100,6 +100,18 @@ Example **.vscode/settings.json**:
 }
 ```
 
+### JetBrains WebStorm IDEs
+
+In any of the JetBrains IDEs you can [configure the linting scope](https://www.jetbrains.com/help/webstorm/eslint.html#ws_eslint_configure_scope).
+Following the steps in their help document, you can add YAML files to the scope like so:
+
+1. Open the **Settings/Preferences** dialog, go to **Languages and Frameworks** | **JavaScript** | **Code Quality Tools** | **ESLint**, and select **Automatic ESLint configuration** or **Manual ESLint configuration**.
+2. In the **Run for files** field, update the pattern that defines the set of files to be linted to include YAML files as well:
+```
+{**/*,*}.{js,ts,jsx,tsx,html,vue,yaml,yml}
+                                 ^^^^ ^^^
+```
+
 <!--USAGE_GUIDE_END-->
 
 ## :question: FAQ
