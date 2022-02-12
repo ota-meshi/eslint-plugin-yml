@@ -35,11 +35,9 @@ module.exports = {
         }
     },
 
-    head: [
-        // ["link", { rel: "icon", type: "image/png", href: "/logo.png" }]
-    ],
+    head: [["link", { rel: "icon", type: "image/svg", href: "/logo.svg" }]],
     themeConfig: {
-        // logo: "/logo.svg",
+        logo: "/logo.svg",
         repo: "ota-meshi/eslint-plugin-yml",
         docsRepo: "ota-meshi/eslint-plugin-yml",
         docsDir: "docs",
