@@ -42,13 +42,12 @@ type OrderObject = {
     natural?: boolean
 }
 type ParsedOption = {
-    isTargetMapping: (node: AST.YAMLMapping) => boolean
-    ignore: (s: string) => boolean
+    isTargetMapping: (node: YAMLMappingData) => boolean
+    ignore: (data: YAMLPairData) => boolean
     isValidOrder: Validator
-    minKeys: number
     orderText: string
 }
-type Validator = (a: string, b: string) => boolean
+type Validator = (a: YAMLPairData, b: YAMLPairData) => boolean
 
 /**
  * Checks whether the given string is new line.
@@ -75,6 +74,85 @@ function getPropertyName(node: AST.YAMLPair, sourceCode: SourceCode): string {
         return target.value
     }
     return sourceCode.text.slice(...target.range)
+}
+
+class YAMLPairData {
+    public readonly mapping: YAMLMappingData
+
+    public readonly node: AST.YAMLPair
+
+    public readonly index: number
+
+    public readonly anchorAlias: {
+        anchors: Set<string>
+        aliases: Set<string>
+    }
+
+    private cachedName: string | null = null
+
+    public get reportLoc() {
+        return this.node.key?.loc ?? this.node.loc
+    }
+
+    public constructor(
+        mapping: YAMLMappingData,
+        node: AST.YAMLPair,
+        index: number,
+        anchorAlias: {
+            anchors: Set<string>
+            aliases: Set<string>
+        },
+    ) {
+        this.mapping = mapping
+        this.node = node
+        this.index = index
+        this.anchorAlias = anchorAlias
+    }
+
+    public get name() {
+        return (this.cachedName ??= getPropertyName(
+            this.node,
+            this.mapping.sourceCode,
+        ))
+    }
+}
+class YAMLMappingData {
+    public readonly node: AST.YAMLMapping
+
+    public readonly sourceCode: SourceCode
+
+    private readonly anchorAliasMap: Map<
+        AST.YAMLPair,
+        {
+            anchors: Set<string>
+            aliases: Set<string>
+        }
+    >
+
+    private cachedProperties: YAMLPairData[] | null = null
+
+    public constructor(
+        node: AST.YAMLMapping,
+        sourceCode: SourceCode,
+        anchorAliasMap: Map<
+            AST.YAMLPair,
+            {
+                anchors: Set<string>
+                aliases: Set<string>
+            }
+        >,
+    ) {
+        this.node = node
+        this.sourceCode = sourceCode
+        this.anchorAliasMap = anchorAliasMap
+    }
+
+    public get pairs() {
+        return (this.cachedProperties ??= this.node.pairs.map(
+            (e, index) =>
+                new YAMLPairData(this, e, index, this.anchorAliasMap.get(e)!),
+        ))
+    }
 }
 
 /**
@@ -113,7 +191,7 @@ function buildValidatorFromType(
         const baseCompare = compare
         compare = (args: string[]) => baseCompare(args.reverse())
     }
-    return (a: string, b: string) => compare([a, b])
+    return (a: YAMLPairData, b: YAMLPairData) => compare([a.name, b.name])
 }
 
 /**
@@ -131,14 +209,13 @@ function parseOptions(
         const minKeys: number = obj.minKeys ?? 2
         return [
             {
-                isTargetMapping: () => true, // all
+                isTargetMapping: (data) => data.node.pairs.length >= minKeys,
                 ignore: () => false,
                 isValidOrder: buildValidatorFromType(
                     type,
                     insensitive,
                     natural,
                 ),
-                minKeys,
                 orderText: `${natural ? "natural " : ""}${
                     insensitive ? "insensitive " : ""
                 }${type}ending`,
@@ -164,21 +241,19 @@ function parseOptions(
                     insensitive,
                     natural,
                 ),
-                minKeys,
                 orderText: `${natural ? "natural " : ""}${
                     insensitive ? "insensitive " : ""
                 }${type}ending`,
             }
         }
-
         const parsedOrder: {
-            test: (s: string) => boolean
+            test: (data: YAMLPairData) => boolean
             isValidNestOrder: Validator
         }[] = []
         for (const o of order) {
             if (typeof o === "string") {
                 parsedOrder.push({
-                    test: (s) => s === o,
+                    test: (data) => data.name === o,
                     isValidNestOrder: () => true,
                 })
             } else {
@@ -190,7 +265,8 @@ function parseOptions(
                 const insensitive = nestOrder.caseSensitive === false
                 const natural = Boolean(nestOrder.natural)
                 parsedOrder.push({
-                    test: (s) => (keyPattern ? keyPattern.test(s) : true),
+                    test: (data) =>
+                        keyPattern ? keyPattern.test(data.name) : true,
                     isValidNestOrder: buildValidatorFromType(
                         type,
                         insensitive,
@@ -201,7 +277,7 @@ function parseOptions(
         }
         return {
             isTargetMapping,
-            ignore: (s) => parsedOrder.every((p) => !p.test(s)),
+            ignore: (data) => parsedOrder.every((p) => !p.test(data)),
             isValidOrder(a, b) {
                 for (const p of parsedOrder) {
                     const matchA = p.test(a)
@@ -219,25 +295,25 @@ function parseOptions(
                 }
                 return false
             },
-            minKeys,
             orderText: "specified",
         }
 
         /**
          * Checks whether given node is verify target
          */
-        function isTargetMapping(node: AST.YAMLMapping) {
+        function isTargetMapping(data: YAMLMappingData) {
+            if (data.node.pairs.length < minKeys) {
+                return false
+            }
             if (hasProperties.length > 0) {
-                const names = new Set(
-                    node.pairs.map((p) => getPropertyName(p, sourceCode)),
-                )
+                const names = new Set(data.pairs.map((p) => p.name))
                 if (!hasProperties.every((name) => names.has(name))) {
                     return false
                 }
             }
 
             let path = ""
-            let curr: AST.YAMLNode = node
+            let curr: AST.YAMLNode = data.node
             let p: AST.YAMLNode | null = curr.parent
             while (p) {
                 if (p.type === "YAMLPair") {
@@ -288,11 +364,10 @@ export default createRule("sort-keys", {
         docs: {
             description: "require mapping keys to be sorted",
             categories: null,
-            extensionRule: "sort-keys",
+            extensionRule: false,
             layout: false,
         },
         fixable: "code",
-
         schema: {
             oneOf: [
                 {
@@ -367,6 +442,7 @@ export default createRule("sort-keys", {
                 },
             ],
         },
+
         messages: {
             sortKeys:
                 "Expected mapping keys to be in {{orderText}} order. '{{thisName}}' should be before '{{prevName}}'.",
@@ -374,30 +450,98 @@ export default createRule("sort-keys", {
         type: "suggestion",
     },
     create(context) {
-        const sourceCode = context.getSourceCode()
         if (!context.parserServices.isYAML) {
             return {}
         }
+        const sourceCode = context.getSourceCode()
+
         // Parse options.
         const parsedOptions = parseOptions(context.options, sourceCode)
 
-        type PairData = {
-            name: string
-            node: AST.YAMLPair
-            anchors: Set<string>
-            aliases: Set<string>
+        /**
+         * Check order
+         */
+        function isValidOrder(
+            prevData: YAMLPairData,
+            thisData: YAMLPairData,
+            option: ParsedOption,
+        ) {
+            if (option.isValidOrder(prevData, thisData)) {
+                return true
+            }
+
+            for (const aliasName of thisData.anchorAlias.aliases) {
+                if (prevData.anchorAlias.anchors.has(aliasName)) {
+                    // The current order is correct for handling anchors.
+                    return true
+                }
+            }
+            for (const anchorName of thisData.anchorAlias.anchors) {
+                if (prevData.anchorAlias.aliases.has(anchorName)) {
+                    // The current order is correct for handling anchors.
+                    return true
+                }
+            }
+            return false
         }
-        type MappingStack = {
-            upper: MappingStack | null
-            prevList: PairData[]
-            numKeys: number
-            option: ParsedOption | null
+
+        /**
+         * Check ignore
+         */
+        function ignore(data: YAMLPairData, option: ParsedOption) {
+            if (!data.node.key && !data.node.value) {
+                // ignore
+                return true
+            }
+            return option.ignore(data)
         }
-        let mappingStack: MappingStack = {
-            upper: null,
-            prevList: [],
-            numKeys: 0,
-            option: null,
+
+        /**
+         * Verify for pair
+         */
+        function verifyPair(data: YAMLPairData, option: ParsedOption) {
+            if (ignore(data, option)) {
+                return
+            }
+            const prevList = data.mapping.pairs
+                .slice(0, data.index)
+                .reverse()
+                .filter((d) => !ignore(d, option))
+
+            if (prevList.length === 0) {
+                return
+            }
+            const prev = prevList[0]
+            if (!isValidOrder(prev, data, option)) {
+                context.report({
+                    loc: data.reportLoc,
+                    messageId: "sortKeys",
+                    data: {
+                        thisName: data.name,
+                        prevName: prev.name,
+                        orderText: option.orderText,
+                    },
+                    *fix(fixer) {
+                        let moveTarget = prevList[0]
+                        for (const prev of prevList) {
+                            if (isValidOrder(prev, data, option)) {
+                                break
+                            } else {
+                                moveTarget = prev
+                            }
+                        }
+                        if (data.node.parent.style === "flow") {
+                            yield* fixForFlow(fixer, data.node, moveTarget.node)
+                        } else {
+                            yield* fixForBlock(
+                                fixer,
+                                data.node,
+                                moveTarget.node,
+                            )
+                        }
+                    },
+                })
+            }
         }
 
         type PairStack = {
@@ -410,49 +554,15 @@ export default createRule("sort-keys", {
             anchors: new Set<string>(),
             aliases: new Set<string>(),
         }
-
-        /**
-         * Check order
-         */
-        function isValidOrder(
-            prevData: PairData,
-            thisData: PairData,
-            option: ParsedOption,
-        ) {
-            if (option.isValidOrder(prevData.name, thisData.name)) {
-                return true
+        const anchorAliasMap = new Map<
+            AST.YAMLPair,
+            {
+                anchors: Set<string>
+                aliases: Set<string>
             }
-
-            for (const aliasName of thisData.aliases) {
-                if (prevData.anchors.has(aliasName)) {
-                    // The current order is correct for handling anchors.
-                    return true
-                }
-            }
-            for (const anchorName of thisData.anchors) {
-                if (prevData.aliases.has(anchorName)) {
-                    // The current order is correct for handling anchors.
-                    return true
-                }
-            }
-            return false
-        }
+        >()
 
         return {
-            YAMLMapping(node: AST.YAMLMapping) {
-                mappingStack = {
-                    upper: mappingStack,
-                    prevList: [],
-                    numKeys: node.pairs.length,
-                    option:
-                        parsedOptions.find((o) => o.isTargetMapping(node)) ||
-                        null,
-                }
-            },
-
-            "YAMLMapping:exit"() {
-                mappingStack = mappingStack.upper!
-            },
             YAMLPair() {
                 pairStack = {
                     upper: pairStack,
@@ -471,62 +581,26 @@ export default createRule("sort-keys", {
                 }
             },
             "YAMLPair:exit"(node: AST.YAMLPair) {
+                anchorAliasMap.set(node, pairStack)
                 const { anchors, aliases } = pairStack
                 pairStack = pairStack.upper!
                 pairStack.anchors = new Set([...pairStack.anchors, ...anchors])
                 pairStack.aliases = new Set([...pairStack.aliases, ...aliases])
-                if (!node.key && !node.value) {
-                    // ignore
-                    return
-                }
-                const option = mappingStack.option
+            },
+            "YAMLMapping:exit"(node: AST.YAMLMapping) {
+                const data = new YAMLMappingData(
+                    node,
+                    sourceCode,
+                    anchorAliasMap,
+                )
+                const option = parsedOptions.find((o) =>
+                    o.isTargetMapping(data),
+                )
                 if (!option) {
                     return
                 }
-                const thisName = getPropertyName(node, sourceCode)
-                if (option.ignore(thisName)) {
-                    return
-                }
-                const prevList = mappingStack.prevList
-                const numKeys = mappingStack.numKeys
-                const thisData = {
-                    name: thisName,
-                    node,
-                    anchors,
-                    aliases,
-                }
-
-                mappingStack.prevList = [thisData, ...prevList]
-                if (prevList.length === 0 || numKeys < option.minKeys) {
-                    return
-                }
-
-                if (!isValidOrder(prevList[0], thisData, option)) {
-                    context.report({
-                        loc: node.key?.loc ?? node.loc,
-                        messageId: "sortKeys",
-                        data: {
-                            thisName,
-                            prevName: prevList[0].name,
-                            orderText: option.orderText,
-                        },
-                        *fix(fixer) {
-                            let moveTarget = prevList[0].node
-                            for (const prev of prevList) {
-                                if (isValidOrder(prev, thisData, option)) {
-                                    break
-                                } else {
-                                    moveTarget = prev.node
-                                }
-                            }
-
-                            if (node.parent.style === "flow") {
-                                yield* fixForFlow(fixer, node, moveTarget)
-                            } else {
-                                yield* fixForBlock(fixer, node, moveTarget)
-                            }
-                        },
-                    })
+                for (const pair of data.pairs) {
+                    verifyPair(pair, option)
                 }
             },
         }

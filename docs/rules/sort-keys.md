@@ -110,5 +110,3 @@ This rule was introduced in eslint-plugin-yml v0.3.0
 - [Rule source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/src/rules/sort-keys.ts)
 - [Test source](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/tests/src/rules/sort-keys.ts)
 - [Test fixture sources](https://github.com/ota-meshi/eslint-plugin-yml/tree/master/tests/fixtures/rules/sort-keys)
-
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/sort-keys)</sup>

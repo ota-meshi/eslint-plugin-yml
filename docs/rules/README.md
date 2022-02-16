@@ -27,6 +27,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/plain-scalar](./plain-scalar.md) | require or disallow plain style scalar. | :wrench: |  | :star: |
 | [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: |  | :star: |
 | [yml/require-string-key](./require-string-key.md) | disallow mapping keys other than strings |  |  |  |
+| [yml/sort-keys](./sort-keys.md) | require mapping keys to be sorted | :wrench: |  |  |
 | [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: | :star: |
 
 ## Extension Rules
@@ -40,5 +41,4 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
 | [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: | :star: |
 | [yml/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines | :wrench: |  |  |
-| [yml/sort-keys](./sort-keys.md) | require mapping keys to be sorted | :wrench: |  |  |
 | [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: |  | :star: |
