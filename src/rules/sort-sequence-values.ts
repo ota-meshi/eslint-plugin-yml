@@ -174,8 +174,10 @@ function buildValidatorFromType(
     type Compare<T> = ([a, b]: T[]) => boolean
 
     // eslint-disable-next-line func-style -- ignore
-    let compareValue: Compare</* eslint-disable-next-line @typescript-eslint/no-explicit-any -- ignore */
-    any> = ([a, b]) => a <= b
+    let compareValue: Compare<
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any -- ignore */
+        any
+    > = ([a, b]) => a <= b
     let compareText: Compare<string> = compareValue
 
     if (natural) {
