@@ -3,13 +3,12 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/sort-sequence-values"
 description: "require sequence values to be sorted"
+since: "v0.14.0"
 ---
-
 # yml/sort-sequence-values
 
 > require sequence values to be sorted
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -81,6 +80,10 @@ The option receives multiple objects with the following properties:
 - [yml/sort-keys]
 
 [yml/sort-keys]: ./sort-keys.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v0.14.0
 
 ## :mag: Implementation
 
