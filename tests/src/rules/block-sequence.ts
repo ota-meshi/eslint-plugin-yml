@@ -9,8 +9,4 @@ const tester = new RuleTester({
     },
 })
 
-tester.run(
-    "block-sequence",
-    rule as any,
-    loadTestCases("block-sequence", { fixable: true }),
-)
+tester.run("block-sequence", rule as any, loadTestCases("block-sequence"))
