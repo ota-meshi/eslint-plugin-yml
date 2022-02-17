@@ -1,0 +1,9 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/7BUB-input.yaml
+---
+hr:
+  - Mark McGwire
+  # Following node labeled SS
+  - &SS Sammy Sosa
+rbi:
+  - Ken Griffey
+  - *SS # Subsequent occurrence

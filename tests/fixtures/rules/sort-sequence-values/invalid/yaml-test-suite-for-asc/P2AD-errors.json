@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Expected sequence values to be in ascending order. ' folded\n' should be before 'literal\n'.",
+        "line": 4,
+        "column": 3
+    },
+    {
+        "message": "Expected sequence values to be in ascending order. ' strip' should be before 'keep\n\n'.",
+        "line": 9,
+        "column": 3
+    }
+]

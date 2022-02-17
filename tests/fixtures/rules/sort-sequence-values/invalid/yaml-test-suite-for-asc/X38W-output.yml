@@ -1,0 +1,2 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/X38W-input.yaml
+{ &a [a, &b b]: *b, *a : [ *b,c, d]}

@@ -1,0 +1,4 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/8QBE-input.yaml
+key:
+ - item2
+ - item1

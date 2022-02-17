@@ -1,0 +1,6 @@
+- 'b'
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/LE5A-input.yaml
+- !!str "a"
+- &anchor "c"
+- *anchor
+- !!str

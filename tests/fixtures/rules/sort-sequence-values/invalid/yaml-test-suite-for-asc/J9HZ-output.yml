@@ -1,0 +1,9 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/J9HZ-input.yaml
+---
+hr: # 1998 hr ranking
+  - Mark McGwire
+  - Sammy Sosa
+rbi:
+  - Ken Griffey
+  # 1998 rbi ranking
+  - Sammy Sosa

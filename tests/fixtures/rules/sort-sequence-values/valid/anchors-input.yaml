@@ -1,0 +1,5 @@
+# {"options": [{"pathPattern": ".*", "order": { "type": "asc" } }]}
+- &anchor B
+- *anchor
+- &anchor A
+- *anchor

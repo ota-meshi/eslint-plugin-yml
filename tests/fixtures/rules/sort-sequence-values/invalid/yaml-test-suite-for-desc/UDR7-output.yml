@@ -1,0 +1,3 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/UDR7-input.yaml
+sequence: [ two, one, ]
+mapping: { sky: blue, sea: green }

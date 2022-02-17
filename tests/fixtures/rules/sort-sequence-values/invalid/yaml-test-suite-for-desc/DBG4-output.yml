@@ -1,0 +1,13 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/DBG4-input.yaml
+- Up, up, and away!
+# Outside flow collection:
+- ::vector
+- ": - ()"
+- -123
+- http://example.com/foo#bar
+# Inside flow collection:
+- [
+  "Up, up and away!", ::vector,
+  ": - ()",
+  -123,
+  http://example.com/foo#bar ]

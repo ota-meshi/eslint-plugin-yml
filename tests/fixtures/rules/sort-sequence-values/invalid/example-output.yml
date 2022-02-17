@@ -1,0 +1,13 @@
+# sort-sequence-values/invalid/example-input.yml
+
+# ✓ GOOD
+good:
+  - a
+  - b
+  - c
+
+# ✗ BAD
+bad:
+  - a
+  - b
+  - c

@@ -1,0 +1,13 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/6HB6-input.yaml
+  # Leading comment line spaces are
+   # neither content nor indentation.
+    
+Not indented:
+ By one space: |
+    By four
+      spaces
+ Flow style: [    # are neither
+  	Still by two,    # Leading spaces
+   By two,        # in flow style
+  Also by two   # content nor
+    ]             # indentation.

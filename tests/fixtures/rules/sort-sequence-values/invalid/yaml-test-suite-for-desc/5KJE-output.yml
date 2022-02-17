@@ -1,0 +1,3 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/5KJE-input.yaml
+- [ two, one, ]
+- [three ,four]

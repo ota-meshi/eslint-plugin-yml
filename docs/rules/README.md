@@ -28,6 +28,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: |  | :star: |
 | [yml/require-string-key](./require-string-key.md) | disallow mapping keys other than strings |  |  |  |
 | [yml/sort-keys](./sort-keys.md) | require mapping keys to be sorted | :wrench: |  |  |
+| [yml/sort-sequence-values](./sort-sequence-values.md) | require sequence values to be sorted | :wrench: |  |  |
 | [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: | :star: |
 
 ## Extension Rules

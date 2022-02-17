@@ -1,0 +1,7 @@
+- >
+ Block scalar
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/735Y-input.yaml
+-
+  "flow in block"
+- !!map # Block collection
+  foo : bar

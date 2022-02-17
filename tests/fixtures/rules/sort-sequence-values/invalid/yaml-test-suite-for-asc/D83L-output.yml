@@ -1,0 +1,5 @@
+- |-2
+  chomp and explicit indent
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/D83L-input.yaml
+- |2-
+  explicit indent and chomp

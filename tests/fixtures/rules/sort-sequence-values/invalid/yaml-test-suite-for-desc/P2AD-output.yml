@@ -1,0 +1,10 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/P2AD-input.yaml
+- | # Empty header↓
+ literal
+- |+ # Chomping indicator↓
+ keep
+
+- >1 # Indentation indicator↓
+  folded
+- >1- # Both indicators↓
+  strip

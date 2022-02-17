@@ -1,0 +1,5 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/F2C7-input.yaml
+ - &a !!str a
+ - !!int &c 4
+ - !!int 2
+ - &d d

@@ -1,0 +1,6 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/5WE3-input.yaml
+? explicit key # Empty value
+? |
+  block key
+: - two # block value
+  - one # Explicit compact

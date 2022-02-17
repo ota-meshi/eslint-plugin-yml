@@ -1,0 +1,5 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/AZ63-input.yaml
+1:
+- 3
+- 2
+4: 5

@@ -1,0 +1,6 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/Q88A-input.yaml
+- [ b, a ]
+- { a: b }
+- 'b'
+- "a"
+- c

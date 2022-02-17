@@ -1,0 +1,13 @@
+# {"options": [{"pathPattern": ".*", "order": { "type": "asc" } }]}
+
+# ✓ GOOD
+good:
+  - a
+  - b
+  - c
+
+# ✗ BAD
+bad:
+  - a
+  - b
+  - c

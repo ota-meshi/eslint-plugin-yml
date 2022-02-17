@@ -1,0 +1,3 @@
+# {"options": [{"pathPattern": ".*", "order": { "type": "asc", "caseSensitive": false } }]}
+
+["a", "A", "B" , "b", "c", "C"]

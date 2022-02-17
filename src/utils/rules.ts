@@ -21,6 +21,7 @@ import plainScalar from "../rules/plain-scalar"
 import quotes from "../rules/quotes"
 import requireStringKey from "../rules/require-string-key"
 import sortKeys from "../rules/sort-keys"
+import sortSequenceValues from "../rules/sort-sequence-values"
 import spacedComment from "../rules/spaced-comment"
 import vueCustomBlockNoParsingError from "../rules/vue-custom-block/no-parsing-error"
 
@@ -47,6 +48,7 @@ export const rules = [
     quotes,
     requireStringKey,
     sortKeys,
+    sortSequenceValues,
     spacedComment,
     vueCustomBlockNoParsingError,
 ] as RuleModule[]

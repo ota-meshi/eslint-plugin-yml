@@ -1,0 +1,4 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/3ALJ-input.yaml
+- - s1_i2
+  - s1_i1
+- s2

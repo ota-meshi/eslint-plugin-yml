@@ -1,0 +1,3 @@
+# sort-sequence-values/invalid/case-sensitive-false-input.yml
+
+["a", "A", "B" , "b", "c", "C"]

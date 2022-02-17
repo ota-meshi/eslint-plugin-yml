@@ -1,0 +1,5 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/EHF6-input.yaml
+!!map {
+  k: !!seq
+  [ !!str b, a]
+}

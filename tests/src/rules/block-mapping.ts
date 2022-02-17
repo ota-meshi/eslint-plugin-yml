@@ -9,8 +9,4 @@ const tester = new RuleTester({
     },
 })
 
-tester.run(
-    "block-mapping",
-    rule as any,
-    loadTestCases("block-mapping", { fixable: true }),
-)
+tester.run("block-mapping", rule as any, loadTestCases("block-mapping"))

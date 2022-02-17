@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Expected sequence values to be in ascending order. '\n\n# detected\n' should be before 'detected\n'.",
+        "line": 4,
+        "column": 3
+    },
+    {
+        "message": "Expected sequence values to be in ascending order. '\t\ndetected\n' should be before ' explicit\n'.",
+        "line": 10,
+        "column": 3
+    }
+]

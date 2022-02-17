@@ -530,14 +530,10 @@ export default createRule("sort-keys", {
                                 moveTarget = prev
                             }
                         }
-                        if (data.node.parent.style === "flow") {
-                            yield* fixForFlow(fixer, data.node, moveTarget.node)
+                        if (data.mapping.node.style === "flow") {
+                            yield* fixForFlow(fixer, data, moveTarget)
                         } else {
-                            yield* fixForBlock(
-                                fixer,
-                                data.node,
-                                moveTarget.node,
-                            )
+                            yield* fixForBlock(fixer, data, moveTarget)
                         }
                     },
                 })
@@ -610,16 +606,18 @@ export default createRule("sort-keys", {
          */
         function* fixForFlow(
             fixer: RuleFixer,
-            node: AST.YAMLPair,
-            moveTarget: AST.YAMLPair,
+            data: YAMLPairData,
+            moveTarget: YAMLPairData,
         ) {
-            const beforeCommaToken = sourceCode.getTokenBefore(node)!
+            const beforeCommaToken = sourceCode.getTokenBefore(data.node)!
             let insertCode: string,
                 removeRange: AST.Range,
                 insertTargetToken: AST.Token | AST.Comment
 
-            const afterCommaToken = sourceCode.getTokenAfter(node)
-            const moveTargetBeforeToken = sourceCode.getTokenBefore(moveTarget)!
+            const afterCommaToken = sourceCode.getTokenAfter(data.node)
+            const moveTargetBeforeToken = sourceCode.getTokenBefore(
+                moveTarget.node,
+            )!
             if (isComma(afterCommaToken)) {
                 // e.g. |/**/ key: value,|
                 removeRange = [
@@ -630,7 +628,7 @@ export default createRule("sort-keys", {
                 insertTargetToken = moveTargetBeforeToken
             } else {
                 // e.g. |,/**/ key: value|
-                removeRange = [beforeCommaToken.range[0], node.range[1]]
+                removeRange = [beforeCommaToken.range[0], data.node.range[1]]
                 if (isComma(moveTargetBeforeToken)) {
                     // { a: 1 , target : 2 , c : 3 }
                     //       ^ insert
@@ -643,7 +641,7 @@ export default createRule("sort-keys", {
                     //  ^ insert
                     insertCode = `${sourceCode.text.slice(
                         beforeCommaToken.range[1],
-                        node.range[1],
+                        data.node.range[1],
                     )},`
                     insertTargetToken = moveTargetBeforeToken
                 }
@@ -661,11 +659,11 @@ export default createRule("sort-keys", {
          */
         function* fixForBlock(
             fixer: RuleFixer,
-            node: AST.YAMLPair,
-            moveTarget: AST.YAMLPair,
+            data: YAMLPairData,
+            moveTarget: YAMLPairData,
         ) {
-            const nodeLocs = getPairRangeForBlock(node)
-            const moveTargetLocs = getPairRangeForBlock(moveTarget)
+            const nodeLocs = getPairRangeForBlock(data.node)
+            const moveTargetLocs = getPairRangeForBlock(moveTarget.node)
 
             if (moveTargetLocs.loc.start.column === 0) {
                 const removeRange: AST.Range = [

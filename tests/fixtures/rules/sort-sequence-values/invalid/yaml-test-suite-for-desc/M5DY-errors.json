@@ -1,0 +1,12 @@
+[
+    {
+        "message": "Expected sequence values to be in descending order. '2001-08-12' should be before '2001-07-02'.",
+        "line": 9,
+        "column": 17
+    },
+    {
+        "message": "Expected sequence values to be in descending order. '2001-08-14' should be before '2001-08-12'.",
+        "line": 10,
+        "column": 5
+    }
+]

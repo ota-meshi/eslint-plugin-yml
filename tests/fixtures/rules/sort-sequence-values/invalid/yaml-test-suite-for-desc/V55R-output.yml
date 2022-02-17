@@ -1,0 +1,5 @@
+- &b b
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/V55R-input.yaml
+- &a a
+- *b
+- *a

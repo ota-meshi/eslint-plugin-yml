@@ -1,0 +1,5 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/7TMG-input.yaml
+---
+[ word2, word1
+# comment
+]

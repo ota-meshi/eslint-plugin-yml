@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected sequence values to be in descending order. ' explicit\n' should be before '\n\n# detected\n'.",
+        "line": 8,
+        "column": 3
+    }
+]

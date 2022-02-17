@@ -1,0 +1,7 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/LP6E-input.yaml
+- [ b ,a, c ]
+- { "a"  : b
+   , c : 'd' ,
+   e   : "f"
+  }
+- [      ]
