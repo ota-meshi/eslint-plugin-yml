@@ -1,0 +1,8 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/S9E8-input.yaml
+sequence:
+- two
+- one
+mapping:
+  ? sky
+  : blue
+  sea : green

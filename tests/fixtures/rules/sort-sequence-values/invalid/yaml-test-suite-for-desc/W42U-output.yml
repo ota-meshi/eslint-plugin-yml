@@ -1,0 +1,7 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/W42U-input.yaml
+- # Empty
+- |
+ block node
+- - two # sequence
+  - one # Compact
+- one: two # Compact mapping

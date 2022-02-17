@@ -1,0 +1,5 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/A2M4-input.yaml
+? a
+: -	b
+  -  - d
+     -	c

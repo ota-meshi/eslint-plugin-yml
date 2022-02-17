@@ -1,0 +1,3 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/F3CP-input.yaml
+---
+{ a: [ c,b, { d: [ f,e] } ] }

@@ -1,0 +1,5 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/2AUY-input.yaml
+ - b
+ - !!str a
+ - !!int 42
+ - d

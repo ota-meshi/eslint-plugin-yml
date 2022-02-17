@@ -64,7 +64,7 @@ function getMinIndent(lines: string[]) {
  */
 export function loadTestCases(
     ruleName: string,
-    _options?: any,
+    options?: { skipOutputTest?: boolean },
     additionals?: {
         valid?: (RuleTester.ValidTestCase | string)[]
         invalid?: RuleTester.InvalidTestCase[]
@@ -138,7 +138,7 @@ export function loadTestCases(
             throw new Error(`Empty code: ${test.filename}`)
         }
     }
-    if (invalid.some((test) => test.output)) {
+    if (invalid.some((test) => test.output) && !options?.skipOutputTest) {
         describe(`Output test for ${ruleName}`, () => {
             for (const test of invalid.filter(({ filename }) =>
                 isYaml(filename),

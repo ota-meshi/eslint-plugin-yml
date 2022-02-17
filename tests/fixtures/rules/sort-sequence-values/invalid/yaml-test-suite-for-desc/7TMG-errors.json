@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Expected sequence values to be in descending order. 'word2' should be before 'word1'.",
+        "line": 5,
+        "column": 3
+    }
+]

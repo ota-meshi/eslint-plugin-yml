@@ -1,0 +1,4 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/YD5X-input.yaml
+- [ hr,name        , avg  ]
+- [Mark McGwire, 0.278, 65]
+- [Sammy Sosa, 0.288  , 63]

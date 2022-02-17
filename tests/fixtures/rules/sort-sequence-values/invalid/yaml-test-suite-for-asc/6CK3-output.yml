@@ -1,0 +1,6 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/6CK3-input.yaml
+%TAG !e! tag:example.com,2000:app/
+---
+- !!str bar
+- !local foo
+- !e!tag%21 baz

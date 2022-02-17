@@ -1,0 +1,15 @@
+{
+    "options": [
+        {
+            "pathPattern": ".*",
+            "order": {
+                "type": "asc"
+            }
+        }
+    ],
+    "settings": {
+        "yml": {
+            "indent": 8
+        }
+    }
+}

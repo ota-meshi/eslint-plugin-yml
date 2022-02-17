@@ -1,0 +1,2 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/FUP4-input.yaml
+[a, [ c,b]]

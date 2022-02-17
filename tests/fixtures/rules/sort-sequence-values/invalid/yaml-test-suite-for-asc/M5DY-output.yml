@@ -1,0 +1,10 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/M5DY-input.yaml
+? - Chicago cubs
+  - Detroit Tigers
+:
+  - 2001-07-23
+
+? [
+    Atlanta Braves, New York Yankees ]
+: [ 2001-07-02, 2001-08-12,
+    2001-08-14 ]

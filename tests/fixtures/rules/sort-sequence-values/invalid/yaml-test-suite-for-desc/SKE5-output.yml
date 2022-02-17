@@ -1,0 +1,6 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/SKE5-input.yaml
+---
+seq:
+ &anchor
+- b
+- a

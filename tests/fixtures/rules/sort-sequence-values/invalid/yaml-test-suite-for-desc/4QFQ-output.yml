@@ -1,0 +1,11 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/4QFQ-input.yaml
+- |
+ detected
+- |1
+  explicit
+- >
+ 
+  
+  # detected
+- >
+ detected

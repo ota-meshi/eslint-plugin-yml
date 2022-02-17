@@ -1,0 +1,9 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/M7NX-input.yaml
+---
+{
+ a: [ c,
+  b, {
+   d: [ f,e]
+  }
+ ]
+}

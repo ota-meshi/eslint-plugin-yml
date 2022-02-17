@@ -201,3 +201,12 @@ makeSuiteTests(
     },
     { force: true },
 )
+
+makeSuiteTests(
+    "sort-sequence-values",
+    {
+        desc: [{ pathPattern: ".*", order: { type: "desc" } }],
+        asc: [{ pathPattern: ".*", order: { type: "asc" } }],
+    },
+    { force: true },
+)

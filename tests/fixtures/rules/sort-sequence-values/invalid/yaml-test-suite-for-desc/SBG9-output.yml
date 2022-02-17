@@ -1,0 +1,2 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-desc/SBG9-input.yaml
+{a: [ c,b], [ e,d]: f}

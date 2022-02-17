@@ -1,0 +1,2 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/DHP8-input.yaml
+[ bar,foo, 42]

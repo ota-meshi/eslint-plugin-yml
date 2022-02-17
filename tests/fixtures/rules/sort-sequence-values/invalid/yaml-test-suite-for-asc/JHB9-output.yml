@@ -1,0 +1,11 @@
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/JHB9-input.yaml
+# Ranking of 1998 home runs
+---
+- Ken Griffey
+- Mark McGwire
+- Sammy Sosa
+
+# Team ranking
+---
+- Chicago Cubs
+- St Louis Cardinals
