@@ -10,7 +10,7 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
               with:
                   node-version: 14
@@ -24,7 +24,7 @@ jobs:
             matrix:
                 node-version: [12.x, 14.x, 16.x, 17.x]
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v3
               with:
@@ -36,7 +36,7 @@ jobs:
     test-with-eslint6:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
               with:
                   node-version: 14.x
@@ -53,7 +53,7 @@ jobs:
             matrix:
                 node-version: [14.x]
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v3
               with:
@@ -68,7 +68,7 @@ jobs:
     test-and-coverage:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
             - name: Install Packages
               run: npm install
