@@ -1,4 +1,7 @@
 {
+    "publishConfig": {
+        "tag": "next"
+    },
     "name": "eslint-plugin-yml",
     "version": "0.14.0",
     "description": "This ESLint plugin provides linting rules for YAML.",
@@ -7,7 +10,7 @@
         "lib"
     ],
     "engines": {
-        "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+        "node": "^14.17.0 || >=16.0.0"
     },
     "scripts": {
         "prebuild": "npm run -s clean",
@@ -52,7 +55,7 @@
         "debug": "^4.3.2",
         "lodash": "^4.17.21",
         "natural-compare": "^1.4.0",
-        "yaml-eslint-parser": "^0.5.0"
+        "yaml-eslint-parser": "^1.0.0-0"
     },
     "peerDependencies": {
         "eslint": ">=6.0.0"
