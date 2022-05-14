@@ -5,7 +5,7 @@
         "column": 2
     },
     {
-        "message": "Expected indentation of 16 spaces but found 1 spaces.",
+        "message": "Expected indentation of 8 spaces but found 1 spaces.",
         "line": 4,
         "column": 1
     },

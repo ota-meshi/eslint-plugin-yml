@@ -1,6 +1,6 @@
 [
     {
-        "message": "Expected indentation of 4 spaces but found 1 spaces.",
+        "message": "Expected indentation of 2 spaces but found 1 spaces.",
         "line": 5,
         "column": 1
     },

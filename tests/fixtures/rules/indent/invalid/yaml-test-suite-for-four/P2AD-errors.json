@@ -5,7 +5,7 @@
         "column": 2
     },
     {
-        "message": "Expected indentation of 8 spaces but found 1 spaces.",
+        "message": "Expected indentation of 4 spaces but found 1 spaces.",
         "line": 3,
         "column": 1
     },
@@ -15,7 +15,7 @@
         "column": 2
     },
     {
-        "message": "Expected indentation of 8 spaces but found 2 spaces.",
+        "message": "Expected indentation of 4 spaces but found 2 spaces.",
         "line": 5,
         "column": 1
     },
@@ -25,7 +25,7 @@
         "column": 2
     },
     {
-        "message": "Expected indentation of 8 spaces but found 1 spaces.",
+        "message": "Expected indentation of 4 spaces but found 1 spaces.",
         "line": 7,
         "column": 1
     },
@@ -35,7 +35,7 @@
         "column": 2
     },
     {
-        "message": "Expected indentation of 8 spaces but found 2 spaces.",
+        "message": "Expected indentation of 4 spaces but found 2 spaces.",
         "line": 10,
         "column": 1
     }
