@@ -1,6 +1,6 @@
 # indent/invalid/block-literal02-input.yml
 - |
-    a
-     b
-      c
+  a
+   b
+    c
 

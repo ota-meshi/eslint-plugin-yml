@@ -1,7 +1,7 @@
 # indent/invalid/yaml-test-suite-for-four/W42U-input.yaml
 - # Empty
 -   |
-        block node
+    block node
 -   -   one # Compact
     -   two # sequence
 -   one: two # Compact mapping

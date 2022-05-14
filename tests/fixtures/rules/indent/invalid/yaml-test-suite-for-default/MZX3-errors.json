@@ -20,7 +20,7 @@
         "column": 2
     },
     {
-        "message": "Expected indentation of 16 spaces but found 2 spaces.",
+        "message": "Expected indentation of 8 spaces but found 2 spaces.",
         "line": 6,
         "column": 1
     },

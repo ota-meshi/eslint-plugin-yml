@@ -86,6 +86,7 @@ export default createRule("indent", {
 
         const offsets = new Map<YAMLToken, OffsetInfo>()
         const marks = new Set<YAMLToken>()
+        const blockLiteralMarks = new Set<YAMLToken>()
         const scalars = new Map<YAMLToken, AST.YAMLScalar>()
 
         /**
@@ -341,6 +342,7 @@ export default createRule("indent", {
                     const literal = sourceCode.getLastToken(node)
                     setOffset(literal, 1, mark)
                     scalars.set(literal, node)
+                    blockLiteralMarks.add(mark)
                 } else {
                     scalars.set(sourceCode.getFirstToken(node), node)
                 }
@@ -419,6 +421,23 @@ export default createRule("indent", {
                         1 /* "-" or "?" or ":" */,
                     actualOffset: nextToken.range[0] - token.range[1],
                 })
+                if (blockLiteralMarks.has(nextToken)) {
+                    // For block literal mark token.
+                    // e.g.
+                    //
+                    // - |
+                    //   text
+                    //   text
+                    lineTokens.unshift(nextToken)
+                    break
+                }
+                // For other tokens.
+                // e.g.
+                //
+                // - [
+                //     text
+                //     text
+                //   ]
                 token = nextToken
                 expectedIndent = nextExpectedIndent
                 cacheExpectedIndent = expectedIndent
@@ -439,6 +458,7 @@ export default createRule("indent", {
             }
 
             if (cacheExpectedIndent != null) {
+                // Sets the indent cache for the tokens behind this line.
                 while ((token = lineTokens.shift()) != null) {
                     const offset = offsets.get(token)
                     if (offset) {
