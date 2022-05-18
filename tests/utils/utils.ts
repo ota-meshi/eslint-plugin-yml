@@ -140,8 +140,9 @@ export function loadTestCases(
     }
     if (invalid.some((test) => test.output) && !options?.skipOutputTest) {
         describe(`Output test for ${ruleName}`, () => {
-            for (const test of invalid.filter(({ filename }) =>
-                isYaml(filename),
+            for (const test of invalid.filter(
+                ({ filename, skipOutputTest }) =>
+                    isYaml(filename) && !skipOutputTest,
             )) {
                 it(test.filename || test.code, () => {
                     const input = yamlESLintParser.parseForESLint(test.code)
@@ -154,6 +155,10 @@ export function loadTestCases(
             }
         })
     }
+    for (const test of invalid) {
+        delete test.skipOutputTest
+    }
+
     return {
         valid,
         invalid,
@@ -184,15 +189,7 @@ function* itrListupInput(rootDir: string): IterableIterator<string> {
 }
 
 function exists(f: string) {
-    try {
-        fs.statSync(f)
-        return true
-    } catch (error: any) {
-        if (error.code === "ENOENT") {
-            return false
-        }
-        throw error
-    }
+    return fs.existsSync(f)
 }
 
 export function makeSuiteTests(
@@ -372,6 +369,13 @@ function getLinter(ruleName: string) {
 function getConfig(ruleName: string, inputFile: string) {
     const filename = inputFile.slice(inputFile.indexOf(ruleName))
     const code0 = fs.readFileSync(inputFile, "utf8")
+    const overrideConfigFile: string = inputFile.replace(
+        /input\.(?:ya?ml|vue)$/u,
+        "override-config.json",
+    )
+    const overrideConfig = exists(overrideConfigFile)
+        ? JSON.parse(fs.readFileSync(overrideConfigFile, "utf8"))
+        : {}
     let code, config
     let configFile: string = inputFile.replace(
         /input\.(?:ya?ml|vue)$/u,
@@ -392,6 +396,7 @@ function getConfig(ruleName: string, inputFile: string) {
                 ? { parser: require.resolve("vue-eslint-parser") }
                 : {},
             config,
+            overrideConfig,
             { code, filename },
         )
     }
