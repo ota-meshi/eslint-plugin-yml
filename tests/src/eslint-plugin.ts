@@ -14,7 +14,7 @@ describe("Integration with eslint-plugin-yml", () => {
         const engine = new ESLint({
             cwd: TEST_CWD,
             extensions: [".js", ".yml"],
-            plugins: { "eslint-plugin-yml": plugin },
+            plugins: { "eslint-plugin-yml": plugin as any },
         })
         const results = await engine.lintFiles(["test01/src"])
         assert.strictEqual(results.length, 2)
@@ -29,7 +29,7 @@ describe("Integration with eslint-plugin-yml", () => {
         const engine = new ESLint({
             cwd: TEST_CWD,
             extensions: [".yml"],
-            plugins: { "eslint-plugin-yml": plugin },
+            plugins: { "eslint-plugin-yml": plugin as any },
         })
         const results = await engine.lintFiles(["issue89/src"])
         assert.strictEqual(results.length, 1)
