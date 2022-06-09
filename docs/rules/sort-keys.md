@@ -85,7 +85,7 @@ The option receives multiple objects with the following properties:
 You can also define options in the same format as the [sort-keys] rule.
 
 ```yaml
-jsonc/sort-keys:
+yml/sort-keys:
   - error
   - asc
   - caseSensitive: true
