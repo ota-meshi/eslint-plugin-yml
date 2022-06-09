@@ -40,7 +40,7 @@ bad:
 ## :wrench: Options
 
 ```yaml
-jsonc/sort-keys:
+yml/sort-keys:
   - error
   # For example, a definition for eslintrc
   - pathPattern: ^$ # Hits the root properties
