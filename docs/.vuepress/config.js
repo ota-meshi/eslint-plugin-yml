@@ -15,7 +15,7 @@ module.exports = {
     title: "eslint-plugin-yml",
     description: "ESLint plugin provides linting rules for YAML",
     serviceWorker: true,
-    evergreen: true,
+    // evergreen: true,
     configureWebpack(_config, _isServer) {
         return {
             resolve: {
@@ -33,6 +33,25 @@ module.exports = {
                 },
             },
         }
+    },
+    chainWebpack(config) {
+        const jsRule = config.module.rule("js")
+        const original = jsRule.exclude.values()
+        jsRule.exclude
+            .clear()
+            .add((filepath) => {
+                if (/node_modules\/yaml\//u.test(filepath)) {
+                    return false
+                }
+                for (const fn of original) {
+                    if (fn(filepath)) {
+                        return true
+                    }
+                }
+                return false
+            })
+            .end()
+            .use("babel-loader")
     },
 
     head: [["link", { rel: "icon", type: "image/svg", href: "/logo.svg" }]],
