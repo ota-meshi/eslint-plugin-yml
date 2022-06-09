@@ -22,6 +22,10 @@ module.exports = {
                 alias: {
                     module: require.resolve("./shim/module"),
                     eslint$: path.resolve(__dirname, "./shim/eslint"),
+                    yaml$: path.resolve(
+                        __dirname,
+                        "../../node_modules/yaml/dist/index.js",
+                    ),
                     esquery: path.resolve(
                         __dirname,
                         "../../node_modules/esquery/dist/esquery.min.js",
