@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in ascending order. 'chomp and explicit indent' should be before 'explicit indent and chomp'.",
-        "line": 4,
-        "column": 3
-    }
+  {
+    "message": "Expected sequence values to be in ascending order. 'chomp and explicit indent' should be before 'explicit indent and chomp'.",
+    "line": 4,
+    "column": 3
+  }
 ]

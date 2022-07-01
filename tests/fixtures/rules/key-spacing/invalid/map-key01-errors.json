@@ -1,17 +1,17 @@
 [
-    {
-        "message": "Extra space after key '{a: b}'.",
-        "line": 3,
-        "column": 11
-    },
-    {
-        "message": "Extra space before value for key '{a: b}'.",
-        "line": 4,
-        "column": 5
-    },
-    {
-        "message": "Extra space after key '{a: b}'.",
-        "line": 7,
-        "column": 7
-    }
+  {
+    "message": "Extra space after key '{a: b}'.",
+    "line": 3,
+    "column": 11
+  },
+  {
+    "message": "Extra space before value for key '{a: b}'.",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "message": "Extra space after key '{a: b}'.",
+    "line": 7,
+    "column": 7
+  }
 ]

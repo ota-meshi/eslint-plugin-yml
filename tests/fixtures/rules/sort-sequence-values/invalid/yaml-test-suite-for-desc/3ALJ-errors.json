@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in descending order. 's1_i2' should be before 's1_i1'.",
-        "line": 3,
-        "column": 5
-    }
+  {
+    "message": "Expected sequence values to be in descending order. 's1_i2' should be before 's1_i1'.",
+    "line": 3,
+    "column": 5
+  }
 ]

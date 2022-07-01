@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Strings must use singlequote.",
-        "line": 3,
-        "column": 6
-    },
-    {
-        "message": "Strings must use singlequote.",
-        "line": 8,
-        "column": 6
-    }
+  {
+    "message": "Strings must use singlequote.",
+    "line": 3,
+    "column": 6
+  },
+  {
+    "message": "Strings must use singlequote.",
+    "line": 8,
+    "column": 6
+  }
 ]

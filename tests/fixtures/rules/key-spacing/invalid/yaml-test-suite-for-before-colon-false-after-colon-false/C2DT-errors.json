@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Extra space before value for key 'readable'.",
-        "line": 4,
-        "column": 11
-    }
+  {
+    "message": "Extra space before value for key 'readable'.",
+    "line": 4,
+    "column": 11
+  }
 ]

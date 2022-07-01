@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in ascending order. 'four' should be before 'three'.",
-        "line": 3,
-        "column": 11
-    }
+  {
+    "message": "Expected sequence values to be in ascending order. 'four' should be before 'three'.",
+    "line": 3,
+    "column": 11
+  }
 ]

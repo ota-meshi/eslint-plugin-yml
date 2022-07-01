@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected mapping keys to be in ascending order. 'mapping' should be before 'sequence'.",
-        "line": 5,
-        "column": 1
-    },
-    {
-        "message": "Expected mapping keys to be in ascending order. 'sea' should be before 'sky'.",
-        "line": 8,
-        "column": 3
-    }
+  {
+    "message": "Expected mapping keys to be in ascending order. 'mapping' should be before 'sequence'.",
+    "line": 5,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. 'sea' should be before 'sky'.",
+    "line": 8,
+    "column": 3
+  }
 ]

@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space before value for key 'safe colon'.",
-        "line": 5,
-        "column": 13
-    },
-    {
-        "message": "Missing space before value for key 'safe dash'.",
-        "line": 6,
-        "column": 12
-    }
+  {
+    "message": "Missing space before value for key 'safe colon'.",
+    "line": 5,
+    "column": 13
+  },
+  {
+    "message": "Missing space before value for key 'safe dash'.",
+    "line": 6,
+    "column": 12
+  }
 ]

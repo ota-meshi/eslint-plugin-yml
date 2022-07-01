@@ -1,7 +1,7 @@
 [
-    {
-        "message": "There should be no space before ']'.",
-        "line": 3,
-        "column": 26
-    }
+  {
+    "message": "There should be no space before ']'.",
+    "line": 3,
+    "column": 26
+  }
 ]

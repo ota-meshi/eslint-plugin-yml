@@ -1,22 +1,22 @@
 [
-    {
-        "message": "Expected mapping keys to be in ascending order. 'player' should be before 'time'.",
-        "line": 4,
-        "column": 1
-    },
-    {
-        "message": "Expected mapping keys to be in ascending order. 'action' should be before 'player'.",
-        "line": 5,
-        "column": 1
-    },
-    {
-        "message": "Expected mapping keys to be in ascending order. 'player' should be before 'time'.",
-        "line": 9,
-        "column": 1
-    },
-    {
-        "message": "Expected mapping keys to be in ascending order. 'action' should be before 'player'.",
-        "line": 10,
-        "column": 1
-    }
+  {
+    "message": "Expected mapping keys to be in ascending order. 'player' should be before 'time'.",
+    "line": 4,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. 'action' should be before 'player'.",
+    "line": 5,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. 'player' should be before 'time'.",
+    "line": 9,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. 'action' should be before 'player'.",
+    "line": 10,
+    "column": 1
+  }
 ]

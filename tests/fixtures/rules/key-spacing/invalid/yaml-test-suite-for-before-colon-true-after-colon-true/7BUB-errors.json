@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space after key 'hr'.",
-        "line": 3,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'rbi'.",
-        "line": 7,
-        "column": 1
-    }
+  {
+    "message": "Missing space after key 'hr'.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'rbi'.",
+    "line": 7,
+    "column": 1
+  }
 ]

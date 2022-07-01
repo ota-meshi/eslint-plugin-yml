@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected sequence values to be in descending order. 'c' should be before 'b'.",
-        "line": 3,
-        "column": 10
-    },
-    {
-        "message": "Expected sequence values to be in descending order. 'f' should be before 'e'.",
-        "line": 3,
-        "column": 22
-    }
+  {
+    "message": "Expected sequence values to be in descending order. 'c' should be before 'b'.",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "message": "Expected sequence values to be in descending order. 'f' should be before 'e'.",
+    "line": 3,
+    "column": 22
+  }
 ]

@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Unexpected line break after this `-` indicator.",
-        "line": 11,
-        "column": 2
-    }
+  {
+    "message": "Unexpected line break after this `-` indicator.",
+    "line": 11,
+    "column": 2
+  }
 ]

@@ -1,12 +1,12 @@
 [
-    {
-        "message": "There should be no linebreak after '['.",
-        "line": 2,
-        "column": 10
-    },
-    {
-        "message": "There should be no linebreak before ']'.",
-        "line": 7,
-        "column": 1
-    }
+  {
+    "message": "There should be no linebreak after '['.",
+    "line": 2,
+    "column": 10
+  },
+  {
+    "message": "There should be no linebreak before ']'.",
+    "line": 7,
+    "column": 1
+  }
 ]

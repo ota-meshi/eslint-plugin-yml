@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Extra space after key 'sea'.",
-        "line": 8,
-        "column": 6
-    }
+  {
+    "message": "Extra space after key 'sea'.",
+    "line": 8,
+    "column": 6
+  }
 ]

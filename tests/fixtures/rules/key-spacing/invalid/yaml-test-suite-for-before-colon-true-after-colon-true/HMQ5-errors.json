@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Missing space after key '!!str &a1 \"foo\"'.",
-        "line": 2,
-        "column": 11
-    }
+  {
+    "message": "Missing space after key '!!str &a1 \"foo\"'.",
+    "line": 2,
+    "column": 11
+  }
 ]

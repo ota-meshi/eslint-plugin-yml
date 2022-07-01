@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in ascending order. 'Block scalar\n' should be before 'flow in block'.",
-        "line": 4,
-        "column": 3
-    }
+  {
+    "message": "Expected sequence values to be in ascending order. 'Block scalar\n' should be before 'flow in block'.",
+    "line": 4,
+    "column": 3
+  }
 ]

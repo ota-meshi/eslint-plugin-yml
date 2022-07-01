@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Unexpected tabs.",
-        "line": 5,
-        "column": 3
-    },
-    {
-        "message": "Unexpected tabs.",
-        "line": 8,
-        "column": 4
-    }
+  {
+    "message": "Unexpected tabs.",
+    "line": 5,
+    "column": 3
+  },
+  {
+    "message": "Unexpected tabs.",
+    "line": 8,
+    "column": 4
+  }
 ]

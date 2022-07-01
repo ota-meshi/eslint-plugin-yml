@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Missing space after key '[flow]'.",
-        "line": 2,
-        "column": 6
-    }
+  {
+    "message": "Missing space after key '[flow]'.",
+    "line": 2,
+    "column": 6
+  }
 ]

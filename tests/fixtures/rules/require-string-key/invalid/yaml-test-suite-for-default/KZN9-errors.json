@@ -1,12 +1,12 @@
 [
-    {
-        "message": "The key must be a string.",
-        "line": 3,
-        "column": 5
-    },
-    {
-        "message": "The key must be a string.",
-        "line": 4,
-        "column": 5
-    }
+  {
+    "message": "The key must be a string.",
+    "line": 3,
+    "column": 5
+  },
+  {
+    "message": "The key must be a string.",
+    "line": 4,
+    "column": 5
+  }
 ]

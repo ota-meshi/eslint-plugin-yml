@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Must use flow style sequences.",
-        "line": 4,
-        "column": 3
-    },
-    {
-        "message": "Must use flow style sequences.",
-        "line": 8,
-        "column": 3
-    }
+  {
+    "message": "Must use flow style sequences.",
+    "line": 4,
+    "column": 3
+  },
+  {
+    "message": "Must use flow style sequences.",
+    "line": 8,
+    "column": 3
+  }
 ]

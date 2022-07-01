@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space after key 'three'.",
-        "line": 2,
-        "column": 17
-    },
-    {
-        "message": "Missing space after key 'five'.",
-        "line": 3,
-        "column": 4
-    }
+  {
+    "message": "Missing space after key 'three'.",
+    "line": 2,
+    "column": 17
+  },
+  {
+    "message": "Missing space after key 'five'.",
+    "line": 3,
+    "column": 4
+  }
 ]

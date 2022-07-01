@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in natural ascending order. '_' should be before 'A'.",
-        "line": 5,
-        "column": 3
-    }
+  {
+    "message": "Expected sequence values to be in natural ascending order. '_' should be before 'A'.",
+    "line": 5,
+    "column": 3
+  }
 ]

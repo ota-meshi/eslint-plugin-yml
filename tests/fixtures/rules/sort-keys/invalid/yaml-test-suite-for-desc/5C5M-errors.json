@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected mapping keys to be in descending order. 'three' should be before 'one'.",
-        "line": 2,
-        "column": 17
-    },
-    {
-        "message": "Expected mapping keys to be in descending order. 'seven' should be before 'five'.",
-        "line": 3,
-        "column": 14
-    }
+  {
+    "message": "Expected mapping keys to be in descending order. 'three' should be before 'one'.",
+    "line": 2,
+    "column": 17
+  },
+  {
+    "message": "Expected mapping keys to be in descending order. 'seven' should be before 'five'.",
+    "line": 3,
+    "column": 14
+  }
 ]

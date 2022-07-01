@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Missing space after key 'JSON like'.",
-        "line": 4,
-        "column": 5
-    }
+  {
+    "message": "Missing space after key 'JSON like'.",
+    "line": 4,
+    "column": 5
+  }
 ]

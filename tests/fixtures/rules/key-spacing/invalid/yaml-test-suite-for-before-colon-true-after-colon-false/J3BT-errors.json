@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space after key 'quoted'.",
-        "line": 3,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'block'.",
-        "line": 4,
-        "column": 1
-    }
+  {
+    "message": "Missing space after key 'quoted'.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'block'.",
+    "line": 4,
+    "column": 1
+  }
 ]

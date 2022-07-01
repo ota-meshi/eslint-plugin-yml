@@ -1,15 +1,15 @@
 {
-    "options": [
-        {
-            "pathPattern": ".*",
-            "order": {
-                "type": "desc"
-            }
-        }
-    ],
-    "settings": {
-        "yml": {
-            "indent": 8
-        }
+  "options": [
+    {
+      "pathPattern": ".*",
+      "order": {
+        "type": "desc"
+      }
     }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
 }

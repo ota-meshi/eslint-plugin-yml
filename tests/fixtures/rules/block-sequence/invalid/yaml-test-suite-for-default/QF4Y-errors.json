@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Must use block style sequences.",
-        "line": 2,
-        "column": 1
-    }
+  {
+    "message": "Must use block style sequences.",
+    "line": 2,
+    "column": 1
+  }
 ]

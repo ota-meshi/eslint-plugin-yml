@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space after key 'bla\"keks'.",
-        "line": 2,
-        "column": 3
-    },
-    {
-        "message": "Missing space after key 'bla]keks'.",
-        "line": 3,
-        "column": 3
-    }
+  {
+    "message": "Missing space after key 'bla\"keks'.",
+    "line": 2,
+    "column": 3
+  },
+  {
+    "message": "Missing space after key 'bla]keks'.",
+    "line": 3,
+    "column": 3
+  }
 ]

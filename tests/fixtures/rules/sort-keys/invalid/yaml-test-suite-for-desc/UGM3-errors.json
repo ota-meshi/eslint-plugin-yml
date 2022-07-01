@@ -1,27 +1,27 @@
 [
-    {
-        "message": "Expected mapping keys to be in descending order. 'state' should be before 'city'.",
-        "line": 13,
-        "column": 9
-    },
-    {
-        "message": "Expected mapping keys to be in descending order. 'price' should be before 'description'.",
-        "line": 20,
-        "column": 7
-    },
-    {
-        "message": "Expected mapping keys to be in descending order. 'price' should be before 'description'.",
-        "line": 24,
-        "column": 7
-    },
-    {
-        "message": "Expected mapping keys to be in descending order. 'tax' should be before 'product'.",
-        "line": 25,
-        "column": 1
-    },
-    {
-        "message": "Expected mapping keys to be in descending order. 'total' should be before 'tax'.",
-        "line": 26,
-        "column": 1
-    }
+  {
+    "message": "Expected mapping keys to be in descending order. 'state' should be before 'city'.",
+    "line": 13,
+    "column": 9
+  },
+  {
+    "message": "Expected mapping keys to be in descending order. 'price' should be before 'description'.",
+    "line": 20,
+    "column": 7
+  },
+  {
+    "message": "Expected mapping keys to be in descending order. 'price' should be before 'description'.",
+    "line": 24,
+    "column": 7
+  },
+  {
+    "message": "Expected mapping keys to be in descending order. 'tax' should be before 'product'.",
+    "line": 25,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in descending order. 'total' should be before 'tax'.",
+    "line": 26,
+    "column": 1
+  }
 ]

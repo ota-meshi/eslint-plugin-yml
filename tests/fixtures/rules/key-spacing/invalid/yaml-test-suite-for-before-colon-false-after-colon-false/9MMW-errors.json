@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Extra space after key 'YAML'.",
-        "line": 2,
-        "column": 9
-    }
+  {
+    "message": "Extra space after key 'YAML'.",
+    "line": 2,
+    "column": 9
+  }
 ]

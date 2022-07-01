@@ -1,22 +1,22 @@
 [
-    {
-        "message": "Missing space before value for key '!!str a'.",
-        "line": 2,
-        "column": 10
-    },
-    {
-        "message": "Missing space before value for key 'c'.",
-        "line": 3,
-        "column": 4
-    },
-    {
-        "message": "Missing space before value for key 'e'.",
-        "line": 4,
-        "column": 4
-    },
-    {
-        "message": "Missing space before value for key 'g'.",
-        "line": 5,
-        "column": 4
-    }
+  {
+    "message": "Missing space before value for key '!!str a'.",
+    "line": 2,
+    "column": 10
+  },
+  {
+    "message": "Missing space before value for key 'c'.",
+    "line": 3,
+    "column": 4
+  },
+  {
+    "message": "Missing space before value for key 'e'.",
+    "line": 4,
+    "column": 4
+  },
+  {
+    "message": "Missing space before value for key 'g'.",
+    "line": 5,
+    "column": 4
+  }
 ]

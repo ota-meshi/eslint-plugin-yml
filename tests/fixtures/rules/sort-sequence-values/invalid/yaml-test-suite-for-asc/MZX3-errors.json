@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected sequence values to be in ascending order. 'double quoted' should be before 'plain'.",
-        "line": 3,
-        "column": 3
-    },
-    {
-        "message": "Expected sequence values to be in ascending order. 'block\n' should be before 'single quoted'.",
-        "line": 5,
-        "column": 3
-    }
+  {
+    "message": "Expected sequence values to be in ascending order. 'double quoted' should be before 'plain'.",
+    "line": 3,
+    "column": 3
+  },
+  {
+    "message": "Expected sequence values to be in ascending order. 'block\n' should be before 'single quoted'.",
+    "line": 5,
+    "column": 3
+  }
 ]

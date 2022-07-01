@@ -1,7 +1,7 @@
 [
-    {
-        "message": "A space is required before '}'.",
-        "line": 2,
-        "column": 36
-    }
+  {
+    "message": "A space is required before '}'.",
+    "line": 2,
+    "column": 36
+  }
 ]

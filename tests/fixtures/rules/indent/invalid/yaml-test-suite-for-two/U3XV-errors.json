@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected indentation of 4 spaces but found 2 spaces.",
-        "line": 11,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 4 spaces but found 2 spaces.",
-        "line": 14,
-        "column": 1
-    }
+  {
+    "message": "Expected indentation of 4 spaces but found 2 spaces.",
+    "line": 11,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 4 spaces but found 2 spaces.",
+    "line": 14,
+    "column": 1
+  }
 ]

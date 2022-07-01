@@ -1,12 +1,12 @@
 {
-    "options": [
-        {
-            "prefer": "single"
-        }
-    ],
-    "settings": {
-        "yml": {
-            "indent": 8
-        }
+  "options": [
+    {
+      "prefer": "single"
     }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
 }

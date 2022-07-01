@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space after key 'JSON'.",
-        "line": 4,
-        "column": 6
-    },
-    {
-        "message": "Missing space after key '{JSON: like}'.",
-        "line": 4,
-        "column": 16
-    }
+  {
+    "message": "Missing space after key 'JSON'.",
+    "line": 4,
+    "column": 6
+  },
+  {
+    "message": "Missing space after key '{JSON: like}'.",
+    "line": 4,
+    "column": 16
+  }
 ]

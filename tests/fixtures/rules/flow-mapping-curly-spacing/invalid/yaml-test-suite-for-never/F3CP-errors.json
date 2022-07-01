@@ -1,22 +1,22 @@
 [
-    {
-        "message": "There should be no space after '{'.",
-        "line": 3,
-        "column": 2
-    },
-    {
-        "message": "There should be no space after '{'.",
-        "line": 3,
-        "column": 14
-    },
-    {
-        "message": "There should be no space before '}'.",
-        "line": 3,
-        "column": 24
-    },
-    {
-        "message": "There should be no space before '}'.",
-        "line": 3,
-        "column": 28
-    }
+  {
+    "message": "There should be no space after '{'.",
+    "line": 3,
+    "column": 2
+  },
+  {
+    "message": "There should be no space after '{'.",
+    "line": 3,
+    "column": 14
+  },
+  {
+    "message": "There should be no space before '}'.",
+    "line": 3,
+    "column": 24
+  },
+  {
+    "message": "There should be no space before '}'.",
+    "line": 3,
+    "column": 28
+  }
 ]

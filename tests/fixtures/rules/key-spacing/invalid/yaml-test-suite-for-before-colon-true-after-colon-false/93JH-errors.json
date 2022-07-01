@@ -1,17 +1,17 @@
 [
-    {
-        "message": "Missing space after key 'key'.",
-        "line": 2,
-        "column": 4
-    },
-    {
-        "message": "Missing space after key 'key2'.",
-        "line": 3,
-        "column": 4
-    },
-    {
-        "message": "Missing space after key 'key3'.",
-        "line": 5,
-        "column": 4
-    }
+  {
+    "message": "Missing space after key 'key'.",
+    "line": 2,
+    "column": 4
+  },
+  {
+    "message": "Missing space after key 'key2'.",
+    "line": 3,
+    "column": 4
+  },
+  {
+    "message": "Missing space after key 'key3'.",
+    "line": 5,
+    "column": 4
+  }
 ]

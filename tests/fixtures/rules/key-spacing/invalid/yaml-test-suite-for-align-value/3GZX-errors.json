@@ -1,17 +1,17 @@
 [
-    {
-        "message": "Missing space before value for key 'First occurrence'.",
-        "line": 2,
-        "column": 19
-    },
-    {
-        "message": "Missing space before value for key 'Override anchor'.",
-        "line": 4,
-        "column": 18
-    },
-    {
-        "message": "Missing space before value for key 'Reuse anchor'.",
-        "line": 5,
-        "column": 15
-    }
+  {
+    "message": "Missing space before value for key 'First occurrence'.",
+    "line": 2,
+    "column": 19
+  },
+  {
+    "message": "Missing space before value for key 'Override anchor'.",
+    "line": 4,
+    "column": 18
+  },
+  {
+    "message": "Missing space before value for key 'Reuse anchor'.",
+    "line": 5,
+    "column": 15
+  }
 ]

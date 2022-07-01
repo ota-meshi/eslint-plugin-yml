@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected sequence values to be in descending order. 'Up, up, and away!' should be before ': - ()'.",
-        "line": 5,
-        "column": 3
-    },
-    {
-        "message": "Expected sequence values to be in descending order. 'Up, up and away!' should be before ': - ()'.",
-        "line": 11,
-        "column": 3
-    }
+  {
+    "message": "Expected sequence values to be in descending order. 'Up, up, and away!' should be before ': - ()'.",
+    "line": 5,
+    "column": 3
+  },
+  {
+    "message": "Expected sequence values to be in descending order. 'Up, up and away!' should be before ': - ()'.",
+    "line": 11,
+    "column": 3
+  }
 ]

@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in ascending order. 'bar' should be before 'foo'.",
-        "line": 5,
-        "column": 3
-    }
+  {
+    "message": "Expected sequence values to be in ascending order. 'bar' should be before 'foo'.",
+    "line": 5,
+    "column": 3
+  }
 ]

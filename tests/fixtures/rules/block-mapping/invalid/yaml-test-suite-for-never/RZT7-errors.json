@@ -1,27 +1,27 @@
 [
-    {
-        "message": "Must use flow style mappings.",
-        "line": 3,
-        "column": 1
-    },
-    {
-        "message": "Must use flow style mappings.",
-        "line": 9,
-        "column": 1
-    },
-    {
-        "message": "Must use flow style mappings.",
-        "line": 15,
-        "column": 1
-    },
-    {
-        "message": "Must use flow style mappings.",
-        "line": 20,
-        "column": 5
-    },
-    {
-        "message": "Must use flow style mappings.",
-        "line": 24,
-        "column": 5
-    }
+  {
+    "message": "Must use flow style mappings.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Must use flow style mappings.",
+    "line": 9,
+    "column": 1
+  },
+  {
+    "message": "Must use flow style mappings.",
+    "line": 15,
+    "column": 1
+  },
+  {
+    "message": "Must use flow style mappings.",
+    "line": 20,
+    "column": 5
+  },
+  {
+    "message": "Must use flow style mappings.",
+    "line": 24,
+    "column": 5
+  }
 ]

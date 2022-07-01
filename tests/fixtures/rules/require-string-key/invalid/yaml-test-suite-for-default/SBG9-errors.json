@@ -1,7 +1,7 @@
 [
-    {
-        "message": "The key must be a string.",
-        "line": 2,
-        "column": 13
-    }
+  {
+    "message": "The key must be a string.",
+    "line": 2,
+    "column": 13
+  }
 ]

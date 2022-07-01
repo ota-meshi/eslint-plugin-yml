@@ -1,13 +1,13 @@
 {
-    "options": [
-        "never",
-        {
-            "nestedHyphen": "never"
-        }
-    ],
-    "settings": {
-        "yml": {
-            "indent": 8
-        }
+  "options": [
+    "never",
+    {
+      "nestedHyphen": "never"
     }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
 }

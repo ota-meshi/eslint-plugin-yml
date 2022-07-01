@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected indentation of 7 spaces but found 1 spaces.",
-        "line": 3,
-        "column": 2
-    },
-    {
-        "message": "Expected indentation of 7 spaces but found 1 spaces.",
-        "line": 4,
-        "column": 2
-    }
+  {
+    "message": "Expected indentation of 7 spaces but found 1 spaces.",
+    "line": 3,
+    "column": 2
+  },
+  {
+    "message": "Expected indentation of 7 spaces but found 1 spaces.",
+    "line": 4,
+    "column": 2
+  }
 ]

@@ -1,12 +1,12 @@
 {
-    "options": [
-        {
-            "align": "colon"
-        }
-    ],
-    "settings": {
-        "yml": {
-            "indent": 8
-        }
+  "options": [
+    {
+      "align": "colon"
     }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
 }

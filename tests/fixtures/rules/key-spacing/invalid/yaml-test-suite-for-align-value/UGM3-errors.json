@@ -1,142 +1,142 @@
 [
-    {
-        "message": "Extra space after key 'date'.",
-        "line": 4,
-        "column": 5
-    },
-    {
-        "message": "Missing space before value for key 'date'.",
-        "line": 4,
-        "column": 10
-    },
-    {
-        "message": "Extra space after key 'given'.",
-        "line": 6,
-        "column": 10
-    },
-    {
-        "message": "Missing space before value for key 'given'.",
-        "line": 6,
-        "column": 14
-    },
-    {
-        "message": "Extra space after key 'family'.",
-        "line": 7,
-        "column": 11
-    },
-    {
-        "message": "Missing space before value for key 'family'.",
-        "line": 7,
-        "column": 14
-    },
-    {
-        "message": "Extra space after key 'city'.",
-        "line": 12,
-        "column": 13
-    },
-    {
-        "message": "Missing space before value for key 'city'.",
-        "line": 12,
-        "column": 19
-    },
-    {
-        "message": "Extra space after key 'state'.",
-        "line": 13,
-        "column": 14
-    },
-    {
-        "message": "Missing space before value for key 'state'.",
-        "line": 13,
-        "column": 19
-    },
-    {
-        "message": "Extra space after key 'postal'.",
-        "line": 14,
-        "column": 15
-    },
-    {
-        "message": "Extra space after key 'sku'.",
-        "line": 17,
-        "column": 10
-    },
-    {
-        "message": "Missing space before value for key 'sku'.",
-        "line": 17,
-        "column": 21
-    },
-    {
-        "message": "Extra space after key 'quantity'.",
-        "line": 18,
-        "column": 15
-    },
-    {
-        "message": "Missing space before value for key 'quantity'.",
-        "line": 18,
-        "column": 21
-    },
-    {
-        "message": "Extra space after key 'description'.",
-        "line": 19,
-        "column": 18
-    },
-    {
-        "message": "Extra space after key 'price'.",
-        "line": 20,
-        "column": 12
-    },
-    {
-        "message": "Missing space before value for key 'price'.",
-        "line": 20,
-        "column": 21
-    },
-    {
-        "message": "Extra space after key 'sku'.",
-        "line": 21,
-        "column": 10
-    },
-    {
-        "message": "Missing space before value for key 'sku'.",
-        "line": 21,
-        "column": 21
-    },
-    {
-        "message": "Extra space after key 'quantity'.",
-        "line": 22,
-        "column": 15
-    },
-    {
-        "message": "Missing space before value for key 'quantity'.",
-        "line": 22,
-        "column": 21
-    },
-    {
-        "message": "Extra space after key 'description'.",
-        "line": 23,
-        "column": 18
-    },
-    {
-        "message": "Extra space after key 'price'.",
-        "line": 24,
-        "column": 12
-    },
-    {
-        "message": "Missing space before value for key 'price'.",
-        "line": 24,
-        "column": 21
-    },
-    {
-        "message": "Extra space after key 'tax'.",
-        "line": 25,
-        "column": 4
-    },
-    {
-        "message": "Missing space before value for key 'tax'.",
-        "line": 25,
-        "column": 8
-    },
-    {
-        "message": "Missing space before value for key 'total'.",
-        "line": 26,
-        "column": 8
-    }
+  {
+    "message": "Extra space after key 'date'.",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "message": "Missing space before value for key 'date'.",
+    "line": 4,
+    "column": 10
+  },
+  {
+    "message": "Extra space after key 'given'.",
+    "line": 6,
+    "column": 10
+  },
+  {
+    "message": "Missing space before value for key 'given'.",
+    "line": 6,
+    "column": 14
+  },
+  {
+    "message": "Extra space after key 'family'.",
+    "line": 7,
+    "column": 11
+  },
+  {
+    "message": "Missing space before value for key 'family'.",
+    "line": 7,
+    "column": 14
+  },
+  {
+    "message": "Extra space after key 'city'.",
+    "line": 12,
+    "column": 13
+  },
+  {
+    "message": "Missing space before value for key 'city'.",
+    "line": 12,
+    "column": 19
+  },
+  {
+    "message": "Extra space after key 'state'.",
+    "line": 13,
+    "column": 14
+  },
+  {
+    "message": "Missing space before value for key 'state'.",
+    "line": 13,
+    "column": 19
+  },
+  {
+    "message": "Extra space after key 'postal'.",
+    "line": 14,
+    "column": 15
+  },
+  {
+    "message": "Extra space after key 'sku'.",
+    "line": 17,
+    "column": 10
+  },
+  {
+    "message": "Missing space before value for key 'sku'.",
+    "line": 17,
+    "column": 21
+  },
+  {
+    "message": "Extra space after key 'quantity'.",
+    "line": 18,
+    "column": 15
+  },
+  {
+    "message": "Missing space before value for key 'quantity'.",
+    "line": 18,
+    "column": 21
+  },
+  {
+    "message": "Extra space after key 'description'.",
+    "line": 19,
+    "column": 18
+  },
+  {
+    "message": "Extra space after key 'price'.",
+    "line": 20,
+    "column": 12
+  },
+  {
+    "message": "Missing space before value for key 'price'.",
+    "line": 20,
+    "column": 21
+  },
+  {
+    "message": "Extra space after key 'sku'.",
+    "line": 21,
+    "column": 10
+  },
+  {
+    "message": "Missing space before value for key 'sku'.",
+    "line": 21,
+    "column": 21
+  },
+  {
+    "message": "Extra space after key 'quantity'.",
+    "line": 22,
+    "column": 15
+  },
+  {
+    "message": "Missing space before value for key 'quantity'.",
+    "line": 22,
+    "column": 21
+  },
+  {
+    "message": "Extra space after key 'description'.",
+    "line": 23,
+    "column": 18
+  },
+  {
+    "message": "Extra space after key 'price'.",
+    "line": 24,
+    "column": 12
+  },
+  {
+    "message": "Missing space before value for key 'price'.",
+    "line": 24,
+    "column": 21
+  },
+  {
+    "message": "Extra space after key 'tax'.",
+    "line": 25,
+    "column": 4
+  },
+  {
+    "message": "Missing space before value for key 'tax'.",
+    "line": 25,
+    "column": 8
+  },
+  {
+    "message": "Missing space before value for key 'total'.",
+    "line": 26,
+    "column": 8
+  }
 ]

@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected sequence values to be in descending order. 'Detroit Tigers' should be before 'Boston Red Sox'.",
-        "line": 4,
-        "column": 5
-    },
-    {
-        "message": "Expected sequence values to be in descending order. 'New York Yankees' should be before 'Detroit Tigers'.",
-        "line": 5,
-        "column": 5
-    }
+  {
+    "message": "Expected sequence values to be in descending order. 'Detroit Tigers' should be before 'Boston Red Sox'.",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "message": "Expected sequence values to be in descending order. 'New York Yankees' should be before 'Detroit Tigers'.",
+    "line": 5,
+    "column": 5
+  }
 ]

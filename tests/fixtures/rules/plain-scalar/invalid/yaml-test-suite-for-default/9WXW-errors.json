@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Must use plain style scalar.",
-        "line": 3,
-        "column": 6
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 8,
-        "column": 6
-    }
+  {
+    "message": "Must use plain style scalar.",
+    "line": 3,
+    "column": 6
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 8,
+    "column": 6
+  }
 ]

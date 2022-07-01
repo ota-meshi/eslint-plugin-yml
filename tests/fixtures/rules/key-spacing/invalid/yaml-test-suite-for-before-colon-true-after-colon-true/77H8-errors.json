@@ -1,17 +1,17 @@
 [
-    {
-        "message": "Missing space after key 'not-date'.",
-        "line": 3,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'picture'.",
-        "line": 5,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'application specific tag'.",
-        "line": 11,
-        "column": 1
-    }
+  {
+    "message": "Missing space after key 'not-date'.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'picture'.",
+    "line": 5,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'application specific tag'.",
+    "line": 11,
+    "column": 1
+  }
 ]

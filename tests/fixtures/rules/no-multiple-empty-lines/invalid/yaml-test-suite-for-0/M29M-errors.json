@@ -1,7 +1,7 @@
 [
-    {
-        "message": "More than 0 blank lines not allowed.",
-        "line": 7,
-        "column": 1
-    }
+  {
+    "message": "More than 0 blank lines not allowed.",
+    "line": 7,
+    "column": 1
+  }
 ]

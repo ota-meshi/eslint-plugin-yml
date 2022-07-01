@@ -1,32 +1,32 @@
 [
-    {
-        "message": "There should be no space after '['.",
-        "line": 2,
-        "column": 4
-    },
-    {
-        "message": "There should be no space before ']'.",
-        "line": 2,
-        "column": 20
-    },
-    {
-        "message": "There should be no space after '['.",
-        "line": 3,
-        "column": 4
-    },
-    {
-        "message": "There should be no space before ']'.",
-        "line": 3,
-        "column": 22
-    },
-    {
-        "message": "There should be no space after '['.",
-        "line": 4,
-        "column": 4
-    },
-    {
-        "message": "There should be no space before ']'.",
-        "line": 4,
-        "column": 25
-    }
+  {
+    "message": "There should be no space after '['.",
+    "line": 2,
+    "column": 4
+  },
+  {
+    "message": "There should be no space before ']'.",
+    "line": 2,
+    "column": 20
+  },
+  {
+    "message": "There should be no space after '['.",
+    "line": 3,
+    "column": 4
+  },
+  {
+    "message": "There should be no space before ']'.",
+    "line": 3,
+    "column": 22
+  },
+  {
+    "message": "There should be no space after '['.",
+    "line": 4,
+    "column": 4
+  },
+  {
+    "message": "There should be no space before ']'.",
+    "line": 4,
+    "column": 25
+  }
 ]

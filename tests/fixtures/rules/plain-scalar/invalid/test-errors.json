@@ -1,42 +1,42 @@
 [
-    {
-        "message": "Must use plain style scalar.",
-        "line": 3,
-        "column": 3
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 3,
-        "column": 12
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 3,
-        "column": 22
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 3,
-        "column": 33
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 4,
-        "column": 3
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 4,
-        "column": 19
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 5,
-        "column": 3
-    },
-    {
-        "message": "Must use plain style scalar.",
-        "line": 5,
-        "column": 18
-    }
+  {
+    "message": "Must use plain style scalar.",
+    "line": 3,
+    "column": 3
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 3,
+    "column": 12
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 3,
+    "column": 22
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 3,
+    "column": 33
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 4,
+    "column": 3
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 4,
+    "column": 19
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 5,
+    "column": 3
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 5,
+    "column": 18
+  }
 ]

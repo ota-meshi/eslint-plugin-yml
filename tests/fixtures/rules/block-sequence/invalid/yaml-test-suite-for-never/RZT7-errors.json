@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Must use flow style sequences.",
-        "line": 20,
-        "column": 3
-    }
+  {
+    "message": "Must use flow style sequences.",
+    "line": 20,
+    "column": 3
+  }
 ]

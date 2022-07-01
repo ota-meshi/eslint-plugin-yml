@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Missing space before value for key 'x\\ny:z\\tx $%^&*()x'.",
-        "line": 3,
-        "column": 23
-    }
+  {
+    "message": "Missing space before value for key 'x\\ny:z\\tx $%^&*()x'.",
+    "line": 3,
+    "column": 23
+  }
 ]

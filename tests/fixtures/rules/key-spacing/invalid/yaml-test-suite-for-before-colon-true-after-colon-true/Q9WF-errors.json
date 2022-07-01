@@ -1,32 +1,32 @@
 [
-    {
-        "message": "Missing space after key 'first'.",
-        "line": 2,
-        "column": 3
-    },
-    {
-        "message": "Missing space after key 'last'.",
-        "line": 2,
-        "column": 17
-    },
-    {
-        "message": "Missing space after key '{ first: Sammy, last: Sosa }'.",
-        "line": 2,
-        "column": 28
-    },
-    {
-        "message": "Missing space after key 'hr'.",
-        "line": 4,
-        "column": 3
-    },
-    {
-        "message": "Extra space before value for key 'hr'.",
-        "line": 4,
-        "column": 5
-    },
-    {
-        "message": "Missing space after key 'avg'.",
-        "line": 6,
-        "column": 3
-    }
+  {
+    "message": "Missing space after key 'first'.",
+    "line": 2,
+    "column": 3
+  },
+  {
+    "message": "Missing space after key 'last'.",
+    "line": 2,
+    "column": 17
+  },
+  {
+    "message": "Missing space after key '{ first: Sammy, last: Sosa }'.",
+    "line": 2,
+    "column": 28
+  },
+  {
+    "message": "Missing space after key 'hr'.",
+    "line": 4,
+    "column": 3
+  },
+  {
+    "message": "Extra space before value for key 'hr'.",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "message": "Missing space after key 'avg'.",
+    "line": 6,
+    "column": 3
+  }
 ]

@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Too many blank lines at the end of file. Max of 0 allowed.",
-        "line": 3,
-        "column": 1
-    }
+  {
+    "message": "Too many blank lines at the end of file. Max of 0 allowed.",
+    "line": 3,
+    "column": 1
+  }
 ]
