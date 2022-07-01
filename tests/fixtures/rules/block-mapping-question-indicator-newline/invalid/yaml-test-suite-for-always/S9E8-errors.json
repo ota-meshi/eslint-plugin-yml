@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected a line break after this `?` indicator.",
-        "line": 6,
-        "column": 3
-    }
+  {
+    "message": "Expected a line break after this `?` indicator.",
+    "line": 6,
+    "column": 3
+  }
 ]

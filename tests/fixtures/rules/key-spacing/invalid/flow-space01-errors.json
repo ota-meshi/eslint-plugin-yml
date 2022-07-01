@@ -1,42 +1,42 @@
 [
-    {
-        "message": "Extra space before value for key 'b'.",
-        "line": 4,
-        "column": 6
-    },
-    {
-        "message": "Extra space before value for key 'c'.",
-        "line": 5,
-        "column": 6
-    },
-    {
-        "message": "Extra space before value for key 'b'.",
-        "line": 8,
-        "column": 6
-    },
-    {
-        "message": "Extra space before value for key 'c'.",
-        "line": 9,
-        "column": 6
-    },
-    {
-        "message": "Extra space before value for key 'b'.",
-        "line": 12,
-        "column": 6
-    },
-    {
-        "message": "Extra space before value for key 'c'.",
-        "line": 13,
-        "column": 6
-    },
-    {
-        "message": "Extra space before value for key 'b'.",
-        "line": 16,
-        "column": 6
-    },
-    {
-        "message": "Extra space before value for key 'c'.",
-        "line": 17,
-        "column": 6
-    }
+  {
+    "message": "Extra space before value for key 'b'.",
+    "line": 4,
+    "column": 6
+  },
+  {
+    "message": "Extra space before value for key 'c'.",
+    "line": 5,
+    "column": 6
+  },
+  {
+    "message": "Extra space before value for key 'b'.",
+    "line": 8,
+    "column": 6
+  },
+  {
+    "message": "Extra space before value for key 'c'.",
+    "line": 9,
+    "column": 6
+  },
+  {
+    "message": "Extra space before value for key 'b'.",
+    "line": 12,
+    "column": 6
+  },
+  {
+    "message": "Extra space before value for key 'c'.",
+    "line": 13,
+    "column": 6
+  },
+  {
+    "message": "Extra space before value for key 'b'.",
+    "line": 16,
+    "column": 6
+  },
+  {
+    "message": "Extra space before value for key 'c'.",
+    "line": 17,
+    "column": 6
+  }
 ]

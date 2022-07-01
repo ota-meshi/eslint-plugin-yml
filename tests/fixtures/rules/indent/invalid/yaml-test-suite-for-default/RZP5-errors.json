@@ -1,42 +1,42 @@
 [
-    {
-        "message": "Expected indentation of 8 spaces but found 2 spaces.",
-        "line": 3,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 8 spaces but found 1 spaces.",
-        "line": 5,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 8 spaces but found 2 spaces.",
-        "line": 7,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 8 spaces but found 1 spaces.",
-        "line": 9,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 8 spaces but found 1 spaces.",
-        "line": 11,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 16 spaces but found 2 spaces.",
-        "line": 12,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 8 spaces but found 1 spaces.",
-        "line": 14,
-        "column": 1
-    },
-    {
-        "message": "Expected indentation of 8 spaces but found 2 spaces.",
-        "line": 16,
-        "column": 1
-    }
+  {
+    "message": "Expected indentation of 8 spaces but found 2 spaces.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 8 spaces but found 1 spaces.",
+    "line": 5,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 8 spaces but found 2 spaces.",
+    "line": 7,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 8 spaces but found 1 spaces.",
+    "line": 9,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 8 spaces but found 1 spaces.",
+    "line": 11,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 16 spaces but found 2 spaces.",
+    "line": 12,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 8 spaces but found 1 spaces.",
+    "line": 14,
+    "column": 1
+  },
+  {
+    "message": "Expected indentation of 8 spaces but found 2 spaces.",
+    "line": 16,
+    "column": 1
+  }
 ]

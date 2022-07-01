@@ -1,32 +1,32 @@
 [
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 3,
-        "column": 3
-    },
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 4,
-        "column": 3
-    },
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 5,
-        "column": 3
-    },
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 7,
-        "column": 3
-    },
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 8,
-        "column": 3
-    },
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 9,
-        "column": 3
-    }
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 3,
+    "column": 3
+  },
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 4,
+    "column": 3
+  },
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 5,
+    "column": 3
+  },
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 7,
+    "column": 3
+  },
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 8,
+    "column": 3
+  },
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 9,
+    "column": 3
+  }
 ]

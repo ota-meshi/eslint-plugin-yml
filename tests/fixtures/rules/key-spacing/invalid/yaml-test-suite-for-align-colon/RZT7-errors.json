@@ -1,32 +1,32 @@
 [
-    {
-        "message": "Missing space after key 'Time'.",
-        "line": 3,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'User'.",
-        "line": 4,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'Time'.",
-        "line": 9,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'User'.",
-        "line": 10,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'Date'.",
-        "line": 15,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'User'.",
-        "line": 16,
-        "column": 1
-    }
+  {
+    "message": "Missing space after key 'Time'.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'User'.",
+    "line": 4,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'Time'.",
+    "line": 9,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'User'.",
+    "line": 10,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'Date'.",
+    "line": 15,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'User'.",
+    "line": 16,
+    "column": 1
+  }
 ]

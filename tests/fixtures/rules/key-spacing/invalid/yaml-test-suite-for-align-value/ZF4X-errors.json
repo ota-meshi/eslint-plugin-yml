@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space before value for key 'Sammy Sosa'.",
-        "line": 3,
-        "column": 13
-    },
-    {
-        "message": "Missing space before value for key 'hr'.",
-        "line": 4,
-        "column": 9
-    }
+  {
+    "message": "Missing space before value for key 'Sammy Sosa'.",
+    "line": 3,
+    "column": 13
+  },
+  {
+    "message": "Missing space before value for key 'hr'.",
+    "line": 4,
+    "column": 9
+  }
 ]

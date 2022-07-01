@@ -1,17 +1,17 @@
 [
-    {
-        "message": "Strings must use doublequote.",
-        "line": 6,
-        "column": 9
-    },
-    {
-        "message": "Strings must use doublequote.",
-        "line": 7,
-        "column": 9
-    },
-    {
-        "message": "Strings must use doublequote.",
-        "line": 8,
-        "column": 14
-    }
+  {
+    "message": "Strings must use doublequote.",
+    "line": 6,
+    "column": 9
+  },
+  {
+    "message": "Strings must use doublequote.",
+    "line": 7,
+    "column": 9
+  },
+  {
+    "message": "Strings must use doublequote.",
+    "line": 8,
+    "column": 14
+  }
 ]

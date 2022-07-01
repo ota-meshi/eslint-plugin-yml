@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected mapping keys to be in ascending order. 'avg' should be before 'hr'.",
-        "line": 6,
-        "column": 3
-    }
+  {
+    "message": "Expected mapping keys to be in ascending order. 'avg' should be before 'hr'.",
+    "line": 6,
+    "column": 3
+  }
 ]

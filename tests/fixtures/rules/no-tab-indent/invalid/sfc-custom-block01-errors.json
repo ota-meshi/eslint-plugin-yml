@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Unexpected tabs.",
-        "line": 3,
-        "column": 1
-    }
+  {
+    "message": "Unexpected tabs.",
+    "line": 3,
+    "column": 1
+  }
 ]

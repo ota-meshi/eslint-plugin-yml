@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Extra space before value for key 'hr'.",
-        "line": 4,
-        "column": 5
-    }
+  {
+    "message": "Extra space before value for key 'hr'.",
+    "line": 4,
+    "column": 5
+  }
 ]

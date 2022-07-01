@@ -1,129 +1,125 @@
-const path = require("path")
+const path = require("path");
 // eslint-disable-next-line node/no-missing-require -- no build
-const { rules } = require("../../lib/utils/rules")
+const { rules } = require("../../lib/utils/rules");
 
 function ruleToLink({
-    meta: {
-        docs: { ruleId, ruleName },
-    },
+  meta: {
+    docs: { ruleId, ruleName },
+  },
 }) {
-    return [`/rules/${ruleName}`, ruleId]
+  return [`/rules/${ruleName}`, ruleId];
 }
 
 module.exports = {
-    base: "/eslint-plugin-yml/",
-    title: "eslint-plugin-yml",
-    description: "ESLint plugin provides linting rules for YAML",
-    serviceWorker: true,
-    // evergreen: true,
-    configureWebpack(_config, _isServer) {
-        return {
-            resolve: {
-                alias: {
-                    module: require.resolve("./shim/module"),
-                    eslint$: path.resolve(__dirname, "./shim/eslint"),
-                    yaml$: path.resolve(
-                        __dirname,
-                        "../../node_modules/yaml/dist/index.js",
-                    ),
-                    esquery: path.resolve(
-                        __dirname,
-                        "../../node_modules/esquery/dist/esquery.min.js",
-                    ),
-                    "@eslint/eslintrc/universal": path.resolve(
-                        __dirname,
-                        "../../node_modules/@eslint/eslintrc/dist/eslintrc-universal.cjs",
-                    ),
-                },
-            },
+  base: "/eslint-plugin-yml/",
+  title: "eslint-plugin-yml",
+  description: "ESLint plugin provides linting rules for YAML",
+  serviceWorker: true,
+  // evergreen: true,
+  configureWebpack(_config, _isServer) {
+    return {
+      resolve: {
+        alias: {
+          module: require.resolve("./shim/module"),
+          eslint$: path.resolve(__dirname, "./shim/eslint"),
+          yaml$: path.resolve(
+            __dirname,
+            "../../node_modules/yaml/dist/index.js"
+          ),
+          esquery: path.resolve(
+            __dirname,
+            "../../node_modules/esquery/dist/esquery.min.js"
+          ),
+          "@eslint/eslintrc/universal": path.resolve(
+            __dirname,
+            "../../node_modules/@eslint/eslintrc/dist/eslintrc-universal.cjs"
+          ),
+        },
+      },
+    };
+  },
+  chainWebpack(config) {
+    const jsRule = config.module.rule("js");
+    const original = jsRule.exclude.values();
+    jsRule.exclude
+      .clear()
+      .add((filepath) => {
+        if (/node_modules\/yaml\//u.test(filepath)) {
+          return false;
         }
-    },
-    chainWebpack(config) {
-        const jsRule = config.module.rule("js")
-        const original = jsRule.exclude.values()
-        jsRule.exclude
-            .clear()
-            .add((filepath) => {
-                if (/node_modules\/yaml\//u.test(filepath)) {
-                    return false
-                }
-                for (const fn of original) {
-                    if (fn(filepath)) {
-                        return true
-                    }
-                }
-                return false
-            })
-            .end()
-            .use("babel-loader")
+        for (const fn of original) {
+          if (fn(filepath)) {
+            return true;
+          }
+        }
+        return false;
+      })
+      .end()
+      .use("babel-loader");
+  },
+
+  head: [["link", { rel: "icon", type: "image/svg", href: "/logo.svg" }]],
+  themeConfig: {
+    logo: "/logo.svg",
+    repo: "ota-meshi/eslint-plugin-yml",
+    docsRepo: "ota-meshi/eslint-plugin-yml",
+    docsDir: "docs",
+    docsBranch: "master",
+    editLinks: true,
+    lastUpdated: true,
+    serviceWorker: {
+      updatePopup: true,
     },
 
-    head: [["link", { rel: "icon", type: "image/svg", href: "/logo.svg" }]],
-    themeConfig: {
-        logo: "/logo.svg",
-        repo: "ota-meshi/eslint-plugin-yml",
-        docsRepo: "ota-meshi/eslint-plugin-yml",
-        docsDir: "docs",
-        docsBranch: "master",
-        editLinks: true,
-        lastUpdated: true,
-        serviceWorker: {
-            updatePopup: true,
+    nav: [
+      { text: "Introduction", link: "/" },
+      { text: "User Guide", link: "/user-guide/" },
+      { text: "Rules", link: "/rules/" },
+      { text: "Playground", link: "/playground/" },
+    ],
+
+    sidebar: {
+      "/rules/": [
+        "/rules/",
+        {
+          title: "YAML Rules",
+          collapsable: false,
+          children: rules
+            .filter(
+              (rule) => !rule.meta.docs.extensionRule && !rule.meta.deprecated
+            )
+            .map(ruleToLink),
         },
-
-        nav: [
-            { text: "Introduction", link: "/" },
-            { text: "User Guide", link: "/user-guide/" },
-            { text: "Rules", link: "/rules/" },
-            { text: "Playground", link: "/playground/" },
-        ],
-
-        sidebar: {
-            "/rules/": [
-                "/rules/",
-                {
-                    title: "YAML Rules",
-                    collapsable: false,
-                    children: rules
-                        .filter(
-                            (rule) =>
-                                !rule.meta.docs.extensionRule &&
-                                !rule.meta.deprecated,
-                        )
-                        .map(ruleToLink),
-                },
-                ...(rules.some(
+        ...(rules.some(
+          (rule) => rule.meta.docs.extensionRule && !rule.meta.deprecated
+        )
+          ? [
+              {
+                title: "Extension Rules",
+                collapsable: false,
+                children: rules
+                  .filter(
                     (rule) =>
-                        rule.meta.docs.extensionRule && !rule.meta.deprecated,
-                )
-                    ? [
-                          {
-                              title: "Extension Rules",
-                              collapsable: false,
-                              children: rules
-                                  .filter(
-                                      (rule) =>
-                                          rule.meta.docs.extensionRule &&
-                                          !rule.meta.deprecated,
-                                  )
-                                  .map(ruleToLink),
-                          },
-                      ]
-                    : []),
-                // Rules in no category.
-                ...(rules.some((rule) => rule.meta.deprecated)
-                    ? [
-                          {
-                              title: "Deprecated",
-                              collapsable: false,
-                              children: rules
-                                  .filter((rule) => rule.meta.deprecated)
-                                  .map(ruleToLink),
-                          },
-                      ]
-                    : []),
-            ],
-            "/": ["/", "/user-guide/", "/rules/", "/playground/"],
-        },
+                      rule.meta.docs.extensionRule && !rule.meta.deprecated
+                  )
+                  .map(ruleToLink),
+              },
+            ]
+          : []),
+        // Rules in no category.
+        ...(rules.some((rule) => rule.meta.deprecated)
+          ? [
+              {
+                title: "Deprecated",
+                collapsable: false,
+                children: rules
+                  .filter((rule) => rule.meta.deprecated)
+                  .map(ruleToLink),
+              },
+            ]
+          : []),
+      ],
+      "/": ["/", "/user-guide/", "/rules/", "/playground/"],
     },
-}
+  },
+};

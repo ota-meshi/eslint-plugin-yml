@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space after key '&a [a, &b b]'.",
-        "line": 2,
-        "column": 14
-    },
-    {
-        "message": "Extra space before value for key '&a [a, &b b]'.",
-        "line": 2,
-        "column": 15
-    }
+  {
+    "message": "Missing space after key '&a [a, &b b]'.",
+    "line": 2,
+    "column": 14
+  },
+  {
+    "message": "Extra space before value for key '&a [a, &b b]'.",
+    "line": 2,
+    "column": 15
+  }
 ]

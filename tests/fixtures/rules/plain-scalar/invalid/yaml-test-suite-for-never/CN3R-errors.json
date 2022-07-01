@@ -1,42 +1,42 @@
 [
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 3,
-        "column": 2
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 3,
-        "column": 5
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 4,
-        "column": 5
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 4,
-        "column": 8
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 5,
-        "column": 7
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 5,
-        "column": 10
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 6,
-        "column": 7
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 6,
-        "column": 10
-    }
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 3,
+    "column": 2
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 3,
+    "column": 5
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 4,
+    "column": 8
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 5,
+    "column": 7
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 5,
+    "column": 10
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 6,
+    "column": 7
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 6,
+    "column": 10
+  }
 ]

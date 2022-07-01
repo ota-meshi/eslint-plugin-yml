@@ -1,12 +1,12 @@
 [
-    {
-        "message": "A space is required after '['.",
-        "line": 3,
-        "column": 3
-    },
-    {
-        "message": "A space is required before ']'.",
-        "line": 3,
-        "column": 15
-    }
+  {
+    "message": "A space is required after '['.",
+    "line": 3,
+    "column": 3
+  },
+  {
+    "message": "A space is required before ']'.",
+    "line": 3,
+    "column": 15
+  }
 ]

@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Missing space before value for key 'mapping'.",
-        "line": 3,
-        "column": 10
-    }
+  {
+    "message": "Missing space before value for key 'mapping'.",
+    "line": 3,
+    "column": 10
+  }
 ]

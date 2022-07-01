@@ -1,22 +1,22 @@
 [
-    {
-        "message": "Missing space after key 'safe'.",
-        "line": 2,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'safe question mark'.",
-        "line": 4,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'safe colon'.",
-        "line": 5,
-        "column": 1
-    },
-    {
-        "message": "Missing space after key 'safe dash'.",
-        "line": 6,
-        "column": 1
-    }
+  {
+    "message": "Missing space after key 'safe'.",
+    "line": 2,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'safe question mark'.",
+    "line": 4,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'safe colon'.",
+    "line": 5,
+    "column": 1
+  },
+  {
+    "message": "Missing space after key 'safe dash'.",
+    "line": 6,
+    "column": 1
+  }
 ]

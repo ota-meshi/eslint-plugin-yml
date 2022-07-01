@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Extra space before value for key '[d, e]'.",
-        "line": 2,
-        "column": 19
-    }
+  {
+    "message": "Extra space before value for key '[d, e]'.",
+    "line": 2,
+    "column": 19
+  }
 ]

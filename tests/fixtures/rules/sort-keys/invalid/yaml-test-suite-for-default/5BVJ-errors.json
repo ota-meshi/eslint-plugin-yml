@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected mapping keys to be in ascending order. 'folded' should be before 'literal'.",
-        "line": 5,
-        "column": 1
-    }
+  {
+    "message": "Expected mapping keys to be in ascending order. 'folded' should be before 'literal'.",
+    "line": 5,
+    "column": 1
+  }
 ]

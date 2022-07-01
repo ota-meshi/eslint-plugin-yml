@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Missing space before value for key 'a'.",
-        "line": 3,
-        "column": 4
-    }
+  {
+    "message": "Missing space before value for key 'a'.",
+    "line": 3,
+    "column": 4
+  }
 ]

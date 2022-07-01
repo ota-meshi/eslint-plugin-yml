@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Empty sequence entries are forbidden.",
-        "line": 2,
-        "column": 1
-    }
+  {
+    "message": "Empty sequence entries are forbidden.",
+    "line": 2,
+    "column": 1
+  }
 ]

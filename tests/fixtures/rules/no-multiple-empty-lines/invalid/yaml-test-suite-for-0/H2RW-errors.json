@@ -1,12 +1,12 @@
 [
-    {
-        "message": "More than 0 blank lines not allowed.",
-        "line": 3,
-        "column": 1
-    },
-    {
-        "message": "More than 0 blank lines not allowed.",
-        "line": 5,
-        "column": 1
-    }
+  {
+    "message": "More than 0 blank lines not allowed.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "More than 0 blank lines not allowed.",
+    "line": 5,
+    "column": 1
+  }
 ]

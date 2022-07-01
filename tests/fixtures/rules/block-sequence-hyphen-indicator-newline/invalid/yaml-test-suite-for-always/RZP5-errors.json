@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 9,
-        "column": 2
-    },
-    {
-        "message": "Expected a line break after this `-` indicator.",
-        "line": 14,
-        "column": 2
-    }
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 9,
+    "column": 2
+  },
+  {
+    "message": "Expected a line break after this `-` indicator.",
+    "line": 14,
+    "column": 2
+  }
 ]

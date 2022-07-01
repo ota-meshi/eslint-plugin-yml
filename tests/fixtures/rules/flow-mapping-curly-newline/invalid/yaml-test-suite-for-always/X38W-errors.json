@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected a line break after this opening brace.",
-        "line": 2,
-        "column": 1
-    },
-    {
-        "message": "Expected a line break before this closing brace.",
-        "line": 2,
-        "column": 36
-    }
+  {
+    "message": "Expected a line break after this opening brace.",
+    "line": 2,
+    "column": 1
+  },
+  {
+    "message": "Expected a line break before this closing brace.",
+    "line": 2,
+    "column": 36
+  }
 ]

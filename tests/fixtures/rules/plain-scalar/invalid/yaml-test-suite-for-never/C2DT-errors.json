@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 3,
-        "column": 12
-    },
-    {
-        "message": "Must use quoted style scalar.",
-        "line": 4,
-        "column": 13
-    }
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 3,
+    "column": 12
+  },
+  {
+    "message": "Must use quoted style scalar.",
+    "line": 4,
+    "column": 13
+  }
 ]

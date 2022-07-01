@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Must use block style mappings.",
-        "line": 2,
-        "column": 1
-    },
-    {
-        "message": "Must use block style mappings.",
-        "line": 7,
-        "column": 1
-    }
+  {
+    "message": "Must use block style mappings.",
+    "line": 2,
+    "column": 1
+  },
+  {
+    "message": "Must use block style mappings.",
+    "line": 7,
+    "column": 1
+  }
 ]

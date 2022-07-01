@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Expected mapping keys to be in ascending order. 'http://foo.com' should be before 'unquoted'.",
-        "line": 4,
-        "column": 1
-    },
-    {
-        "message": "Expected mapping keys to be in ascending order. '' should be before 'omitted value'.",
-        "line": 6,
-        "column": 1
-    }
+  {
+    "message": "Expected mapping keys to be in ascending order. 'http://foo.com' should be before 'unquoted'.",
+    "line": 4,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. '' should be before 'omitted value'.",
+    "line": 6,
+    "column": 1
+  }
 ]

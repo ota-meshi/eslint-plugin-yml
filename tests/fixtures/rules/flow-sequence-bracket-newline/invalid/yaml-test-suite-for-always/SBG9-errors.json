@@ -1,12 +1,12 @@
 [
-    {
-        "message": "A linebreak is required after '['.",
-        "line": 2,
-        "column": 5
-    },
-    {
-        "message": "A linebreak is required before ']'.",
-        "line": 2,
-        "column": 10
-    }
+  {
+    "message": "A linebreak is required after '['.",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "message": "A linebreak is required before ']'.",
+    "line": 2,
+    "column": 10
+  }
 ]

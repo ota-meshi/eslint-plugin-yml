@@ -1,13 +1,13 @@
 {
-    "options": [
-        {
-            "beforeColon": false,
-            "afterColon": false
-        }
-    ],
-    "settings": {
-        "yml": {
-            "indent": 8
-        }
+  "options": [
+    {
+      "beforeColon": false,
+      "afterColon": false
     }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
 }

@@ -1,17 +1,17 @@
 [
-    {
-        "message": "Missing space after key 'sun'.",
-        "line": 2,
-        "column": 3
-    },
-    {
-        "message": "Missing space after key 'earth'.",
-        "line": 3,
-        "column": 5
-    },
-    {
-        "message": "Missing space after key 'moon'.",
-        "line": 4,
-        "column": 5
-    }
+  {
+    "message": "Missing space after key 'sun'.",
+    "line": 2,
+    "column": 3
+  },
+  {
+    "message": "Missing space after key 'earth'.",
+    "line": 3,
+    "column": 5
+  },
+  {
+    "message": "Missing space after key 'moon'.",
+    "line": 4,
+    "column": 5
+  }
 ]

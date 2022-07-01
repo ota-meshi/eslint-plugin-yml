@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in descending order. 'Sammy Sosa' should be before 'Mark McGwire'.",
-        "line": 5,
-        "column": 5
-    }
+  {
+    "message": "Expected sequence values to be in descending order. 'Sammy Sosa' should be before 'Mark McGwire'.",
+    "line": 5,
+    "column": 5
+  }
 ]

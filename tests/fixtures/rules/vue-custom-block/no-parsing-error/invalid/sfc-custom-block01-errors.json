@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Flow map must end with a }",
-        "line": 4,
-        "column": 1
-    }
+  {
+    "message": "Flow map must end with a }",
+    "line": 4,
+    "column": 1
+  }
 ]

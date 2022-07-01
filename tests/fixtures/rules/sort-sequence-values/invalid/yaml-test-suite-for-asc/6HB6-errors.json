@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in ascending order. 'Also by two' should be before 'By two'.",
-        "line": 11,
-        "column": 3
-    }
+  {
+    "message": "Expected sequence values to be in ascending order. 'Also by two' should be before 'By two'.",
+    "line": 11,
+    "column": 3
+  }
 ]

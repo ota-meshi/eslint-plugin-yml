@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Extra space before value for key 'implicit flow key'.",
-        "line": 3,
-        "column": 23
-    }
+  {
+    "message": "Extra space before value for key 'implicit flow key'.",
+    "line": 3,
+    "column": 23
+  }
 ]

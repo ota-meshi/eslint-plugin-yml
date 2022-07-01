@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Missing space after key 'a'.",
-        "line": 2,
-        "column": 2
-    },
-    {
-        "message": "Missing space after key '[d, e]'.",
-        "line": 2,
-        "column": 18
-    }
+  {
+    "message": "Missing space after key 'a'.",
+    "line": 2,
+    "column": 2
+  },
+  {
+    "message": "Missing space after key '[d, e]'.",
+    "line": 2,
+    "column": 18
+  }
 ]

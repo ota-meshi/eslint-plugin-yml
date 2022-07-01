@@ -1,12 +1,12 @@
 {
-    "options": [
-        {
-            "mode": "minimum"
-        }
-    ],
-    "settings": {
-        "yml": {
-            "indent": 8
-        }
+  "options": [
+    {
+      "mode": "minimum"
     }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
 }

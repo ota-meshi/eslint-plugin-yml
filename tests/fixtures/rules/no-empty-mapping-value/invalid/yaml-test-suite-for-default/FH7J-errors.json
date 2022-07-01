@@ -1,12 +1,12 @@
 [
-    {
-        "message": "Empty mapping values are forbidden.",
-        "line": 5,
-        "column": 3
-    },
-    {
-        "message": "Empty mapping values are forbidden.",
-        "line": 6,
-        "column": 3
-    }
+  {
+    "message": "Empty mapping values are forbidden.",
+    "line": 5,
+    "column": 3
+  },
+  {
+    "message": "Empty mapping values are forbidden.",
+    "line": 6,
+    "column": 3
+  }
 ]

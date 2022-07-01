@@ -1,7 +1,7 @@
 [
-    {
-        "message": "Expected sequence values to be in descending order. 'single quoted' should be before 'double quoted'.",
-        "line": 4,
-        "column": 11
-    }
+  {
+    "message": "Expected sequence values to be in descending order. 'single quoted' should be before 'double quoted'.",
+    "line": 4,
+    "column": 11
+  }
 ]
