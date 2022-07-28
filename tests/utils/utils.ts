@@ -102,7 +102,7 @@ export function loadTestCases(
         try {
             errors = fs.readFileSync(errorFile, "utf8")
         } catch (e) {
-            writeFixtures(ruleName, inputFile, config?.settings?.yml)
+            writeFixtures(ruleName, inputFile)
             errors = fs.readFileSync(errorFile, "utf8")
         }
         config.errors = JSON.parse(errors)
@@ -111,7 +111,7 @@ export function loadTestCases(
             try {
                 output = fs.readFileSync(outputFile, "utf8")
             } catch (e) {
-                writeFixtures(ruleName, inputFile, config?.settings?.yml)
+                writeFixtures(ruleName, inputFile)
                 output = fs.readFileSync(outputFile, "utf8")
             }
             config.output = output
@@ -289,17 +289,20 @@ export function makeSuiteTests(
 function writeFixtures(
     ruleName: string,
     inputFile: string,
-    ymlSettings: YMLSettings,
+    ymlSettings?: YMLSettings | null,
     { force }: { force?: boolean } = {},
 ) {
+    const config = getConfig(ruleName, inputFile)
+    if (!ymlSettings) {
+        // eslint-disable-next-line no-param-reassign -- test
+        ymlSettings = config?.settings?.yml
+    }
     const linter = getLinter(ruleName)
     const errorFile = inputFile.replace(/input\.(?:ya?ml|vue)$/u, "errors.json")
     const outputFile = inputFile.replace(
         /input\.(?:ya?ml|vue)$/u,
         isYaml(inputFile) ? "output.yml" : "output.vue",
     )
-
-    const config = getConfig(ruleName, inputFile)
 
     const result = linter.verify(
         config.code,
@@ -310,6 +313,7 @@ function writeFixtures(
             parser: isYaml(inputFile)
                 ? "yaml-eslint-parser"
                 : "vue-eslint-parser",
+            parserOptions: config?.parserOptions,
             settings: {
                 yml: ymlSettings,
             },

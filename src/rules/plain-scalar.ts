@@ -94,6 +94,8 @@ export default createRule("plain-scalar", {
 
         const sourceCode = context.getSourceCode()
 
+        let currentDocument: AST.YAMLDocument | undefined
+
         /* eslint-disable complexity -- X( */
         /**
          * Check if it can be converted to plain.
@@ -165,7 +167,9 @@ export default createRule("plain-scalar", {
             }
 
             try {
-                const result = parseForESLint(node.value)
+                const result = parseForESLint(node.value, {
+                    defaultYAMLVersion: currentDocument?.version,
+                })
                 if (getStaticYAMLValue(result.ast) !== node.value) {
                     return
                 }
@@ -207,6 +211,9 @@ export default createRule("plain-scalar", {
         }
 
         return {
+            YAMLDocument(node) {
+                currentDocument = node
+            },
             YAMLScalar(node: AST.YAMLScalar) {
                 if (!isStringScalar(node)) {
                     return

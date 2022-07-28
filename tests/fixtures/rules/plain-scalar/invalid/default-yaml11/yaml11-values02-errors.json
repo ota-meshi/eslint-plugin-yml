@@ -1,0 +1,12 @@
+[
+  {
+    "message": "Must use plain style scalar.",
+    "line": 15,
+    "column": 3
+  },
+  {
+    "message": "Must use plain style scalar.",
+    "line": 21,
+    "column": 3
+  }
+]

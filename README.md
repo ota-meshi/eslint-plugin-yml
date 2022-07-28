@@ -35,7 +35,7 @@ e.g. [eslint-plugin-yaml](https://www.npmjs.com/package/eslint-plugin-yaml)
 These plugins use the processor to parse and return the results independently, without providing the ESLint engine with AST and source code text.
 
 Plugins don't provide AST, so you can't use directive comments (e.g. `# eslint-disable`).  
-Plugins don't provide source code text, so you can't use it with plugins and rules that use text (e.g. [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier), [eol-last](https://eslint.org/docs/rules/eol-last)).  
+Plugins don't provide source code text, so you can't use it with plugins and rules that use text (e.g. [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier), [eol-last](https://eslint.org/docs/rules/eol-last)).
 
 **eslint-plugin-yml** works by providing AST and source code text to ESLint.
 
@@ -74,13 +74,13 @@ module.exports = {
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',
-    'plugin:yml/standard'
+    "plugin:yml/standard",
   ],
   rules: {
     // override/add rules settings here, such as:
     // 'yml/rule-name': 'error'
-  }
-}
+  },
+};
 ```
 
 This plugin provides configs:
@@ -115,6 +115,29 @@ module.exports = {
 };
 ```
 
+#### Parser Options
+
+The following parser options for `yaml-eslint-parser` are available by specifying them in [parserOptions](https://eslint.org/docs/latest/user-guide/configuring/language-options#specifying-parser-options) in the ESLint configuration file.
+
+```js
+module.exports = {
+  // ...
+  overrides: [
+    {
+      files: ["*.yaml", "*.yml"],
+      parser: "yaml-eslint-parser",
+      // Options used with yaml-eslint-parser.
+      parserOptions: {
+        defaultYAMLVersion: "1.2",
+      },
+    },
+  ],
+  // ...
+};
+```
+
+See also [https://github.com/ota-meshi/yaml-eslint-parser#readme](https://github.com/ota-meshi/yaml-eslint-parser#readme).
+
 ### Running ESLint from the command line
 
 If you want to run `eslint` from the command line, make sure you include the `.yaml` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
@@ -138,11 +161,7 @@ Example **.vscode/settings.json**:
 
 ```json
 {
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        "yaml"
-    ]
+  "eslint.validate": ["javascript", "javascriptreact", "yaml"]
 }
 ```
 
@@ -153,6 +172,7 @@ Following the steps in their help document, you can add YAML files to the scope 
 
 1. Open the **Settings/Preferences** dialog, go to **Languages and Frameworks** | **JavaScript** | **Code Quality Tools** | **ESLint**, and select **Automatic ESLint configuration** or **Manual ESLint configuration**.
 2. In the **Run for files** field, update the pattern that defines the set of files to be linted to include YAML files as well:
+
 ```
 {**/*,*}.{js,ts,jsx,tsx,html,vue,yaml,yml}
                                  ^^^^ ^^^
@@ -232,8 +252,8 @@ Please use GitHub's Issues/PRs.
 
 ### Development Tools
 
-- `npm test` runs tests and measures coverage.  
-- `npm run update` runs in order to update readme and recommended configuration.  
+- `npm test` runs tests and measures coverage.
+- `npm run update` runs in order to update readme and recommended configuration.
 
 ### Working With Rules
 
@@ -254,7 +274,7 @@ This plugin uses [yaml-eslint-parser](https://github.com/ota-meshi/yaml-eslint-p
 
 See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
 
-[YAML]: https://yaml.org/
+[yaml]: https://yaml.org/
 [eslint-plugin-json-schema-validator]: https://github.com/ota-meshi/eslint-plugin-json-schema-validator
 [@intlify/eslint-plugin-vue-i18n]: https://github.com/intlify/eslint-plugin-vue-i18n
-[Vue I18n]: https://github.com/intlify/vue-i18n-next
+[vue i18n]: https://github.com/intlify/vue-i18n-next
