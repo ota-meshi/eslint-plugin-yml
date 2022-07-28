@@ -35,7 +35,7 @@ e.g. [eslint-plugin-yaml](https://www.npmjs.com/package/eslint-plugin-yaml)
 These plugins use the processor to parse and return the results independently, without providing the ESLint engine with AST and source code text.
 
 Plugins don't provide AST, so you can't use directive comments (e.g. `# eslint-disable`).  
-Plugins don't provide source code text, so you can't use it with plugins and rules that use text (e.g. [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier), [eol-last](https://eslint.org/docs/rules/eol-last)).  
+Plugins don't provide source code text, so you can't use it with plugins and rules that use text (e.g. [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier), [eol-last](https://eslint.org/docs/rules/eol-last)).
 
 **eslint-plugin-yml** works by providing AST and source code text to ESLint.
 
@@ -70,7 +70,7 @@ You can verify the message files by checking and installing [@intlify/eslint-plu
 
 See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
 
-[YAML]: https://yaml.org/
+[yaml]: https://yaml.org/
 [eslint-plugin-json-schema-validator]: https://github.com/ota-meshi/eslint-plugin-json-schema-validator
 [@intlify/eslint-plugin-vue-i18n]: https://github.com/intlify/eslint-plugin-vue-i18n
-[Vue I18n]: https://github.com/intlify/vue-i18n-next
+[vue i18n]: https://github.com/intlify/vue-i18n-next
