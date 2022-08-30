@@ -1,51 +1,51 @@
-import path from "path"
-import fs from "fs"
-import os from "os"
+import path from "path";
+import fs from "fs";
+import os from "os";
 // import eslint from "eslint"
-import { rules } from "./lib/load-rules"
-import type { RuleModule } from "../src/types"
-const isWin = os.platform().startsWith("win")
+import { rules } from "./lib/load-rules";
+import type { RuleModule } from "../src/types";
+const isWin = os.platform().startsWith("win");
 
 const CONFIGS = {
-    recommended: {
-        filter(rule: RuleModule) {
-            return (
-                rule.meta.docs.categories &&
-                !rule.meta.deprecated &&
-                rule.meta.docs.categories.includes("recommended")
-            )
-        },
-        option(rule: RuleModule) {
-            return rule.meta.docs.default || "error"
-        },
-        config: "recommended",
+  recommended: {
+    filter(rule: RuleModule) {
+      return (
+        rule.meta.docs.categories &&
+        !rule.meta.deprecated &&
+        rule.meta.docs.categories.includes("recommended")
+      );
     },
-    standard: {
-        filter(rule: RuleModule) {
-            return (
-                rule.meta.docs.categories &&
-                !rule.meta.deprecated &&
-                rule.meta.docs.categories.includes("standard")
-            )
-        },
-        option(rule: RuleModule) {
-            return rule.meta.docs.default || "error"
-        },
-        config: "standard",
+    option(rule: RuleModule) {
+      return rule.meta.docs.default || "error";
     },
-    prettier: {
-        filter(rule: RuleModule) {
-            return rule.meta.docs.layout
-        },
-        option(_rule: RuleModule) {
-            return "off"
-        },
-        config: "prettier",
+    config: "recommended",
+  },
+  standard: {
+    filter(rule: RuleModule) {
+      return (
+        rule.meta.docs.categories &&
+        !rule.meta.deprecated &&
+        rule.meta.docs.categories.includes("standard")
+      );
     },
-}
+    option(rule: RuleModule) {
+      return rule.meta.docs.default || "error";
+    },
+    config: "standard",
+  },
+  prettier: {
+    filter(rule: RuleModule) {
+      return rule.meta.docs.layout;
+    },
+    option(_rule: RuleModule) {
+      return "off";
+    },
+    config: "prettier",
+  },
+};
 
 for (const rec of ["recommended", "standard", "prettier"] as const) {
-    let content = `
+  let content = `
 import path from "path"
 const base = require.resolve("./base")
 const baseExtend =
@@ -55,29 +55,27 @@ export = {
     rules: {
         // eslint-plugin-yml rules
         ${rules
-            .filter(CONFIGS[rec].filter)
-            .map((rule) => {
-                return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(
-                    rule,
-                )}"`
-            })
-            .join(",\n")}
+          .filter(CONFIGS[rec].filter)
+          .map((rule) => {
+            return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
+          })
+          .join(",\n")}
     },
 }
-`
+`;
 
-    const filePath = path.resolve(
-        __dirname,
-        `../src/configs/${CONFIGS[rec].config}.ts`,
-    )
+  const filePath = path.resolve(
+    __dirname,
+    `../src/configs/${CONFIGS[rec].config}.ts`
+  );
 
-    if (isWin) {
-        content = content
-            .replace(/\r?\n/gu, "\n")
-            .replace(/\r/gu, "\n")
-            .replace(/\n/gu, "\r\n")
-    }
+  if (isWin) {
+    content = content
+      .replace(/\r?\n/gu, "\n")
+      .replace(/\r/gu, "\n")
+      .replace(/\n/gu, "\r\n");
+  }
 
-    // Update file.
-    fs.writeFileSync(filePath, content)
+  // Update file.
+  fs.writeFileSync(filePath, content);
 }

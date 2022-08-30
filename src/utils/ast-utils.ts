@@ -1,4 +1,4 @@
-import type { YAMLToken } from "../types"
+import type { YAMLToken } from "../types";
 
 /**
  * Checks if the given token is a comment token or not.
@@ -6,7 +6,7 @@ import type { YAMLToken } from "../types"
  * @returns {boolean} `true` if the token is a comment token.
  */
 export function isCommentToken(token: YAMLToken | null): boolean {
-    return Boolean(token && (token.type === "Block" || token.type === "Line"))
+  return Boolean(token && (token.type === "Block" || token.type === "Line"));
 }
 /**
  * Determines whether two adjacent tokens are on the same line.
@@ -16,7 +16,7 @@ export function isCommentToken(token: YAMLToken | null): boolean {
  * @public
  */
 export function isTokenOnSameLine(left: YAMLToken, right: YAMLToken): boolean {
-    return left.loc.end.line === right.loc.start.line
+  return left.loc.end.line === right.loc.start.line;
 }
 
 /**
@@ -25,7 +25,7 @@ export function isTokenOnSameLine(left: YAMLToken, right: YAMLToken): boolean {
  * @returns `true` if the token is a question.
  */
 export function isQuestion(token: YAMLToken | null): token is YAMLToken {
-    return token != null && token.type === "Punctuator" && token.value === "?"
+  return token != null && token.type === "Punctuator" && token.value === "?";
 }
 
 /**
@@ -34,7 +34,7 @@ export function isQuestion(token: YAMLToken | null): token is YAMLToken {
  * @returns `true` if the token is a hyphen.
  */
 export function isHyphen(token: YAMLToken | null): token is YAMLToken {
-    return token != null && token.type === "Punctuator" && token.value === "-"
+  return token != null && token.type === "Punctuator" && token.value === "-";
 }
 
 /**
@@ -43,7 +43,7 @@ export function isHyphen(token: YAMLToken | null): token is YAMLToken {
  * @returns `true` if the token is a colon.
  */
 export function isColon(token: YAMLToken | null): token is YAMLToken {
-    return token != null && token.type === "Punctuator" && token.value === ":"
+  return token != null && token.type === "Punctuator" && token.value === ":";
 }
 
 /**
@@ -52,5 +52,5 @@ export function isColon(token: YAMLToken | null): token is YAMLToken {
  * @returns `true` if the token is a comma.
  */
 export function isComma(token: YAMLToken | null): token is YAMLToken {
-    return token != null && token.type === "Punctuator" && token.value === ","
+  return token != null && token.type === "Punctuator" && token.value === ",";
 }
