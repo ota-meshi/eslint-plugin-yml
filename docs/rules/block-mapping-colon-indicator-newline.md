@@ -3,13 +3,13 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/block-mapping-colon-indicator-newline"
 description: "enforce consistent line breaks after `:` indicator"
+since: "v1.2.0"
 ---
 
 # yml/block-mapping-colon-indicator-newline
 
 > enforce consistent line breaks after `:` indicator
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -53,6 +53,10 @@ yml/block-mapping-colon-indicator-newline:
 - [yml/key-spacing](./key-spacing.md)
 - [yml/block-mapping-question-indicator-newline](./block-mapping-question-indicator-newline.md)
 - [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v1.2.0
 
 ## :mag: Implementation
 
