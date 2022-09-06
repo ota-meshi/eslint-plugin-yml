@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 import { rules } from "../src/utils/rules";
 import type { RuleModule } from "../src/types";
+import { getNewVersion } from "./lib/changesets-util";
 
 //eslint-disable-next-line require-jsdoc -- tools
 function formatItems(items: string[]) {
@@ -24,7 +25,7 @@ function yamlValue(val: unknown) {
 const ROOT = path.resolve(__dirname, "../docs/rules");
 
 //eslint-disable-next-line require-jsdoc -- tools
-function pickSince(content: string): string | null {
+function pickSince(content: string): string | null | Promise<string> {
   const fileIntro = /^---\n((?:.*\n)+)---\n*/.exec(content);
   if (fileIntro) {
     const since = /since: "?(v\d+\.\d+\.\d+)"?/.exec(fileIntro[1]);
@@ -37,6 +38,10 @@ function pickSince(content: string): string | null {
     // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- ignore
     return `v${require("../package.json").version}`;
   }
+  // eslint-disable-next-line no-process-env -- ignore
+  if (process.env.IN_VERSION_CI_SCRIPT) {
+    return getNewVersion().then((v) => `v${v}`);
+  }
   return null;
 }
 
@@ -47,7 +52,7 @@ class DocFile {
 
   private content: string;
 
-  private readonly since: string | null;
+  private readonly since: string | null | Promise<string>;
 
   public constructor(rule: RuleModule) {
     this.rule = rule;
@@ -64,8 +69,10 @@ class DocFile {
     const {
       meta: {
         fixable,
+        hasSuggestions,
         deprecated,
-        docs: { ruleId, description, categories, replacedBy },
+        replacedBy,
+        docs: { ruleId, description, categories },
       },
     } = this.rule;
     const title = `# ${ruleId}\n\n> ${description}`;
@@ -101,9 +108,14 @@ class DocFile {
         "- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule."
       );
     }
+    if (hasSuggestions) {
+      notes.push(
+        "- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)."
+      );
+    }
     if (!this.since) {
       notes.unshift(
-        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>`
+        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>`
       );
     }
 
@@ -112,11 +124,14 @@ class DocFile {
       notes.push("", "");
     }
 
-    const headerPattern = /#.+\n+[^\n]*\n+(?:- .+\n+)*\n*/u;
+    const headerPattern = /(?:^|\n)#.+\n+[^\n]*\n+(?:- .+\n+)*\n*/u;
 
-    const header = `${title}\n\n${notes.join("\n")}`;
+    const header = `\n${title}\n\n${notes.join("\n")}`;
     if (headerPattern.test(this.content)) {
-      this.content = this.content.replace(headerPattern, header);
+      this.content = this.content.replace(
+        headerPattern,
+        header.replace(/\$/g, "$$$$")
+      );
     } else {
       this.content = `${header}${this.content.trim()}\n`;
     }
@@ -124,7 +139,7 @@ class DocFile {
     return this;
   }
 
-  public updateFooter() {
+  public async updateFooter() {
     const { ruleName, extensionRule } = this.rule.meta.docs;
     const footerPattern =
       /## (?:(?::mag:)? ?Implementation|:rocket: Version).+$/s;
@@ -132,7 +147,7 @@ class DocFile {
       this.since
         ? `## :rocket: Version
 
-This rule was introduced in eslint-plugin-yml ${this.since}
+This rule was introduced in eslint-plugin-yml ${await this.since}
 
 `
         : ""
@@ -149,7 +164,10 @@ ${
     : ""
 }`;
     if (footerPattern.test(this.content)) {
-      this.content = this.content.replace(footerPattern, footer);
+      this.content = this.content.replace(
+        footerPattern,
+        footer.replace(/\$/g, "$$$$")
+      );
     } else {
       this.content = `${this.content.trim()}\n\n${footer}`;
     }
@@ -190,7 +208,7 @@ ${
     return this;
   }
 
-  public updateFileIntro() {
+  public async updateFileIntro() {
     const { ruleId, description } = this.rule.meta.docs;
 
     const fileIntro = {
@@ -198,17 +216,20 @@ ${
       sidebarDepth: 0,
       title: ruleId,
       description,
-      ...(this.since ? { since: this.since } : {}),
+      ...(this.since ? { since: await this.since } : {}),
     };
     const computed = `---\n${Object.keys(fileIntro)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- tool
       .map((key) => `${key}: ${yamlValue((fileIntro as any)[key])}`)
-      .join("\n")}\n---\n`;
+      .join("\n")}\n---\n\n`;
 
-    const fileIntroPattern = /^---\n(.*\n)+?---\n*/gu;
+    const fileIntroPattern = /^---\n(?:.*\n)+?---\n*/gu;
 
     if (fileIntroPattern.test(this.content)) {
-      this.content = this.content.replace(fileIntroPattern, computed);
+      this.content = this.content.replace(
+        fileIntroPattern,
+        computed.replace(/\$/g, "$$$$")
+      );
     } else {
       this.content = `${computed}${this.content.trim()}\n`;
     }
@@ -217,21 +238,23 @@ ${
   }
 
   public write() {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires -- tools
-    const isWin = require("os").platform().startsWith("win");
-
-    this.content = this.content.replace(/\r?\n/gu, isWin ? "\r\n" : "\n");
+    this.content = this.content.replace(/\r?\n/gu, "\n");
 
     fs.writeFileSync(this.filePath, this.content);
   }
 }
 
-for (const rule of rules) {
-  DocFile.read(rule)
-    .updateHeader()
-    .updateFooter()
-    .updateCodeBlocks()
-    .updateFileIntro()
-    .adjustCodeBlocks()
-    .write();
+void main();
+
+/** main */
+async function main() {
+  for (const rule of rules) {
+    const doc = DocFile.read(rule);
+    doc.updateHeader();
+    await doc.updateFooter();
+    doc.updateCodeBlocks();
+    await doc.updateFileIntro();
+    doc.adjustCodeBlocks();
+    doc.write();
+  }
 }
