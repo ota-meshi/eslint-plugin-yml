@@ -4,6 +4,7 @@ import blockMappingQuestionIndicatorNewline from "../rules/block-mapping-questio
 import blockMapping from "../rules/block-mapping";
 import blockSequenceHyphenIndicatorNewline from "../rules/block-sequence-hyphen-indicator-newline";
 import blockSequence from "../rules/block-sequence";
+import fileExtension from "../rules/file-extension";
 import flowMappingCurlyNewline from "../rules/flow-mapping-curly-newline";
 import flowMappingCurlySpacing from "../rules/flow-mapping-curly-spacing";
 import flowSequenceBracketNewline from "../rules/flow-sequence-bracket-newline";
@@ -32,6 +33,7 @@ export const rules = [
   blockMapping,
   blockSequenceHyphenIndicatorNewline,
   blockSequence,
+  fileExtension,
   flowMappingCurlyNewline,
   flowMappingCurlySpacing,
   flowSequenceBracketNewline,

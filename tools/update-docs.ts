@@ -92,7 +92,7 @@ class DocFile {
         notes.push("- :warning: This rule was **deprecated**.");
       }
     } else {
-      if (categories) {
+      if (categories && categories.length) {
         const presets = [];
         // eslint-disable-next-line @typescript-eslint/require-array-sort-compare -- ignore
         for (const cat of categories.sort()) {
