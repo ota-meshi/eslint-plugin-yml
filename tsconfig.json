@@ -18,7 +18,9 @@
     //     "*": ["typings/*"]
     // },
     "esModuleInterop": true,
-    "outDir": "lib"
+    "outDir": "lib",
+
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*",
