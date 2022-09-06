@@ -18,6 +18,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/block-mapping](./block-mapping.md) | require or disallow block style mappings. | :wrench: |  | :star: |
 | [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md) | enforce consistent line breaks after `-` indicator | :wrench: |  | :star: |
 | [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: |  | :star: |
+| [yml/file-extension](./file-extension.md) | enforce YAML file extension |  |  |  |
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  | :star: |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |  |
 | [yml/no-empty-document](./no-empty-document.md) | disallow empty document |  | :star: | :star: |
