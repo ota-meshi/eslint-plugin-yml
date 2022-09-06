@@ -112,5 +112,8 @@
     "vue-eslint-parser": "^9.0.0",
     "vuepress": "^1.5.2",
     "yaml": "^2.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
