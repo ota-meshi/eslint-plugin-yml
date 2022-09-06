@@ -1,0 +1,16 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "ota-meshi/eslint-plugin-yml"
+    }
+  ],
+  "commit": false,
+  "linked": [],
+  "access": "restricted",
+  "baseBranch": "master",
+  "updateInternalDependencies": "patch",
+  "bumpVersionsWithWorkspaceProtocolOnly": true,
+  "ignore": []
+}

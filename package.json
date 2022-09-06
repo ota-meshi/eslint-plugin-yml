@@ -28,6 +28,9 @@
     "docs:build": "export NODE_OPTIONS=--openssl-legacy-provider && npm run build:ts && vuepress build docs --no-cache",
     "preversion": "npm test && git add .",
     "version": "env-cmd -e version npm run update && git add .",
+    "version:ci": "env-cmd -e version-ci npm run update && changeset version",
+    "prerelease": "npm run build",
+    "release": "changeset publish",
     "update-fixtures": "npm run ts -- ./tools/update-fixtures.ts && npm run eslint-fix",
     "ts": "node -r esbuild-register",
     "mocha": "npm run ts -- ./node_modules/mocha/bin/mocha.js"
@@ -60,6 +63,8 @@
     "eslint": ">=6.0.0"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.6",
+    "@changesets/cli": "^2.24.2",
     "@ota-meshi/eslint-plugin": "^0.12.0",
     "@types/debug": "^4.1.5",
     "@types/eslint": "^8.0.0",

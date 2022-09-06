@@ -40,7 +40,6 @@ export interface RuleMetaData {
     url: string;
     ruleId: string;
     ruleName: string;
-    replacedBy?: [];
     default?: "error" | "warn";
     extensionRule: string | false;
     layout: boolean;
@@ -50,6 +49,7 @@ export interface RuleMetaData {
   hasSuggestions?: boolean;
   schema: JSONSchema4 | JSONSchema4[];
   deprecated?: boolean;
+  replacedBy?: string[];
   type: "problem" | "suggestion" | "layout";
 }
 
