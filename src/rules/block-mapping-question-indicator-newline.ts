@@ -52,9 +52,13 @@ export default createRule("block-mapping-question-indicator-newline", {
                 loc: question.loc,
                 messageId: "unexpectedLinebreakAfterIndicator",
                 fix(fixer) {
-                  const spaces = " ".repeat(
-                    Math.max(key.loc.start.column - question.loc.end.column, 1)
-                  );
+                  const spaceCount =
+                    key.loc.start.column - question.loc.end.column;
+                  if (spaceCount < 1 && key.loc.start.line < key.loc.end.line) {
+                    // Stop auto-fix as it can break the indentation of multi-line key.
+                    return null;
+                  }
+                  const spaces = " ".repeat(Math.max(spaceCount, 1));
                   return fixer.replaceTextRange(
                     [question.range[1], key.range[0]],
                     spaces

@@ -1,0 +1,10 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/9FMG-input.yaml
+a:
+  b:
+    c:
+       d
+  e:
+    f:
+       g
+h:
+   i

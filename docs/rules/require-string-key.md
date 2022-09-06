@@ -5,6 +5,7 @@ title: "yml/require-string-key"
 description: "disallow mapping keys other than strings"
 since: "v0.3.0"
 ---
+
 # yml/require-string-key
 
 > disallow mapping keys other than strings

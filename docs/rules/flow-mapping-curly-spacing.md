@@ -5,6 +5,7 @@ title: "yml/flow-mapping-curly-spacing"
 description: "enforce consistent spacing inside braces"
 since: "v0.1.0"
 ---
+
 # yml/flow-mapping-curly-spacing
 
 > enforce consistent spacing inside braces

@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/JQ4R-input.yaml
+block sequence:
+  - one
+  - two :
+          three

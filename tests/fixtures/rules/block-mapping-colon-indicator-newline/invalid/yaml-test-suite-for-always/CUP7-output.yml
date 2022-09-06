@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/CUP7-input.yaml
+anchored:
+          !local &anchor value
+alias:
+       *anchor

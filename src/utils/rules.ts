@@ -1,4 +1,5 @@
 import type { RuleModule } from "../types";
+import blockMappingColonIndicatorNewline from "../rules/block-mapping-colon-indicator-newline";
 import blockMappingQuestionIndicatorNewline from "../rules/block-mapping-question-indicator-newline";
 import blockMapping from "../rules/block-mapping";
 import blockSequenceHyphenIndicatorNewline from "../rules/block-sequence-hyphen-indicator-newline";
@@ -26,6 +27,7 @@ import spacedComment from "../rules/spaced-comment";
 import vueCustomBlockNoParsingError from "../rules/vue-custom-block/no-parsing-error";
 
 export const rules = [
+  blockMappingColonIndicatorNewline,
   blockMappingQuestionIndicatorNewline,
   blockMapping,
   blockSequenceHyphenIndicatorNewline,

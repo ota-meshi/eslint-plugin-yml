@@ -1,0 +1,8 @@
+{
+  "options": ["always"],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
+}

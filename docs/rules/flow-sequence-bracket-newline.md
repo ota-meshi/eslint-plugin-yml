@@ -5,6 +5,7 @@ title: "yml/flow-sequence-bracket-newline"
 description: "enforce linebreaks after opening and before closing flow sequence brackets"
 since: "v0.1.0"
 ---
+
 # yml/flow-sequence-bracket-newline
 
 > enforce linebreaks after opening and before closing flow sequence brackets

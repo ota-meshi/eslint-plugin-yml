@@ -5,6 +5,7 @@ title: "yml/flow-sequence-bracket-spacing"
 description: "enforce consistent spacing inside flow sequence brackets"
 since: "v0.1.0"
 ---
+
 # yml/flow-sequence-bracket-spacing
 
 > enforce consistent spacing inside flow sequence brackets

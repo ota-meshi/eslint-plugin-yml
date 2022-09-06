@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/6SLA-input.yaml
+"foo\nbar:baz\tx \\$%^&*()x":
+                              23
+'x\ny:z\tx $%^&*()x':
+                      24

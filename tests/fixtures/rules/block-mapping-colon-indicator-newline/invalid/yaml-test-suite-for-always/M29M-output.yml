@@ -1,0 +1,10 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/M29M-input.yaml
+a:
+   |
+ ab
+ 
+ cd
+ ef
+ 
+
+...

@@ -5,6 +5,7 @@ title: "yml/no-multiple-empty-lines"
 description: "disallow multiple empty lines"
 since: "v0.12.0"
 ---
+
 # yml/no-multiple-empty-lines
 
 > disallow multiple empty lines

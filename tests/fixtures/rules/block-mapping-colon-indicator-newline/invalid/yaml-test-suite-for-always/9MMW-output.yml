@@ -1,0 +1,7 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/9MMW-input.yaml
+- [ YAML :
+           separate ]
+- [ :
+      empty key entry ]
+- [ "JSON like":
+                adjacent ]

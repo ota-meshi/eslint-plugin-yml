@@ -5,6 +5,7 @@ title: "yml/indent"
 description: "enforce consistent indentation"
 since: "v0.1.0"
 ---
+
 # yml/indent
 
 > enforce consistent indentation

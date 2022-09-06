@@ -1,0 +1,7 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/Z67P-input.yaml
+literal:
+         |2
+  value
+folded:
+        !foo >1
+ value

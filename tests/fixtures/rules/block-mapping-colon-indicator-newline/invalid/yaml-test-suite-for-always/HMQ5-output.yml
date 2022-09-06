@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/HMQ5-input.yaml
+!!str &a1 "foo":
+  !!str bar
+&a2 baz :
+          *a1

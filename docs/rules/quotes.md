@@ -5,6 +5,7 @@ title: "yml/quotes"
 description: "enforce the consistent use of either double, or single quotes"
 since: "v0.3.0"
 ---
+
 # yml/quotes
 
 > enforce the consistent use of either double, or single quotes

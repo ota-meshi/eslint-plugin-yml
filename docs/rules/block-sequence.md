@@ -5,6 +5,7 @@ title: "yml/block-sequence"
 description: "require or disallow block style sequences."
 since: "v0.1.0"
 ---
+
 # yml/block-sequence
 
 > require or disallow block style sequences.

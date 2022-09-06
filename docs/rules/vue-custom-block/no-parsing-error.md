@@ -5,6 +5,7 @@ title: "yml/vue-custom-block/no-parsing-error"
 description: "disallow parsing errors in Vue custom blocks"
 since: "v0.2.0"
 ---
+
 # yml/vue-custom-block/no-parsing-error
 
 > disallow parsing errors in Vue custom blocks

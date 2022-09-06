@@ -1,0 +1,6 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/AZ63-input.yaml
+1:
+- 2
+- 3
+4:
+   5

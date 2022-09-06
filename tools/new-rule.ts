@@ -145,4 +145,7 @@ Same as [${ruleId}] rule option. See [here](https://eslint.org/docs/rules/${rule
   cp.execSync(`code "${ruleFile}"`);
   cp.execSync(`code "${testFile}"`);
   cp.execSync(`code "${docFile}"`);
+  console.log(
+    `npm run mocha -- "tests/src/**/${ruleId}.ts" --reporter dot --timeout 60000`
+  );
 })(process.argv[2]);

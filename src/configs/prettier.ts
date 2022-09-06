@@ -5,6 +5,7 @@ export = {
   extends: [baseExtend],
   rules: {
     // eslint-plugin-yml rules
+    "yml/block-mapping-colon-indicator-newline": "off",
     "yml/block-mapping-question-indicator-newline": "off",
     "yml/block-sequence-hyphen-indicator-newline": "off",
     "yml/flow-mapping-curly-newline": "off",

@@ -1,0 +1,6 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/S3PD-input.yaml
+plain key:
+           in-line value
+: # Both empty
+"quoted key":
+- entry

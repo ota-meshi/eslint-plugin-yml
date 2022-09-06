@@ -5,6 +5,7 @@ title: "yml/spaced-comment"
 description: "enforce consistent spacing after the `#` in a comment"
 since: "v0.1.0"
 ---
+
 # yml/spaced-comment
 
 > enforce consistent spacing after the `#` in a comment

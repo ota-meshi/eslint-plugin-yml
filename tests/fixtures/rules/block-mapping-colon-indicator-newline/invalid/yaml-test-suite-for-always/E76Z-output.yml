@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/E76Z-input.yaml
+&a a:
+      &b b
+*a :
+     *b

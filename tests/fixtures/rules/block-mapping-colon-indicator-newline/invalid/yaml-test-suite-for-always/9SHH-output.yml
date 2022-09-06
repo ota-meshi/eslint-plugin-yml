@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/9SHH-input.yaml
+single:
+        'text'
+double:
+        "text"

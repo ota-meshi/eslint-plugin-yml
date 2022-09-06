@@ -1,0 +1,62 @@
+[
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 3,
+    "column": 5
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 9,
+    "column": 5
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 10,
+    "column": 5
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 15,
+    "column": 5
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 16,
+    "column": 5
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 20,
+    "column": 9
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 21,
+    "column": 9
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 22,
+    "column": 9
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 24,
+    "column": 9
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 25,
+    "column": 9
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 26,
+    "column": 9
+  }
+]

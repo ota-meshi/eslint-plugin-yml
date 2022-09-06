@@ -5,6 +5,7 @@ title: "yml/no-tab-indent"
 description: "disallow tabs for indentation."
 since: "v0.1.0"
 ---
+
 # yml/no-tab-indent
 
 > disallow tabs for indentation.

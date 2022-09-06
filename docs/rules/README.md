@@ -13,6 +13,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 
 | Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
 |:--------|:------------|:-------:|:-----------:|:--------:|
+| [yml/block-mapping-colon-indicator-newline](./block-mapping-colon-indicator-newline.md) | enforce consistent line breaks after `:` indicator | :wrench: |  |  |
 | [yml/block-mapping-question-indicator-newline](./block-mapping-question-indicator-newline.md) | enforce consistent line breaks after `?` indicator | :wrench: |  | :star: |
 | [yml/block-mapping](./block-mapping.md) | require or disallow block style mappings. | :wrench: |  | :star: |
 | [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md) | enforce consistent line breaks after `-` indicator | :wrench: |  | :star: |

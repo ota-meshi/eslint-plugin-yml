@@ -71,9 +71,16 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
                 loc: hyphen.loc,
                 messageId: "unexpectedLinebreakAfterIndicator",
                 fix(fixer) {
-                  const spaces = " ".repeat(
-                    Math.max(entry.loc.start.column - hyphen.loc.end.column, 1)
-                  );
+                  const spaceCount =
+                    entry.loc.start.column - hyphen.loc.end.column;
+                  if (
+                    spaceCount < 1 &&
+                    entry.loc.start.line < entry.loc.end.line
+                  ) {
+                    // Stop auto-fix as it can break the indentation of multi-line entry.
+                    return null;
+                  }
+                  const spaces = " ".repeat(Math.max(spaceCount, 1));
                   return fixer.replaceTextRange(
                     [hyphen.range[1], entry.range[0]],
                     spaces

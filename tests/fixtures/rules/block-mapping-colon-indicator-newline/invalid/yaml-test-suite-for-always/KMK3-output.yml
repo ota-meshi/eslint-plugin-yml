@@ -1,0 +1,6 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/KMK3-input.yaml
+foo:
+  bar:
+       1
+baz:
+     2

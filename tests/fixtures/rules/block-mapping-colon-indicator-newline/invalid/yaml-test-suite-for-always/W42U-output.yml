@@ -1,0 +1,8 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/W42U-input.yaml
+- # Empty
+- |
+ block node
+- - one # Compact
+  - two # sequence
+- one:
+       two # Compact mapping

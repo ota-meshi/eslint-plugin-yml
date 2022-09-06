@@ -1,0 +1,8 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/JTV5-input.yaml
+? a
+  true
+:
+  null
+  d
+? e
+  42

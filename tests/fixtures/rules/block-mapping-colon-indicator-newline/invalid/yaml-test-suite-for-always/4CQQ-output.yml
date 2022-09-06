@@ -1,0 +1,8 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/4CQQ-input.yaml
+plain:
+  This unquoted scalar
+  spans many lines.
+
+quoted:
+        "So does this
+  quoted scalar.\n"

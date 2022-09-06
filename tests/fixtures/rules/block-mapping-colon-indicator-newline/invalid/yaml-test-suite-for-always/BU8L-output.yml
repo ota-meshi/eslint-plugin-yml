@@ -1,0 +1,6 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/BU8L-input.yaml
+key:
+     &anchor
+ !!map
+  a:
+     b

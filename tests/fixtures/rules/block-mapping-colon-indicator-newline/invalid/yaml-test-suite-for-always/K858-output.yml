@@ -1,0 +1,10 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/K858-input.yaml
+strip:
+       >-
+
+clip:
+      >
+
+keep:
+      |+
+

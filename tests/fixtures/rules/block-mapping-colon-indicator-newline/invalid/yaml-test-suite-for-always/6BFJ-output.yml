@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/6BFJ-input.yaml
+---
+&mapping
+&key [ &item a, b, c ]:
+                        value
