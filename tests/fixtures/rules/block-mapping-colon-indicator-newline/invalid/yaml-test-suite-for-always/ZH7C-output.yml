@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/ZH7C-input.yaml
+&a a:
+      b
+c:
+   &d d

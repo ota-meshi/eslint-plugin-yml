@@ -5,6 +5,7 @@ title: "yml/no-irregular-whitespace"
 description: "disallow irregular whitespace"
 since: "v0.1.0"
 ---
+
 # yml/no-irregular-whitespace
 
 > disallow irregular whitespace

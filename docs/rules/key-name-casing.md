@@ -5,6 +5,7 @@ title: "yml/key-name-casing"
 description: "enforce naming convention to key names"
 since: "v0.2.0"
 ---
+
 # yml/key-name-casing
 
 > enforce naming convention to key names

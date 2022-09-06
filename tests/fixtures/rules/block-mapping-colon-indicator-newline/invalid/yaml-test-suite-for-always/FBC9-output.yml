@@ -1,0 +1,10 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/FBC9-input.yaml
+safe:
+      a!"#$%&'()*+,-./09:;<=>?@AZ[\]^_`az{|}~
+     !"#$%&'()*+,-./09:;<=>?@AZ[\]^_`az{|}~
+safe question mark:
+                    ?foo
+safe colon:
+            :foo
+safe dash:
+           -foo

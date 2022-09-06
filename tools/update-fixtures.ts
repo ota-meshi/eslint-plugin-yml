@@ -184,6 +184,16 @@ makeSuiteTests(
 );
 
 makeSuiteTests(
+  "block-mapping-colon-indicator-newline",
+  {
+    default: [],
+    never: ["never"],
+    always: ["always"],
+  },
+  { force: true }
+);
+
+makeSuiteTests(
   "no-empty-document",
   {
     default: [],

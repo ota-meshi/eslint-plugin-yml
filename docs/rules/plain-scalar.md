@@ -5,6 +5,7 @@ title: "yml/plain-scalar"
 description: "require or disallow plain style scalar."
 since: "v0.3.0"
 ---
+
 # yml/plain-scalar
 
 > require or disallow plain style scalar.

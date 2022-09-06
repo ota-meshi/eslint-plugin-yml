@@ -1,0 +1,4 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/8CWC-input.yaml
+---
+key ends with two colons:::
+                            value

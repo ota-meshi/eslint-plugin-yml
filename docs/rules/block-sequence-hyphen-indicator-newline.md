@@ -5,6 +5,7 @@ title: "yml/block-sequence-hyphen-indicator-newline"
 description: "enforce consistent line breaks after `-` indicator"
 since: "v0.5.0"
 ---
+
 # yml/block-sequence-hyphen-indicator-newline
 
 > enforce consistent line breaks after `-` indicator

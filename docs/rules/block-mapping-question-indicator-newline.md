@@ -5,6 +5,7 @@ title: "yml/block-mapping-question-indicator-newline"
 description: "enforce consistent line breaks after `?` indicator"
 since: "v0.5.0"
 ---
+
 # yml/block-mapping-question-indicator-newline
 
 > enforce consistent line breaks after `?` indicator
@@ -53,6 +54,7 @@ yml/block-mapping-question-indicator-newline:
 - [yml/flow-sequence-bracket-newline](./flow-sequence-bracket-newline.md)
 - [yml/flow-mapping-curly-newline](./flow-mapping-curly-newline.md)
 - [yml/key-spacing](./key-spacing.md)
+- [yml/block-mapping-colon-indicator-newline](./block-mapping-colon-indicator-newline.md)
 - [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md)
 
 ## :rocket: Version

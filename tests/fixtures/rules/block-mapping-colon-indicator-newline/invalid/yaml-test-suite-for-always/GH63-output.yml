@@ -1,0 +1,6 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/GH63-input.yaml
+? a
+:
+  13
+1.5:
+     d

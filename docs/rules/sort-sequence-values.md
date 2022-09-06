@@ -5,6 +5,7 @@ title: "yml/sort-sequence-values"
 description: "require sequence values to be sorted"
 since: "v0.14.0"
 ---
+
 # yml/sort-sequence-values
 
 > require sequence values to be sorted

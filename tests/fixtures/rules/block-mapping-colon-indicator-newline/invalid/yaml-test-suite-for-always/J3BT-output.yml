@@ -1,0 +1,9 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/J3BT-input.yaml
+# Tabs and spaces
+quoted:
+        "Quoted 	"
+block:
+       |
+  void main() {
+  	printf("Hello, world!\n");
+  }

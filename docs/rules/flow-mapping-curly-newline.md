@@ -5,6 +5,7 @@ title: "yml/flow-mapping-curly-newline"
 description: "enforce consistent line breaks inside braces"
 since: "v0.1.0"
 ---
+
 # yml/flow-mapping-curly-newline
 
 > enforce consistent line breaks inside braces

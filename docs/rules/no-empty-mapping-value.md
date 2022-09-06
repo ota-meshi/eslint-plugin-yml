@@ -5,6 +5,7 @@ title: "yml/no-empty-mapping-value"
 description: "disallow empty mapping values"
 since: "v0.3.0"
 ---
+
 # yml/no-empty-mapping-value
 
 > disallow empty mapping values

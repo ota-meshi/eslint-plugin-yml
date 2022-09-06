@@ -5,6 +5,7 @@ title: "yml/block-mapping"
 description: "require or disallow block style mappings."
 since: "v0.1.0"
 ---
+
 # yml/block-mapping
 
 > require or disallow block style mappings.

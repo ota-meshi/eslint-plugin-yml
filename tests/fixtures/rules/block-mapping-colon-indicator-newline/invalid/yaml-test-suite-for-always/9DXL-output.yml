@@ -1,0 +1,10 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/9DXL-input.yaml
+Mapping:
+         Document
+---
+# Empty
+...
+%YAML 1.2
+---
+matches %:
+           20

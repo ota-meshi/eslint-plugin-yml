@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/JS2J-input.yaml
+First occurrence:
+                  &anchor Value
+Second occurrence:
+                   *anchor

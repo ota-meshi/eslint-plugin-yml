@@ -1,0 +1,11 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/74H7-input.yaml
+!!str a:
+         b
+c:
+   !!int 42
+e:
+   !!str f
+g:
+   h
+!!int 23:
+          !!bool false

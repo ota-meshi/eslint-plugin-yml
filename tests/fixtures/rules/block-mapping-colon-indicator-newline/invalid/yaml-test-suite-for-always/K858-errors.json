@@ -1,0 +1,17 @@
+[
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 2,
+    "column": 6
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "message": "Expected a line break after this `:` indicator.",
+    "line": 6,
+    "column": 5
+  }
+]

@@ -1,0 +1,4 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/9J7A-input.yaml
+foo:
+  bar:
+       baz

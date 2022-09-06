@@ -5,6 +5,7 @@ title: "yml/no-empty-sequence-entry"
 description: "disallow empty sequence entries"
 since: "v0.3.0"
 ---
+
 # yml/no-empty-sequence-entry
 
 > disallow empty sequence entries

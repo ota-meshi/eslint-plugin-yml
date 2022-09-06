@@ -1,0 +1,9 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/5BVJ-input.yaml
+literal:
+         |
+  some
+  text
+folded:
+        >
+  some
+  text

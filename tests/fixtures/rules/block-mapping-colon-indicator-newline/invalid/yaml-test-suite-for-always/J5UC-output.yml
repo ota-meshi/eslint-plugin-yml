@@ -1,0 +1,7 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/J5UC-input.yaml
+foo:
+     blue
+bar:
+     arrr
+baz:
+     jazz

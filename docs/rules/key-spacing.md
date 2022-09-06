@@ -5,6 +5,7 @@ title: "yml/key-spacing"
 description: "enforce consistent spacing between keys and values in mapping pairs"
 since: "v0.3.0"
 ---
+
 # yml/key-spacing
 
 > enforce consistent spacing between keys and values in mapping pairs

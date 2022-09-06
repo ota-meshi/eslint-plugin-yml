@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/W5VH-input.yaml
+a:
+   &:@*!$"<foo>: scalar a
+b:
+   *:@*!$"<foo>:

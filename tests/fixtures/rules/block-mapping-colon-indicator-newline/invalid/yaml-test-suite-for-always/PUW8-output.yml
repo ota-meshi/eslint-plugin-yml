@@ -1,0 +1,5 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/PUW8-input.yaml
+---
+a:
+   b
+---

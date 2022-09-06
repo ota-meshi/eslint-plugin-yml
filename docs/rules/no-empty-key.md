@@ -5,6 +5,7 @@ title: "yml/no-empty-key"
 description: "disallow empty mapping keys"
 since: "v0.3.0"
 ---
+
 # yml/no-empty-key
 
 > disallow empty mapping keys

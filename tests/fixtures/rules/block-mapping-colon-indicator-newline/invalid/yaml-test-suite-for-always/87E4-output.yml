@@ -1,0 +1,6 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/87E4-input.yaml
+'implicit block key' :
+                       [
+  'implicit flow key' :
+                        value,
+ ]

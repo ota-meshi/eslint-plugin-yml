@@ -1,0 +1,6 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-never/A984-input.yaml
+a: b
+ c
+d:
+ e
+  f

@@ -1,0 +1,23 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/F8F9-input.yaml
+ # Strip
+  # Comments:
+strip:
+       |-
+  # text
+  
+ # Clip
+  # comments:
+
+clip:
+      |
+  # text
+ 
+ # Keep
+  # comments:
+
+keep:
+      |+
+  # text
+
+ # Trail
+  # comments.

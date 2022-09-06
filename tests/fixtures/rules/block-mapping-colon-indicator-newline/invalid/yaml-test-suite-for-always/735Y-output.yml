@@ -1,0 +1,8 @@
+# block-mapping-colon-indicator-newline/invalid/yaml-test-suite-for-always/735Y-input.yaml
+-
+  "flow in block"
+- >
+ Block scalar
+- !!map # Block collection
+  foo :
+        bar

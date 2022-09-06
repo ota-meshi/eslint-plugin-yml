@@ -5,6 +5,7 @@ title: "yml/no-empty-document"
 description: "disallow empty document"
 since: "v0.6.0"
 ---
+
 # yml/no-empty-document
 
 > disallow empty document

@@ -5,6 +5,7 @@ title: "yml/sort-keys"
 description: "require mapping keys to be sorted"
 since: "v0.3.0"
 ---
+
 # yml/sort-keys
 
 > require mapping keys to be sorted
