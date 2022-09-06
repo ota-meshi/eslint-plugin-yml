@@ -3,13 +3,12 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/file-extension"
 description: "enforce YAML file extension"
+since: "v1.2.0"
 ---
 
 # yml/file-extension
 
 > enforce YAML file extension
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
@@ -52,6 +51,10 @@ yml/file-extension:
 
 - `extension` ... The extension you want to enforce. Default is `"yaml"`.
 - `caseSensitive` ... Specify `true` to enforce lowercase extension. Default is `true`.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v1.2.0
 
 ## :mag: Implementation
 
