@@ -21,7 +21,6 @@ export async function getNewVersion(): Promise<string> {
     preState
   );
 
-  return releasePlan.releases.find(
-    ({ name }) => name === "eslint-plugin-svelte"
-  )!.newVersion;
+  return releasePlan.releases.find(({ name }) => name === "eslint-plugin-yml")!
+    .newVersion;
 }
