@@ -215,9 +215,9 @@ export default createRule("indent", {
      * Calculate the indentation offset for the values in the mapping.
      */
     function calcMappingPairValueIndentOffset(
-      node: AST.YAMLWithMeta | AST.YAMLContent | null
+      node: AST.YAMLWithMeta | AST.YAMLContent
     ) {
-      if (indentBlockSequences || !node) {
+      if (indentBlockSequences) {
         return 1;
       }
       if (node.type === "YAMLSequence" && node.style === "block") {
@@ -291,14 +291,13 @@ export default createRule("indent", {
         const pairFirst = sourceCode.getFirstToken(node);
         const keyToken = node.key && sourceCode.getFirstToken(node.key);
         const colonToken = findColonToken();
-        const valueToken = node.value && sourceCode.getFirstToken(node.value);
 
         const questionToken = isQuestion(pairFirst) ? pairFirst : null;
         if (questionToken) {
           // ? a: b
           marks.add(questionToken);
 
-          if (keyToken) {
+          if (node.key) {
             setOffset(
               keyToken,
               calcMappingPairValueIndentOffset(node.key),
@@ -317,7 +316,8 @@ export default createRule("indent", {
             setOffset(colonToken, 1, keyToken);
           }
         }
-        if (valueToken) {
+        if (node.value) {
+          const valueToken = sourceCode.getFirstToken(node.value);
           if (colonToken) {
             setOffset(
               valueToken,
