@@ -1,0 +1,25 @@
+# {"options":[2, {"indentBlockSequences": true}]}
+a:
+  - a
+  - b
+  - c
+
+b:
+- a
+- b
+- c
+
+c:
+ -
+  - a
+  - b
+  - c
+
+?
+  - a
+  - b
+  - c
+:
+  - a
+  - b
+  - c

@@ -1,0 +1,25 @@
+# indent/invalid/block-sequence-without-indent-block-sequences01-input.yml
+a:
+- a
+- b
+- c
+
+b:
+- a
+- b
+- c
+
+c:
+-
+  - a
+  - b
+  - c
+
+?
+- a
+- b
+- c
+:
+- a
+- b
+- c

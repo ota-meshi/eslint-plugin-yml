@@ -49,9 +49,60 @@ This rule reports enforces a consistent indentation style. The default style is 
 yml/indent:
   - error
   - 2
+  - indentBlockSequences: true
 ```
 
-Specify the number of indents.
+- Number option ... Specify the number of indents.
+- Object option
+  - `indentBlockSequences` ... Specifies whether block sequences should be indented or not (when in a mapping).
+
+### `"indentBlockSequences": true` (default)
+
+<eslint-code-block fix>
+
+<!-- eslint-skip -->
+
+```yaml
+# eslint yml/indent: [error, 2, { indentBlockSequences: true }]
+
+# ✓ GOOD
+key1:
+  - a
+  - b
+  - c
+
+# ✗ BAD
+key2:
+- a
+- b
+- c
+```
+
+</eslint-code-block>
+
+### `"indentBlockSequences": false`
+
+<eslint-code-block fix>
+
+<!-- eslint-skip -->
+
+```yaml
+# eslint yml/indent: [error, 2, { indentBlockSequences: false }]
+
+# ✓ GOOD
+key1:
+- a
+- b
+- c
+
+# ✗ BAD
+key2:
+  - a
+  - b
+  - c
+```
+
+</eslint-code-block>
 
 ## :couple: Related rules
 

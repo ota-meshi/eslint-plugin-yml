@@ -1,7 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
 import { hasTabIndent, getNumOfIndent } from "../utils/yaml";
-import type { YAMLToken, Fix, RuleFixer } from "../types";
+import type { YAMLToken, Fix, RuleFixer, RuleContext } from "../types";
 import { isHyphen, isQuestion, isColon } from "../utils/ast-utils";
 
 // ----------------------------------------------------------------------
@@ -49,6 +49,32 @@ type LineIndentLastScalarData = {
   expectedIndent: number;
 };
 
+/**
+ * Parse options
+ */
+function parseOptions(context: RuleContext) {
+  const [indentOption, objectOptions] = context.options as [
+    number | undefined,
+    (
+      | {
+          indentBlockSequences?: boolean;
+        }
+      | undefined
+    )
+  ];
+  const numOfIndent = getNumOfIndent(context, indentOption);
+  let indentBlockSequences = true;
+  if (objectOptions) {
+    if (objectOptions.indentBlockSequences === false) {
+      indentBlockSequences = false;
+    }
+  }
+  return {
+    numOfIndent,
+    indentBlockSequences,
+  };
+}
+
 export default createRule("indent", {
   meta: {
     docs: {
@@ -62,6 +88,13 @@ export default createRule("indent", {
       {
         type: "integer",
         minimum: 2,
+      },
+      {
+        type: "object",
+        properties: {
+          indentBlockSequences: { type: "boolean" },
+        },
+        additionalProperties: false,
       },
     ],
     messages: {
@@ -80,7 +113,7 @@ export default createRule("indent", {
       return {};
     }
 
-    const numOfIndent = getNumOfIndent(context, context.options[0]);
+    const { numOfIndent, indentBlockSequences } = parseOptions(context);
 
     const sourceCode = context.getSourceCode();
 
@@ -178,6 +211,21 @@ export default createRule("indent", {
       }
     }
 
+    /**
+     * Calculate the indentation offset for the values in the mapping.
+     */
+    function calcMappingPairValueIndentOffset(
+      node: AST.YAMLWithMeta | AST.YAMLContent | null
+    ) {
+      if (indentBlockSequences || !node) {
+        return 1;
+      }
+      if (node.type === "YAMLSequence" && node.style === "block") {
+        return 0;
+      }
+      return 1;
+    }
+
     const documents: AST.YAMLDocument[] = [];
     return {
       YAMLDocument(node) {
@@ -238,44 +286,27 @@ export default createRule("indent", {
           }
         }
       },
-      // eslint-disable-next-line complexity -- X(
+
       YAMLPair(node) {
         const pairFirst = sourceCode.getFirstToken(node);
-        let questionToken: YAMLToken | null = null;
-        let keyToken: YAMLToken | null = null;
-        let colonToken: YAMLToken | null = null;
-        let valueToken: YAMLToken | null = null;
-        if (isQuestion(pairFirst)) {
+        const keyToken = node.key && sourceCode.getFirstToken(node.key);
+        const colonToken = findColonToken();
+        const valueToken = node.value && sourceCode.getFirstToken(node.value);
+
+        const questionToken = isQuestion(pairFirst) ? pairFirst : null;
+        if (questionToken) {
           // ? a: b
-          questionToken = pairFirst;
           marks.add(questionToken);
-        }
 
-        if (node.value) {
-          valueToken = sourceCode.getFirstToken(node.value);
-          colonToken = sourceCode.getTokenBefore(node.value, isColon);
-        }
-        if (node.key) {
-          keyToken = sourceCode.getFirstToken(node.key);
-          if (!colonToken) {
-            const token = sourceCode.getTokenAfter(node.key, isColon);
-            if (token && token.range[0] < node.range[1]) {
-              colonToken = token;
-            }
-          }
-        }
-        if (!colonToken) {
-          const tokens = sourceCode.getTokens(node, isColon);
-          if (tokens.length) {
-            colonToken = tokens[0];
+          if (keyToken) {
+            setOffset(
+              keyToken,
+              calcMappingPairValueIndentOffset(node.key),
+              questionToken
+            );
           }
         }
 
-        if (keyToken) {
-          if (questionToken) {
-            setOffset(keyToken, 1, questionToken);
-          }
-        }
         if (colonToken) {
           marks.add(colonToken);
           if (questionToken) {
@@ -288,10 +319,33 @@ export default createRule("indent", {
         }
         if (valueToken) {
           if (colonToken) {
-            setOffset(valueToken, 1, colonToken);
+            setOffset(
+              valueToken,
+              calcMappingPairValueIndentOffset(node.value),
+              colonToken
+            );
           } else if (keyToken) {
+            // Probably not reach.
             setOffset(valueToken, 1, keyToken);
           }
+        }
+
+        /** Find colon indicator token */
+        function findColonToken() {
+          if (node.value) {
+            return sourceCode.getTokenBefore(node.value, isColon);
+          }
+          if (node.key) {
+            const token = sourceCode.getTokenAfter(node.key, isColon);
+            if (token && token.range[0] < node.range[1]) {
+              return token;
+            }
+          }
+          const tokens = sourceCode.getTokens(node, isColon);
+          if (tokens.length) {
+            return tokens[0];
+          }
+          return null;
         }
       },
       YAMLWithMeta(node) {
