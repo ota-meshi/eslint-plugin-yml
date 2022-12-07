@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.3.0
+
+### Minor Changes
+
+- [#200](https://github.com/ota-meshi/eslint-plugin-yml/pull/200) [`8e82601`](https://github.com/ota-meshi/eslint-plugin-yml/commit/8e82601b85aebb0d4487592ce8b0349788a00266) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `indentBlockSequences` option to `yml/indent` rule
+
 ## 1.2.0
 
 ### Minor Changes
