@@ -1,0 +1,10 @@
+# indent/invalid/flow-sequence-without-indent-block-sequences01-input.yml
+a:
+  [a,b,c]
+
+b:
+  [
+    a,
+    b,
+    c
+  ]
