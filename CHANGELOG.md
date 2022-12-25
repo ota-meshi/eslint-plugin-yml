@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.4.0
+
+### Minor Changes
+
+- [#205](https://github.com/ota-meshi/eslint-plugin-yml/pull/205) [`ea2c472`](https://github.com/ota-meshi/eslint-plugin-yml/commit/ea2c47271cbd8ea921a71a73c57dd7c097cec15b) Thanks [@danielrentz](https://github.com/danielrentz)! - disable `no-unused-vars` in base config
+
 ## 1.3.0
 
 ### Minor Changes
