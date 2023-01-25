@@ -1,0 +1,7 @@
+# indent/invalid/indicator/mapping-test-input.yml
+foo:
+    ? bar
+    : - {
+            a: a,
+            b: b
+        }

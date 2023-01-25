@@ -1,0 +1,8 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/S9E8-input.yaml
+sequence:
+    - one
+    - two
+mapping:
+    ? sky
+    : blue
+    sea : green

@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/6BFJ-input.yaml
+---
+&mapping
+    &key [ &item a, b, c ]: value

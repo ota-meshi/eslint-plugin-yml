@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/LP6E-input.yaml
+- [a, b , c ]
+- { "a"  : b
+      , c : 'd' ,
+      e   : "f"
+  }
+- [      ]

@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/DFF7-input.yaml
+{
+    ? explicit: entry,
+    implicit: entry,
+    ?
+}

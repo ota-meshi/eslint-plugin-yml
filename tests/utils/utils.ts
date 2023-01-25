@@ -185,10 +185,6 @@ function* itrListupInput(rootDir: string): IterableIterator<string> {
   }
 }
 
-function exists(f: string) {
-  return fs.existsSync(f);
-}
-
 export function makeSuiteTests(
   ruleName: string,
   optionsList: { [name: string]: any[] },
@@ -250,7 +246,7 @@ export function makeSuiteTests(
         }
         const configFile = path.join(path.dirname(inputFile), "_config.json");
 
-        if (!exists(configFile) || force) {
+        if (!fs.existsSync(configFile) || force) {
           fs.writeFileSync(
             configFile,
             `${JSON.stringify(
@@ -312,7 +308,7 @@ function writeFixtures(
     },
     config.filename
   );
-  if (force || !exists(errorFile)) {
+  if (force || !fs.existsSync(errorFile)) {
     fs.writeFileSync(
       errorFile,
       `${JSON.stringify(
@@ -328,7 +324,7 @@ function writeFixtures(
     );
   }
 
-  if (force || !exists(outputFile)) {
+  if (force || !fs.existsSync(outputFile)) {
     const output = applyFixes(config.code, result).output;
 
     if (plugin.rules[ruleName].meta.fixable != null) {
@@ -369,7 +365,7 @@ function getConfig(ruleName: string, inputFile: string) {
     /input\.(?:ya?ml|vue)$/u,
     "override-config.json"
   );
-  const overrideConfig = exists(overrideConfigFile)
+  const overrideConfig = fs.existsSync(overrideConfigFile)
     ? JSON.parse(fs.readFileSync(overrideConfigFile, "utf8"))
     : {};
   let code, config;
@@ -377,10 +373,10 @@ function getConfig(ruleName: string, inputFile: string) {
     /input\.(?:ya?ml|vue)$/u,
     "config.json"
   );
-  if (!exists(configFile)) {
+  if (!fs.existsSync(configFile)) {
     configFile = path.join(path.dirname(inputFile), "_config.json");
   }
-  if (exists(configFile)) {
+  if (fs.existsSync(configFile)) {
     config = JSON.parse(fs.readFileSync(configFile, "utf8"));
   }
   if (config && typeof config === "object") {

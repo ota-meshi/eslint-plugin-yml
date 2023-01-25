@@ -1,0 +1,7 @@
+# indent/invalid/indicator/basic-test-input.yml
+foo:
+    bar:
+        - a
+        - b
+        - c
+        - d

@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/M5C3-input.yaml
+literal: |4
+    value
+folded:
+   !foo
+  >1
+ value

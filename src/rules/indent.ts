@@ -11,10 +11,10 @@ const ITERATION_OPTS = Object.freeze({
   includeComments: true,
 } as const);
 type Offset = -1 | 0 | 1;
-type OffsetInfo = {
+type IndentInfo = {
   baseToken: YAMLToken | null;
-  offset: Offset;
-  offsetWhenBaseIsNotFirst: Offset | null;
+  indent: number;
+  indentWhenBaseIsNotFirst: number | null;
   expectedIndent?: number;
 };
 type LineIndentStep1 = {
@@ -22,7 +22,7 @@ type LineIndentStep1 = {
   firstToken: YAMLToken;
   expectedIndent: number | null;
   actualIndent: number;
-  markData: LineIndentMarkData[];
+  indicatorData: LineIndentIndicatorData[];
   lastScalar: null | LineIndentLastScalarData;
 };
 
@@ -30,14 +30,14 @@ type LineIndentStep2 = {
   line: number;
   expectedIndent: number;
   actualIndent: number;
-  markData: LineIndentMarkData[];
+  indicatorData: LineIndentIndicatorData[];
   indentBlockScalar?: {
     node: AST.YAMLBlockLiteralScalar | AST.YAMLBlockFoldedScalar;
   };
 };
 
-type LineIndentMarkData = {
-  mark: YAMLToken;
+type LineIndentIndicatorData = {
+  indicator: YAMLToken;
   next: YAMLToken;
   expectedOffset: number;
   actualOffset: number;
@@ -58,20 +58,26 @@ function parseOptions(context: RuleContext) {
     (
       | {
           indentBlockSequences?: boolean;
+          indicatorValueIndent?: number;
         }
       | undefined
     )
   ];
   const numOfIndent = getNumOfIndent(context, indentOption);
   let indentBlockSequences = true;
+  let indicatorValueIndent = numOfIndent;
   if (objectOptions) {
     if (objectOptions.indentBlockSequences === false) {
       indentBlockSequences = false;
+    }
+    if (objectOptions.indicatorValueIndent != null) {
+      indicatorValueIndent = objectOptions.indicatorValueIndent;
     }
   }
   return {
     numOfIndent,
     indentBlockSequences,
+    indicatorValueIndent,
   };
 }
 
@@ -93,6 +99,10 @@ export default createRule("indent", {
         type: "object",
         properties: {
           indentBlockSequences: { type: "boolean" },
+          indicatorValueIndent: {
+            type: "integer",
+            minimum: 2,
+          },
         },
         additionalProperties: false,
       },
@@ -113,12 +123,13 @@ export default createRule("indent", {
       return {};
     }
 
-    const { numOfIndent, indentBlockSequences } = parseOptions(context);
+    const { numOfIndent, indentBlockSequences, indicatorValueIndent } =
+      parseOptions(context);
 
     const sourceCode = context.getSourceCode();
 
-    const offsets = new Map<YAMLToken, OffsetInfo>();
-    const marks = new Set<YAMLToken>();
+    const indents = new Map<YAMLToken, IndentInfo>();
+    const indicators = new Set<YAMLToken>();
     const blockLiteralMarks = new Set<YAMLToken>();
     const scalars = new Map<YAMLToken, AST.YAMLScalar>();
 
@@ -134,18 +145,42 @@ export default createRule("indent", {
       baseToken: YAMLToken,
       options?: { offsetWhenBaseIsNotFirst?: Offset }
     ) {
+      setIndent(
+        token,
+        offset * numOfIndent,
+        baseToken,
+        options && {
+          indentWhenBaseIsNotFirst:
+            options.offsetWhenBaseIsNotFirst &&
+            options.offsetWhenBaseIsNotFirst * numOfIndent,
+        }
+      );
+    }
+
+    /**
+     * Set indent to the given tokens.
+     * @param token The token to set.
+     * @param indent The indent of the tokens.
+     * @param baseToken The token of the base indent.
+     */
+    function setIndent(
+      token: YAMLToken | (YAMLToken | null)[] | null,
+      indent: number,
+      baseToken: YAMLToken,
+      options?: { indentWhenBaseIsNotFirst?: number }
+    ) {
       if (token == null) {
         return;
       }
       if (Array.isArray(token)) {
         for (const t of token) {
-          setOffset(t, offset, baseToken, options);
+          setIndent(t, indent, baseToken, options);
         }
       } else {
-        offsets.set(token, {
+        indents.set(token, {
           baseToken,
-          offset,
-          offsetWhenBaseIsNotFirst: options?.offsetWhenBaseIsNotFirst ?? null,
+          indent,
+          indentWhenBaseIsNotFirst: options?.indentWhenBaseIsNotFirst ?? null,
         });
       }
     }
@@ -212,18 +247,39 @@ export default createRule("indent", {
     }
 
     /**
-     * Calculate the indentation offset for the values in the mapping.
+     * Calculate the indentation for the values in the mapping.
      */
-    function calcMappingPairValueIndentOffset(
-      node: AST.YAMLWithMeta | AST.YAMLContent
+    function calcMappingPairValueIndent(
+      node: AST.YAMLWithMeta | AST.YAMLContent,
+      indent: number
     ) {
       if (indentBlockSequences) {
-        return 1;
+        return indent;
       }
       if (node.type === "YAMLSequence" && node.style === "block") {
         return 0;
       }
-      return 1;
+      return indent;
+    }
+
+    /**
+     * Calculate the indentation for the values in the indicator.
+     */
+    function calcIndicatorValueIndent(token: YAMLToken) {
+      return isBeginningToken(token) ? indicatorValueIndent : numOfIndent;
+    }
+
+    /**
+     * Checks whether the given token is a beginning token.
+     */
+    function isBeginningToken(token: YAMLToken) {
+      const before = sourceCode.getTokenBefore(
+        token,
+        (t) => !indicators.has(t)
+      );
+      if (!before) return true;
+
+      return before.loc.end.line < token.loc.start.line;
     }
 
     const documents: AST.YAMLDocument[] = [];
@@ -235,10 +291,10 @@ export default createRule("indent", {
           return;
         }
 
-        offsets.set(first, {
+        indents.set(first, {
           baseToken: null,
-          offsetWhenBaseIsNotFirst: null,
-          offset: 0,
+          indentWhenBaseIsNotFirst: null,
+          indent: 0,
           expectedIndent: 0,
         });
         processNodeList([...node.directives, node.content], first, null, 0);
@@ -278,11 +334,11 @@ export default createRule("indent", {
               continue;
             }
             const hyphen = sourceCode.getTokenBefore(entry, isHyphen)!;
-            marks.add(hyphen);
+            indicators.add(hyphen);
             // | -
             // |   a
             const entryToken = sourceCode.getFirstToken(entry);
-            setOffset(entryToken, 1, hyphen);
+            setIndent(entryToken, calcIndicatorValueIndent(hyphen), hyphen);
           }
         }
       },
@@ -295,19 +351,22 @@ export default createRule("indent", {
         const questionToken = isQuestion(pairFirst) ? pairFirst : null;
         if (questionToken) {
           // ? a: b
-          marks.add(questionToken);
+          indicators.add(questionToken);
 
           if (node.key) {
-            setOffset(
+            setIndent(
               keyToken,
-              calcMappingPairValueIndentOffset(node.key),
+              calcMappingPairValueIndent(
+                node.key,
+                calcIndicatorValueIndent(questionToken)
+              ),
               questionToken
             );
           }
         }
 
         if (colonToken) {
-          marks.add(colonToken);
+          indicators.add(colonToken);
           if (questionToken) {
             setOffset(colonToken, 0, questionToken, {
               offsetWhenBaseIsNotFirst: 1,
@@ -319,9 +378,12 @@ export default createRule("indent", {
         if (node.value) {
           const valueToken = sourceCode.getFirstToken(node.value);
           if (colonToken) {
-            setOffset(
+            setIndent(
               valueToken,
-              calcMappingPairValueIndentOffset(node.value),
+              calcMappingPairValueIndent(
+                node.value,
+                calcIndicatorValueIndent(colonToken)
+              ),
               colonToken
             );
           } else if (keyToken) {
@@ -428,7 +490,7 @@ export default createRule("indent", {
       const lastToken = lineTokens[lineTokens.length - 1];
       let lineExpectedIndent: number | null = null;
       let cacheExpectedIndent: number | null = null;
-      const markData: LineIndentMarkData[] = [];
+      const indicatorData: LineIndentIndicatorData[] = [];
       const firstToken = lineTokens.shift()!;
       let token: YAMLToken | undefined = firstToken;
       let expectedIndent = getExpectedIndent(token);
@@ -436,7 +498,7 @@ export default createRule("indent", {
         lineExpectedIndent = expectedIndent;
         cacheExpectedIndent = expectedIndent;
       }
-      while (token && marks.has(token) && expectedIndent != null) {
+      while (token && indicators.has(token) && expectedIndent != null) {
         const nextToken = lineTokens.shift();
         if (!nextToken) {
           break;
@@ -449,8 +511,8 @@ export default createRule("indent", {
           lineTokens.unshift(nextToken);
           break;
         }
-        markData.push({
-          mark: token,
+        indicatorData.push({
+          indicator: token,
           next: nextToken,
           expectedOffset:
             nextExpectedIndent - expectedIndent - 1 /* "-" or "?" or ":" */,
@@ -495,9 +557,9 @@ export default createRule("indent", {
       if (cacheExpectedIndent != null) {
         // Sets the indent cache for the tokens behind this line.
         while ((token = lineTokens.shift()) != null) {
-          const offset = offsets.get(token);
-          if (offset) {
-            offset.expectedIndent = cacheExpectedIndent;
+          const indent = indents.get(token);
+          if (indent) {
+            indent.expectedIndent = cacheExpectedIndent;
           }
         }
       }
@@ -521,7 +583,7 @@ export default createRule("indent", {
         actualIndent: column,
         firstToken,
         line,
-        markData,
+        indicatorData,
         lastScalar,
       };
     }
@@ -533,36 +595,36 @@ export default createRule("indent", {
       if (token.type === "Marker") {
         return 0;
       }
-      const offset = offsets.get(token);
-      if (!offset) {
+      const indent = indents.get(token);
+      if (!indent) {
         return null;
       }
-      if (offset.expectedIndent != null) {
-        return offset.expectedIndent;
+      if (indent.expectedIndent != null) {
+        return indent.expectedIndent;
       }
-      if (offset.baseToken == null) {
+      if (indent.baseToken == null) {
         return null;
       }
-      const baseIndent = getExpectedIndent(offset.baseToken);
+      const baseIndent = getExpectedIndent(indent.baseToken);
       if (baseIndent == null) {
         return null;
       }
-      let offsetIndent = offset.offset;
-      if (offsetIndent === 0 && offset.offsetWhenBaseIsNotFirst != null) {
-        let before: YAMLToken | null = offset.baseToken;
+      let offsetIndent = indent.indent;
+      if (offsetIndent === 0 && indent.indentWhenBaseIsNotFirst != null) {
+        let before: YAMLToken | null = indent.baseToken;
         while (
           (before = sourceCode.getTokenBefore(before, ITERATION_OPTS)) != null
         ) {
-          if (!marks.has(before)) {
+          if (!indicators.has(before)) {
             break;
           }
         }
-        if (before?.loc.end.line === offset.baseToken.loc.start.line) {
+        if (before?.loc.end.line === indent.baseToken.loc.start.line) {
           // base token is not first
-          offsetIndent = offset.offsetWhenBaseIsNotFirst;
+          offsetIndent = indent.indentWhenBaseIsNotFirst;
         }
       }
-      return (offset.expectedIndent = baseIndent + numOfIndent * offsetIndent);
+      return (indent.expectedIndent = baseIndent + offsetIndent);
     }
 
     /**
@@ -595,7 +657,7 @@ export default createRule("indent", {
             line,
             expectedIndent: lineIndent.expectedIndent,
             actualIndent: lineIndent.actualIndent,
-            markData: lineIndent.markData,
+            indicatorData: lineIndent.indicatorData,
           };
           if (!results[line]) {
             results[line] = indent;
@@ -702,7 +764,7 @@ export default createRule("indent", {
               line: commentLineIndent.line,
               expectedIndent,
               actualIndent: commentLineIndent.actualIndent,
-              markData: commentLineIndent.markData,
+              indicatorData: commentLineIndent.indicatorData,
             };
           }
         }
@@ -777,7 +839,7 @@ export default createRule("indent", {
             line: scalarLine,
             expectedIndent,
             actualIndent: scalarActualIndent,
-            markData: [],
+            indicatorData: [],
           };
         }
       }
@@ -803,7 +865,7 @@ export default createRule("indent", {
             line: scalarLine,
             expectedIndent,
             actualIndent: scalarActualIndent,
-            markData: [],
+            indicatorData: [],
           };
         }
       }
@@ -836,21 +898,21 @@ export default createRule("indent", {
             },
             fix: buildFix(lineIndent, lineIndents),
           });
-        } else if (lineIndent.markData.length) {
-          for (const markData of lineIndent.markData) {
-            if (markData.actualOffset !== markData.expectedOffset) {
-              const markLoc = markData.mark.loc.end;
-              const loc = markData.next.loc.start;
+        } else if (lineIndent.indicatorData.length) {
+          for (const indicatorData of lineIndent.indicatorData) {
+            if (indicatorData.actualOffset !== indicatorData.expectedOffset) {
+              const indicatorLoc = indicatorData.indicator.loc.end;
+              const loc = indicatorData.next.loc.start;
 
               context.report({
                 loc: {
-                  start: markLoc,
+                  start: indicatorLoc,
                   end: loc,
                 },
                 messageId: "wrongIndentation",
                 data: {
-                  expected: String(markData.expectedOffset),
-                  actual: String(markData.actualOffset),
+                  expected: String(indicatorData.expectedOffset),
+                  actual: String(indicatorData.actualOffset),
                 },
                 fix: buildFix(lineIndent, lineIndents),
               });
@@ -894,9 +956,9 @@ export default createRule("indent", {
           if (expectedIndent <= li.actualIndent) {
             return null;
           }
-          for (const mark of li.markData) {
-            if (mark.actualOffset !== mark.expectedOffset) {
-              // If the mark indentation on the previous line needs to be fixed, the process will stop.
+          for (const indicator of li.indicatorData) {
+            if (indicator.actualOffset !== indicator.expectedOffset) {
+              // If the indicator mark indentation on the previous line needs to be fixed, the process will stop.
               return null;
             }
           }
@@ -979,11 +1041,11 @@ export default createRule("indent", {
           }
 
           // hyphen
-          if (li.markData) {
-            for (const markData of li.markData) {
+          if (li.indicatorData) {
+            for (const indicatorData of li.indicatorData) {
               yield fixer.replaceTextRange(
-                [markData.mark.range[1], markData.next.range[0]],
-                " ".repeat(markData.expectedOffset)
+                [indicatorData.indicator.range[1], indicatorData.next.range[0]],
+                " ".repeat(indicatorData.expectedOffset)
               );
             }
           }

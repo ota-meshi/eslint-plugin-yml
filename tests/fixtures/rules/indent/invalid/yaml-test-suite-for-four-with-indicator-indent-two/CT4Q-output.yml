@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/CT4Q-input.yaml
+[
+    ? foo
+      bar : baz
+]
