@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.5.0
+
+### Minor Changes
+
+- [#216](https://github.com/ota-meshi/eslint-plugin-yml/pull/216) [`815aa61`](https://github.com/ota-meshi/eslint-plugin-yml/commit/815aa61174e9d4f4744516dede7cc45a5b82eab1) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `indicatorValueIndent` option to `yml/indent` rule
+
 ## 1.4.0
 
 ### Minor Changes
