@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/87E4-input.yaml
+'implicit block key' : [
+    'implicit flow key' : value,
+ ]

@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/35KP-input.yaml
+--- !!map
+    ? a
+    : b
+--- !!seq
+    - !!str c
+--- !!str
+    d
+    e

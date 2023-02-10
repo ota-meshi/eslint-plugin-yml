@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/FP8R-input.yaml
+--- >
+    line1
+    line2
+    line3

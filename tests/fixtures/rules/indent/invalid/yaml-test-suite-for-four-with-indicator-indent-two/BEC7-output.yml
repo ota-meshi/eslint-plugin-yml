@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/BEC7-input.yaml
+%YAML 1.3 # Attempt parsing
+# with a warning
+---
+"foo"

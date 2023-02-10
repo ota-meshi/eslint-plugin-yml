@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/DC7X-input.yaml
+a: b	
+seq:	
+    - a	
+c: d	#X

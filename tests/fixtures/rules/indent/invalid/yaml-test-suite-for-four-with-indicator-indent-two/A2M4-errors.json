@@ -1,0 +1,12 @@
+[
+  {
+    "message": "Expected indentation of 1 spaces but found 2 spaces.",
+    "line": 4,
+    "column": 4
+  },
+  {
+    "message": "Expected indentation of 4 spaces but found 5 spaces.",
+    "line": 5,
+    "column": 1
+  }
+]

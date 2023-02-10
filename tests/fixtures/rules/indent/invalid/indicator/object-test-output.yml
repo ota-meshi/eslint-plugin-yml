@@ -1,0 +1,7 @@
+# indent/invalid/indicator/object-test-input.yml
+foo:
+    bar:
+        - {
+              a: a,
+              b: b
+          }

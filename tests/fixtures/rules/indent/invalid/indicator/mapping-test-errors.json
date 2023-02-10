@@ -1,0 +1,17 @@
+[
+  {
+    "message": "Expected indentation of 1 spaces but found 3 spaces.",
+    "line": 3,
+    "column": 6
+  },
+  {
+    "message": "Expected indentation of 1 spaces but found 3 spaces.",
+    "line": 4,
+    "column": 6
+  },
+  {
+    "message": "Expected indentation of 1 spaces but found 3 spaces.",
+    "line": 4,
+    "column": 10
+  }
+]

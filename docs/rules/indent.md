@@ -50,11 +50,13 @@ yml/indent:
   - error
   - 2
   - indentBlockSequences: true
+    indicatorValueIndent: 2
 ```
 
 - Number option ... Specify the number of indents.
 - Object option
   - `indentBlockSequences` ... Specifies whether block sequences should be indented or not (when in a mapping).
+  - `indicatorValueIndent` ... Specifies the number of indents from indicator marks. Defaults to specified indent.
 
 ### `"indentBlockSequences": true` (default)
 
@@ -100,6 +102,38 @@ key2:
   - a
   - b
   - c
+```
+
+</eslint-code-block>
+
+### `[4, "indicatorValueIndent": 2]`
+
+<eslint-code-block fix>
+
+<!-- eslint-skip -->
+
+```yaml
+# eslint yml/indent: [error, 4, { indicatorValueIndent: 2 }]
+
+# ✓ GOOD
+good:
+    key:
+        - id: 1
+          name: Foo
+        - id: 2
+          name: Bar
+        - id: 3
+          name: Baz
+
+# ✗ BAD
+bad:
+    key:
+        -   id: 1
+            name: Foo
+        -   id: 2
+            name: Bar
+        -   id: 3
+            name: Baz
 ```
 
 </eslint-code-block>

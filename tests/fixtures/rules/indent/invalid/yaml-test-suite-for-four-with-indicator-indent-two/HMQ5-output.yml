@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/HMQ5-input.yaml
+!!str &a1 "foo":
+    !!str bar
+&a2 baz : *a1

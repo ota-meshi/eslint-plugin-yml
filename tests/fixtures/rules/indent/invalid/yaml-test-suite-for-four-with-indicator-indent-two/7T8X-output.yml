@@ -1,0 +1,17 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/7T8X-input.yaml
+>
+    
+     folded
+     line
+
+     next
+     line
+       * bullet
+
+       * list
+       * lines
+
+     last
+     line
+
+# Comment

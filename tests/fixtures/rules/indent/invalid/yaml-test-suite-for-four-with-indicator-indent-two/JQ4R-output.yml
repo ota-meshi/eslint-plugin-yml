@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/JQ4R-input.yaml
+block sequence:
+    - one
+    - two : three

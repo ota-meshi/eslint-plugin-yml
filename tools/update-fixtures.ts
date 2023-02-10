@@ -34,6 +34,7 @@ makeSuiteTests(
     default: [],
     two: [2],
     four: [4],
+    "four-with-indicator-indent-two": [4, { indicatorValueIndent: 2 }],
   },
   { force: true }
 );

@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/2AUY-input.yaml
+- !!str a
+- b
+- !!int 42
+- d

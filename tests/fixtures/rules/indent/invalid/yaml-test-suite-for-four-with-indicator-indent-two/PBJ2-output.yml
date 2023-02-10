@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/PBJ2-input.yaml
+american:
+    - Boston Red Sox
+    - Detroit Tigers
+    - New York Yankees
+national:
+    - New York Mets
+    - Chicago Cubs
+    - Atlanta Braves

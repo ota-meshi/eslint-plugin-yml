@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-indicator-indent-two/JDH8-input.yaml
+---
+k:#foo
+&a !t s
