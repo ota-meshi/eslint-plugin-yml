@@ -44,7 +44,8 @@
     "eslintplugin",
     "eslint-plugin",
     "yaml",
-    "yml"
+    "yml",
+    "lint"
   ],
   "author": "Yosuke Ota",
   "funding": "https://github.com/sponsors/ota-meshi",
