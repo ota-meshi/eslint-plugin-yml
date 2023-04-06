@@ -39,6 +39,9 @@ Plugins don't provide source code text, so you can't use it with plugins and rul
 
 **eslint-plugin-yml** works by providing AST and source code text to ESLint.
 
+## ℹ️ Installation
+`npm install --save-dev eslint eslint-plugin-yml`
+
 ## :book: Usage
 
 See [User Guide](./user-guide/README.md).
