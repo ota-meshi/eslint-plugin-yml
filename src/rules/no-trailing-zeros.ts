@@ -12,7 +12,7 @@ export default createRule("no-trailing-zeros", {
     fixable: "code",
     schema: [],
     messages: {
-      wrongZeros: "Trailing zeros are not allowed, fix to `{{fixed}}`",
+      wrongZeros: "Trailing zeros are not allowed, fix to `{{fixed}}`.",
     },
     type: "layout",
   },
