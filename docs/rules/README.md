@@ -26,6 +26,7 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 | [yml/no-empty-mapping-value](./no-empty-mapping-value.md) | disallow empty mapping values |  | :star: | :star: |
 | [yml/no-empty-sequence-entry](./no-empty-sequence-entry.md) | disallow empty sequence entries |  | :star: | :star: |
 | [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: | :star: |
+| [yml/no-trailing-zeros](./no-trailing-zeros.md) | disallow trailing zeros for numbers. |  |  | :star: |
 | [yml/plain-scalar](./plain-scalar.md) | require or disallow plain style scalar. | :wrench: |  | :star: |
 | [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: |  | :star: |
 | [yml/require-string-key](./require-string-key.md) | disallow mapping keys other than strings |  |  |  |
