@@ -10,17 +10,9 @@ export default createRule("no-trailing-zeros", {
       layout: true,
     },
     fixable: "code",
-    schema: [
-      {
-        type: "object",
-        properties: {
-          prefer: { enum: ["number", "double-quotes", "single-quotes"] },
-        },
-        additionalProperties: false,
-      },
-    ],
+    schema: [],
     messages: {
-      wrongZeros: "Trailing zeros are not allowed, fix to: {{fixed}}",
+      wrongZeros: "Trailing zeros are not allowed, fix to `{{fixed}}`",
     },
     type: "layout",
   },
