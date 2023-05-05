@@ -19,6 +19,7 @@ import noEmptySequenceEntry from "../rules/no-empty-sequence-entry";
 import noIrregularWhitespace from "../rules/no-irregular-whitespace";
 import noMultipleEmptyLines from "../rules/no-multiple-empty-lines";
 import noTabIndent from "../rules/no-tab-indent";
+import noTrailingZeros from "../rules/no-trailing-zeros";
 import plainScalar from "../rules/plain-scalar";
 import quotes from "../rules/quotes";
 import requireStringKey from "../rules/require-string-key";
@@ -48,6 +49,7 @@ export const rules = [
   noIrregularWhitespace,
   noMultipleEmptyLines,
   noTabIndent,
+  noTrailingZeros,
   plainScalar,
   quotes,
   requireStringKey,

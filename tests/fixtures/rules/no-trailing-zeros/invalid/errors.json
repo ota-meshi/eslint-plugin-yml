@@ -1,0 +1,22 @@
+[
+  {
+    "message": "Trailing zeros are not allowed, fix to: 1.2",
+    "line": 4,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to: .2",
+    "line": 6,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to: 1.2",
+    "line": 10,
+    "column": 12
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to: .2",
+    "line": 12,
+    "column": 12
+  }
+]
