@@ -9,4 +9,8 @@ const tester = new RuleTester({
   },
 });
 
-tester.run("no-trailing-zeros", rule as any, loadTestCases("no-trailing-zeros"));
+tester.run(
+  "no-trailing-zeros",
+  rule as any,
+  loadTestCases("no-trailing-zeros")
+);
