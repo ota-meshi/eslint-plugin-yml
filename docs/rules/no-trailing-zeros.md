@@ -2,20 +2,19 @@
 pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/no-trailing-zeros"
-description: "disallow trailing zeros for numbers"
-since: "v1.5.1"
+description: "disallow trailing zeros for floats"
 ---
 
 # yml/no-trailing-zeros
 
-> disallow trailing zeros for numbers
+> disallow trailing zeros for floats
 
-- :gear: This rule is included in `"plugin:yml/standard"`.
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
-This rule enforces the removal of unnecessary trailing zeros from numbers.
+This rule enforces the removal of unnecessary trailing zeros from floats.
 
 <eslint-code-block fix>
 
@@ -36,10 +35,6 @@ This rule enforces the removal of unnecessary trailing zeros from numbers.
 ## :wrench: Options
 
 Nothing.
-
-## :rocket: Version
-
-This rule was introduced in eslint-plugin-yml v1.5.1
 
 ## :mag: Implementation
 

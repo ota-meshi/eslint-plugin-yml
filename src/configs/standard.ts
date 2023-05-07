@@ -21,7 +21,6 @@ export = {
     "yml/no-empty-sequence-entry": "error",
     "yml/no-irregular-whitespace": "error",
     "yml/no-tab-indent": "error",
-    "yml/no-trailing-zeros": "error",
     "yml/plain-scalar": "error",
     "yml/quotes": "error",
     "yml/spaced-comment": "error",
