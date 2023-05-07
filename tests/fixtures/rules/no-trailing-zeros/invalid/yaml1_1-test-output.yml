@@ -1,0 +1,6 @@
+# no-trailing-zeros/invalid/yaml1_1-test-input.yml
+%YAML 1.1
+---
+a: 1_2.3
+b: 1_2.3
+c: 1_2.3_4e30

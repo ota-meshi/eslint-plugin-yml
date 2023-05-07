@@ -1,0 +1,82 @@
+[
+  {
+    "message": "Trailing zeros are not allowed, fix to `1.2e20`.",
+    "line": 3,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `.2e20`.",
+    "line": 5,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `1e20`.",
+    "line": 6,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `0e20`.",
+    "line": 7,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `+1e20`.",
+    "line": 8,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `-1e20`.",
+    "line": 9,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `+0e20`.",
+    "line": 10,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `-0e20`.",
+    "line": 11,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `1.2E20`.",
+    "line": 13,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `.2E20`.",
+    "line": 15,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `1E20`.",
+    "line": 16,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `0E20`.",
+    "line": 17,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `+1E20`.",
+    "line": 18,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `-1E20`.",
+    "line": 19,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `+0E20`.",
+    "line": 20,
+    "column": 3
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `-0E20`.",
+    "line": 21,
+    "column": 3
+  }
+]

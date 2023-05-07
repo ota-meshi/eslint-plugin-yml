@@ -27,19 +27,28 @@ export default createRule("no-trailing-zeros", {
           return;
         } else if (typeof node.value !== "number") {
           return;
-        } else if (!node.strValue.endsWith("0")) {
-          return;
         }
 
-        const parts = node.strValue.split(".");
-        if (parts.length !== 2) {
+        const floating = parseFloatingPoint(node.strValue);
+        if (!floating) {
           return;
         }
-
-        while (parts[1].endsWith("0")) {
-          parts[1] = parts[1].slice(0, -1);
+        let { decimalPart } = floating;
+        while (decimalPart.endsWith("_")) {
+          decimalPart = decimalPart.slice(0, -1);
         }
-        const fixed = parts[1] ? parts.join(".") : parts[0] || "0";
+        if (!decimalPart.endsWith("0")) {
+          return;
+        }
+        while (decimalPart.endsWith("0")) {
+          decimalPart = decimalPart.slice(0, -1);
+          while (decimalPart.endsWith("_")) {
+            decimalPart = decimalPart.slice(0, -1);
+          }
+        }
+        const fixed = decimalPart
+          ? `${floating.sign}${floating.intPart}.${decimalPart}${floating.expPart}`
+          : `${floating.sign}${floating.intPart || "0"}${floating.expPart}`;
 
         context.report({
           node,
@@ -55,3 +64,35 @@ export default createRule("no-trailing-zeros", {
     };
   },
 });
+
+/** Parse floating point number string */
+function parseFloatingPoint(str: string) {
+  const parts = str.split(".");
+  if (parts.length !== 2) {
+    // No floating point present.
+    return null;
+  }
+  let decimalPart: string, expPart: string, intPart: string, sign: string;
+  const expIndex = parts[1].search(/e/iu);
+  if (expIndex >= 0) {
+    decimalPart = parts[1].slice(0, expIndex);
+    expPart = parts[1].slice(expIndex);
+  } else {
+    decimalPart = parts[1];
+    expPart = "";
+  }
+  if (parts[0].startsWith("-") || parts[0].startsWith("+")) {
+    sign = parts[0][0];
+    intPart = parts[0].slice(1);
+  } else {
+    sign = "";
+    intPart = parts[0];
+  }
+
+  return {
+    sign,
+    intPart,
+    decimalPart,
+    expPart,
+  };
+}
