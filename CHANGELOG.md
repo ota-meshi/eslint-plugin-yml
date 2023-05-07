@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.6.0
+
+### Minor Changes
+
+- [#236](https://github.com/ota-meshi/eslint-plugin-yml/pull/236) [`7e34b77`](https://github.com/ota-meshi/eslint-plugin-yml/commit/7e34b7748a4e3663ab56dc504214ba613b3f8347) Thanks [@sxyazi](https://github.com/sxyazi)! - feat: add `yml/no-trailing-zeros` rule
+
 ## 1.5.0
 
 ### Minor Changes
