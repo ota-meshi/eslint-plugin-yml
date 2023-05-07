@@ -207,6 +207,7 @@ The rules with the following star :star: are included in the config.
 | [yml/no-empty-mapping-value](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-mapping-value.html) | disallow empty mapping values |  | :star: | :star: |
 | [yml/no-empty-sequence-entry](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-sequence-entry.html) | disallow empty sequence entries |  | :star: | :star: |
 | [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: | :star: |
+| [yml/no-trailing-zeros](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-zeros.html) | disallow trailing zeros for floats | :wrench: |  |  |
 | [yml/plain-scalar](https://ota-meshi.github.io/eslint-plugin-yml/rules/plain-scalar.html) | require or disallow plain style scalar. | :wrench: |  | :star: |
 | [yml/quotes](https://ota-meshi.github.io/eslint-plugin-yml/rules/quotes.html) | enforce the consistent use of either double, or single quotes | :wrench: |  | :star: |
 | [yml/require-string-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/require-string-key.html) | disallow mapping keys other than strings |  |  |  |

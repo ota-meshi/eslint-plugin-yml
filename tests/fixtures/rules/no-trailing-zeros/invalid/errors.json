@@ -1,0 +1,62 @@
+[
+  {
+    "message": "Trailing zeros are not allowed, fix to `1.2`.",
+    "line": 4,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `.2`.",
+    "line": 6,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `1`.",
+    "line": 7,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `0`.",
+    "line": 8,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `+1`.",
+    "line": 9,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `-1`.",
+    "line": 10,
+    "column": 10
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `1.2`.",
+    "line": 14,
+    "column": 12
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `.2`.",
+    "line": 16,
+    "column": 12
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `1`.",
+    "line": 17,
+    "column": 12
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `0`.",
+    "line": 18,
+    "column": 12
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `+1`.",
+    "line": 19,
+    "column": 12
+  },
+  {
+    "message": "Trailing zeros are not allowed, fix to `-1`.",
+    "line": 20,
+    "column": 12
+  }
+]
