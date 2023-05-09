@@ -2,7 +2,7 @@ import assert from "assert";
 import plugin from "../../src";
 import { version } from "../../package.json";
 const expectedMeta = {
-  name: "eslint-plugin-yaml",
+  name: "eslint-plugin-yml",
   version,
 };
 
