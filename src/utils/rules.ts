@@ -1,3 +1,6 @@
+// IMPORTANT!
+// This file has been automatically generated,
+// in order to update its content execute "npm run update"
 import type { RuleModule } from "../types";
 import blockMappingColonIndicatorNewline from "../rules/block-mapping-colon-indicator-newline";
 import blockMappingQuestionIndicatorNewline from "../rules/block-mapping-question-indicator-newline";

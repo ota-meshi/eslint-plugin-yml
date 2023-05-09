@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.7.0
+
+### Minor Changes
+
+- [#238](https://github.com/ota-meshi/eslint-plugin-yml/pull/238) [`6033d9c`](https://github.com/ota-meshi/eslint-plugin-yml/commit/6033d9c6130f08ff5667ffa712a63b74244a4b48) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: export meta object
+
 ## 1.6.0
 
 ### Minor Changes
