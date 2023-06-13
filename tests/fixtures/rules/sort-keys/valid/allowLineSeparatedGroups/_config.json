@@ -1,0 +1,8 @@
+{
+  "options": ["asc", { "allowLineSeparatedGroups": true }],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
+}
