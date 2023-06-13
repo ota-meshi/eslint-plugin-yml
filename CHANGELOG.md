@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.8.0
+
+### Minor Changes
+
+- [#247](https://github.com/ota-meshi/eslint-plugin-yml/pull/247) [`2b9f295`](https://github.com/ota-meshi/eslint-plugin-yml/commit/2b9f295ccd24c603d6413b2406a1af241f306dce) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `allowLineSeparatedGroups` option to the `yml/sort-keys` rule
+
 ## 1.7.0
 
 ### Minor Changes
