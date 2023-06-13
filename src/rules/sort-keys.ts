@@ -20,6 +20,7 @@ type CompatibleWithESLintOptions =
         caseSensitive?: boolean;
         natural?: boolean;
         minKeys?: number;
+        allowLineSeparatedGroups?: boolean;
       }
     ];
 type PatternOption = {
@@ -35,6 +36,7 @@ type PatternOption = {
           }
       )[];
   minKeys?: number;
+  allowLineSeparatedGroups?: boolean;
 };
 type OrderObject = {
   type?: OrderTypeOption;
@@ -45,6 +47,7 @@ type ParsedOption = {
   isTargetMapping: (node: YAMLMappingData) => boolean;
   ignore: (data: YAMLPairData) => boolean;
   isValidOrder: Validator;
+  allowLineSeparatedGroups: boolean;
   orderText: string;
 };
 type Validator = (a: YAMLPairData, b: YAMLPairData) => boolean;
@@ -115,6 +118,11 @@ class YAMLPairData {
       this.mapping.sourceCode
     ));
   }
+
+  public getPrev(): YAMLPairData | null {
+    const prevIndex = this.index - 1;
+    return prevIndex >= 0 ? this.mapping.pairs[prevIndex] : null;
+  }
 }
 class YAMLMappingData {
   public readonly node: AST.YAMLMapping;
@@ -152,6 +160,31 @@ class YAMLMappingData {
       (e, index) =>
         new YAMLPairData(this, e, index, this.anchorAliasMap.get(e)!)
     ));
+  }
+
+  public getPath(sourceCode: SourceCode): string {
+    let path = "";
+    let curr: AST.YAMLNode = this.node;
+    let p: AST.YAMLNode | null = curr.parent;
+    while (p) {
+      if (p.type === "YAMLPair") {
+        const name = getPropertyName(p, sourceCode);
+        if (/^[$_a-z][\w$]*$/iu.test(name)) {
+          path = `.${name}${path}`;
+        } else {
+          path = `[${JSON.stringify(name)}]${path}`;
+        }
+      } else if (p.type === "YAMLSequence") {
+        const index = p.entries.indexOf(curr as never);
+        path = `[${index}]${path}`;
+      }
+      curr = p;
+      p = curr.parent;
+    }
+    if (path.startsWith(".")) {
+      path = path.slice(1);
+    }
+    return path;
   }
 }
 
@@ -207,6 +240,7 @@ function parseOptions(
     const insensitive = obj.caseSensitive === false;
     const natural = Boolean(obj.natural);
     const minKeys: number = obj.minKeys ?? 2;
+    const allowLineSeparatedGroups = obj.allowLineSeparatedGroups || false;
     return [
       {
         isTargetMapping: (data) => data.node.pairs.length >= minKeys,
@@ -215,6 +249,7 @@ function parseOptions(
         orderText: `${natural ? "natural " : ""}${
           insensitive ? "insensitive " : ""
         }${type}ending`,
+        allowLineSeparatedGroups,
       },
     ];
   }
@@ -224,6 +259,7 @@ function parseOptions(
     const pathPattern = new RegExp(opt.pathPattern);
     const hasProperties = opt.hasProperties ?? [];
     const minKeys: number = opt.minKeys ?? 2;
+    const allowLineSeparatedGroups = opt.allowLineSeparatedGroups || false;
     if (!Array.isArray(order)) {
       const type: OrderTypeOption = order.type ?? "asc";
       const insensitive = order.caseSensitive === false;
@@ -236,6 +272,7 @@ function parseOptions(
         orderText: `${natural ? "natural " : ""}${
           insensitive ? "insensitive " : ""
         }${type}ending`,
+        allowLineSeparatedGroups,
       };
     }
     const parsedOrder: {
@@ -281,6 +318,7 @@ function parseOptions(
         return false;
       },
       orderText: "specified",
+      allowLineSeparatedGroups,
     };
 
     /**
@@ -297,28 +335,7 @@ function parseOptions(
         }
       }
 
-      let path = "";
-      let curr: AST.YAMLNode = data.node;
-      let p: AST.YAMLNode | null = curr.parent;
-      while (p) {
-        if (p.type === "YAMLPair") {
-          const name = getPropertyName(p, sourceCode);
-          if (/^[$_a-z][\w$]*$/iu.test(name)) {
-            path = `.${name}${path}`;
-          } else {
-            path = `[${JSON.stringify(name)}]${path}`;
-          }
-        } else if (p.type === "YAMLSequence") {
-          const index = p.entries.indexOf(curr as never);
-          path = `[${index}]${path}`;
-        }
-        curr = p;
-        p = curr.parent;
-      }
-      if (path.startsWith(".")) {
-        path = path.slice(1);
-      }
-      return pathPattern.test(path);
+      return pathPattern.test(data.getPath(sourceCode));
     }
   });
 }
@@ -393,6 +410,9 @@ export default createRule("sort-keys", {
                 type: "integer",
                 minimum: 2,
               },
+              allowLineSeparatedGroups: {
+                type: "boolean",
+              },
             },
             required: ["pathPattern", "order"],
             additionalProperties: false,
@@ -419,6 +439,9 @@ export default createRule("sort-keys", {
                   type: "integer",
                   minimum: 2,
                 },
+                allowLineSeparatedGroups: {
+                  type: "boolean",
+                },
               },
               additionalProperties: false,
             },
@@ -439,6 +462,12 @@ export default createRule("sort-keys", {
       return {};
     }
     const sourceCode = context.getSourceCode();
+    if (
+      sourceCode.text.includes(
+        "sort-keys/invalid/yaml-test-suite-for-desc/S3PD-input.yaml"
+      )
+    )
+      debugger;
 
     // Parse options.
     const parsedOptions = parseOptions(context.options, sourceCode);
@@ -488,10 +517,21 @@ export default createRule("sort-keys", {
       if (ignore(data, option)) {
         return;
       }
-      const prevList = data.mapping.pairs
-        .slice(0, data.index)
-        .reverse()
-        .filter((d) => !ignore(d, option));
+      const prevList: YAMLPairData[] = [];
+      let currTarget = data;
+      let prevTarget;
+      while ((prevTarget = currTarget.getPrev())) {
+        if (option.allowLineSeparatedGroups) {
+          if (hasBlankLine(prevTarget, currTarget)) {
+            break;
+          }
+        }
+
+        if (!option.ignore(prevTarget)) {
+          prevList.push(prevTarget);
+        }
+        currTarget = prevTarget;
+      }
 
       if (prevList.length === 0) {
         return;
@@ -523,6 +563,27 @@ export default createRule("sort-keys", {
           },
         });
       }
+    }
+
+    /**
+     * Checks whether the given two properties have a blank line between them.
+     */
+    function hasBlankLine(prev: YAMLPairData, next: YAMLPairData) {
+      const tokenOrNodes = [
+        ...sourceCode.getTokensBetween(prev.node as never, next.node as never, {
+          includeComments: true,
+        }),
+        next.node,
+      ];
+      let prevLoc = prev.node.loc;
+      for (const t of tokenOrNodes) {
+        const loc = t.loc;
+        if (loc.start.line - prevLoc.end.line > 1) {
+          return true;
+        }
+        prevLoc = loc;
+      }
+      return false;
     }
 
     type PairStack = {

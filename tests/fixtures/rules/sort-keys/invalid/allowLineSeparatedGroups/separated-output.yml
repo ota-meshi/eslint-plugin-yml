@@ -1,0 +1,6 @@
+# sort-keys/invalid/allowLineSeparatedGroups/separated-input.yaml
+x: 1
+y: 2
+
+a: 4
+b: 3
