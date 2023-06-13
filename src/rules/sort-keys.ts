@@ -462,12 +462,6 @@ export default createRule("sort-keys", {
       return {};
     }
     const sourceCode = context.getSourceCode();
-    if (
-      sourceCode.text.includes(
-        "sort-keys/invalid/yaml-test-suite-for-desc/S3PD-input.yaml"
-      )
-    )
-      debugger;
 
     // Parse options.
     const parsedOptions = parseOptions(context.options, sourceCode);
@@ -527,7 +521,7 @@ export default createRule("sort-keys", {
           }
         }
 
-        if (!option.ignore(prevTarget)) {
+        if (!ignore(prevTarget, option)) {
           prevList.push(prevTarget);
         }
         currTarget = prevTarget;
