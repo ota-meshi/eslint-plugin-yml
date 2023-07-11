@@ -19,7 +19,7 @@ const log = debug("eslint-plugin-yml:utils/index");
  */
 export function createRule(
   ruleName: string,
-  rule: PartialRuleModule
+  rule: PartialRuleModule,
 ): RuleModule {
   return {
     meta: {
@@ -47,7 +47,7 @@ export function createRule(
                 customBlock: true,
               });
             },
-          }
+          },
         );
       }
       return rule.create(context as any, {
@@ -69,7 +69,7 @@ export function defineWrapperListener(
   proxyOptions: {
     options: any[];
     createListenerProxy?: (listener: CoreRuleListener) => RuleListener;
-  }
+  },
 ): RuleListener {
   if (!context.parserServices.isYAML) {
     return {};

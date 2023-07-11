@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "no-empty-sequence-entry",
   rule as any,
-  loadTestCases("no-empty-sequence-entry")
+  loadTestCases("no-empty-sequence-entry"),
 );

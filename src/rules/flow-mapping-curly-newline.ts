@@ -51,7 +51,7 @@ function normalizeOptionValue(
     | "always"
     | "never"
     | { multiline?: boolean; minProperties?: number; consistent?: boolean }
-    | null
+    | null,
 ) {
   let multiline = false;
   let minProperties = Number.POSITIVE_INFINITY;
@@ -87,7 +87,7 @@ function areLineBreaksRequired(
   node: AST.YAMLFlowMapping,
   options: { multiline: boolean; minProperties: number; consistent: boolean },
   first: YAMLToken,
-  last: YAMLToken
+  last: YAMLToken,
 ) {
   const objectProperties = node.pairs;
 
@@ -144,12 +144,12 @@ export default createRule("flow-mapping-curly-newline", {
       }
       const openBrace = sourceCode.getFirstToken(
         node,
-        (token) => token.value === "{"
+        (token) => token.value === "{",
       )!;
 
       const closeBrace = sourceCode.getLastToken(
         node,
-        (token) => token.value === "}"
+        (token) => token.value === "}",
       )!;
 
       let first = sourceCode.getTokenAfter(openBrace, {
@@ -187,7 +187,7 @@ export default createRule("flow-mapping-curly-newline", {
 
               const indent = incIndent(
                 getActualIndentFromLine(openBrace.loc.start.line, context),
-                context
+                context,
               );
 
               return fixer.insertTextAfter(openBrace, `\n${indent}`);
@@ -206,7 +206,7 @@ export default createRule("flow-mapping-curly-newline", {
 
               const indent = getActualIndentFromLine(
                 closeBrace.loc.start.line,
-                context
+                context,
               );
 
               return fixer.insertTextBefore(closeBrace, `\n${indent}`);
@@ -217,11 +217,11 @@ export default createRule("flow-mapping-curly-newline", {
         const consistent = options.consistent;
         const hasLineBreakBetweenOpenBraceAndFirst = !isTokenOnSameLine(
           openBrace,
-          first
+          first,
         );
         const hasLineBreakBetweenCloseBraceAndLast = !isTokenOnSameLine(
           last,
-          closeBrace
+          closeBrace,
         );
 
         if (

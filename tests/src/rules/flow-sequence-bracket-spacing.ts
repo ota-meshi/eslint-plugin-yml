@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "flow-sequence-bracket-spacing",
   rule as any,
-  loadTestCases("flow-sequence-bracket-spacing")
+  loadTestCases("flow-sequence-bracket-spacing"),
 );

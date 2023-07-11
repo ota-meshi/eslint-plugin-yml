@@ -110,7 +110,7 @@ class YAMLEntryData {
     anchorAlias: {
       anchors: Set<string>;
       aliases: Set<string>;
-    }
+    },
   ) {
     this.sequence = sequence;
     this.node = node;
@@ -148,7 +148,7 @@ class YAMLSequenceData {
         anchors: Set<string>;
         aliases: Set<string>;
       }
-    >
+    >,
   ) {
     this.node = node;
     this.sourceCode = sourceCode;
@@ -158,7 +158,7 @@ class YAMLSequenceData {
   public get entries() {
     return (this.cachedEntries ??= this.node.entries.map(
       (e, index) =>
-        new YAMLEntryData(this, e, index, this.anchorAliasMap.get(e)!)
+        new YAMLEntryData(this, e, index, this.anchorAliasMap.get(e)!),
     ));
   }
 }
@@ -169,7 +169,7 @@ class YAMLSequenceData {
 function buildValidatorFromType(
   order: OrderTypeOption,
   insensitive: boolean,
-  natural: boolean
+  natural: boolean,
 ): Validator {
   type Compare<T> = ([a, b]: T[]) => boolean;
 
@@ -212,7 +212,7 @@ function buildValidatorFromType(
  */
 function parseOptions(
   options: UserOptions,
-  sourceCode: SourceCode
+  sourceCode: SourceCode,
 ): ParsedOption[] {
   return options.map((opt) => {
     const order = opt.order;
@@ -451,7 +451,7 @@ export default createRule("sort-sequence-values", {
     function isValidOrder(
       prevData: YAMLEntryData,
       thisData: YAMLEntryData,
-      option: ParsedOption
+      option: ParsedOption,
     ) {
       if (option.isValidOrder(prevData, thisData)) {
         return true;
@@ -597,7 +597,7 @@ export default createRule("sort-sequence-values", {
     function* fixForFlow(
       fixer: RuleFixer,
       data: YAMLEntryData,
-      moveTarget: YAMLEntryData
+      moveTarget: YAMLEntryData,
     ) {
       const beforeToken = data.aroundTokens.before;
       const afterToken = data.aroundTokens.after;
@@ -617,14 +617,14 @@ export default createRule("sort-sequence-values", {
           //    ^ insert
           insertCode = sourceCode.text.slice(...removeRange);
           insertTargetToken = sourceCode.getTokenBefore(
-            moveTarget.aroundTokens.before
+            moveTarget.aroundTokens.before,
           )!;
         } else {
           // [ target ]
           //  ^ insert
           insertCode = `${sourceCode.text.slice(
             beforeToken.range[1],
-            data.range[1]
+            data.range[1],
           )},`;
           insertTargetToken = moveTarget.aroundTokens.before;
         }
@@ -640,11 +640,11 @@ export default createRule("sort-sequence-values", {
     function* fixForBlock(
       fixer: RuleFixer,
       data: YAMLEntryData,
-      moveTarget: YAMLEntryData
+      moveTarget: YAMLEntryData,
     ) {
       const moveDataList = data.sequence.entries.slice(
         moveTarget.index,
-        data.index + 1
+        data.index + 1,
       );
 
       let replacementCodeRange = getBlockEntryRange(data);
@@ -652,7 +652,7 @@ export default createRule("sort-sequence-values", {
         const range = getBlockEntryRange(target);
         yield fixer.replaceTextRange(
           range,
-          sourceCode.text.slice(...replacementCodeRange)
+          sourceCode.text.slice(...replacementCodeRange),
         );
         replacementCodeRange = range;
       }
@@ -670,7 +670,7 @@ export default createRule("sort-sequence-values", {
      */
     function getBlockEntryStartOffset(data: YAMLEntryData) {
       const beforeHyphenToken = sourceCode.getTokenBefore(
-        data.aroundTokens.before
+        data.aroundTokens.before,
       );
       if (!beforeHyphenToken) {
         const comment = sourceCode.getTokenBefore(data.aroundTokens.before, {

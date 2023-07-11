@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "no-irregular-whitespace",
   rule as any,
-  loadTestCases("no-irregular-whitespace")
+  loadTestCases("no-irregular-whitespace"),
 );

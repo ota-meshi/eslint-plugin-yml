@@ -24,7 +24,7 @@ export default createRule("no-empty-mapping-value", {
      * Checks if the given node is empty
      */
     function isEmptyNode(
-      node: AST.YAMLContent | AST.YAMLWithMeta | null
+      node: AST.YAMLContent | AST.YAMLWithMeta | null,
     ): boolean {
       if (!node) {
         return true;

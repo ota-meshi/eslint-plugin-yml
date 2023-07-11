@@ -29,7 +29,7 @@ export function hasTabIndent(context: RuleContext): boolean {
  */
 export function calcExpectIndentForPairs(
   mapping: AST.YAMLMapping,
-  context: RuleContext
+  context: RuleContext,
 ): string | null {
   const sourceCode = context.getSourceCode();
   let parentNode = mapping.parent;
@@ -45,7 +45,7 @@ export function calcExpectIndentForPairs(
       return calcExpectIndentFromBaseNode(
         parentNode,
         mapping.pairs[0],
-        context
+        context,
       );
     }
     parentNode = parentNode.parent;
@@ -83,7 +83,7 @@ export function calcExpectIndentForPairs(
       }
       const offsetIndent = sourceCode.text.slice(
         hyphen.range[1],
-        mapping.range[0]
+        mapping.range[0],
       );
       return `${hyphenIndent} ${offsetIndent}`;
     }
@@ -107,7 +107,7 @@ export function calcExpectIndentForPairs(
  */
 export function calcExpectIndentForEntries(
   sequence: AST.YAMLFlowSequence,
-  context: RuleContext
+  context: RuleContext,
 ): string | null {
   const sourceCode = context.getSourceCode();
   let parentNode = sequence.parent;
@@ -123,7 +123,7 @@ export function calcExpectIndentForEntries(
       return calcExpectIndentFromBaseNode(
         parentNode,
         sequence.entries[0],
-        context
+        context,
       );
     }
     parentNode = parentNode.parent;
@@ -162,7 +162,7 @@ export function calcExpectIndentForEntries(
       }
       const offsetIndent = sourceCode.text.slice(
         hyphen.range[1],
-        sequence.range[0]
+        sequence.range[0],
       );
       return `${hyphenIndent} ${offsetIndent}`;
     }
@@ -187,7 +187,7 @@ export function calcExpectIndentForEntries(
 function calcExpectIndentFromBaseNode(
   baseNode: AST.YAMLNode,
   node: AST.YAMLNode,
-  context: RuleContext
+  context: RuleContext,
 ) {
   const baseIndent = getActualIndent(baseNode, context);
   if (baseIndent == null) {
@@ -206,7 +206,7 @@ function calcExpectIndentFromBaseNode(
  */
 export function getActualIndent(
   node: YAMLNodeOrToken,
-  context: RuleContext
+  context: RuleContext,
 ): string | null {
   const sourceCode = context.getSourceCode();
   const before = sourceCode.getTokenBefore(node, { includeComments: true });
@@ -221,7 +221,7 @@ export function getActualIndent(
  */
 export function getActualIndentFromLine(
   line: number,
-  context: RuleContext
+  context: RuleContext,
 ): string {
   const sourceCode = context.getSourceCode();
   const lineText = sourceCode.getLines()[line - 1];
@@ -255,7 +255,7 @@ export function decIndent(indent: string, context: RuleContext): string {
  */
 export function getNumOfIndent(
   context: RuleContext,
-  optionValue?: number | null
+  optionValue?: number | null,
 ): number {
   const num = optionValue ?? context.settings?.yml?.indent;
   return num == null || num < 2 ? 2 : num;
@@ -288,7 +288,7 @@ export function isKeyNode(node: AST.YAMLContent | AST.YAMLWithMeta): boolean {
  * Unwrap meta
  */
 export function unwrapMeta(
-  node: AST.YAMLContent | AST.YAMLWithMeta | null
+  node: AST.YAMLContent | AST.YAMLWithMeta | null,
 ): AST.YAMLContent | null {
   if (!node) {
     return node;
@@ -306,7 +306,7 @@ export function* processIndentFix(
   fixer: RuleFixer,
   baseIndent: string,
   targetNode: AST.YAMLContent | AST.YAMLWithMeta | AST.YAMLPair,
-  context: RuleContext
+  context: RuleContext,
 ): IterableIterator<Fix> {
   const sourceCode = context.getSourceCode();
   if (targetNode.type === "YAMLWithMeta") {
@@ -411,13 +411,13 @@ export function fixIndent(
   fixer: RuleFixer,
   sourceCode: SourceCode,
   indent: string,
-  node: YAMLNodeOrToken
+  node: YAMLNodeOrToken,
 ): Fix {
   const prevToken = sourceCode.getTokenBefore(node, {
     includeComments: true,
   })!;
   return fixer.replaceTextRange(
     [prevToken.range[1], node.range[0]],
-    `\n${indent}`
+    `\n${indent}`,
   );
 }

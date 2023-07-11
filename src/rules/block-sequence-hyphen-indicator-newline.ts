@@ -83,7 +83,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
                   const spaces = " ".repeat(Math.max(spaceCount, 1));
                   return fixer.replaceTextRange(
                     [hyphen.range[1], entry.range[0]],
-                    spaces
+                    spaces,
                   );
                 },
               });
@@ -97,7 +97,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
                   const spaces = `\n${" ".repeat(entry.loc.start.column)}`;
                   return fixer.replaceTextRange(
                     [hyphen.range[1], entry.range[0]],
-                    spaces
+                    spaces,
                   );
                 },
               });

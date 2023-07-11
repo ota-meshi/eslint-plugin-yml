@@ -44,7 +44,7 @@ function toRegExps(patterns: string[]) {
  * Checks whether given node is string value scalar
  */
 function isStringScalar(
-  node: AST.YAMLScalar
+  node: AST.YAMLScalar,
 ): node is AST.YAMLScalar & { value: string } {
   return typeof node.value === "string";
 }
@@ -89,7 +89,7 @@ export default createRule("plain-scalar", {
               // Irregular white spaces
               String.raw`[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u2028\u2029\u202f\u205f\u3000\ufeff]`,
             ]
-          : [])
+          : []),
     );
 
     const sourceCode = context.getSourceCode();
@@ -102,7 +102,7 @@ export default createRule("plain-scalar", {
      */
     function canToPlain(
       /* eslint-enable complexity -- X( */
-      node: AST.YAMLDoubleQuotedScalar | AST.YAMLSingleQuotedScalar
+      node: AST.YAMLDoubleQuotedScalar | AST.YAMLSingleQuotedScalar,
     ) {
       if (node.value !== node.value.trim()) {
         return false;
@@ -196,7 +196,7 @@ export default createRule("plain-scalar", {
             node,
             `"${text
               .replace(/(["\\])/gu, "\\$1")
-              .replace(/\r?\n|[\u2028\u2029]/gu, "\\n")}"`
+              .replace(/\r?\n|[\u2028\u2029]/gu, "\\n")}"`,
           );
         },
       });

@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "no-trailing-zeros",
   rule as any,
-  loadTestCases("no-trailing-zeros")
+  loadTestCases("no-trailing-zeros"),
 );

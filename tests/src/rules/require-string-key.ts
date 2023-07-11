@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "require-string-key",
   rule as any,
-  loadTestCases("require-string-key")
+  loadTestCases("require-string-key"),
 );

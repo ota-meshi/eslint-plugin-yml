@@ -113,7 +113,7 @@ export interface SourceCode {
   getText(
     node?: YAMLNodeOrToken,
     beforeCount?: number,
-    afterCount?: number
+    afterCount?: number,
   ): string;
 
   getLines(): string[];
@@ -138,91 +138,91 @@ export interface SourceCode {
 
   getTokenByRangeStart(
     offset: number,
-    options?: { includeComments?: boolean }
+    options?: { includeComments?: boolean },
   ): YAMLToken | null;
 
   getFirstToken(node: AST.YAMLNode): AST.Token;
   getFirstToken(
     node: AST.YAMLNode,
-    options?: CursorWithSkipOptions
+    options?: CursorWithSkipOptions,
   ): YAMLToken | null;
 
   getFirstTokens(
     node: AST.YAMLNode,
-    options?: CursorWithCountOptions
+    options?: CursorWithCountOptions,
   ): YAMLToken[];
 
   getLastToken(node: AST.YAMLNode): AST.Token;
   getLastToken(
     node: AST.YAMLNode,
-    options?: CursorWithSkipOptions
+    options?: CursorWithSkipOptions,
   ): YAMLToken | null;
 
   getLastTokens(
     node: AST.YAMLNode,
-    options?: CursorWithCountOptions
+    options?: CursorWithCountOptions,
   ): YAMLToken[];
 
   getTokenBefore(node: YAMLNodeOrToken): AST.Token | null;
   getTokenBefore(
     node: YAMLNodeOrToken,
-    options?: CursorWithSkipOptions
+    options?: CursorWithSkipOptions,
   ): YAMLToken | null;
 
   getTokensBefore(
     node: YAMLNodeOrToken,
-    options?: CursorWithCountOptions
+    options?: CursorWithCountOptions,
   ): YAMLToken[];
 
   getTokenAfter(node: YAMLNodeOrToken): AST.Token | null;
   getTokenAfter(
     node: YAMLNodeOrToken,
-    options?: CursorWithSkipOptions
+    options?: CursorWithSkipOptions,
   ): YAMLToken | null;
 
   getTokensAfter(
     node: YAMLNodeOrToken,
-    options?: CursorWithCountOptions
+    options?: CursorWithCountOptions,
   ): YAMLToken[];
 
   getFirstTokenBetween(
     left: YAMLNodeOrToken,
     right: YAMLNodeOrToken,
-    options?: CursorWithSkipOptions
+    options?: CursorWithSkipOptions,
   ): YAMLToken | null;
 
   getFirstTokensBetween(
     left: YAMLNodeOrToken,
     right: YAMLNodeOrToken,
-    options?: CursorWithCountOptions
+    options?: CursorWithCountOptions,
   ): YAMLToken[];
 
   getLastTokenBetween(
     left: YAMLNodeOrToken,
     right: YAMLNodeOrToken,
-    options?: CursorWithSkipOptions
+    options?: CursorWithSkipOptions,
   ): YAMLToken | null;
 
   getLastTokensBetween(
     left: YAMLNodeOrToken,
     right: YAMLNodeOrToken,
-    options?: CursorWithCountOptions
+    options?: CursorWithCountOptions,
   ): YAMLToken[];
 
   getTokensBetween(
     left: YAMLNodeOrToken,
     right: YAMLNodeOrToken,
-    padding?: number | FilterPredicate | CursorWithCountOptions
+    padding?: number | FilterPredicate | CursorWithCountOptions,
   ): YAMLToken[];
 
   getTokens(
     node: AST.YAMLNode,
     beforeCount?: number,
-    afterCount?: number
+    afterCount?: number,
   ): YAMLToken[];
   getTokens(
     node: AST.YAMLNode,
-    options: FilterPredicate | CursorWithCountOptions
+    options: FilterPredicate | CursorWithCountOptions,
   ): YAMLToken[];
 
   commentsExistBetween(left: YAMLNodeOrToken, right: YAMLNodeOrToken): boolean;

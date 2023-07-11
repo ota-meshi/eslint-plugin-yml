@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "block-sequence-hyphen-indicator-newline",
   rule as any,
-  loadTestCases("block-sequence-hyphen-indicator-newline")
+  loadTestCases("block-sequence-hyphen-indicator-newline"),
 );

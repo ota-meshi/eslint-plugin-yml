@@ -24,19 +24,19 @@ module.exports = {
           eslint$: path.resolve(__dirname, "./shim/eslint"),
           "eslint-visitor-keys$": path.resolve(
             __dirname,
-            "./shim/eslint-visitor-keys"
+            "./shim/eslint-visitor-keys",
           ),
           yaml$: path.resolve(
             __dirname,
-            "../../node_modules/yaml/dist/index.js"
+            "../../node_modules/yaml/dist/index.js",
           ),
           esquery: path.resolve(
             __dirname,
-            "../../node_modules/esquery/dist/esquery.min.js"
+            "../../node_modules/esquery/dist/esquery.min.js",
           ),
           "@eslint/eslintrc/universal": path.resolve(
             __dirname,
-            "../../node_modules/@eslint/eslintrc/dist/eslintrc-universal.cjs"
+            "../../node_modules/@eslint/eslintrc/dist/eslintrc-universal.cjs",
           ),
         },
       },
@@ -90,12 +90,12 @@ module.exports = {
           collapsable: false,
           children: rules
             .filter(
-              (rule) => !rule.meta.docs.extensionRule && !rule.meta.deprecated
+              (rule) => !rule.meta.docs.extensionRule && !rule.meta.deprecated,
             )
             .map(ruleToLink),
         },
         ...(rules.some(
-          (rule) => rule.meta.docs.extensionRule && !rule.meta.deprecated
+          (rule) => rule.meta.docs.extensionRule && !rule.meta.deprecated,
         )
           ? [
               {
@@ -104,7 +104,7 @@ module.exports = {
                 children: rules
                   .filter(
                     (rule) =>
-                      rule.meta.docs.extensionRule && !rule.meta.deprecated
+                      rule.meta.docs.extensionRule && !rule.meta.deprecated,
                   )
                   .map(ruleToLink),
               },

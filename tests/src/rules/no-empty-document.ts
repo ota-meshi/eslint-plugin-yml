@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "no-empty-document",
   rule as any,
-  loadTestCases("no-empty-document")
+  loadTestCases("no-empty-document"),
 );

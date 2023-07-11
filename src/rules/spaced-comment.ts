@@ -193,7 +193,7 @@ export default createRule("spaced-comment", {
       node: AST.Comment,
       messageId: string,
       match: RegExpExecArray | null,
-      refChar: string
+      refChar: string,
     ) {
       context.report({
         node,
@@ -210,7 +210,7 @@ export default createRule("spaced-comment", {
           end += match![0].length;
           return fixer.replaceTextRange(
             [start, end],
-            `#${match?.[1] ? match[1] : ""}`
+            `#${match?.[1] ? match[1] : ""}`,
           );
         },
         messageId,
@@ -252,7 +252,7 @@ export default createRule("spaced-comment", {
               node,
               "unexpectedSpaceAfterMarker",
               beginMatch,
-              beginMatch[1]
+              beginMatch[1],
             );
           }
         }

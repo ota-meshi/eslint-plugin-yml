@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "flow-mapping-curly-spacing",
   rule as any,
-  loadTestCases("flow-mapping-curly-spacing")
+  loadTestCases("flow-mapping-curly-spacing"),
 );

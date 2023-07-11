@@ -38,7 +38,7 @@ export default createRule("flow-mapping-curly-spacing", {
                   get properties() {
                     return node.pairs;
                   },
-                })
+                }),
               );
             }
           },

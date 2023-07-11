@@ -32,7 +32,7 @@ const OPTIONS_ENUM: Option[] = ["always", "never", "ignore"];
  */
 function parseOptions(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- option
-  option: any
+  option: any,
 ): {
   singleline: Option;
   multiline: Option;
@@ -231,7 +231,7 @@ export default createRule("block-sequence", {
 function canFixToBlock(
   sequenceInfo: Stack,
   node: AST.YAMLFlowSequence,
-  sourceCode: SourceCode
+  sourceCode: SourceCode,
 ) {
   if (sequenceInfo.hasNullPair || sequenceInfo.hasBlockLiteralOrFolded) {
     return false;
@@ -274,7 +274,7 @@ function canFixToBlock(
 function canFixToFlow(
   sequenceInfo: Stack,
   node: AST.YAMLBlockSequence,
-  context: RuleContext
+  context: RuleContext,
 ) {
   if (sequenceInfo.hasNullPair || sequenceInfo.hasBlockLiteralOrFolded) {
     return false;
@@ -345,7 +345,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
       yield* removeComma(prev, prevToken);
       yield fixer.replaceTextRange(
         [prevToken.range[1], entry.range[0]],
-        `\n${expectIndent}- `
+        `\n${expectIndent}- `,
       );
       yield* processEntryIndent(`${expectIndent}  `, entry);
 
@@ -372,7 +372,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
      */
     function* processEntryIndent(
       baseIndent: string,
-      entry: AST.YAMLContent | AST.YAMLWithMeta
+      entry: AST.YAMLContent | AST.YAMLWithMeta,
     ) {
       if (entry.type === "YAMLWithMeta" && entry.value) {
         yield* processIndentFix(fixer, baseIndent, entry.value, context);
@@ -416,14 +416,14 @@ function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
  */
 function buildFixBlockToFlow(
   node: AST.YAMLBlockSequence,
-  context: RuleContext
+  context: RuleContext,
 ) {
   const sourceCode = context.getSourceCode();
   return function* (fixer: RuleFixer): IterableIterator<Fix> {
     const entries = node.entries.filter(
       (
-        e: AST.YAMLContent | AST.YAMLWithMeta | null
-      ): e is AST.YAMLContent | AST.YAMLWithMeta => e != null
+        e: AST.YAMLContent | AST.YAMLWithMeta | null,
+      ): e is AST.YAMLContent | AST.YAMLWithMeta => e != null,
     );
     if (entries.length !== node.entries.length) {
       // cannot convert

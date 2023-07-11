@@ -20,7 +20,7 @@ describe("Integration with eslint-plugin-yml", () => {
     assert.strictEqual(results.length, 2);
     assert.strictEqual(
       results.reduce((s, a) => s + a.errorCount, 0),
-      0
+      0,
     );
   });
 
@@ -35,7 +35,7 @@ describe("Integration with eslint-plugin-yml", () => {
     assert.strictEqual(results.length, 1);
     assert.strictEqual(
       results.reduce((s, a) => s + a.errorCount, 0),
-      0
+      0,
     );
   });
 });

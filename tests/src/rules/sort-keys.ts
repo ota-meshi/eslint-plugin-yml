@@ -63,7 +63,7 @@ tester.run(
         {
           code: fs.readFileSync(
             require.resolve("../../../package.json"),
-            "utf-8"
+            "utf-8",
           ),
           options: OPTIONS_FOR_PACKAGE_JSON,
         },
@@ -429,6 +429,6 @@ tester.run(
           ],
         },
       ],
-    }
-  )
+    },
+  ),
 );

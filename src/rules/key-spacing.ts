@@ -135,7 +135,7 @@ function initOptions(
     align?: Partial<AlignOption>;
     multiLine?: UserOption;
     singleLine?: UserOption;
-  } & UserOption
+  } & UserOption,
 ) {
   let align: AlignOption | undefined,
     multiLine: ParsedOption,
@@ -295,7 +295,7 @@ function create(context: RuleContext): RuleListener {
    * @returns {boolean} Whether the property is a key-value property.
    */
   function isKeyValueProperty(
-    property: AST.YAMLPair
+    property: AST.YAMLPair,
   ): property is YAMLKeyValuePair {
     return property.key != null && property.value != null;
   }
@@ -341,7 +341,7 @@ function create(context: RuleContext): RuleListener {
    */
   function canChangeSpaces(
     property: YAMLKeyValuePair,
-    side: "key" | "value"
+    side: "key" | "value",
   ): boolean {
     if (side === "value") {
       const before = sourceCode.getTokenBefore(property.key);
@@ -364,7 +364,7 @@ function create(context: RuleContext): RuleListener {
     /* eslint-enable complexity -- ignore */
     property: YAMLKeyValuePair,
     side: "key" | "value",
-    whitespace: string
+    whitespace: string,
   ): boolean {
     if (side === "key") {
       if (property.key.type === "YAMLAlias") {
@@ -430,7 +430,7 @@ function create(context: RuleContext): RuleListener {
    */
   function canInsertSpaces(
     property: YAMLKeyValuePair,
-    side: "key" | "value"
+    side: "key" | "value",
   ): boolean {
     if (side === "key") {
       if (property.key.type === "YAMLScalar") {
@@ -468,7 +468,7 @@ function create(context: RuleContext): RuleListener {
     side: "key" | "value",
     whitespace: string,
     expected: number,
-    mode: "strict" | "minimum"
+    mode: "strict" | "minimum",
   ) {
     const diff = whitespace.length - expected;
     const nextColon = getNextColon(property.key);
@@ -570,7 +570,7 @@ function create(context: RuleContext): RuleListener {
    */
   function getPropertyWhitespace(pair: YAMLKeyValuePair) {
     const whitespace = /(\s*):(\s*)/u.exec(
-      sourceCode.getText().slice(pair.key.range[1], pair.value.range[0])
+      sourceCode.getText().slice(pair.key.range[1], pair.value.range[0]),
     );
 
     if (whitespace) {
@@ -598,14 +598,14 @@ function create(context: RuleContext): RuleListener {
         "key",
         actual.beforeColon,
         lineOptions.beforeColon ? 1 : 0,
-        lineOptions.mode
+        lineOptions.mode,
       );
       report(
         node,
         "value",
         actual.afterColon,
         lineOptions.afterColon ? 1 : 0,
-        lineOptions.mode
+        lineOptions.mode,
       );
     }
   }
@@ -618,7 +618,7 @@ function create(context: RuleContext): RuleListener {
    */
   function verifyListSpacing(
     properties: YAMLKeyValuePair[],
-    lineOptions: ParsedOption
+    lineOptions: ParsedOption,
   ) {
     const length = properties.length;
 
@@ -647,7 +647,7 @@ function create(context: RuleContext): RuleListener {
         if (isSingleLine(node)) {
           verifyListSpacing(
             node.pairs.filter(isKeyValueProperty),
-            singleLineOptions
+            singleLineOptions,
           );
         } else {
           verifyAlignment(node);
@@ -696,7 +696,7 @@ function create(context: RuleContext): RuleListener {
               "value",
               whitespace.afterColon,
               targetWidth - width,
-              mode
+              mode,
             );
           } else {
             // align = "colon"
@@ -705,7 +705,7 @@ function create(context: RuleContext): RuleListener {
               "key",
               whitespace.beforeColon,
               targetWidth - width,
-              mode
+              mode,
             );
             report(property, "value", whitespace.afterColon, afterColon, mode);
           }
@@ -721,7 +721,7 @@ function create(context: RuleContext): RuleListener {
      */
     function continuesPropertyGroup(
       lastMember: AST.YAMLPair,
-      candidate: AST.YAMLPair
+      candidate: AST.YAMLPair,
     ) {
       const groupEndLine = lastMember.loc.start.line;
       const candidateStartLine = candidate.loc.start.line;
@@ -778,7 +778,7 @@ function create(context: RuleContext): RuleListener {
 
           return groups;
         },
-        [[]] as AST.YAMLPair[][]
+        [[]] as AST.YAMLPair[][],
       );
     }
 
@@ -810,7 +810,7 @@ function create(context: RuleContext): RuleListener {
         if (!isKeyValueProperty(node)) return;
         verifySpacing(
           node,
-          isSingleLine(node.parent) ? singleLineOptions : multiLineOptions
+          isSingleLine(node.parent) ? singleLineOptions : multiLineOptions,
         );
       },
     };

@@ -106,7 +106,7 @@ export default createRule("block-mapping-colon-indicator-newline", {
                   const spaces = " ".repeat(Math.max(spaceCount, 1));
                   return fixer.replaceTextRange(
                     [colon.range[1], value.range[0]],
-                    spaces
+                    spaces,
                   );
                 },
               });
@@ -120,7 +120,7 @@ export default createRule("block-mapping-colon-indicator-newline", {
                   const spaces = `\n${" ".repeat(value.loc.start.column)}`;
                   return fixer.replaceTextRange(
                     [colon.range[1], value.range[0]],
-                    spaces
+                    spaces,
                   );
                 },
               });

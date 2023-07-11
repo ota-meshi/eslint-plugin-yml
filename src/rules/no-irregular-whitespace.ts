@@ -64,7 +64,7 @@ export default createRule("no-irregular-whitespace", {
       const [startIndex, endIndex] = node.range;
 
       errorIndexes = errorIndexes.filter(
-        (errorIndex) => errorIndex < startIndex || endIndex <= errorIndex
+        (errorIndex) => errorIndex < startIndex || endIndex <= errorIndex,
       );
     }
 

@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "block-mapping-question-indicator-newline",
   rule as any,
-  loadTestCases("block-mapping-question-indicator-newline")
+  loadTestCases("block-mapping-question-indicator-newline"),
 );

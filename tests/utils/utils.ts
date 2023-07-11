@@ -25,7 +25,7 @@ export function unIndent(strings: readonly string[]): string {
  * for `code` and `output`
  */
 export function unIndentCodeAndOutput([code]: readonly string[]): (
-  args: readonly string[]
+  args: readonly string[],
 ) => {
   code: string;
   output: string;
@@ -37,7 +37,7 @@ export function unIndentCodeAndOutput([code]: readonly string[]): (
     const outputLines = output.split("\n");
     const minLineIndent = Math.min(
       getMinIndent(outputLines),
-      codeMinLineIndent
+      codeMinLineIndent,
     );
 
     return {
@@ -66,22 +66,22 @@ export function loadTestCases(
   additionals?: {
     valid?: (RuleTester.ValidTestCase | string)[];
     invalid?: RuleTester.InvalidTestCase[];
-  }
+  },
 ): {
   valid: RuleTester.ValidTestCase[];
   invalid: RuleTester.InvalidTestCase[];
 } {
   const validFixtureRoot = path.resolve(
     __dirname,
-    `../fixtures/rules/${ruleName}/valid/`
+    `../fixtures/rules/${ruleName}/valid/`,
   );
   const invalidFixtureRoot = path.resolve(
     __dirname,
-    `../fixtures/rules/${ruleName}/invalid/`
+    `../fixtures/rules/${ruleName}/invalid/`,
   );
 
   const valid = listupInput(validFixtureRoot).map((inputFile) =>
-    getConfig(ruleName, inputFile)
+    getConfig(ruleName, inputFile),
   );
 
   const fixable = plugin.rules[ruleName].meta.fixable != null;
@@ -90,11 +90,11 @@ export function loadTestCases(
     const config = getConfig(ruleName, inputFile);
     const errorFile = inputFile.replace(
       /input\.(?:ya?ml|vue)$/u,
-      "errors.json"
+      "errors.json",
     );
     const outputFile = inputFile.replace(
       /input\.(?:ya?ml|vue)$/u,
-      isYaml(inputFile) ? "output.yml" : "output.vue"
+      isYaml(inputFile) ? "output.yml" : "output.vue",
     );
     let errors;
     try {
@@ -139,14 +139,14 @@ export function loadTestCases(
   if (invalid.some((test) => test.output) && !options?.skipOutputTest) {
     describe(`Output test for ${ruleName}`, () => {
       for (const test of invalid.filter(
-        ({ filename, skipOutputTest }) => isYaml(filename) && !skipOutputTest
+        ({ filename, skipOutputTest }) => isYaml(filename) && !skipOutputTest,
       )) {
         it(test.filename || test.code, () => {
           const input = yamlESLintParser.parseForESLint(test.code);
           const output = yamlESLintParser.parseForESLint(test.output);
           assert.deepStrictEqual(
             yamlESLintParser.getStaticYAMLValue(input.ast),
-            yamlESLintParser.getStaticYAMLValue(output.ast)
+            yamlESLintParser.getStaticYAMLValue(output.ast),
           );
         });
       }
@@ -188,15 +188,15 @@ function* itrListupInput(rootDir: string): IterableIterator<string> {
 export function makeSuiteTests(
   ruleName: string,
   optionsList: { [name: string]: any[] },
-  { force }: { force?: boolean } = {}
+  { force }: { force?: boolean } = {},
 ): void {
   const suiteFixtureRoot = path.resolve(
     __dirname,
-    "../fixtures/yaml-test-suite/"
+    "../fixtures/yaml-test-suite/",
   );
   const invalidFixtureRoot = path.resolve(
     __dirname,
-    `../fixtures/rules/${ruleName}/invalid/`
+    `../fixtures/rules/${ruleName}/invalid/`,
   );
   const linter = getLinter(ruleName);
 
@@ -214,7 +214,7 @@ export function makeSuiteTests(
 
       const fixtureDir = path.join(
         invalidFixtureRoot,
-        `yaml-test-suite-for-${optionName}/`
+        `yaml-test-suite-for-${optionName}/`,
       );
       const inputFile = path.join(fixtureDir, path.basename(fixture));
       const filename = inputFile.slice(inputFile.indexOf(ruleName));
@@ -234,7 +234,7 @@ export function makeSuiteTests(
             yml: { indent: 8 },
           },
         },
-        inputFile
+        inputFile,
       );
       if (result.length) {
         // has error
@@ -257,9 +257,9 @@ export function makeSuiteTests(
                 },
               },
               null,
-              2
+              2,
             )}\n`,
-            "utf8"
+            "utf8",
           );
         }
         fs.writeFileSync(inputFile, code0, "utf8");
@@ -269,7 +269,7 @@ export function makeSuiteTests(
           { indent: 8 },
           {
             force,
-          }
+          },
         );
       }
     }
@@ -280,7 +280,7 @@ function writeFixtures(
   ruleName: string,
   inputFile: string,
   ymlSettings?: YMLSettings | null,
-  { force }: { force?: boolean } = {}
+  { force }: { force?: boolean } = {},
 ) {
   const config = getConfig(ruleName, inputFile);
   if (!ymlSettings) {
@@ -291,7 +291,7 @@ function writeFixtures(
   const errorFile = inputFile.replace(/input\.(?:ya?ml|vue)$/u, "errors.json");
   const outputFile = inputFile.replace(
     /input\.(?:ya?ml|vue)$/u,
-    isYaml(inputFile) ? "output.yml" : "output.vue"
+    isYaml(inputFile) ? "output.yml" : "output.vue",
   );
 
   const result = linter.verify(
@@ -306,7 +306,7 @@ function writeFixtures(
         yml: ymlSettings,
       },
     },
-    config.filename
+    config.filename,
   );
   if (force || !fs.existsSync(errorFile)) {
     fs.writeFileSync(
@@ -318,9 +318,9 @@ function writeFixtures(
           column: m.column,
         })),
         null,
-        2
+        2,
       )}\n`,
-      "utf8"
+      "utf8",
     );
   }
 
@@ -337,7 +337,7 @@ function verify(
   linter: Linter,
   code: string,
   config: Linter.Config,
-  filename: string
+  filename: string,
 ): Linter.LintMessage[] {
   try {
     return linter.verify(code, config, filename);
@@ -363,7 +363,7 @@ function getConfig(ruleName: string, inputFile: string) {
   const code0 = fs.readFileSync(inputFile, "utf8");
   const overrideConfigFile: string = inputFile.replace(
     /input\.(?:ya?ml|vue)$/u,
-    "override-config.json"
+    "override-config.json",
   );
   const overrideConfig = fs.existsSync(overrideConfigFile)
     ? JSON.parse(fs.readFileSync(overrideConfigFile, "utf8"))
@@ -371,7 +371,7 @@ function getConfig(ruleName: string, inputFile: string) {
   let code, config;
   let configFile: string = inputFile.replace(
     /input\.(?:ya?ml|vue)$/u,
-    "config.json"
+    "config.json",
   );
   if (!fs.existsSync(configFile)) {
     configFile = path.join(path.dirname(inputFile), "_config.json");
@@ -387,7 +387,7 @@ function getConfig(ruleName: string, inputFile: string) {
       isVue(inputFile) ? { parser: require.resolve("vue-eslint-parser") } : {},
       config,
       overrideConfig,
-      { code, filename }
+      { code, filename },
     );
   }
   // inline config
@@ -411,7 +411,7 @@ function getConfig(ruleName: string, inputFile: string) {
   return Object.assign(
     isVue(inputFile) ? { parser: require.resolve("vue-eslint-parser") } : {},
     config,
-    { code, filename }
+    { code, filename },
   );
 }
 

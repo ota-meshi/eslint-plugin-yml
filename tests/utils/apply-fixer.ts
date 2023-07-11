@@ -27,7 +27,7 @@ function compareMessagesByLocation(a: any, b: any) {
  */
 export function applyFixes(
   sourceText: string,
-  messages: Linter.LintMessage[]
+  messages: Linter.LintMessage[],
 ): {
   fixed: boolean;
   messages: Linter.LintMessage[];

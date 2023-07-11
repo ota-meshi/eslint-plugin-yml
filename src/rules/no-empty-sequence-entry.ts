@@ -25,7 +25,7 @@ export default createRule("no-empty-sequence-entry", {
      * Checks if the given node is empty
      */
     function isEmptyNode(
-      node: AST.YAMLContent | AST.YAMLWithMeta | null
+      node: AST.YAMLContent | AST.YAMLWithMeta | null,
     ): boolean {
       if (!node) {
         return true;
@@ -59,7 +59,7 @@ export default createRule("no-empty-sequence-entry", {
      */
     function getHyphen(
       node: AST.YAMLBlockSequence,
-      index: number
+      index: number,
     ): AST.Token | null {
       if (index === 0) {
         const token = sourceCode.getFirstToken(node);
