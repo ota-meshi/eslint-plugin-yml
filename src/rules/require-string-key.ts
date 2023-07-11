@@ -49,7 +49,7 @@ export default createRule("require-string-key", {
      * Checks if the given node is string
      */
     function isStringNode(
-      node: AST.YAMLContent | AST.YAMLWithMeta | null
+      node: AST.YAMLContent | AST.YAMLWithMeta | null,
     ): boolean {
       if (!node) {
         return false;

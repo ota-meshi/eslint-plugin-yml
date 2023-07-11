@@ -110,7 +110,7 @@ export default createRule("flow-sequence-bracket-newline", {
      */
     function reportNoBeginningLinebreak(
       node: AST.YAMLFlowSequence,
-      token: YAMLToken
+      token: YAMLToken,
     ) {
       context.report({
         node,
@@ -141,7 +141,7 @@ export default createRule("flow-sequence-bracket-newline", {
      */
     function reportNoEndingLinebreak(
       node: AST.YAMLFlowSequence,
-      token: YAMLToken
+      token: YAMLToken,
     ) {
       context.report({
         node,
@@ -172,7 +172,7 @@ export default createRule("flow-sequence-bracket-newline", {
      */
     function reportRequiredBeginningLinebreak(
       node: AST.YAMLFlowSequence,
-      token: YAMLToken
+      token: YAMLToken,
     ) {
       context.report({
         node,
@@ -185,7 +185,7 @@ export default createRule("flow-sequence-bracket-newline", {
 
           const indent = incIndent(
             getActualIndentFromLine(token.loc.start.line, context),
-            context
+            context,
           );
           return fixer.insertTextAfter(token, `\n${indent}`);
         },
@@ -200,7 +200,7 @@ export default createRule("flow-sequence-bracket-newline", {
      */
     function reportRequiredEndingLinebreak(
       node: AST.YAMLFlowSequence,
-      token: YAMLToken
+      token: YAMLToken,
     ) {
       context.report({
         node,

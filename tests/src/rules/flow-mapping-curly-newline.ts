@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "flow-mapping-curly-newline",
   rule as any,
-  loadTestCases("flow-mapping-curly-newline")
+  loadTestCases("flow-mapping-curly-newline"),
 );

@@ -22,7 +22,7 @@ const OPTIONS_ENUM: OptionType[] = ["always", "never", "ignore"];
  */
 function parseOptions(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- option
-  option: any
+  option: any,
 ): {
   singleline: OptionType;
   multiline: OptionType;
@@ -323,7 +323,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowMapping, context: RuleContext) {
       yield* removeComma(prev, prevToken);
       yield fixer.replaceTextRange(
         [prevToken.range[1], pair.range[0]],
-        `\n${expectIndent}`
+        `\n${expectIndent}`,
       );
       const colonToken = sourceCode.getTokenAfter(pair.key!, isColon)!;
       if (
@@ -360,7 +360,7 @@ function buildFixFlowToBlock(node: AST.YAMLFlowMapping, context: RuleContext) {
  */
 function buildFixBlockToFlow(
   node: AST.YAMLBlockMapping,
-  _context: RuleContext
+  _context: RuleContext,
 ) {
   return function* (fixer: RuleFixer): IterableIterator<Fix> {
     yield fixer.insertTextBefore(node, "{");

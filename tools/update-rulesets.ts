@@ -70,7 +70,7 @@ export = {
 
   const filePath = path.resolve(
     __dirname,
-    `../src/configs/${CONFIGS[rec].config}.ts`
+    `../src/configs/${CONFIGS[rec].config}.ts`,
   );
 
   if (isWin) {

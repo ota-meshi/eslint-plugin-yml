@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "flow-sequence-bracket-newline",
   rule as any,
-  loadTestCases("flow-sequence-bracket-newline")
+  loadTestCases("flow-sequence-bracket-newline"),
 );

@@ -61,7 +61,7 @@ function parseOptions(context: RuleContext) {
           indicatorValueIndent?: number;
         }
       | undefined
-    )
+    ),
   ];
   const numOfIndent = getNumOfIndent(context, indentOption);
   let indentBlockSequences = true;
@@ -143,7 +143,7 @@ export default createRule("indent", {
       token: YAMLToken | (YAMLToken | null)[] | null,
       offset: Offset,
       baseToken: YAMLToken,
-      options?: { offsetWhenBaseIsNotFirst?: Offset }
+      options?: { offsetWhenBaseIsNotFirst?: Offset },
     ) {
       setIndent(
         token,
@@ -153,7 +153,7 @@ export default createRule("indent", {
           indentWhenBaseIsNotFirst:
             options.offsetWhenBaseIsNotFirst &&
             options.offsetWhenBaseIsNotFirst * numOfIndent,
-        }
+        },
       );
     }
 
@@ -167,7 +167,7 @@ export default createRule("indent", {
       token: YAMLToken | (YAMLToken | null)[] | null,
       indent: number,
       baseToken: YAMLToken,
-      options?: { indentWhenBaseIsNotFirst?: number }
+      options?: { indentWhenBaseIsNotFirst?: number },
     ) {
       if (token == null) {
         return;
@@ -195,7 +195,7 @@ export default createRule("indent", {
       nodeList: (AST.YAMLNode | null)[],
       left: YAMLToken,
       right: YAMLToken | null,
-      offset: Offset
+      offset: Offset,
     ) {
       let lastToken = left;
 
@@ -251,7 +251,7 @@ export default createRule("indent", {
      */
     function calcMappingPairValueIndent(
       node: AST.YAMLWithMeta | AST.YAMLContent,
-      indent: number
+      indent: number,
     ) {
       if (indentBlockSequences) {
         return indent;
@@ -275,7 +275,7 @@ export default createRule("indent", {
     function isBeginningToken(token: YAMLToken) {
       const before = sourceCode.getTokenBefore(
         token,
-        (t) => !indicators.has(t)
+        (t) => !indicators.has(t),
       );
       if (!before) return true;
 
@@ -358,9 +358,9 @@ export default createRule("indent", {
               keyToken,
               calcMappingPairValueIndent(
                 node.key,
-                calcIndicatorValueIndent(questionToken)
+                calcIndicatorValueIndent(questionToken),
               ),
-              questionToken
+              questionToken,
             );
           }
         }
@@ -382,9 +382,9 @@ export default createRule("indent", {
               valueToken,
               calcMappingPairValueIndent(
                 node.value,
-                calcIndicatorValueIndent(colonToken)
+                calcIndicatorValueIndent(colonToken),
               ),
-              colonToken
+              colonToken,
             );
           } else if (keyToken) {
             // Probably not reach.
@@ -485,7 +485,7 @@ export default createRule("indent", {
      */
     function processExpectedIndent(
       /* eslint-enable complexity -- X( */
-      lineTokens: YAMLToken[]
+      lineTokens: YAMLToken[],
     ): LineIndentStep1 {
       const lastToken = lineTokens[lineTokens.length - 1];
       let lineExpectedIndent: number | null = null;
@@ -676,13 +676,13 @@ export default createRule("indent", {
               processBlockLiteral(
                 indent,
                 scalarNode,
-                lineIndent.lastScalar.expectedIndent
+                lineIndent.lastScalar.expectedIndent,
               );
             } else {
               processScalar(
                 indent,
                 scalarNode,
-                lineIndent.lastScalar.expectedIndent
+                lineIndent.lastScalar.expectedIndent,
               );
             }
           }
@@ -701,7 +701,7 @@ export default createRule("indent", {
           range: [number, number];
           commentLineIndents: LineIndentStep1[];
         }[],
-        lineIndents: (LineIndentStep1 | undefined)[]
+        lineIndents: (LineIndentStep1 | undefined)[],
       ) {
         for (const { range, commentLineIndents } of commentLines) {
           let prev: LineIndentStep2 | undefined = results
@@ -758,7 +758,7 @@ export default createRule("indent", {
                   commentLineIndent.actualIndent < indent
                 );
               }) ?? expectedIndent,
-              expectedIndent
+              expectedIndent,
             );
             results[commentLineIndent.line] = {
               line: commentLineIndent.line,
@@ -807,7 +807,7 @@ export default createRule("indent", {
       function processBlockLiteral(
         lineIndent: LineIndentStep2,
         scalarNode: AST.YAMLBlockLiteralScalar | AST.YAMLBlockFoldedScalar,
-        expectedIndent: number
+        expectedIndent: number,
       ) {
         if (scalarNode.indent != null) {
           if (lineIndent.expectedIndent < lineIndent.actualIndent) {
@@ -833,7 +833,7 @@ export default createRule("indent", {
           }
           const scalarActualIndent = Math.min(
             firstLineActualIndent,
-            actualLineIndent
+            actualLineIndent,
           );
           results[scalarLine] = {
             line: scalarLine,
@@ -850,7 +850,7 @@ export default createRule("indent", {
       function processScalar(
         lineIndent: LineIndentStep2,
         scalarNode: AST.YAMLScalar,
-        expectedIndent: number
+        expectedIndent: number,
       ) {
         for (
           let scalarLine = lineIndent.line + 1;
@@ -929,12 +929,12 @@ export default createRule("indent", {
     function buildFix(
       /* eslint-enable complexity -- X */
       lineIndent: LineIndentStep2,
-      lineIndents: (LineIndentStep2 | undefined)[]
+      lineIndents: (LineIndentStep2 | undefined)[],
     ) {
       const { line, expectedIndent } = lineIndent;
       const document =
         documents.find(
-          (doc) => doc.loc.start.line <= line && line <= doc.loc.end.line
+          (doc) => doc.loc.start.line <= line && line <= doc.loc.end.line,
         ) || sourceCode.ast;
 
       let startLine = document.loc.start.line;
@@ -1045,7 +1045,7 @@ export default createRule("indent", {
             for (const indicatorData of li.indicatorData) {
               yield fixer.replaceTextRange(
                 [indicatorData.indicator.range[1], indicatorData.next.range[0]],
-                " ".repeat(indicatorData.expectedOffset)
+                " ".repeat(indicatorData.expectedOffset),
               );
             }
           }
@@ -1063,7 +1063,7 @@ export default createRule("indent", {
         const mark = sourceCode.getFirstToken(blockLiteral)!;
         yield fixer.replaceText(
           mark,
-          mark.value.replace(/\d+/u, (num: string) => `${Number(num) + diff}`)
+          mark.value.replace(/\d+/u, (num: string) => `${Number(num) + diff}`),
         );
       }
       const expectedIndent = li.expectedIndent;
@@ -1078,7 +1078,7 @@ export default createRule("indent", {
             column: li.actualIndent,
           }),
         ],
-        " ".repeat(expectedIndent)
+        " ".repeat(expectedIndent),
       );
     }
 

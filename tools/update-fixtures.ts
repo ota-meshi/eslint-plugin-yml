@@ -7,7 +7,7 @@ makeSuiteTests(
     never: ["never"],
     always: ["always"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -17,7 +17,7 @@ makeSuiteTests(
     never: ["never"],
     always: ["always"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -25,7 +25,7 @@ makeSuiteTests(
   {
     default: [],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -36,7 +36,7 @@ makeSuiteTests(
     four: [4],
     "four-with-indicator-indent-two": [4, { indicatorValueIndent: 2 }],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -46,7 +46,7 @@ makeSuiteTests(
     always: ["always"],
     never: ["never"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -56,7 +56,7 @@ makeSuiteTests(
     never: ["never"],
     always: ["always"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -66,7 +66,7 @@ makeSuiteTests(
     never: ["never"],
     always: ["always"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -76,7 +76,7 @@ makeSuiteTests(
     never: ["never"],
     always: ["always"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -86,7 +86,7 @@ makeSuiteTests(
     desc: ["desc"],
     asc: ["asc"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -97,7 +97,7 @@ makeSuiteTests(
     single: [{ prefer: "single" }],
     "avoid-escape-false": [{ avoidEscape: false }],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -107,7 +107,7 @@ makeSuiteTests(
     always: ["always"],
     never: ["never"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -130,7 +130,7 @@ makeSuiteTests(
     "align-value": [{ align: "value" }],
     "align-colon": [{ align: "colon" }],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -138,7 +138,7 @@ makeSuiteTests(
   {
     default: [],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -146,7 +146,7 @@ makeSuiteTests(
   {
     default: [],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -154,14 +154,14 @@ makeSuiteTests(
   {
     default: [],
   },
-  { force: true }
+  { force: true },
 );
 makeSuiteTests(
   "no-empty-sequence-entry",
   {
     default: [],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -171,7 +171,7 @@ makeSuiteTests(
     never: ["never", { nestedHyphen: "never" }],
     always: ["always", { nestedHyphen: "always" }],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -181,7 +181,7 @@ makeSuiteTests(
     never: ["never"],
     always: ["always"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -191,7 +191,7 @@ makeSuiteTests(
     never: ["never"],
     always: ["always"],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -199,7 +199,7 @@ makeSuiteTests(
   {
     default: [],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -210,7 +210,7 @@ makeSuiteTests(
     1: [{ max: 1 }],
     3: [{ max: 3 }],
   },
-  { force: true }
+  { force: true },
 );
 
 makeSuiteTests(
@@ -219,5 +219,5 @@ makeSuiteTests(
     desc: [{ pathPattern: ".*", order: { type: "desc" } }],
     asc: [{ pathPattern: ".*", order: { type: "asc" } }],
   },
-  { force: true }
+  { force: true },
 );

@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "no-empty-mapping-value",
   rule as any,
-  loadTestCases("no-empty-mapping-value")
+  loadTestCases("no-empty-mapping-value"),
 );

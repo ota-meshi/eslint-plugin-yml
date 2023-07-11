@@ -38,7 +38,7 @@ export default createRule("flow-sequence-bracket-spacing", {
                   get elements() {
                     return node.entries;
                   },
-                })
+                }),
               );
             }
           },

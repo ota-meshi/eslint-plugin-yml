@@ -12,5 +12,5 @@ const tester = new RuleTester({
 tester.run(
   "sort-sequence-values",
   rule as any,
-  loadTestCases("sort-sequence-values", { skipOutputTest: true })
+  loadTestCases("sort-sequence-values", { skipOutputTest: true }),
 );

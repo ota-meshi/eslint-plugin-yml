@@ -21,7 +21,7 @@ type CompatibleWithESLintOptions =
         natural?: boolean;
         minKeys?: number;
         allowLineSeparatedGroups?: boolean;
-      }
+      },
     ];
 type PatternOption = {
   pathPattern: string;
@@ -104,7 +104,7 @@ class YAMLPairData {
     anchorAlias: {
       anchors: Set<string>;
       aliases: Set<string>;
-    }
+    },
   ) {
     this.mapping = mapping;
     this.node = node;
@@ -115,7 +115,7 @@ class YAMLPairData {
   public get name() {
     return (this.cachedName ??= getPropertyName(
       this.node,
-      this.mapping.sourceCode
+      this.mapping.sourceCode,
     ));
   }
 
@@ -148,7 +148,7 @@ class YAMLMappingData {
         anchors: Set<string>;
         aliases: Set<string>;
       }
-    >
+    >,
   ) {
     this.node = node;
     this.sourceCode = sourceCode;
@@ -158,7 +158,7 @@ class YAMLMappingData {
   public get pairs() {
     return (this.cachedProperties ??= this.node.pairs.map(
       (e, index) =>
-        new YAMLPairData(this, e, index, this.anchorAliasMap.get(e)!)
+        new YAMLPairData(this, e, index, this.anchorAliasMap.get(e)!),
     ));
   }
 
@@ -192,7 +192,7 @@ class YAMLMappingData {
  * Check if given options are CompatibleWithESLintOptions
  */
 function isCompatibleWithESLintOptions(
-  options: UserOptions
+  options: UserOptions,
 ): options is CompatibleWithESLintOptions {
   if (options.length === 0) {
     return true;
@@ -210,7 +210,7 @@ function isCompatibleWithESLintOptions(
 function buildValidatorFromType(
   order: OrderTypeOption,
   insensitive: boolean,
-  natural: boolean
+  natural: boolean,
 ): Validator {
   let compare = natural
     ? ([a, b]: string[]) => naturalCompare(a, b) <= 0
@@ -232,7 +232,7 @@ function buildValidatorFromType(
  */
 function parseOptions(
   options: UserOptions,
-  sourceCode: SourceCode
+  sourceCode: SourceCode,
 ): ParsedOption[] {
   if (isCompatibleWithESLintOptions(options)) {
     const type: OrderTypeOption = options[0] ?? "asc";
@@ -472,7 +472,7 @@ export default createRule("sort-keys", {
     function isValidOrder(
       prevData: YAMLPairData,
       thisData: YAMLPairData,
-      option: ParsedOption
+      option: ParsedOption,
     ) {
       if (option.isValidOrder(prevData, thisData)) {
         return true;
@@ -641,7 +641,7 @@ export default createRule("sort-keys", {
     function* fixForFlow(
       fixer: RuleFixer,
       data: YAMLPairData,
-      moveTarget: YAMLPairData
+      moveTarget: YAMLPairData,
     ) {
       const beforeCommaToken = sourceCode.getTokenBefore(data.node)!;
       let insertCode: string,
@@ -668,7 +668,7 @@ export default createRule("sort-keys", {
           //  ^ insert
           insertCode = `${sourceCode.text.slice(
             beforeCommaToken.range[1],
-            data.node.range[1]
+            data.node.range[1],
           )},`;
           insertTargetToken = moveTargetBeforeToken;
         }
@@ -684,7 +684,7 @@ export default createRule("sort-keys", {
     function* fixForBlock(
       fixer: RuleFixer,
       data: YAMLPairData,
-      moveTarget: YAMLPairData
+      moveTarget: YAMLPairData,
     ) {
       const nodeLocs = getPairRangeForBlock(data.node);
       const moveTargetLocs = getPairRangeForBlock(moveTarget.node);
@@ -702,7 +702,7 @@ export default createRule("sort-keys", {
         const insertCode = sourceCode.text.slice(...removeRange);
         yield fixer.insertTextBeforeRange(
           moveTargetRange,
-          `${insertCode}${moveTargetLocs.loc.start.line === 1 ? "\n" : ""}`
+          `${insertCode}${moveTargetLocs.loc.start.line === 1 ? "\n" : ""}`,
         );
 
         yield fixer.removeRange(removeRange);
@@ -714,14 +714,14 @@ export default createRule("sort-keys", {
 
         const insertCode = `${sourceCode.text.slice(
           nodeLocs.range[0] + diffIndent,
-          nodeLocs.range[1]
+          nodeLocs.range[1],
         )}\n${sourceCode.text.slice(
           nodeLocs.range[0],
-          nodeLocs.range[0] + diffIndent
+          nodeLocs.range[0] + diffIndent,
         )}`;
         yield fixer.insertTextBeforeRange(
           moveTargetLocs.range,
-          `${insertCode}${moveTargetLocs.loc.start.line === 1 ? "\n" : ""}`
+          `${insertCode}${moveTargetLocs.loc.start.line === 1 ? "\n" : ""}`,
         );
 
         const removeRange: AST.Range = [

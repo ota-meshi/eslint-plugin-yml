@@ -82,7 +82,7 @@ export default createRule("quotes", {
                 `"${text
                   .replace(/''/gu, "'")
                   // escapes
-                  .replace(/(["\\])/gu, "\\$1")}"`
+                  .replace(/(["\\])/gu, "\\$1")}"`,
               );
             }
             return fixer.replaceText(
@@ -90,7 +90,7 @@ export default createRule("quotes", {
               `'${text
                 .replace(/\\(["\\])/gu, "$1")
                 // escapes
-                .replace(/'/gu, "''")}'`
+                .replace(/'/gu, "''")}'`,
             );
           },
         });

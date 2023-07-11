@@ -24,7 +24,7 @@ function readRules() {
   }
   const vueCustomBlockRulesLibRoot = path.resolve(
     __dirname,
-    "../../src/rules/vue-custom-block"
+    "../../src/rules/vue-custom-block",
   );
   for (const name of fs.readdirSync(vueCustomBlockRulesLibRoot)) {
     const ruleName = `vue-custom-block/${name.replace(/\.ts$/u, "")}`;
