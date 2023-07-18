@@ -1,6 +1,6 @@
-/* eslint node/no-missing-import: 0 -- DEMO */
+/* eslint n/no-missing-import: 0 -- DEMO */
 // eslint-disable-next-line eslint-comments/disable-enable-pair -- DEMO
-/* eslint-disable node/no-unsupported-features/es-syntax -- DEMO */
+/* eslint-disable n/no-unsupported-features/es-syntax -- DEMO */
 import { Linter } from "eslint/lib/linter";
 import plugin from "../../../../";
 
