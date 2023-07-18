@@ -1,5 +1,5 @@
 const path = require("path");
-// eslint-disable-next-line node/no-missing-require -- no build
+// eslint-disable-next-line n/no-missing-require -- no build
 const { rules } = require("../../lib/utils/rules");
 
 function ruleToLink({
