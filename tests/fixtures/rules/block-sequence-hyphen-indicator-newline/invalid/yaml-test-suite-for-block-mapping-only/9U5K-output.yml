@@ -1,0 +1,12 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/9U5K-input.yaml
+---
+# Products purchased
+-
+  item    : Super Hoop
+  quantity: 1
+-
+  item    : Basketball
+  quantity: 4
+-
+  item    : Big Shoes
+  quantity: 1

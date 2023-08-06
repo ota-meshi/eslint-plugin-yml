@@ -1,0 +1,5 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/AZW3-input.yaml
+-
+  bla"keks: foo
+-
+  bla]keks: foo

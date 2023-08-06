@@ -1,0 +1,6 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/V9D5-input.yaml
+-
+  sun: yellow
+-
+  ? earth: blue
+  : moon: white

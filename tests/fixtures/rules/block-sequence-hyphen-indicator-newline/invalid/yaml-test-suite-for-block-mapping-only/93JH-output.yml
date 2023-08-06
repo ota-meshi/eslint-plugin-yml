@@ -1,0 +1,6 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/93JH-input.yaml
+ -
+   key: value
+   key2: value2
+ -
+   key3: value3
