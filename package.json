@@ -82,7 +82,7 @@
     "@typescript-eslint/parser": "^6.0.0",
     "cross-env": "^7.0.2",
     "env-cmd": "^10.1.0",
-    "esbuild": "^0.18.0",
+    "esbuild": "^0.19.0",
     "esbuild-register": "^3.2.0",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",
