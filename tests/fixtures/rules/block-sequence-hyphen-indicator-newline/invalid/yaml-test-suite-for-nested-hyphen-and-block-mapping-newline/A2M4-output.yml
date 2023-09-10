@@ -1,0 +1,6 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-and-block-mapping-newline/A2M4-input.yaml
+? a
+: -	b
+  -
+     -	c
+     - d

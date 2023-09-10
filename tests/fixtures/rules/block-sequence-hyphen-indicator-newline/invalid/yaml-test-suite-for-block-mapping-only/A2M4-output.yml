@@ -1,6 +1,0 @@
-# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/A2M4-input.yaml
-? a
-: -	b
-  -
-     -	c
-     - d

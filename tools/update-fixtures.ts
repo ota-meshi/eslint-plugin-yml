@@ -170,7 +170,7 @@ makeSuiteTests(
     default: [],
     never: ["never", { nestedHyphen: "never" }],
     always: ["always", { nestedHyphen: "always" }],
-    "block-mapping-only": [
+    "nested-hyphen-and-block-mapping-newline": [
       "never",
       { nestedHyphen: "always", blockMapping: "always" },
     ],

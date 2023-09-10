@@ -1,4 +1,4 @@
-# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/RZP5-input.yaml
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-and-block-mapping-newline/RZP5-input.yaml
 a: "double
   quotes" # lala
 b: plain

@@ -1,4 +1,4 @@
-# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/J7PZ-input.yaml
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-and-block-mapping-newline/J7PZ-input.yaml
 # Ordered maps are represented as
 # A sequence of mappings, with
 # each mapping having one key

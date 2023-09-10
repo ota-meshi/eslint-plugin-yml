@@ -1,4 +1,4 @@
-# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only/XW4D-input.yaml
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-and-block-mapping-newline/XW4D-input.yaml
 a: "double
   quotes" # lala
 b: plain
