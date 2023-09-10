@@ -1,8 +1,8 @@
 {
   "options": [
-    "always",
+    "never",
     {
-      "nestedHyphen": "always",
+      "nestedHyphen": "never",
       "blockMapping": "always"
     }
   ],

@@ -168,8 +168,16 @@ makeSuiteTests(
   "block-sequence-hyphen-indicator-newline",
   {
     default: [],
-    never: ["never", { nestedHyphen: "never" }],
-    always: ["always", { nestedHyphen: "always" }],
+    never: ["never", { nestedHyphen: "never", blockMapping: "never" }],
+    always: ["always", { nestedHyphen: "always", blockMapping: "always" }],
+    "nested-hyphen-only-newline": [
+      "never",
+      { nestedHyphen: "always", blockMapping: "never" },
+    ],
+    "block-mapping-only-newline": [
+      "never",
+      { nestedHyphen: "never", blockMapping: "always" },
+    ],
     "nested-hyphen-and-block-mapping-newline": [
       "never",
       { nestedHyphen: "always", blockMapping: "always" },

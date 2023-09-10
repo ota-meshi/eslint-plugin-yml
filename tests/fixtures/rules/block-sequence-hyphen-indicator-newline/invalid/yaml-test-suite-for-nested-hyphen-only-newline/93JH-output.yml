@@ -1,0 +1,4 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-only-newline/93JH-input.yaml
+ - key: value
+   key2: value2
+ - key3: value3
