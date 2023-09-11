@@ -1,0 +1,5 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-and-block-mapping-newline/JQ4R-input.yaml
+block sequence:
+  - one
+  -
+    two : three

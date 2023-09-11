@@ -2,7 +2,8 @@
   "options": [
     "never",
     {
-      "nestedHyphen": "never"
+      "nestedHyphen": "never",
+      "blockMapping": "never"
     }
   ],
   "settings": {

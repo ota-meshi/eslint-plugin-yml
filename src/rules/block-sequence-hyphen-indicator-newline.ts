@@ -17,6 +17,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
         type: "object",
         properties: {
           nestedHyphen: { enum: ["always", "never"] },
+          blockMapping: { enum: ["always", "never"] },
         },
         additionalProperties: false,
       },
@@ -37,14 +38,23 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
     const style: "never" | "always" = context.options[0] || "never";
     const nestedHyphenStyle: "never" | "always" =
       context.options[1]?.nestedHyphen || "always";
+    const blockMappingStyle: "never" | "always" =
+      context.options[1]?.blockMapping || style;
 
     /**
      * Get style from given hyphen
      */
-    function getStyleOption(hyphen: AST.Token): "never" | "always" {
+    function getStyleOption(
+      hyphen: AST.Token,
+      entry: AST.YAMLContent | AST.YAMLWithMeta,
+    ): "never" | "always" {
       const next = sourceCode.getTokenAfter(hyphen);
       if (next && isHyphen(next)) {
         return nestedHyphenStyle;
+      }
+
+      if (entry.type === "YAMLMapping" && entry.style === "block") {
+        return blockMappingStyle;
       }
 
       return style;
@@ -66,7 +76,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
 
           const hasNewline = hyphen.loc.end.line < entry.loc.start.line;
           if (hasNewline) {
-            if (getStyleOption(hyphen) === "never") {
+            if (getStyleOption(hyphen, entry) === "never") {
               context.report({
                 loc: hyphen.loc,
                 messageId: "unexpectedLinebreakAfterIndicator",
@@ -89,7 +99,7 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
               });
             }
           } else {
-            if (getStyleOption(hyphen) === "always") {
+            if (getStyleOption(hyphen, entry) === "always") {
               context.report({
                 loc: hyphen.loc,
                 messageId: "expectedLinebreakAfterIndicator",

@@ -41,6 +41,7 @@ yml/block-sequence-hyphen-indicator-newline:
   - error
   - never # or "always" 
   - nestedHyphen: always # or "never"
+  - blockMapping: never # or "always"
 ```
 
 - Styles
@@ -49,6 +50,27 @@ yml/block-sequence-hyphen-indicator-newline:
 
 - Properties
   - `nestedHyphen` ... Specifies the style to apply to nested hyphens. default `"always"`
+  - `blockMapping` ... Specifies the style to apply to block mapping. If unspecified, the value of `Styles` is used.
+
+### `"blockMapping": "always"`
+
+<eslint-code-block fix>
+
+<!-- eslint-skip -->
+
+```yaml
+# eslint yml/block-sequence-hyphen-indicator-newline: ['error', 'never', { blockMapping: 'always' }]
+
+# ✓ GOOD
+-
+  keyA: "GOOD"
+- { keyB: "GOOD" }
+
+# ✗ BAD
+- key: "BAD"
+```
+
+</eslint-code-block>
 
 ## :couple: Related rules
 

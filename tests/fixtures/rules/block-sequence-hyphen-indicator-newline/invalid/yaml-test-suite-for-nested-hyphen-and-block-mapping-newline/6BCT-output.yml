@@ -1,0 +1,6 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-and-block-mapping-newline/6BCT-input.yaml
+-
+  foo:	 bar
+-
+  - baz
+  -	baz

@@ -1,0 +1,6 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-nested-hyphen-and-block-mapping-newline/735Y-input.yaml
+- "flow in block"
+- >
+ Block scalar
+- !!map # Block collection
+  foo : bar
