@@ -1,0 +1,7 @@
+# {"options": ["never", {"nestedHyphen": "never", "blockMapping": "always" }]}
+-
+  a: a
+- -
+    b: b
+# flow style mapping don't format
+- {c: c}

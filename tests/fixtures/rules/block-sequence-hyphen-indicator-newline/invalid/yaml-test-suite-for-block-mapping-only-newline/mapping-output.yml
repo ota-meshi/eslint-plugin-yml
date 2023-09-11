@@ -1,0 +1,6 @@
+# block-sequence-hyphen-indicator-newline/invalid/yaml-test-suite-for-block-mapping-only-newline/mapping-input.yaml
+-
+  a: a
+- -
+    b: b
+- {c: c}
