@@ -1,0 +1,5 @@
+# block-sequence-hyphen-indicator-newline/invalid/default/mapping-input.yaml
+- a: a
+-
+  - b: b
+- {c: c}

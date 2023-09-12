@@ -1,0 +1,7 @@
+# block-sequence-hyphen-indicator-newline/invalid/nested-hyphen-and-block-mapping-newline/mapping-input.yaml
+-
+  a: a
+-
+  -
+    b: b
+- {c: c}

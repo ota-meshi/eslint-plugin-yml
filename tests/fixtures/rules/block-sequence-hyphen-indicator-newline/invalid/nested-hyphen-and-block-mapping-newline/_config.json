@@ -1,0 +1,14 @@
+{
+  "options": [
+    "never",
+    {
+      "nestedHyphen": "always",
+      "blockMapping": "always"
+    }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
+}
