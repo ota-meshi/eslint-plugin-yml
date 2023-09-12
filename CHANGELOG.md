@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.9.0
+
+### Minor Changes
+
+- [#259](https://github.com/ota-meshi/eslint-plugin-yml/pull/259) [`b73d852`](https://github.com/ota-meshi/eslint-plugin-yml/commit/b73d8529b56c77debe8c8f0e538e40169423c77d) Thanks [@sun-yryr](https://github.com/sun-yryr)! - feat: add `blockMapping` option in `block-sequence-hyphen-indicator-newline`
+
 ## 1.8.0
 
 ### Minor Changes
