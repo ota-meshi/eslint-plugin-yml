@@ -38,6 +38,10 @@ fs.writeFileSync(
       /<!--USAGE_SECTION_START-->[\s\S]*<!--USAGE_SECTION_END-->/u,
       "See [User Guide](./user-guide/index.md).",
     )
+    .replace(
+      /\[LICENSE\]\(LICENSE\)/gu,
+      "[LICENSE](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/LICENSE)",
+    )
     .replace(/<!--DOCS_IGNORE_START-->[\s\S]*?<!--DOCS_IGNORE_END-->/gu, "")
     .replace(/\(https:\/\/ota-meshi.github.io\/eslint-plugin-yml/gu, "(.")
     .replace(/\n{3,}/gu, "\n\n"),

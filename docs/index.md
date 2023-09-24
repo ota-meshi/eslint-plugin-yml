@@ -68,7 +68,7 @@ You can verify the message files by checking and installing [@intlify/eslint-plu
 
 ## :lock: License
 
-See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
+See the [LICENSE](https://github.com/ota-meshi/eslint-plugin-yml/blob/master/LICENSE) file for license rights and limitations (MIT).
 
 [yaml]: https://yaml.org/
 [eslint-plugin-json-schema-validator]: https://github.com/ota-meshi/eslint-plugin-json-schema-validator
