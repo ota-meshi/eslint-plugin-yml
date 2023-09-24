@@ -1,5 +1,3 @@
-/* eslint n/no-unsupported-features/es-syntax: off -- not node */
-// eslint-disable-next-line n/no-extraneous-import -- ignore
 import pako from "pako";
 
 /**
@@ -18,13 +16,33 @@ export function deserializeState(serializedString) {
   }
 
   try {
-    const compressedString = window.atob(serializedString);
-    const uint8Arr = pako.inflate(
-      Uint8Array.from(compressedString, (c) => c.charCodeAt(0)),
-    );
-
-    const jsonText = new TextDecoder().decode(uint8Arr);
-    const json = JSON.parse(jsonText);
+    const decodedText = window.atob(serializedString);
+    const json = (() => {
+      let error;
+      for (const fn of [
+        () => {
+          const uint8Arr = pako.inflate(
+            Uint8Array.from(decodedText, (c) => c.charCodeAt(0)),
+          );
+          const jsonText = new TextDecoder().decode(uint8Arr);
+          return JSON.parse(jsonText);
+        },
+        () => {
+          const jsonText = pako.inflate(decodedText, {
+            to: "string",
+          });
+          return JSON.parse(jsonText);
+        },
+        () => JSON.parse(decodedText),
+      ]) {
+        try {
+          return fn();
+        } catch (e) {
+          error = e;
+        }
+      }
+      throw error;
+    })();
 
     if (typeof json === "object" && json != null) {
       if (typeof json.code === "string") {
@@ -38,7 +56,7 @@ export function deserializeState(serializedString) {
       }
     }
   } catch (error) {
-    // eslint-disable-next-line no-console -- demo
+    //eslint-disable-next-line no-console -- demo
     console.error(error);
   }
 

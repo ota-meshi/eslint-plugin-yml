@@ -4,8 +4,8 @@
     <div class="main-content">
       <rules-settings
         ref="settings"
+        v-model:rules="rules"
         class="rules-settings"
-        :rules.sync="rules"
       />
       <div class="editor-content">
         <pg-editor
@@ -20,10 +20,10 @@
               v-for="(msg, i) in messages"
               :key="msg.line + ':' + msg.column + ':' + msg.ruleId + '@' + i"
               class="message"
-              :class="getRule(msg.ruleId).classes"
+              :class="getRule(msg.ruleId)?.classes"
             >
               [{{ msg.line }}:{{ msg.column }}]: {{ msg.message }} (<a
-                :href="getRule(msg.ruleId).url"
+                :href="getRule(msg.ruleId)?.url"
                 target="_blank"
               >
                 {{ msg.ruleId }} </a
@@ -43,8 +43,7 @@ import SnsBar from "./components/SnsBar.vue";
 import { deserializeState, serializeState } from "./state";
 import { DEFAULT_RULES_CONFIG, getRule } from "./rules";
 
-const DEFAULT_CODE = `
----
+const DEFAULT_CODE = `---
 blockStyle:
   packageName: eslint-plugin-yml
   description: This ESLint plugin provides linting rules for YAML.
@@ -55,7 +54,6 @@ flowStyle: {
    github: https://github.com/ota-meshi/eslint-plugin-yml,
 }
 `;
-
 export default {
   name: "PlaygroundBlock",
   components: { PgEditor, RulesSettings, SnsBar },
@@ -137,6 +135,10 @@ function equalsRules(a, b) {
 }
 </script>
 <style scoped>
+.app {
+  height: calc(100vh - 70px);
+}
+
 .main-content {
   display: flex;
   flex-wrap: wrap;

@@ -129,6 +129,7 @@ export default {
       required: true,
     },
   },
+  emits: ["update:rules"],
   data() {
     return {
       categoryState: Object.fromEntries(

@@ -10,6 +10,9 @@
 /dist
 /docs/.vuepress/dist
 /docs/.vuepress/components/demo/demo-code.js
+/docs/.vitepress/cache
+/docs/.vitepress/build-system/shim
 !/.github
 !/.vscode
 !/docs/.vuepress
+!/docs/.vitepress

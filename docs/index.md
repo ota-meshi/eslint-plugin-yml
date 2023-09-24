@@ -41,11 +41,11 @@ Plugins don't provide source code text, so you can't use it with plugins and rul
 
 ## :book: Usage
 
-See [User Guide](./user-guide/README.md).
+See [User Guide](./user-guide/index.md).
 
 ## :white_check_mark: Rules
 
-See [Available Rules](./rules/README.md).
+See [Available Rules](./rules/index.md).
 
 ## :rocket: To Do More Verification
 

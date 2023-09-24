@@ -27,7 +27,8 @@
     "src/**/*",
     "tests/src/**/*",
     "tests/utils/**/*",
-    "tools/**/*"
+    "tools/**/*",
+    "docs/.vitepress/**/*"
     // "typings/**/*"
   ],
   "exclude": ["lib/**/*"]
