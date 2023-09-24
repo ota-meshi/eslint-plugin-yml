@@ -10,15 +10,16 @@
     :dark="dark"
     :format="format"
     :fix="fix"
-    @input="$emit('input', $event)"
+    @update:code="$emit('update:code', $event)"
     @change="$emit('change', $event)"
   />
 </template>
 
 <script>
-import EslintEditor from "vue-eslint-editor";
-import { Linter } from "eslint/lib/linter";
-import plugin from "../../../..";
+import EslintEditor from "@ota-meshi/site-kit-eslint-editor-vue";
+import { loadMonacoEditor } from "@ota-meshi/site-kit-monaco-editor";
+import { Linter } from "eslint";
+import { rules } from "../../../../../src/utils/rules";
 
 export default {
   name: "EslintPluginEditor",
@@ -56,9 +57,11 @@ export default {
       default: "yaml-eslint-parser",
     },
   },
+  emits: ["update:code", "change"],
 
   data() {
     return {
+      espree: null,
       yamlESLintParser: null,
       vueESLintParser: null,
       format: {
@@ -99,8 +102,9 @@ export default {
         rules: this.rules,
         parser: this.parser,
         parserOptions: {
-          sourceType: "script",
-          ecmaVersion: 2021,
+          parser: this.espree,
+          sourceType: "module",
+          ecmaVersion: "latest",
         },
       };
     },
@@ -112,8 +116,8 @@ export default {
       linter.defineParser("yaml-eslint-parser", this.yamlESLintParser);
       linter.defineParser("vue-eslint-parser", this.vueESLintParser);
 
-      for (const k of Object.keys(plugin.rules)) {
-        const rule = plugin.rules[k];
+      for (const k of Object.keys(rules)) {
+        const rule = rules[k];
         linter.defineRule(rule.meta.docs.ruleId, rule);
       }
 
@@ -123,50 +127,40 @@ export default {
 
   async mounted() {
     // Load parser asynchronously.
-    const [yamlESLintParser, vueESLintParser] = await Promise.all([
+    const [espree, yamlESLintParser, vueESLintParser] = await Promise.all([
+      import("espree"),
       import("yaml-eslint-parser"),
-      import("espree").then(() => import("vue-eslint-parser")),
+      import("vue-eslint-parser"),
     ]);
+    this.espree = espree;
     this.yamlESLintParser = yamlESLintParser;
     this.vueESLintParser = vueESLintParser;
 
-    const editor = this.$refs.editor;
+    const monaco = await loadMonacoEditor();
+    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+      validate: false,
+    });
+    monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+      validate: false,
+    });
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: false,
+    });
 
-    editor.$watch("monaco", () => {
-      const { monaco } = editor;
-      // monaco.languages.j()
-      monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-        validate: false,
-      });
-      monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
-        validate: false,
-      });
-
-      monaco.languages.register({ id: "yaml" });
-      monaco.languages.setMonarchTokensProvider(
-        "yaml",
-        require("monaco-editor/esm/vs/basic-languages/yaml/yaml").language,
+    const editorVue = this.$refs.editor.$refs.monacoEditorRef;
+    for (const editor of [
+      editorVue.getLeftEditor(),
+      editorVue.getRightEditor(),
+    ]) {
+      editor?.onDidChangeModelDecorations(() =>
+        this.onDidChangeModelDecorations(editor),
       );
-    });
-    editor.$watch("codeEditor", () => {
-      if (editor.codeEditor) {
-        editor.codeEditor.onDidChangeModelDecorations(() =>
-          this.onDidChangeModelDecorations(editor.codeEditor),
-        );
-      }
-    });
-    editor.$watch("fixedCodeEditor", () => {
-      if (editor.fixedCodeEditor) {
-        editor.fixedCodeEditor.onDidChangeModelDecorations(() =>
-          this.onDidChangeModelDecorations(editor.fixedCodeEditor),
-        );
-      }
-    });
+    }
   },
 
   methods: {
-    onDidChangeModelDecorations(editor) {
-      const { monaco } = this.$refs.editor;
+    async onDidChangeModelDecorations(editor) {
+      const monaco = await loadMonacoEditor();
       const model = editor.getModel();
       monaco.editor.setModelMarkers(model, "yaml", []);
     },

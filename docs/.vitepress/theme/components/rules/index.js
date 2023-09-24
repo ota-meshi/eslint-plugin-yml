@@ -1,8 +1,5 @@
-/* eslint n/no-missing-import: 0 -- DEMO */
-// eslint-disable-next-line eslint-comments/disable-enable-pair -- DEMO
-/* eslint-disable n/no-unsupported-features/es-syntax -- DEMO */
-import { Linter } from "eslint/lib/linter";
-import plugin from "../../../../";
+import { Linter } from "eslint";
+import { rules } from "../../../../../src/utils/rules.ts";
 
 const coreRules = Object.fromEntries(new Linter().getRules());
 
@@ -27,18 +24,19 @@ const CATEGORY_CLASSES = {
 
 const allRules = [];
 
-for (const k of Object.keys(plugin.rules)) {
-  const rule = plugin.rules[k];
-  rule.meta.docs.category = "yml";
+for (const k of Object.keys(rules)) {
+  const rule = rules[k];
+  if (rule.meta.deprecated) {
+    continue;
+  }
   allRules.push({
     classes: "eslint-plugin-yml-rule",
     category: "yml",
     ruleId: rule.meta.docs.ruleId,
     url: rule.meta.docs.url,
-    initChecked: CATEGORY_INDEX[rule.meta.docs.category] <= 3,
+    initChecked: CATEGORY_INDEX.yml <= 3,
   });
 }
-
 for (const k of Object.keys(coreRules)) {
   const rule = coreRules[k];
   if (rule.meta.deprecated) {
@@ -60,7 +58,7 @@ allRules.sort((a, b) =>
 export const categories = [];
 
 for (const rule of allRules) {
-  const title = CATEGORY_TITLES[rule.category] || rule.fallbackTitle;
+  const title = CATEGORY_TITLES[rule.category];
   let category = categories.find((c) => c.title === title);
   if (!category) {
     category = {
@@ -87,22 +85,11 @@ categories.sort((a, b) =>
 );
 
 export const DEFAULT_RULES_CONFIG = allRules.reduce((c, r) => {
-  if (
-    [
-      "no-trailing-spaces",
-      "no-multiple-empty-lines",
-      "comma-spacing",
-      "no-multi-spaces",
-    ].includes(r.ruleId)
-  ) {
-    c[r.ruleId] = "error";
-  } else {
-    c[r.ruleId] = r.initChecked ? "error" : "off";
-  }
+  c[r.ruleId] = r.initChecked ? "error" : "off";
   return c;
 }, {});
 
-export const rules = allRules;
+export { allRules as rules };
 
 export function getRule(ruleId) {
   if (!ruleId) {

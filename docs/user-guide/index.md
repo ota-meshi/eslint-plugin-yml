@@ -44,7 +44,7 @@ This plugin provides configs:
 - `plugin:yml/standard` ... Above, plus rules to enforce the common stylistic conventions.
 - `plugin:yml/prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
-See [the rule list](../rules/README.md) to get the `rules` that this plugin provides.
+See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.
 
 #### Parser Configuration
 

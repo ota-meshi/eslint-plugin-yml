@@ -1,5 +1,3 @@
-/* eslint n/no-unsupported-features/es-syntax: off -- not node */
-// eslint-disable-next-line n/no-extraneous-import -- ignore
 import pako from "pako";
 
 /**
