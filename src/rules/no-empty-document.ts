@@ -1,5 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
+import { getSourceCode } from "../utils/compat";
 
 export default createRule("no-empty-document", {
   meta: {
@@ -16,7 +17,8 @@ export default createRule("no-empty-document", {
     type: "suggestion",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
 

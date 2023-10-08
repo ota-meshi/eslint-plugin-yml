@@ -105,6 +105,7 @@ export interface SourceCode {
   hasBOM: boolean;
   parserServices: {
     isYAML?: true;
+    parseError?: any;
   };
   visitorKeys: {
     [nodeType: string]: string[];

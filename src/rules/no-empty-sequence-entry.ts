@@ -1,6 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
 import { isHyphen } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 export default createRule("no-empty-sequence-entry", {
   meta: {
@@ -17,7 +18,8 @@ export default createRule("no-empty-sequence-entry", {
     type: "suggestion",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
 
@@ -37,7 +39,6 @@ export default createRule("no-empty-sequence-entry", {
       return false;
     }
 
-    const sourceCode = context.getSourceCode();
     return {
       YAMLSequence(node: AST.YAMLSequence) {
         if (node.style !== "block") {

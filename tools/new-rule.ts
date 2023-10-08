@@ -35,6 +35,7 @@ const logger = console;
     ruleFile,
     `
 import type { AST } from "yaml-eslint-parser"
+import { getSourceCode } from "../utils/compat";
 import { createRule, defineWrapperListener, getCoreRule } from "../utils"
 const coreRule = getCoreRule("${ruleId}")
 import {
@@ -53,8 +54,8 @@ export default createRule("${ruleId}", {
         type: coreRule.meta!.type!,
     },
     create(context) {
-        const sourceCode = context.getSourceCode()
-        if (!context.parserServices.isYAML) {
+        const sourceCode = getSourceCode(context)
+        if (!sourceCode.parserServices.isYAML) {
             return {}
         }
 

@@ -4,6 +4,7 @@ import { createRule } from "../utils";
 import { isComma } from "../utils/ast-utils";
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
+import { getSourceCode } from "../utils/compat";
 
 type YAMLValue = ReturnType<typeof getStaticYAMLValue>;
 
@@ -438,10 +439,10 @@ export default createRule("sort-sequence-values", {
     type: "suggestion",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
-    const sourceCode = context.getSourceCode();
     // Parse options.
     const parsedOptions = parseOptions(context.options, sourceCode);
 

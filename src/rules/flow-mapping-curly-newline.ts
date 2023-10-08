@@ -12,6 +12,7 @@ import {
   hasTabIndent,
   isKeyNode,
 } from "../utils/yaml";
+import { getSourceCode } from "../utils/compat";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -126,11 +127,10 @@ export default createRule("flow-mapping-curly-newline", {
     type: "layout",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
-
-    const sourceCode = context.getSourceCode();
     const options = normalizeOptionValue(context.options[0]);
 
     /**

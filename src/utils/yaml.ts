@@ -7,13 +7,14 @@ import type {
   SourceCode,
 } from "../types";
 import { isHyphen } from "./ast-utils";
+import { getSourceCode } from "./compat";
 
 /**
  * Check if you are using tabs for indentation.
  * If you're using tabs, you're not sure if your YAML was parsed successfully, so almost all rules stop auto-fix.
  */
 export function hasTabIndent(context: RuleContext): boolean {
-  for (const line of context.getSourceCode().getLines()) {
+  for (const line of getSourceCode(context).getLines()) {
     if (/^\s*\t/u.test(line)) {
       return true;
     }
@@ -31,7 +32,7 @@ export function calcExpectIndentForPairs(
   mapping: AST.YAMLMapping,
   context: RuleContext,
 ): string | null {
-  const sourceCode = context.getSourceCode();
+  const sourceCode = getSourceCode(context);
   let parentNode = mapping.parent;
   if (parentNode.type === "YAMLWithMeta") {
     const before = sourceCode.getTokenBefore(parentNode);
@@ -109,7 +110,7 @@ export function calcExpectIndentForEntries(
   sequence: AST.YAMLFlowSequence,
   context: RuleContext,
 ): string | null {
-  const sourceCode = context.getSourceCode();
+  const sourceCode = getSourceCode(context);
   let parentNode = sequence.parent;
   if (parentNode.type === "YAMLWithMeta") {
     const before = sourceCode.getTokenBefore(parentNode);
@@ -208,7 +209,7 @@ export function getActualIndent(
   node: YAMLNodeOrToken,
   context: RuleContext,
 ): string | null {
-  const sourceCode = context.getSourceCode();
+  const sourceCode = getSourceCode(context);
   const before = sourceCode.getTokenBefore(node, { includeComments: true });
   if (!before || before.loc.end.line < node.loc.start.line) {
     return getActualIndentFromLine(node.loc.start.line, context);
@@ -223,7 +224,7 @@ export function getActualIndentFromLine(
   line: number,
   context: RuleContext,
 ): string {
-  const sourceCode = context.getSourceCode();
+  const sourceCode = getSourceCode(context);
   const lineText = sourceCode.getLines()[line - 1];
   return /^[^\S\n\r\u2028\u2029]*/u.exec(lineText)![0];
 }
@@ -308,7 +309,7 @@ export function* processIndentFix(
   targetNode: AST.YAMLContent | AST.YAMLWithMeta | AST.YAMLPair,
   context: RuleContext,
 ): IterableIterator<Fix> {
-  const sourceCode = context.getSourceCode();
+  const sourceCode = getSourceCode(context);
   if (targetNode.type === "YAMLWithMeta") {
     yield* metaIndent(targetNode);
     return;

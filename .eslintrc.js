@@ -29,6 +29,14 @@ module.exports = {
     "no-shadow": "off",
     "no-void": ["error", { allowAsStatement: true }],
     "jsonc/array-element-newline": "off",
+    "no-restricted-properties": [
+      "error",
+      { object: "context", property: "getSourceCode" },
+      { object: "context", property: "getFilename" },
+      { object: "context", property: "getCwd" },
+      { object: "context", property: "getScope" },
+      { object: "context", property: "parserServices" },
+    ],
   },
   overrides: [
     {

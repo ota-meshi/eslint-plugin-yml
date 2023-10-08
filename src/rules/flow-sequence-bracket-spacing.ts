@@ -4,6 +4,7 @@ import {
   getProxyNode,
   getCoreRule,
 } from "../utils";
+import { getSourceCode } from "../utils/compat";
 const coreRule = getCoreRule("array-bracket-spacing");
 
 export default createRule("flow-sequence-bracket-spacing", {
@@ -22,7 +23,8 @@ export default createRule("flow-sequence-bracket-spacing", {
     type: coreRule.meta!.type!,
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
 

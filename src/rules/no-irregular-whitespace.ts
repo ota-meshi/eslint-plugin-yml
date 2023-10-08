@@ -1,6 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
 import type { YAMLNodeOrToken } from "../types";
+import { getSourceCode } from "../utils/compat";
 
 // ------------------------------------------------------------------------------
 // Constants
@@ -42,7 +43,8 @@ export default createRule("no-irregular-whitespace", {
     type: "problem",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     // Module store of error indexes that we have found
@@ -52,8 +54,6 @@ export default createRule("no-irregular-whitespace", {
     const options = context.options[0] || {};
     const skipComments = Boolean(options.skipComments);
     const skipQuotedScalars = options.skipQuotedScalars !== false;
-
-    const sourceCode = context.getSourceCode();
 
     /**
      * Removes errors that occur inside a string node

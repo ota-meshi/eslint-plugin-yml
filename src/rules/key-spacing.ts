@@ -6,6 +6,7 @@ import type { AST } from "yaml-eslint-parser";
 import type { RuleListener, RuleContext } from "../types";
 import { createRule } from "../utils";
 import { isColon, isQuestion } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -269,7 +270,8 @@ export default createRule("key-spacing", {
  * Create rule visitor
  */
 function create(context: RuleContext): RuleListener {
-  if (!context.parserServices.isYAML) {
+  const sourceCode = getSourceCode(context);
+  if (!sourceCode.parserServices.isYAML) {
     return {};
   }
   /**
@@ -286,8 +288,6 @@ function create(context: RuleContext): RuleListener {
     singleLine: singleLineOptions,
     align: alignmentOptions,
   } = initOptions(options);
-
-  const sourceCode = context.getSourceCode();
 
   /**
    * Determines if the given property is key-value property.

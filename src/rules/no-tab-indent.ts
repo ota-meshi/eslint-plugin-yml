@@ -1,5 +1,6 @@
 import type { RuleContext } from "../types";
 import { createRule } from "../utils";
+import { getSourceCode } from "../utils/compat";
 
 export default createRule("no-tab-indent", {
   meta: {
@@ -16,12 +17,12 @@ export default createRule("no-tab-indent", {
     type: "problem",
   },
   create(context: RuleContext) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     return {
       Program() {
-        const sourceCode = context.getSourceCode();
         const lines = sourceCode.lines;
         for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
           const line = lines[lineIndex];

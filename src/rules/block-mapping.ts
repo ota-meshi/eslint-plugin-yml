@@ -9,6 +9,7 @@ import {
   unwrapMeta,
   processIndentFix,
 } from "../utils/yaml";
+import { getSourceCode } from "../utils/compat";
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -99,7 +100,8 @@ export default createRule("block-mapping", {
     type: "layout",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     const options = parseOptions(context.options[0]);
@@ -292,7 +294,7 @@ function canFixToFlow(mappingInfo: Stack, node: AST.YAMLBlockMapping) {
  */
 function buildFixFlowToBlock(node: AST.YAMLFlowMapping, context: RuleContext) {
   return function* (fixer: RuleFixer): IterableIterator<Fix> {
-    const sourceCode = context.getSourceCode();
+    const sourceCode = getSourceCode(context);
     const open = sourceCode.getFirstToken(node);
     const close = sourceCode.getLastToken(node);
     if (open?.value !== "{" || close?.value !== "}") {

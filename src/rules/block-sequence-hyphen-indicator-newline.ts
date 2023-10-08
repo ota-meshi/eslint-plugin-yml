@@ -1,6 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
 import { isHyphen } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 export default createRule("block-sequence-hyphen-indicator-newline", {
   meta: {
@@ -31,8 +32,8 @@ export default createRule("block-sequence-hyphen-indicator-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = context.getSourceCode();
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     const style: "never" | "always" = context.options[0] || "never";

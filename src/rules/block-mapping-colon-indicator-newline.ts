@@ -1,6 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
 import { isColon } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 export default createRule("block-mapping-colon-indicator-newline", {
   meta: {
@@ -28,8 +29,8 @@ export default createRule("block-mapping-colon-indicator-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = context.getSourceCode();
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     const option: "never" | "always" = context.options[0] || "never";

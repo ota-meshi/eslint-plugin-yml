@@ -1,5 +1,6 @@
 import path from "path";
 import { createRule } from "../utils";
+import { getFilename, getSourceCode } from "../utils/compat";
 
 export default createRule("file-extension", {
   meta: {
@@ -29,7 +30,8 @@ export default createRule("file-extension", {
     type: "suggestion",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     const expected: string = context.options[0]?.extension || "yaml";
@@ -37,7 +39,7 @@ export default createRule("file-extension", {
 
     return {
       Program(node) {
-        const filename = context.getFilename();
+        const filename = getFilename(context);
         const actual = path.extname(filename);
         if (
           (caseSensitive ? actual : actual.toLocaleLowerCase()) ===
