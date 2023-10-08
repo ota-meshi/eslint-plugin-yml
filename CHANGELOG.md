@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.10.0
+
+### Minor Changes
+
+- [#270](https://github.com/ota-meshi/eslint-plugin-yml/pull/270) [`96a031f`](https://github.com/ota-meshi/eslint-plugin-yml/commit/96a031f4989b6da8cf044a5a9bf9e47b1b8d3538) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: use eslint-compat-utils
+
 ## 1.9.0
 
 ### Minor Changes
