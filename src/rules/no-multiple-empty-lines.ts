@@ -1,4 +1,5 @@
 import { createRule } from "../utils";
+import { getSourceCode } from "../utils/compat";
 
 export default createRule("no-multiple-empty-lines", {
   meta: {
@@ -43,7 +44,8 @@ export default createRule("no-multiple-empty-lines", {
     type: "layout",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
 
@@ -54,8 +56,6 @@ export default createRule("no-multiple-empty-lines", {
       maxEOF: context.options[0]?.maxEOF ?? maxOption,
       maxBOF: context.options[0]?.maxBOF ?? maxOption,
     };
-
-    const sourceCode = context.getSourceCode();
 
     const allLines = [...sourceCode.lines];
     if (allLines[allLines.length - 1] === "") {

@@ -1,5 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
+import { getSourceCode } from "../utils/compat";
 
 type Prefer = "double" | "single";
 
@@ -29,7 +30,8 @@ export default createRule("quotes", {
     type: "layout",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     const objectOption = context.options[0] || {};

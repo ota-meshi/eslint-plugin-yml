@@ -1,5 +1,6 @@
 import { createRule } from "../utils";
 import { isQuestion } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 export default createRule("block-mapping-question-indicator-newline", {
   meta: {
@@ -24,8 +25,8 @@ export default createRule("block-mapping-question-indicator-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = context.getSourceCode();
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     const option: "never" | "always" = context.options[0] || "never";

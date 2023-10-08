@@ -1,10 +1,10 @@
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
-import type { RuleListener } from "../types";
 import { createRule } from "../utils";
 import type { CasingKind } from "../utils/casing";
 import { getChecker } from "../utils/casing";
 import { allowedCaseOptions } from "../utils/casing";
+import { getSourceCode } from "../utils/compat";
 
 type Option = {
   [key in CasingKind]?: boolean;
@@ -63,8 +63,9 @@ export default createRule("key-name-casing", {
     type: "suggestion",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
-      return {} as RuleListener;
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
+      return {};
     }
     const option: Option = { ...context.options[0] };
     if (option.camelCase !== false) {

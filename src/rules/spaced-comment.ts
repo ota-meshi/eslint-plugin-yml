@@ -1,6 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
 import lodash from "lodash";
 import { createRule } from "../utils";
+import { getSourceCode } from "../utils/compat";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -157,10 +158,10 @@ export default createRule("spaced-comment", {
     type: "suggestion",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
-    const sourceCode = context.getSourceCode();
 
     // Unless the first option is never, require a space
     const requireSpace = context.options[0] !== "never";

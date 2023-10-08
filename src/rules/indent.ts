@@ -3,6 +3,7 @@ import { createRule } from "../utils";
 import { hasTabIndent, getNumOfIndent } from "../utils/yaml";
 import type { YAMLToken, Fix, RuleFixer, RuleContext } from "../types";
 import { isHyphen, isQuestion, isColon } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -114,7 +115,8 @@ export default createRule("indent", {
     type: "layout",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
 
@@ -125,8 +127,6 @@ export default createRule("indent", {
 
     const { numOfIndent, indentBlockSequences, indicatorValueIndent } =
       parseOptions(context);
-
-    const sourceCode = context.getSourceCode();
 
     const indents = new Map<YAMLToken, IndentInfo>();
     const indicators = new Set<YAMLToken>();

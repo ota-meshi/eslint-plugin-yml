@@ -10,6 +10,7 @@ import type { AST } from "yaml-eslint-parser";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import debug from "debug";
 import path from "path";
+import { getFilename, getSourceCode } from "./compat";
 const log = debug("eslint-plugin-yml:utils/index");
 
 /**
@@ -32,12 +33,13 @@ export function createRule(
       },
     },
     create(context: Rule.RuleContext): any {
+      const sourceCode = getSourceCode(context);
       if (
-        typeof context.parserServices.defineCustomBlocksVisitor ===
+        typeof sourceCode.parserServices.defineCustomBlocksVisitor ===
           "function" &&
-        path.extname(context.getFilename()) === ".vue"
+        path.extname(getFilename(context)) === ".vue"
       ) {
-        return context.parserServices.defineCustomBlocksVisitor(
+        return sourceCode.parserServices.defineCustomBlocksVisitor(
           context,
           yamlESLintParser,
           {
@@ -71,7 +73,8 @@ export function defineWrapperListener(
     createListenerProxy?: (listener: CoreRuleListener) => RuleListener;
   },
 ): RuleListener {
-  if (!context.parserServices.isYAML) {
+  const sourceCode = getSourceCode(context);
+  if (!sourceCode.parserServices.isYAML) {
     return {};
   }
   const listener = coreRule.create({

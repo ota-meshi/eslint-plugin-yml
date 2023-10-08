@@ -19,6 +19,7 @@ import type {
   SourceCode,
 } from "../types";
 import { isComma } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -109,7 +110,8 @@ export default createRule("block-sequence", {
     type: "layout",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
     const options = parseOptions(context.options[0]);
@@ -201,7 +203,7 @@ export default createRule("block-sequence", {
           }
 
           const canFix =
-            canFixToBlock(sequenceInfo, node, context.getSourceCode()) &&
+            canFixToBlock(sequenceInfo, node, sourceCode) &&
             !hasTabIndent(context);
           context.report({
             loc: node.loc,
@@ -314,7 +316,7 @@ function canFixToFlow(
  */
 function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
   return function* (fixer: RuleFixer): IterableIterator<Fix> {
-    const sourceCode = context.getSourceCode();
+    const sourceCode = getSourceCode(context);
     const open = sourceCode.getFirstToken(node);
     const close = sourceCode.getLastToken(node);
     if (open?.value !== "[" || close?.value !== "]") {
@@ -418,7 +420,7 @@ function buildFixBlockToFlow(
   node: AST.YAMLBlockSequence,
   context: RuleContext,
 ) {
-  const sourceCode = context.getSourceCode();
+  const sourceCode = getSourceCode(context);
   return function* (fixer: RuleFixer): IterableIterator<Fix> {
     const entries = node.entries.filter(
       (

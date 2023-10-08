@@ -3,6 +3,7 @@ import naturalCompare from "natural-compare";
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils";
 import { isComma, isCommentToken } from "../utils/ast-utils";
+import { getSourceCode } from "../utils/compat";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -458,10 +459,10 @@ export default createRule("sort-keys", {
     type: "suggestion",
   },
   create(context) {
-    if (!context.parserServices.isYAML) {
+    const sourceCode = getSourceCode(context);
+    if (!sourceCode.parserServices.isYAML) {
       return {};
     }
-    const sourceCode = context.getSourceCode();
 
     // Parse options.
     const parsedOptions = parseOptions(context.options, sourceCode);
