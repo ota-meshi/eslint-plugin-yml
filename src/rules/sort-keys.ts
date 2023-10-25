@@ -170,7 +170,7 @@ class YAMLMappingData {
     while (p) {
       if (p.type === "YAMLPair") {
         const name = getPropertyName(p, sourceCode);
-        if (/^[$_a-z][\w$]*$/iu.test(name)) {
+        if (/^[$a-z_][\w$]*$/iu.test(name)) {
           path = `.${name}${path}`;
         } else {
           path = `[${JSON.stringify(name)}]${path}`;
