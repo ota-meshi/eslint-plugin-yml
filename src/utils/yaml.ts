@@ -238,8 +238,8 @@ export function incIndent(indent: string, context: RuleContext): string {
     numOfIndent === 2
       ? "  "
       : numOfIndent === 4
-      ? "    "
-      : " ".repeat(numOfIndent);
+        ? "    "
+        : " ".repeat(numOfIndent);
   return `${indent}${add}`;
 }
 
