@@ -1,0 +1,5 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-always-with-object-option/EHF6-input.yaml
+!!map {
+  k: !!seq
+  [ a, !!str b ]
+}

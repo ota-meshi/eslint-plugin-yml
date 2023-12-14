@@ -1,0 +1,9 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-always-with-object-option/M7NX-input.yaml
+---
+{
+ a: [
+  b, c, {
+   d: [ e, f ]
+  }
+ ]
+}

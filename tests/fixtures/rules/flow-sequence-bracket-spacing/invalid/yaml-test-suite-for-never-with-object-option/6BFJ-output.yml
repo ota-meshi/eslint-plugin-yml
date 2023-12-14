@@ -1,0 +1,4 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-never-with-object-option/6BFJ-input.yaml
+---
+&mapping
+&key [&item a, b, c]: value

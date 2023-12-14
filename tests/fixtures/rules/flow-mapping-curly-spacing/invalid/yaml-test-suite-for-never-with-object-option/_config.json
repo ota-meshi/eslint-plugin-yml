@@ -1,0 +1,14 @@
+{
+  "options": [
+    "never",
+    {
+      "arraysInObjects": true,
+      "objectsInObjects": true
+    }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
+}

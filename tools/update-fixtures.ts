@@ -55,6 +55,14 @@ makeSuiteTests(
     default: [],
     never: ["never"],
     always: ["always"],
+    "never-with-object-option": [
+      "never",
+      { arraysInObjects: true, objectsInObjects: true },
+    ],
+    "always-with-object-option": [
+      "always",
+      { arraysInObjects: true, objectsInObjects: true },
+    ],
   },
   { force: true },
 );
@@ -75,6 +83,14 @@ makeSuiteTests(
     default: [],
     never: ["never"],
     always: ["always"],
+    "never-with-object-option": [
+      "never",
+      { singleValue: true, objectsInArrays: true, arraysInArrays: true },
+    ],
+    "always-with-object-option": [
+      "always",
+      { singleValue: true, objectsInArrays: true, arraysInArrays: true },
+    ],
   },
   { force: true },
 );

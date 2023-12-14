@@ -1,0 +1,7 @@
+# flow-mapping-curly-spacing/invalid/yaml-test-suite-for-never-with-object-option/Q9WF-input.yaml
+{first: Sammy, last: Sosa}:
+# Statistics:
+  hr:  # Home runs
+     65
+  avg: # Average
+   0.278
