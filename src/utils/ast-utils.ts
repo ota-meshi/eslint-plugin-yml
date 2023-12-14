@@ -54,3 +54,47 @@ export function isColon(token: YAMLToken | null): token is YAMLToken {
 export function isComma(token: YAMLToken | null): token is YAMLToken {
   return token != null && token.type === "Punctuator" && token.value === ",";
 }
+
+/**
+ * Checks if the given token is an opening square bracket token or not.
+ * @param token The token to check.
+ * @returns `true` if the token is an opening square bracket token.
+ */
+export function isOpeningBracketToken(
+  token: YAMLToken | null,
+): token is YAMLToken {
+  return token != null && token.value === "[" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing square bracket token or not.
+ * @param token The token to check.
+ * @returns `true` if the token is a closing square bracket token.
+ */
+export function isClosingBracketToken(
+  token: YAMLToken | null,
+): token is YAMLToken {
+  return token != null && token.value === "]" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is an opening brace token or not.
+ * @param token The token to check.
+ * @returns `true` if the token is an opening brace token.
+ */
+export function isOpeningBraceToken(
+  token: YAMLToken | null,
+): token is YAMLToken {
+  return token != null && token.value === "{" && token.type === "Punctuator";
+}
+
+/**
+ * Checks if the given token is a closing brace token or not.
+ * @param token The token to check.
+ * @returns `true` if the token is a closing brace token.
+ */
+export function isClosingBraceToken(
+  token: YAMLToken | null,
+): token is YAMLToken {
+  return token != null && token.value === "}" && token.type === "Punctuator";
+}

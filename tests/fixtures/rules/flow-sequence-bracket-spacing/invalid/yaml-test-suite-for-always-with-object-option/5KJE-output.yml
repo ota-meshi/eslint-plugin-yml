@@ -1,0 +1,3 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-always-with-object-option/5KJE-input.yaml
+- [ one, two, ]
+- [ three ,four ]

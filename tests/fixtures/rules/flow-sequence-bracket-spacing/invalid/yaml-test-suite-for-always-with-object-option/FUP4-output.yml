@@ -1,0 +1,2 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-always-with-object-option/FUP4-input.yaml
+[ a, [ b, c ] ]

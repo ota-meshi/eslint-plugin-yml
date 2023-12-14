@@ -1,0 +1,3 @@
+# flow-mapping-curly-spacing/invalid/yaml-test-suite-for-always-with-object-option/5C5M-input.yaml
+- { one : two , three: four , }
+- { five: six,seven : eight }

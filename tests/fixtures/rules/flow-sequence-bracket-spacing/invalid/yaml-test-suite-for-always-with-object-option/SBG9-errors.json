@@ -1,0 +1,22 @@
+[
+  {
+    "message": "A space is required after '['.",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "message": "A space is required before ']'.",
+    "line": 2,
+    "column": 10
+  },
+  {
+    "message": "A space is required after '['.",
+    "line": 2,
+    "column": 13
+  },
+  {
+    "message": "A space is required before ']'.",
+    "line": 2,
+    "column": 18
+  }
+]

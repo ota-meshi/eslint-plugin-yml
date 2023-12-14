@@ -1,0 +1,2 @@
+# flow-sequence-bracket-spacing/invalid/yaml-test-suite-for-always-with-object-option/DHP8-input.yaml
+[ foo, bar, 42 ]

@@ -1,0 +1,2 @@
+# flow-mapping-curly-spacing/invalid/yaml-test-suite-for-always-with-object-option/X38W-input.yaml
+{ &a [a, &b b]: *b, *a : [c, *b, d] }
