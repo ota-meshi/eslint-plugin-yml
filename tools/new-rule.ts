@@ -68,16 +68,17 @@ export default createRule("${ruleId}", {
   );
   fs.writeFileSync(
     testFile,
-    `import { RuleTester } from "eslint"
+    `import { RuleTester } from "../../utils/eslint-compat";
 import rule from "../../../src/rules/${ruleId}"
-import { loadTestCases, makeSuiteTests } from "../../utils/utils"
+import { loadTestCases } from "../../utils/utils";
+import * as yamlESLintParser from "yaml-eslint-parser";
 
 const tester = new RuleTester({
-    parser: require.resolve("yaml-eslint-parser"),
-    parserOptions: {
-        ecmaVersion: 2020,
-    },
-})
+  languageOptions: {
+    parser: yamlESLintParser,
+    ecmaVersion: 2020,
+  },
+});
 
 // TODO Delete when it are done.
 makeSuiteTests("${ruleId}", {

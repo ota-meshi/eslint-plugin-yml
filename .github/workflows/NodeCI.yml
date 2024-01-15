@@ -45,6 +45,18 @@ jobs:
           npm install --legacy-peer-deps
       - name: Test
         run: npm test
+  test-with-eslint9:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: Install Target Packages
+        run: |+
+          npm i -D eslint@^9.0.0-0 --legacy-peer-deps
+          npx rimraf node_modules
+          npm install --legacy-peer-deps
+      - name: Test
+        run: npm test
   test-with-eslint7:
     runs-on: ubuntu-latest
     steps:

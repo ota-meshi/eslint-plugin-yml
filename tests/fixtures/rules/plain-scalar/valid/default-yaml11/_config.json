@@ -1,5 +1,7 @@
 {
-  "parserOptions": {
-    "defaultYAMLVersion": "1.1"
+  "languageOptions": {
+    "parserOptions": {
+      "defaultYAMLVersion": "1.1"
+    }
   }
 }

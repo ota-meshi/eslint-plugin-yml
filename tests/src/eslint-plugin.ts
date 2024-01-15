@@ -1,10 +1,8 @@
 import path from "path";
 import assert from "assert";
-import { getESLint } from "eslint-compat-utils";
 import plugin from "../../src/index";
+import { LegacyESLint } from "../utils/eslint-compat";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention -- Class name
-const ESLint = getESLint();
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
@@ -13,7 +11,7 @@ const TEST_CWD = path.join(__dirname, "../fixtures/integrations/eslint-plugin");
 
 describe("Integration with eslint-plugin-yml", () => {
   it("should lint without errors", async () => {
-    const engine = new ESLint({
+    const engine = new LegacyESLint({
       cwd: TEST_CWD,
       extensions: [".js", ".yml"],
       plugins: { "eslint-plugin-yml": plugin as any },
@@ -28,7 +26,7 @@ describe("Integration with eslint-plugin-yml", () => {
 
   // https://github.com/ota-meshi/eslint-plugin-yml/issues/89
   it("should lint without error when use the 'no-multi-spaces' rule and block node together.", async () => {
-    const engine = new ESLint({
+    const engine = new LegacyESLint({
       cwd: TEST_CWD,
       extensions: [".yml"],
       plugins: { "eslint-plugin-yml": plugin as any },
