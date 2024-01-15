@@ -227,9 +227,11 @@ export function makeSuiteTests(
           rules: {
             [ruleName]: ["error", ...options],
           },
-          parser: isYaml(inputFile)
-            ? "yaml-eslint-parser"
-            : "vue-eslint-parser",
+          ...({
+            languageOptions: {
+              parser: isYaml(inputFile) ? yamlESLintParser : vueESLintParser,
+            },
+          } as any),
           settings: {
             yml: { indent: 8 },
           },
@@ -300,8 +302,12 @@ function writeFixtures(
       rules: {
         [ruleName]: ["error", ...(config.options || [])],
       },
-      parser: isYaml(inputFile) ? "yaml-eslint-parser" : "vue-eslint-parser",
-      parserOptions: config?.parserOptions,
+      ...({
+        languageOptions: {
+          parser: isYaml(inputFile) ? yamlESLintParser : vueESLintParser,
+          ...config?.languageOptions,
+        },
+      } as any),
       settings: {
         yml: ymlSettings,
       },
@@ -384,7 +390,7 @@ function getConfig(ruleName: string, inputFile: string) {
       ? `# ${filename}\n${code0}`
       : `<!--${filename}-->\n${code0}`;
     return Object.assign(
-      isVue(inputFile) ? { parser: require.resolve("vue-eslint-parser") } : {},
+      isVue(inputFile) ? { languageOptions: { parser: vueESLintParser } } : {},
       config,
       overrideConfig,
       { code, filename },
@@ -409,7 +415,7 @@ function getConfig(ruleName: string, inputFile: string) {
   }
 
   return Object.assign(
-    isVue(inputFile) ? { parser: require.resolve("vue-eslint-parser") } : {},
+    isVue(inputFile) ? { languageOptions: { parser: vueESLintParser } } : {},
     config,
     { code, filename },
   );
