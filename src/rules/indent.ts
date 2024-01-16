@@ -206,8 +206,8 @@ export default createRule("indent", {
           continue;
         }
         const elementTokens = {
-          firstToken: sourceCode.getFirstToken(node)!,
-          lastToken: sourceCode.getLastToken(node)!,
+          firstToken: sourceCode.getFirstToken(node),
+          lastToken: sourceCode.getLastToken(node),
         };
 
         // Collect comma/comment tokens between the last token of the previous node and the first token of this node.
@@ -321,7 +321,7 @@ export default createRule("indent", {
           // |   a,
           // |   b
           // | ]
-          const open = sourceCode.getFirstToken(node)!;
+          const open = sourceCode.getFirstToken(node);
           const close = sourceCode.getLastToken(node);
           processNodeList(node.entries, open, close, 1);
         } else if (node.style === "block") {
@@ -992,7 +992,7 @@ export default createRule("indent", {
         if (li?.indentBlockScalar) {
           const blockLiteral = li.indentBlockScalar.node;
           const diff = li.expectedIndent - li.actualIndent;
-          const mark = sourceCode.getFirstToken(blockLiteral)!;
+          const mark = sourceCode.getFirstToken(blockLiteral);
           const num = /\d+/u.exec(mark.value)?.[0];
           if (num != null) {
             const newIndent = Number(num) + diff;
@@ -1060,7 +1060,7 @@ export default createRule("indent", {
       if (li.indentBlockScalar) {
         const blockLiteral = li.indentBlockScalar.node;
         const diff = li.expectedIndent - li.actualIndent;
-        const mark = sourceCode.getFirstToken(blockLiteral)!;
+        const mark = sourceCode.getFirstToken(blockLiteral);
         yield fixer.replaceText(
           mark,
           mark.value.replace(/\d+/u, (num: string) => `${Number(num) + diff}`),

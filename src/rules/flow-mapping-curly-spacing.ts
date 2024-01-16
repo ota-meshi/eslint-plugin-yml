@@ -253,7 +253,7 @@ export default createRule("flow-mapping-curly-spacing", {
     function checkForObject(node: AST.YAMLMapping) {
       if (node.pairs.length === 0) return;
 
-      const first = sourceCode.getFirstToken(node)!;
+      const first = sourceCode.getFirstToken(node);
       const last = getClosingBraceOfObject(node)!;
       const second = sourceCode.getTokenAfter(first, {
         includeComments: true,

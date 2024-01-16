@@ -99,7 +99,7 @@ class YAMLEntryData {
     const before =
       this.index > 0
         ? this.sequence.entries[this.index - 1].aroundTokens.after
-        : sourceCode.getFirstToken(this.sequence.node)!;
+        : sourceCode.getFirstToken(this.sequence.node);
     const after = sourceCode.getTokenAfter(before)!;
     return (this.cachedAroundTokens = { before, after });
   }
