@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.12.2
+
+### Patch Changes
+
+- [#297](https://github.com/ota-meshi/eslint-plugin-yml/pull/297) [`9c6ea14`](https://github.com/ota-meshi/eslint-plugin-yml/commit/9c6ea14a2416407e555dbc7b9392074c3f8963cc) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency eslint-compat-utils to ^0.4.0
+
 ## 1.12.1
 
 ### Patch Changes
