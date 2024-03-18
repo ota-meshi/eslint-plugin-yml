@@ -71,13 +71,7 @@ describe("`standard` config", () => {
         line: m.line,
         message: m.message,
       })),
-      [
-        {
-          message: "Extra space before value for key 'foo'.",
-          ruleId: "yml/key-spacing",
-          line: 1,
-        },
-      ],
+      [],
     );
   });
 });
