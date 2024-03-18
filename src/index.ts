@@ -4,7 +4,7 @@ import base from "./configs/base";
 import recommended from "./configs/recommended";
 import standard from "./configs/standard";
 import prettier from "./configs/prettier";
-import flatBase from "./configs/base";
+import flatBase from "./configs/flat/base";
 import flatRecommended from "./configs/flat/recommended";
 import flatStandard from "./configs/flat/standard";
 import flatPrettier from "./configs/flat/prettier";
