@@ -61,5 +61,23 @@ describe("`standard` config", () => {
         },
       ],
     );
+
+    const resultWithJs = await linter.lintText(";", { filePath: "test.js" });
+    const messagesWithJs = resultWithJs[0].messages;
+
+    assert.deepStrictEqual(
+      messagesWithJs.map((m) => ({
+        ruleId: m.ruleId,
+        line: m.line,
+        message: m.message,
+      })),
+      [
+        {
+          message: "Extra space before value for key 'foo'.",
+          ruleId: "yml/key-spacing",
+          line: 1,
+        },
+      ],
+    );
   });
 });
