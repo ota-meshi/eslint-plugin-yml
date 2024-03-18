@@ -112,7 +112,7 @@ export function loadTestCases(
         writeFixtures(ruleName, inputFile);
         output = fs.readFileSync(outputFile, "utf8");
       }
-      config.output = output;
+      config.output = output === config.code ? null : output;
     }
 
     return config;
@@ -143,7 +143,9 @@ export function loadTestCases(
       )) {
         it(test.filename || test.code, () => {
           const input = yamlESLintParser.parseForESLint(test.code);
-          const output = yamlESLintParser.parseForESLint(test.output);
+          const output = yamlESLintParser.parseForESLint(
+            test.output === null ? test.code : test.output,
+          );
           assert.deepStrictEqual(
             yamlESLintParser.getStaticYAMLValue(input.ast),
             yamlESLintParser.getStaticYAMLValue(output.ast),

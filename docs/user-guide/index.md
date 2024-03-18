@@ -19,7 +19,39 @@ npm install --save-dev eslint eslint-plugin-yml
 
 ### Configuration
 
-Use `.eslintrc.*` file to configure rules. See also: [https://eslint.org/docs/user-guide/configuring](https://eslint.org/docs/user-guide/configuring).
+#### New (ESLint>=v9) Config (Flat Config)
+
+Use `eslint.config.js` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
+
+Example **eslint.config.js**:
+
+```mjs
+import eslintPluginYml from 'eslint-plugin-yml';
+export default [
+  // add more generic rule sets here, such as:
+  // js.configs.recommended,
+  ...eslintPluginYml.configs['flat/recommended'],
+  {
+    rules: {
+      // override/add rules settings here, such as:
+    // 'yml/rule-name': 'error'
+    }
+  }
+];
+```
+
+This plugin provides configs:
+
+- `*.configs['flat/base']` ... Configuration to enable correct YAML parsing.
+- `*.configs['flat/recommended']` ... Above, plus rules to prevent errors or unintended behavior.
+- `*.configs['flat/standard']` ... Above, plus rules to enforce the common stylistic conventions.
+- `*.configs['flat/prettier']` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
+
+See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.
+
+#### Legacy Config (ESLint<v9)
+
+Use `.eslintrc.*` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/>.
 
 Example **.eslintrc.js**:
 
