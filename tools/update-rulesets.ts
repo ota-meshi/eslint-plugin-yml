@@ -83,3 +83,42 @@ export = {
   // Update file.
   fs.writeFileSync(filePath, content);
 }
+
+for (const rec of ["recommended", "standard", "prettier"] as const) {
+  let content = `/*
+ * IMPORTANT!
+ * This file has been automatically generated,
+ * in order to update its content execute "npm run update"
+ */
+import base from './base';
+export default [
+  ...base,
+  {
+    rules: {
+        // eslint-plugin-yml rules
+        ${rules
+          .filter(CONFIGS[rec].filter)
+          .map((rule) => {
+            return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
+          })
+          .join(",\n")}
+    },
+  }
+]
+`;
+
+  const filePath = path.resolve(
+    __dirname,
+    `../src/configs/flat/${CONFIGS[rec].config}.ts`,
+  );
+
+  if (isWin) {
+    content = content
+      .replace(/\r?\n/gu, "\n")
+      .replace(/\r/gu, "\n")
+      .replace(/\n/gu, "\r\n");
+  }
+
+  // Update file.
+  fs.writeFileSync(filePath, content);
+}

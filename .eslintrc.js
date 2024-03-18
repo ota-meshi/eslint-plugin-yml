@@ -40,6 +40,12 @@ module.exports = {
   },
   overrides: [
     {
+      files: ["*.mjs"],
+      parserOptions: {
+        sourceType: "module",
+      },
+    },
+    {
       files: ["*.ts", "*.mts"],
       parser: "@typescript-eslint/parser",
       parserOptions: {
@@ -114,6 +120,12 @@ module.exports = {
       },
     },
     {
+      files: ["*.md/**", "**/*.md/**"],
+      rules: {
+        "n/no-missing-import": "off",
+      },
+    },
+    {
       files: ["docs/.vitepress/**"],
       parserOptions: {
         sourceType: "module",
@@ -125,6 +137,17 @@ module.exports = {
       rules: {
         "require-jsdoc": "off",
         "n/file-extension-in-import": "off",
+      },
+    },
+    {
+      files: ["docs/.vitepress/**/*.*"],
+      rules: {
+        "eslint-plugin/require-meta-docs-description": "off",
+        "eslint-plugin/require-meta-docs-url": "off",
+        "eslint-plugin/require-meta-type": "off",
+        "eslint-plugin/prefer-message-ids": "off",
+        "eslint-plugin/prefer-object-rule": "off",
+        "eslint-plugin/require-meta-schema": "off",
       },
     },
   ],

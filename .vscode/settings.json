@@ -10,6 +10,9 @@
     "github-actions-workflow",
     "markdown"
   ],
+  "eslint.options": {
+    "overrideConfigFile": "./.eslintrc.for-vscode.js"
+  },
   "typescript.validate.enable": true,
   "javascript.validate.enable": false,
   "vetur.validation.script": false,
