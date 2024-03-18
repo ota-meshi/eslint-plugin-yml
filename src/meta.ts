@@ -2,4 +2,4 @@
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 export const name = "eslint-plugin-yml" as const;
-export const version = "1.12.2" as const;
+export const version = "1.13.0" as const;

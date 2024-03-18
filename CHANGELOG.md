@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.13.0
+
+### Minor Changes
+
+- [#308](https://github.com/ota-meshi/eslint-plugin-yml/pull/308) [`d2ec358`](https://github.com/ota-meshi/eslint-plugin-yml/commit/d2ec358c01202f78e9a6a06ad9f9b84b72a3d60b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Add support for flat config
+
 ## 1.12.2
 
 ### Patch Changes
