@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.13.2
+
+### Patch Changes
+
+- [#316](https://github.com/ota-meshi/eslint-plugin-yml/pull/316) [`49801e9`](https://github.com/ota-meshi/eslint-plugin-yml/commit/49801e9e8a13687bd7deb5748ce44b4abf7480f7) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: incorrect auto-fix in `yml/sort-keys` rule
+
 ## 1.13.1
 
 ### Patch Changes
