@@ -429,6 +429,102 @@ tester.run(
             "Expected mapping keys to be in specified order. 'e' should be before 'z'.",
           ],
         },
+        {
+          code: `- b: 1
+  c: 2
+  a: 3
+`,
+          errors: [
+            {
+              message:
+                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+              line: 3,
+              column: 3,
+            },
+          ],
+          output: `- a: 3
+  b: 1
+  c: 2
+`,
+        },
+        {
+          code: `
+- b: 1
+  c: 2
+  a: 3
+`,
+          errors: [
+            {
+              message:
+                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+              line: 4,
+              column: 3,
+            },
+          ],
+          output: `
+- a: 3
+  b: 1
+  c: 2
+`,
+        },
+        {
+          code: `b: 1
+c: 2
+a: 3
+`,
+          errors: [
+            {
+              message:
+                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+              line: 3,
+              column: 1,
+            },
+          ],
+          output: `
+a: 3
+b: 1
+c: 2
+`,
+        },
+        {
+          code: ` b: 1
+ c: 2
+ a: 3
+`,
+          errors: [
+            {
+              message:
+                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+              line: 3,
+              column: 2,
+            },
+          ],
+          output: `
+ a: 3
+ b: 1
+ c: 2
+`,
+        },
+        {
+          code: `
+b: 1
+c: 2
+a: 3
+`,
+          errors: [
+            {
+              message:
+                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+              line: 4,
+              column: 1,
+            },
+          ],
+          output: `
+a: 3
+b: 1
+c: 2
+`,
+        },
       ],
     },
   ),

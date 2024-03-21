@@ -1,6 +1,7 @@
 "use strict";
 
 module.exports = {
+  root: true,
   extends: [require.resolve("./.eslintrc.js")],
   overrides: [
     {
