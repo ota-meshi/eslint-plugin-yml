@@ -720,10 +720,7 @@ export default createRule("sort-keys", {
           nodeLocs.range[0],
           nodeLocs.range[0] + diffIndent,
         )}`;
-        yield fixer.insertTextBeforeRange(
-          moveTargetLocs.range,
-          `${insertCode}${moveTargetLocs.loc.start.line === 1 ? "\n" : ""}`,
-        );
+        yield fixer.insertTextBeforeRange(moveTargetLocs.range, insertCode);
 
         const removeRange: AST.Range = [
           getNewlineStartIndex(nodeLocs.range[0]),
