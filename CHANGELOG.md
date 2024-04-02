@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.14.0
+
+### Minor Changes
+
+- [#320](https://github.com/ota-meshi/eslint-plugin-yml/pull/320) [`60123cf`](https://github.com/ota-meshi/eslint-plugin-yml/commit/60123cf4305a1e5d8e8d51bc0bb537732b25137d) Thanks [@Logicer16](https://github.com/Logicer16)! - feat: improved compatibility with `@types/eslint` for flat config.
+
 ## 1.13.2
 
 ### Patch Changes
