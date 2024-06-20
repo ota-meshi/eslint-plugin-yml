@@ -2,13 +2,14 @@ import fs from "fs";
 import path from "path";
 import assert from "assert";
 import type { RuleTester } from "eslint";
-import { Linter } from "eslint";
+import type { Linter } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import * as vueESLintParser from "vue-eslint-parser";
 // eslint-disable-next-line @typescript-eslint/no-require-imports -- tests
 import plugin = require("../../src/index");
 import type { YMLSettings } from "../../src/types";
 import { applyFixes } from "./apply-fixer";
+import { getLinter as getCompatLinter } from "eslint-compat-utils/linter";
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string
@@ -200,7 +201,7 @@ export function makeSuiteTests(
     __dirname,
     `../fixtures/rules/${ruleName}/invalid/`,
   );
-  const linter = getLinter(ruleName);
+  const linter = getLinter();
 
   let count = 0;
   for (const fixture of itrListupInput(suiteFixtureRoot)) {
@@ -226,8 +227,11 @@ export function makeSuiteTests(
         linter,
         code,
         {
+          plugins: {
+            yml: plugin,
+          },
           rules: {
-            [ruleName]: ["error", ...options],
+            [`yml/${ruleName}`]: ["error", ...options],
           },
           ...({
             languageOptions: {
@@ -291,7 +295,7 @@ function writeFixtures(
     // eslint-disable-next-line no-param-reassign -- test
     ymlSettings = config?.settings?.yml;
   }
-  const linter = getLinter(ruleName);
+  const linter = getLinter();
   const errorFile = inputFile.replace(/input\.(?:ya?ml|vue)$/u, "errors.json");
   const outputFile = inputFile.replace(
     /input\.(?:ya?ml|vue)$/u,
@@ -301,8 +305,11 @@ function writeFixtures(
   const result = linter.verify(
     config.code,
     {
+      plugins: {
+        yml: plugin,
+      },
       rules: {
-        [ruleName]: ["error", ...(config.options || [])],
+        [`yml/${ruleName}`]: ["error", ...(config.options || [])],
       },
       ...({
         languageOptions: {
@@ -355,13 +362,10 @@ function verify(
   }
 }
 
-function getLinter(ruleName: string) {
+function getLinter() {
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- for test
+  const Linter = getCompatLinter();
   const linter = new Linter();
-  // @ts-expect-error for test
-  linter.defineParser("yaml-eslint-parser", yamlESLintParser);
-  linter.defineParser("vue-eslint-parser", vueESLintParser as any);
-  // @ts-expect-error for test
-  linter.defineRule(ruleName, plugin.rules[ruleName]);
 
   return linter;
 }
