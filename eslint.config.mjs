@@ -157,6 +157,9 @@ export default [
       },
       sourceType: "module",
     },
+    rules: {
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+    },
   },
   {
     files: ["*.md/*.js", "**/*.md/*.js"],
