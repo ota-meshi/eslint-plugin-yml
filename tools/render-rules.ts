@@ -1,7 +1,7 @@
 import type { RuleModule } from "../src/types";
 import { rules } from "../src/utils/rules";
 
-//eslint-disable-next-line require-jsdoc -- tool
+//eslint-disable-next-line jsdoc/require-jsdoc -- tool
 export default function renderRulesTableContent(
   categoryLevel: number,
   buildRulePath = (ruleName: string) => `./${ruleName}.md`,
@@ -17,7 +17,7 @@ export default function renderRulesTableContent(
 
   // -----------------------------------------------------------------------------
 
-  //eslint-disable-next-line require-jsdoc -- tool
+  //eslint-disable-next-line jsdoc/require-jsdoc -- tool
   function toRuleRow(rule: RuleModule) {
     const fixableMark = rule.meta.fixable ? ":wrench:" : "";
     const recommendedMark =
@@ -38,12 +38,12 @@ export default function renderRulesTableContent(
     return `| ${link} | ${description} | ${fixableMark} | ${recommendedMark} | ${standardMark} |`;
   }
 
-  //eslint-disable-next-line require-jsdoc -- tool
+  //eslint-disable-next-line jsdoc/require-jsdoc -- tool
   function toDeprecatedRuleRow(rule: RuleModule) {
     const link = `[${rule.meta.docs.ruleId}](${buildRulePath(
       rule.meta.docs.ruleName || "",
     )})`;
-    const replacedRules = rule.meta.docs.replacedBy || [];
+    const replacedRules = rule.meta.replacedBy || [];
     const replacedBy = replacedRules
       .map((name) => `[yml/${name}](${buildRulePath(name)}.md)`)
       .join(", ");

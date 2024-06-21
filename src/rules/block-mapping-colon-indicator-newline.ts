@@ -1,5 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { isColon } from "../utils/ast-utils";
 import { getSourceCode } from "../utils/compat";
 

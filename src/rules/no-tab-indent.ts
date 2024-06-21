@@ -1,5 +1,5 @@
 import type { RuleContext } from "../types";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { getSourceCode } from "../utils/compat";
 
 export default createRule("no-tab-indent", {

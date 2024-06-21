@@ -1,0 +1,216 @@
+import tsParser from "@typescript-eslint/parser";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import js from "@eslint/js";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
+});
+
+export default [
+  {
+    ignores: [
+      ".nyc_output/",
+      "coverage/",
+      "node_modules/",
+      "tests/fixtures/integrations/",
+      "tests/fixtures/**/*.vue",
+      "tests/fixtures/**/*.yaml",
+      "tests/fixtures/**/*.yml",
+      "assets/",
+      "dist/",
+      "lib/",
+      "!.github/",
+      "!.vscode/",
+      "!.devcontainer/",
+      "!docs/.vuepress/",
+      "!docs/.vitepress/",
+      "docs/.vuepress/dist/",
+      "docs/.vuepress/components/demo/demo-code.js",
+      "docs/.vitepress/cache/",
+      "docs/.vitepress/build-system/shim/",
+      "docs/.vitepress/dist/",
+      "**/*.md/*.bash",
+    ],
+  },
+  ...compat.extends(
+    "plugin:@ota-meshi/recommended",
+    "plugin:@ota-meshi/+node",
+    "plugin:@ota-meshi/+typescript",
+    "plugin:@ota-meshi/+eslint-plugin",
+    "plugin:@ota-meshi/+vue3",
+    "plugin:@ota-meshi/+package-json",
+    "plugin:@ota-meshi/+json",
+    "plugin:@ota-meshi/+yaml",
+    "plugin:@ota-meshi/+md",
+    "plugin:@ota-meshi/+prettier",
+  ),
+  {
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: "script",
+
+      parserOptions: {
+        project: true,
+      },
+    },
+
+    rules: {
+      "no-warning-comments": "warn",
+      "no-lonely-if": "off",
+      "new-cap": "off",
+      "no-shadow": "off",
+
+      "no-void": [
+        "error",
+        {
+          allowAsStatement: true,
+        },
+      ],
+
+      "jsonc/array-element-newline": "off",
+
+      "no-restricted-properties": [
+        "error",
+        {
+          object: "context",
+          property: "getSourceCode",
+        },
+        {
+          object: "context",
+          property: "getFilename",
+        },
+        {
+          object: "context",
+          property: "getCwd",
+        },
+        {
+          object: "context",
+          property: "getScope",
+        },
+        {
+          object: "context",
+          property: "parserServices",
+        },
+      ],
+    },
+  },
+  {
+    files: ["**/*.mjs", "*.mjs"],
+
+    languageOptions: {
+      sourceType: "module",
+    },
+  },
+  {
+    files: ["**/*.ts", "**/*.mts"],
+
+    languageOptions: {
+      parser: tsParser,
+      sourceType: "module",
+
+      parserOptions: {
+        project: true,
+      },
+    },
+
+    rules: {
+      "n/no-unsupported-features/es-syntax": "off",
+      "@typescript-eslint/no-shadow": "off",
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          selector: "default",
+          format: ["camelCase"],
+          leadingUnderscore: "allow",
+          trailingUnderscore: "allow",
+        },
+        {
+          selector: "variable",
+          format: ["camelCase", "UPPER_CASE"],
+          leadingUnderscore: "allow",
+          trailingUnderscore: "allow",
+        },
+        {
+          selector: "typeLike",
+          format: ["PascalCase"],
+        },
+        {
+          selector: "property",
+          format: null,
+        },
+        {
+          selector: "method",
+          format: null,
+        },
+        {
+          selector: "import",
+          format: ["camelCase", "PascalCase", "UPPER_CASE"],
+        },
+      ],
+
+      "@typescript-eslint/no-non-null-assertion": "off",
+    },
+  },
+  {
+    files: ["scripts/**/*.ts", "tests/**/*.ts"],
+
+    languageOptions: {
+      parser: tsParser,
+
+      parserOptions: {
+        project: true,
+      },
+    },
+
+    rules: {
+      "jsdoc/require-jsdoc": "off",
+      "no-console": "off",
+      "@typescript-eslint/no-misused-promises": "off",
+    },
+  },
+  {
+    files: ["**/*.vue"],
+
+    languageOptions: {
+      globals: {
+        require: true,
+      },
+
+      ecmaVersion: 5,
+      sourceType: "module",
+    },
+  },
+  {
+    files: ["*.md/*.js", "**/*.md/*.js"],
+
+    rules: {
+      "n/no-missing-import": "off",
+    },
+  },
+  {
+    files: ["docs/.vitepress/**/*.{js,ts,mjs,mts,vue}"],
+    languageOptions: {
+      globals: {
+        window: true,
+      },
+      sourceType: "module",
+    },
+    rules: {
+      "jsdoc/require-jsdoc": "off",
+      "n/file-extension-in-import": "off",
+      "n/no-extraneous-import": "off",
+      "eslint-plugin/require-meta-docs-description": "off",
+      "eslint-plugin/require-meta-docs-url": "off",
+      "eslint-plugin/require-meta-type": "off",
+      "eslint-plugin/prefer-message-ids": "off",
+      "eslint-plugin/prefer-object-rule": "off",
+      "eslint-plugin/require-meta-schema": "off",
+    },
+  },
+];

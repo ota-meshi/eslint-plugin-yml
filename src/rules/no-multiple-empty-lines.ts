@@ -1,4 +1,4 @@
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { getSourceCode } from "../utils/compat";
 
 export default createRule("no-multiple-empty-lines", {

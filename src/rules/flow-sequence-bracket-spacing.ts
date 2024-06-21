@@ -1,5 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { getSourceCode } from "../utils/compat";
 import { isTokenOnSameLine } from "../utils/ast-utils";
 

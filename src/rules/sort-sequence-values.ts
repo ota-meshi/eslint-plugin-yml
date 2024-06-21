@@ -1,6 +1,6 @@
 import type { RuleFixer, SourceCode, YAMLToken } from "../types";
 import naturalCompare from "natural-compare";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { isComma } from "../utils/ast-utils";
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
