@@ -52,9 +52,7 @@ export default [
   ),
   {
     languageOptions: {
-      ecmaVersion: 2020,
       sourceType: "script",
-
       parserOptions: {
         project: true,
       },
@@ -181,8 +179,6 @@ export default [
       globals: {
         require: true,
       },
-
-      ecmaVersion: 5,
       sourceType: "module",
     },
   },

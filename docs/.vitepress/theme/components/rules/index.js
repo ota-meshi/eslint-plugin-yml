@@ -1,7 +1,5 @@
-import { Linter } from "eslint";
 import { rules } from "../../../../../src/utils/rules.ts";
-
-const coreRules = Object.fromEntries(new Linter().getRules());
+import { builtinRules } from "eslint/use-at-your-own-risk";
 
 const CATEGORY_TITLES = {
   yml: "eslint-plugin-yml",
@@ -37,8 +35,7 @@ for (const k of Object.keys(rules)) {
     initChecked: CATEGORY_INDEX.yml <= 3,
   });
 }
-for (const k of Object.keys(coreRules)) {
-  const rule = coreRules[k];
+for (const [k, rule] of builtinRules.entries()) {
   if (rule.meta.deprecated) {
     continue;
   }
@@ -86,6 +83,9 @@ categories.sort((a, b) =>
 
 export const DEFAULT_RULES_CONFIG = allRules.reduce((c, r) => {
   c[r.ruleId] = r.initChecked ? "error" : "off";
+  if (r.ruleId === "yml/sort-sequence-values") {
+    c[r.ruleId] = "off";
+  }
   return c;
 }, {});
 
