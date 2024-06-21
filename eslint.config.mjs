@@ -1,16 +1,4 @@
-import tsParser from "@typescript-eslint/parser";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
+import myPlugin from "@ota-meshi/eslint-plugin";
 
 export default [
   {
@@ -38,18 +26,17 @@ export default [
       "**/*.md/*.bash",
     ],
   },
-  ...compat.extends(
-    "plugin:@ota-meshi/recommended",
-    "plugin:@ota-meshi/+node",
-    "plugin:@ota-meshi/+typescript",
-    "plugin:@ota-meshi/+eslint-plugin",
-    "plugin:@ota-meshi/+vue3",
-    "plugin:@ota-meshi/+package-json",
-    "plugin:@ota-meshi/+json",
-    "plugin:@ota-meshi/+yaml",
-    "plugin:@ota-meshi/+md",
-    "plugin:@ota-meshi/+prettier",
-  ),
+  ...myPlugin.config({
+    node: true,
+    ts: true,
+    eslintPlugin: true,
+    vue3: true,
+    packageJson: true,
+    json: true,
+    yaml: true,
+    md: true,
+    prettier: true,
+  }),
   {
     languageOptions: {
       sourceType: "script",
@@ -109,9 +96,7 @@ export default [
     files: ["**/*.ts", "**/*.mts"],
 
     languageOptions: {
-      parser: tsParser,
       sourceType: "module",
-
       parserOptions: {
         project: true,
       },
@@ -157,15 +142,6 @@ export default [
   },
   {
     files: ["scripts/**/*.ts", "tests/**/*.ts"],
-
-    languageOptions: {
-      parser: tsParser,
-
-      parserOptions: {
-        project: true,
-      },
-    },
-
     rules: {
       "jsdoc/require-jsdoc": "off",
       "no-console": "off",
