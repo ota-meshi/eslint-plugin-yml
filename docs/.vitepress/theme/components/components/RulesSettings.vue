@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import { categories } from "../rules";
+import { categories } from "../rules/index";
 
 export default {
   name: "RulesSettings",

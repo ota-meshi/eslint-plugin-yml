@@ -1,6 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import type { CasingKind } from "../utils/casing";
 import { getChecker } from "../utils/casing";
 import { allowedCaseOptions } from "../utils/casing";

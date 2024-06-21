@@ -1,4 +1,4 @@
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { isQuestion } from "../utils/ast-utils";
 import { getSourceCode } from "../utils/compat";
 

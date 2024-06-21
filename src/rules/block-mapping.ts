@@ -1,6 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
 import type { YAMLNodeOrToken, RuleFixer, Fix, RuleContext } from "../types";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { isColon, isComma } from "../utils/ast-utils";
 import {
   calcExpectIndentForPairs,

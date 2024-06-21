@@ -16,6 +16,7 @@ export function deserializeState(serializedString) {
   }
 
   try {
+    // eslint-disable-next-line n/no-unsupported-features/node-builtins -- Used in browser
     const decodedText = window.atob(serializedString);
     const json = (() => {
       let error;

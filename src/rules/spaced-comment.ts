@@ -1,6 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
 import lodash from "lodash";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { getSourceCode } from "../utils/compat";
 
 //------------------------------------------------------------------------------

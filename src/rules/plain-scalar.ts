@@ -1,6 +1,6 @@
 import { getStaticYAMLValue, parseForESLint } from "yaml-eslint-parser";
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { getSourceCode } from "../utils/compat";
 
 const SYMBOLS = new Set([

@@ -1,5 +1,5 @@
 import path from "path";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { getFilename, getSourceCode } from "../utils/compat";
 
 export default createRule("file-extension", {

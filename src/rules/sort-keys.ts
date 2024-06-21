@@ -1,7 +1,7 @@
 import type { RuleFixer, SourceCode } from "../types";
 import naturalCompare from "natural-compare";
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import { isComma, isCommentToken } from "../utils/ast-utils";
 import { getSourceCode } from "../utils/compat";
 

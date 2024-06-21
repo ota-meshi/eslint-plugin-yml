@@ -1,4 +1,4 @@
-import { createRule } from "../utils";
+import { createRule } from "../utils/index";
 import type { AST } from "yaml-eslint-parser";
 import { getSourceCode } from "../utils/compat";
 import {

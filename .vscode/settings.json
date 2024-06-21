@@ -11,7 +11,7 @@
     "markdown"
   ],
   "eslint.options": {
-    "overrideConfigFile": "./.eslintrc.for-vscode.js"
+    "overrideConfigFile": "./.eslintrc.for-vscode.mjs"
   },
   "typescript.validate.enable": true,
   "javascript.validate.enable": false,
