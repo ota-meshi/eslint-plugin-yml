@@ -50,6 +50,10 @@ This rule enforces line breaks after opening and before closing flow sequence br
 yml/flow-sequence-bracket-newline:
   - error
   - always # or "never" or "consistent"
+---
+# or
+yml/flow-sequence-bracket-newline:
+  - error
   - multiline: true
     minItems: null
 ```
