@@ -14,7 +14,7 @@ since: "v0.12.0"
 
 ## :book: Rule Details
 
-This rule aims to reduce the scrolling required when reading through your code. It will warn when the maximum amount of empty lines has been exceeded.  
+This rule aims to reduce the scrolling required when reading through your code. It will warn when the maximum amount of empty lines has been exceeded.
 Use `max: 0` if you want to remove all blank lines.
 
 <eslint-code-block fix>
@@ -42,8 +42,6 @@ Use `max: 0` if you want to remove all blank lines.
 
 ## :wrench: Options
 
-Nothing.
-
 ```yaml
 yml/no-multiple-empty-lines:
   - error
@@ -56,7 +54,7 @@ yml/no-multiple-empty-lines:
 - `maxEOF` ... Enforces a maximum number of consecutive empty lines at the end of files. Default is value specified for `max`.
 - `maxBOF` ... Enforces a maximum number of consecutive empty lines at the beginning of files. Default is value specified for `max`.
 
-Same as [no-multiple-empty-lines] rule option. See [here](https://eslint.org/docs/rules/no-multiple-empty-lines#options) for details. 
+Same as [no-multiple-empty-lines] rule option. See [here](https://eslint.org/docs/rules/no-multiple-empty-lines#options) for details.
 
 ## :couple: Related rules
 
