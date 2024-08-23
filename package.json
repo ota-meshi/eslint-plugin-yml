@@ -106,7 +106,7 @@
     "eslint-plugin-yml": "^1.0.0",
     "events": "^3.3.0",
     "mocha": "^10.0.0",
-    "monaco-editor": "^0.50.0",
+    "monaco-editor": "^0.51.0",
     "nyc": "^17.0.0",
     "pako": "^2.1.0",
     "prettier": "^3.0.3",
