@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.15.0
+
+### Minor Changes
+
+- [#355](https://github.com/ota-meshi/eslint-plugin-yml/pull/355) [`1e356b3`](https://github.com/ota-meshi/eslint-plugin-yml/pull/355/commits/1e356b3c709a933a6eda43e2eda0e35a35c038d2) Thanks [@subhanahmed047](https://github.com/subhanahmed047)! - disable `no-unused-labels` in base config
+
 ## 1.14.0
 
 ### Minor Changes
