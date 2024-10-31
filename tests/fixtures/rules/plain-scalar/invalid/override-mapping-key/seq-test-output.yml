@@ -1,0 +1,4 @@
+# plain-scalar/invalid/override-mapping-key/seq-test-input.yml
+- "a"
+- "b"
+- ["a", "b"]
