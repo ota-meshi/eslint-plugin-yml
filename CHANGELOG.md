@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.15.0
+
+### Minor Changes
+
+- [#374](https://github.com/ota-meshi/eslint-plugin-yml/pull/374) [`4790eaf`](https://github.com/ota-meshi/eslint-plugin-yml/commit/4790eaf7c71c20080e1dbc629ba79c08d2d75e47) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `overrides` option to `yml/plain-scalar`
+
 ## 1.14.0
 
 ### Minor Changes
