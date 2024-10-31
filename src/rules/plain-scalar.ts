@@ -68,6 +68,13 @@ export default createRule("plain-scalar", {
             type: "array",
             items: { type: "string" },
           },
+          overrides: {
+            type: "object",
+            properties: {
+              mappingKey: { enum: ["always", "never", null] },
+            },
+            additionalProperties: false,
+          },
         },
         additionalProperties: false,
       },
@@ -83,16 +90,39 @@ export default createRule("plain-scalar", {
     if (!sourceCode.parserServices.isYAML) {
       return {};
     }
-    const option: "always" | "never" = context.options[0] || "always";
-    const ignorePatterns: RegExp[] = toRegExps(
-      context.options[1]?.ignorePatterns ??
-        (option === "always"
-          ? [
-              // Irregular white spaces
-              String.raw`[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u2028\u2029\u202f\u205f\u3000\ufeff]`,
-            ]
-          : []),
-    );
+    type Option = {
+      prefer: "always" | "never";
+      ignorePatterns: RegExp[];
+    };
+    const valueOption: Option = {
+      prefer: context.options[0] || "always",
+      ignorePatterns: [],
+    };
+    const overridesMappingKey = context.options[1]?.overrides?.mappingKey;
+    const keyOption: Option = overridesMappingKey
+      ? {
+          prefer: overridesMappingKey,
+          ignorePatterns: [],
+        }
+      : valueOption;
+    if (context.options[1]?.ignorePatterns) {
+      valueOption.ignorePatterns = toRegExps(
+        context.options[1]?.ignorePatterns,
+      );
+    } else {
+      if (valueOption.prefer === "always") {
+        valueOption.ignorePatterns = toRegExps([
+          // Irregular white spaces
+          String.raw`[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u2028\u2029\u202f\u205f\u3000\ufeff]`,
+        ]);
+      }
+      if (overridesMappingKey && keyOption.prefer === "always") {
+        keyOption.ignorePatterns = toRegExps([
+          // Irregular white spaces
+          String.raw`[\v\f\u0085\u00a0\u1680\u180e\u2000-\u200b\u2028\u2029\u202f\u205f\u3000\ufeff]`,
+        ]);
+      }
+    }
 
     let currentDocument: AST.YAMLDocument | undefined;
 
@@ -202,6 +232,21 @@ export default createRule("plain-scalar", {
       });
     }
 
+    /**
+     * Checks whether the given node is within key
+     */
+    function withinKey(node: AST.YAMLScalar | AST.YAMLWithMeta) {
+      const parent = node.parent;
+      if (parent.type === "YAMLPair" && parent.key === node) {
+        return true;
+      }
+      const grandParent = parent.parent;
+      if (grandParent.type === "YAMLWithMeta") {
+        return withinKey(grandParent);
+      }
+      return false;
+    }
+
     return {
       YAMLDocument(node) {
         currentDocument = node;
@@ -210,10 +255,12 @@ export default createRule("plain-scalar", {
         if (!isStringScalar(node)) {
           return;
         }
-        if (ignorePatterns.some((p) => p.test(node.value))) {
+        const option = withinKey(node) ? keyOption : valueOption;
+
+        if (option.ignorePatterns.some((p) => p.test(node.value))) {
           return;
         }
-        if (option === "always") {
+        if (option.prefer === "always") {
           verifyAlways(node);
         } else {
           verifyNever(node);

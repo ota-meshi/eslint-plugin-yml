@@ -305,6 +305,7 @@ function writeFixtures(
   const result = linter.verify(
     config.code,
     {
+      files: ["**/*.*"],
       plugins: {
         yml: plugin,
       },
@@ -321,7 +322,7 @@ function writeFixtures(
         yml: ymlSettings,
       },
     },
-    config.filename,
+    inputFile,
   );
   if (force || !fs.existsSync(errorFile)) {
     fs.writeFileSync(
