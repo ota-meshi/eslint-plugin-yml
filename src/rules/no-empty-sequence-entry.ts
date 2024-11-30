@@ -19,7 +19,7 @@ export default createRule("no-empty-sequence-entry", {
   },
   create(context) {
     const sourceCode = getSourceCode(context);
-    if (!sourceCode.parserServices.isYAML) {
+    if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
 

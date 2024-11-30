@@ -51,7 +51,7 @@ export default createRule("flow-mapping-curly-spacing", {
   },
   create(context) {
     const sourceCode = getSourceCode(context);
-    if (!sourceCode.parserServices.isYAML) {
+    if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
 

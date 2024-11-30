@@ -38,6 +38,7 @@ describe("Integration with eslint-plugin-yml", () => {
       it(dir, async () => {
         const engine = new LegacyESLint({
           cwd: path.join(TEST_ROOT, dir),
+          // @ts-expect-error -- ignore
           extensions: [".js", ".yml"],
           plugins: { "eslint-plugin-yml": plugin as any },
         });
@@ -60,17 +61,18 @@ describe("Integration with eslint-plugin-yml", () => {
           errors: 0,
         },
       },
-      // ...(semver.satisfies(process.version, ">=18")
-      //   ? [
-      //       {
-      //         dir: "with-json",
-      //         expects: {
-      //           files: 2,
-      //           errors: 0,
-      //         },
-      //       },
-      //     ]
-      //   : []),
+      ...(semver.satisfies(process.version, ">=18") &&
+      semver.satisfies(ESLint.version, ">=9")
+        ? [
+            {
+              dir: "with-json",
+              expects: {
+                files: 2,
+                errors: 0,
+              },
+            },
+          ]
+        : []),
     ]) {
       it(dir, async () => {
         const engine = new ESLint({

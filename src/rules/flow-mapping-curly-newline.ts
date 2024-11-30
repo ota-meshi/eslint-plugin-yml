@@ -128,7 +128,7 @@ export default createRule("flow-mapping-curly-newline", {
   },
   create(context) {
     const sourceCode = getSourceCode(context);
-    if (!sourceCode.parserServices.isYAML) {
+    if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
     const options = normalizeOptionValue(context.options[0]);

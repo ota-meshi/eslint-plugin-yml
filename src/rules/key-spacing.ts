@@ -271,7 +271,7 @@ export default createRule("key-spacing", {
  */
 function create(context: RuleContext): RuleListener {
   const sourceCode = getSourceCode(context);
-  if (!sourceCode.parserServices.isYAML) {
+  if (!sourceCode.parserServices?.isYAML) {
     return {};
   }
   /**

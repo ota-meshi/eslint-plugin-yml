@@ -55,7 +55,7 @@ export default createRule("${ruleId}", {
     },
     create(context) {
         const sourceCode = getSourceCode(context)
-        if (!sourceCode.parserServices.isYAML) {
+        if (!sourceCode.parserServices?.isYAML) {
             return {}
         }
 

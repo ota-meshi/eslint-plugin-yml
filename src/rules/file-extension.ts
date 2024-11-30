@@ -31,7 +31,7 @@ export default createRule("file-extension", {
   },
   create(context) {
     const sourceCode = getSourceCode(context);
-    if (!sourceCode.parserServices.isYAML) {
+    if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
     const expected: string = context.options[0]?.extension || "yaml";
