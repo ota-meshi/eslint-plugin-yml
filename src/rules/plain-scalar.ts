@@ -87,7 +87,7 @@ export default createRule("plain-scalar", {
   },
   create(context) {
     const sourceCode = getSourceCode(context);
-    if (!sourceCode.parserServices.isYAML) {
+    if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
     type Option = {

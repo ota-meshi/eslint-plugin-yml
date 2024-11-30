@@ -101,7 +101,7 @@ export default createRule("block-mapping", {
   },
   create(context) {
     const sourceCode = getSourceCode(context);
-    if (!sourceCode.parserServices.isYAML) {
+    if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
     const options = parseOptions(context.options[0]);

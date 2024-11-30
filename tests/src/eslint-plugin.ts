@@ -60,17 +60,17 @@ describe("Integration with eslint-plugin-yml", () => {
           errors: 0,
         },
       },
-      // ...(semver.satisfies(process.version, ">=18")
-      //   ? [
-      //       {
-      //         dir: "with-json",
-      //         expects: {
-      //           files: 2,
-      //           errors: 0,
-      //         },
-      //       },
-      //     ]
-      //   : []),
+      ...(semver.satisfies(process.version, ">=18")
+        ? [
+            {
+              dir: "with-json",
+              expects: {
+                files: 2,
+                errors: 0,
+              },
+            },
+          ]
+        : []),
     ]) {
       it(dir, async () => {
         const engine = new ESLint({

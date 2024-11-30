@@ -27,7 +27,7 @@ export function createRule(
     create(context: Rule.RuleContext): any {
       const sourceCode = getSourceCode(context);
       if (
-        typeof sourceCode.parserServices.defineCustomBlocksVisitor ===
+        typeof sourceCode.parserServices?.defineCustomBlocksVisitor ===
           "function" &&
         path.extname(getFilename(context)) === ".vue"
       ) {

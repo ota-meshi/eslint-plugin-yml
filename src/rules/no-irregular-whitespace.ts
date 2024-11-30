@@ -44,7 +44,7 @@ export default createRule("no-irregular-whitespace", {
   },
   create(context) {
     const sourceCode = getSourceCode(context);
-    if (!sourceCode.parserServices.isYAML) {
+    if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
     // Module store of error indexes that we have found

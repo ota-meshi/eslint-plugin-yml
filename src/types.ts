@@ -103,7 +103,7 @@ export interface SourceCode {
   ast: AST.YAMLProgram;
   lines: string[];
   hasBOM: boolean;
-  parserServices: {
+  parserServices?: {
     isYAML?: true;
     parseError?: any;
   };
