@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.16.0
+
+### Minor Changes
+
+- [#385](https://github.com/ota-meshi/eslint-plugin-yml/pull/385) [`5c11866`](https://github.com/ota-meshi/eslint-plugin-yml/commit/5c11866c7f9a994e6677421b31989b0652d701bc) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: changed to prevent crash when used with language plugins
+
 ## 1.15.0
 
 ### Minor Changes
