@@ -25,7 +25,7 @@ Use `eslint.config.js` file to configure rules. See also: <https://eslint.org/do
 
 Example **eslint.config.js**:
 
-```mjs
+```js
 import eslintPluginYml from 'eslint-plugin-yml';
 export default [
   // add more generic rule sets here, such as:

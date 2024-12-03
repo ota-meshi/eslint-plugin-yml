@@ -163,6 +163,9 @@ export default [
   },
   {
     files: ["*.md/*.js", "**/*.md/*.js"],
+    languageOptions: {
+      sourceType: "module",
+    },
 
     rules: {
       "n/no-missing-import": "off",
