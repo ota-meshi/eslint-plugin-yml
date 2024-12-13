@@ -72,7 +72,7 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.5.0",
-    "@eslint/json": "^0.8.0",
+    "@eslint/json": "^0.9.0",
     "@ota-meshi/eslint-plugin": "^0.17.3",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.0",
     "@types/debug": "^4.1.5",
