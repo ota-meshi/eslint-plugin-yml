@@ -58,8 +58,8 @@
   "homepage": "https://ota-meshi.github.io/eslint-plugin-yml/",
   "dependencies": {
     "debug": "^4.3.2",
+    "escape-string-regexp": "4.0.0",
     "eslint-compat-utils": "^0.6.0",
-    "lodash": "^4.17.21",
     "natural-compare": "^1.4.0",
     "yaml-eslint-parser": "^1.2.1"
   },
@@ -80,7 +80,6 @@
     "@types/eslint-scope": "^3.7.0",
     "@types/eslint-visitor-keys": "^3.0.0",
     "@types/estree": "^1.0.0",
-    "@types/lodash": "^4.14.158",
     "@types/mocha": "^10.0.0",
     "@types/natural-compare": "^1.4.0",
     "@types/node": "^22.0.0",
