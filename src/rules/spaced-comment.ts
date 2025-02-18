@@ -1,5 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
-import lodash from "lodash";
+import escapeStringRegexp from "escape-string-regexp";
 import { createRule } from "../utils/index";
 import { getSourceCode } from "../utils/compat";
 
@@ -13,7 +13,7 @@ import { getSourceCode } from "../utils/compat";
  * @returns {string} An escaped string.
  */
 function escapeText(s: string) {
-  return `(?:${lodash.escapeRegExp(s)})`;
+  return `(?:${escapeStringRegexp(s)})`;
 }
 
 /**
