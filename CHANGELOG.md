@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.17.0
+
+### Minor Changes
+
+- [#406](https://github.com/ota-meshi/eslint-plugin-yml/pull/406) [`91d7a0a`](https://github.com/ota-meshi/eslint-plugin-yml/commit/91d7a0a39775548f81b3bd4bf7f9eb668369df99) Thanks [@SukkaW](https://github.com/SukkaW)! - Replace `lodash` to reduce the package installation size
+
 ## 1.16.0
 
 ### Minor Changes
