@@ -1,5 +1,5 @@
 ---
-"eslint-plugin-yml": patch
+"eslint-plugin-yml": minor
 ---
 
 Replace `lodash` to reduce the package installation size
