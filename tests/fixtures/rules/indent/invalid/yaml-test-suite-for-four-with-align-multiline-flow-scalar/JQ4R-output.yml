@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/JQ4R-input.yaml
+block sequence:
+    -   one
+    -   two : three

@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/KSS4-input.yaml
+--- "quoted
+    string"
+--- &node foo

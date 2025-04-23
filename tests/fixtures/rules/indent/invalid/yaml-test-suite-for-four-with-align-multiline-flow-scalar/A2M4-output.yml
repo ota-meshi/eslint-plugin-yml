@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/A2M4-input.yaml
+?   a
+:   -   b
+    -   -   c
+        -   d

@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/GH63-input.yaml
+?   a
+:   13
+1.5: d

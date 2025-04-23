@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/WZ62-input.yaml
+{
+    foo : !!str,
+    !!str : bar,
+}

@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/EHF6-input.yaml
+!!map {
+    k: !!seq
+        [ a, !!str b]
+}

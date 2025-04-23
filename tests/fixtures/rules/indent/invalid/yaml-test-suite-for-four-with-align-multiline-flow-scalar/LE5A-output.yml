@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/LE5A-input.yaml
+-   !!str "a"
+-   'b'
+-   &anchor "c"
+-   *anchor
+-   !!str

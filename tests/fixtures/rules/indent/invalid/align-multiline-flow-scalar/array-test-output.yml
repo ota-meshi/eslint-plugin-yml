@@ -1,0 +1,28 @@
+# indent/invalid/align-multiline-flow-scalar/array-test-input.yml
+-   "s
+    s"
+-   "s
+    s"
+-   "s
+    s"
+- 
+    "s
+    s"
+-   's
+    s'
+-   's
+    s'
+-   's
+    s'
+-
+    's
+    s'
+-   s
+    s
+-   s
+    s
+-   s
+    s
+-
+    s
+    s

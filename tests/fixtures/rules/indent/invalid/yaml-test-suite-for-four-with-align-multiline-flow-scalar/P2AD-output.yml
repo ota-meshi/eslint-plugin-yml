@@ -1,0 +1,10 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/P2AD-input.yaml
+-   | # Empty header↓
+    literal
+-   >3 # Indentation indicator↓
+    folded
+-   |+ # Chomping indicator↓
+    keep
+
+-   >3- # Both indicators↓
+    strip

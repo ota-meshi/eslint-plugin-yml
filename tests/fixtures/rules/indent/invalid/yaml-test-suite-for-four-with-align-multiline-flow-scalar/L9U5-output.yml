@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/L9U5-input.yaml
+implicit block key : [
+    implicit flow key : value,
+ ]

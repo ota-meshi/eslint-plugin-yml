@@ -1,0 +1,10 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/T26H-input.yaml
+--- |
+    
+     
+     literal
+      
+     
+     text
+
+    # Comment

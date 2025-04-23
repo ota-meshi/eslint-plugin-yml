@@ -60,6 +60,7 @@ function parseOptions(context: RuleContext) {
       | {
           indentBlockSequences?: boolean;
           indicatorValueIndent?: number;
+          alignMultilineFlowScalar?: boolean;
         }
       | undefined
     ),
@@ -67,6 +68,7 @@ function parseOptions(context: RuleContext) {
   const numOfIndent = getNumOfIndent(context, indentOption);
   let indentBlockSequences = true;
   let indicatorValueIndent = numOfIndent;
+  let alignMultilineFlowScalar = false;
   if (objectOptions) {
     if (objectOptions.indentBlockSequences === false) {
       indentBlockSequences = false;
@@ -74,11 +76,15 @@ function parseOptions(context: RuleContext) {
     if (objectOptions.indicatorValueIndent != null) {
       indicatorValueIndent = objectOptions.indicatorValueIndent;
     }
+    if (objectOptions.alignMultilineFlowScalar != null) {
+      alignMultilineFlowScalar = objectOptions.alignMultilineFlowScalar;
+    }
   }
   return {
     numOfIndent,
     indentBlockSequences,
     indicatorValueIndent,
+    alignMultilineFlowScalar,
   };
 }
 
@@ -104,6 +110,9 @@ export default createRule("indent", {
             type: "integer",
             minimum: 2,
           },
+          alignMultilineFlowScalar: {
+            type: "boolean",
+          },
         },
         additionalProperties: false,
       },
@@ -125,8 +134,12 @@ export default createRule("indent", {
       return {};
     }
 
-    const { numOfIndent, indentBlockSequences, indicatorValueIndent } =
-      parseOptions(context);
+    const {
+      numOfIndent,
+      indentBlockSequences,
+      indicatorValueIndent,
+      alignMultilineFlowScalar,
+    } = parseOptions(context);
 
     const indents = new Map<YAMLToken, IndentInfo>();
     const indicators = new Set<YAMLToken>();
@@ -679,11 +692,13 @@ export default createRule("indent", {
                 lineIndent.lastScalar.expectedIndent,
               );
             } else {
-              processScalar(
-                indent,
-                scalarNode,
-                lineIndent.lastScalar.expectedIndent,
-              );
+              let expectedIndent = lineIndent.lastScalar.expectedIndent;
+              if (alignMultilineFlowScalar) {
+                if (!isBeginningToken(lineIndent.lastScalar.token)) {
+                  expectedIndent = lineIndent.lastScalar.node.loc.start.column;
+                }
+              }
+              processMultilineScalar(indent, scalarNode, expectedIndent);
             }
           }
         }
@@ -845,9 +860,9 @@ export default createRule("indent", {
       }
 
       /**
-       * Process for a scalar
+       * Process for a multiline-scalar
        */
-      function processScalar(
+      function processMultilineScalar(
         lineIndent: LineIndentStep2,
         scalarNode: AST.YAMLScalar,
         expectedIndent: number,

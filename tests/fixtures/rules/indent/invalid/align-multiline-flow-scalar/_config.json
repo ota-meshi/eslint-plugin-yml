@@ -1,0 +1,13 @@
+{
+  "options": [
+    4,
+    {
+      "alignMultilineFlowScalar": true
+    }
+  ],
+  "settings": {
+    "yml": {
+      "indent": 8
+    }
+  }
+}

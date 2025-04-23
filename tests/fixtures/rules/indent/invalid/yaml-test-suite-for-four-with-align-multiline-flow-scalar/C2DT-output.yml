@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/C2DT-input.yaml
+{
+    "adjacent":value,
+    "readable": value,
+    "empty":
+}

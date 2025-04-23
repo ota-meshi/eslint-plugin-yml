@@ -1,0 +1,6 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/SKE5-input.yaml
+---
+seq:
+    &anchor
+        -   a
+        -   b

@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/S4JQ-input.yaml
+# Assuming conventional resolution:
+-   "12"
+-   12
+-   ! 12

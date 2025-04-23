@@ -1,0 +1,8 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/EX5H-input.yaml
+---
+a
+b  
+c
+d
+
+e

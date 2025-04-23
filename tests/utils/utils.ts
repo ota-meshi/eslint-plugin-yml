@@ -227,6 +227,7 @@ export function makeSuiteTests(
         linter,
         code,
         {
+          files: ["**/*.*"],
           plugins: {
             yml: plugin,
           },

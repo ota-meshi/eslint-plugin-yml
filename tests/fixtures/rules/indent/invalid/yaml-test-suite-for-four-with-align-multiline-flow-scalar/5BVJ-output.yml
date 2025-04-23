@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/5BVJ-input.yaml
+literal: |
+    some
+    text
+folded: >
+    some
+    text

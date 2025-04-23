@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/W4TN-input.yaml
+%YAML 1.2
+--- |
+    %!PS-Adobe-2.0
+...
+%YAML1.2
+---
+# Empty
+...

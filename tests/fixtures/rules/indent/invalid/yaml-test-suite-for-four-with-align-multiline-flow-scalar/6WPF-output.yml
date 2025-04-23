@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/6WPF-input.yaml
+---
+"
+foo 
+
+bar
+
+baz
+"

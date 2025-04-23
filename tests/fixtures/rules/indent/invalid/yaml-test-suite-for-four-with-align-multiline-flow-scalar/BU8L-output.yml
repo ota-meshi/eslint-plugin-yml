@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/BU8L-input.yaml
+key: &anchor
+    !!map
+    a: b

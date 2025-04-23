@@ -1,0 +1,3 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/3MYT-input.yaml
+k:#foo
+&a !t s
