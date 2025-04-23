@@ -37,7 +37,7 @@ makeSuiteTests(
     "four-with-indicator-indent-two": [4, { indicatorValueIndent: 2 }],
     "four-with-align-multiline-flow-scalar": [
       4,
-      { alignMultilineFlowScalar: true },
+      { alignMultilineFlowScalars: true },
     ],
   },
   { force: true },

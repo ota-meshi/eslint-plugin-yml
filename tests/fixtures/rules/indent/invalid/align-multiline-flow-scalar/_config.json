@@ -2,7 +2,7 @@
   "options": [
     4,
     {
-      "alignMultilineFlowScalar": true
+      "alignMultilineFlowScalars": true
     }
   ],
   "settings": {

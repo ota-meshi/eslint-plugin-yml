@@ -60,7 +60,7 @@ function parseOptions(context: RuleContext) {
       | {
           indentBlockSequences?: boolean;
           indicatorValueIndent?: number;
-          alignMultilineFlowScalar?: boolean;
+          alignMultilineFlowScalars?: boolean;
         }
       | undefined
     ),
@@ -68,7 +68,7 @@ function parseOptions(context: RuleContext) {
   const numOfIndent = getNumOfIndent(context, indentOption);
   let indentBlockSequences = true;
   let indicatorValueIndent = numOfIndent;
-  let alignMultilineFlowScalar = false;
+  let alignMultilineFlowScalars = false;
   if (objectOptions) {
     if (objectOptions.indentBlockSequences === false) {
       indentBlockSequences = false;
@@ -76,15 +76,15 @@ function parseOptions(context: RuleContext) {
     if (objectOptions.indicatorValueIndent != null) {
       indicatorValueIndent = objectOptions.indicatorValueIndent;
     }
-    if (objectOptions.alignMultilineFlowScalar != null) {
-      alignMultilineFlowScalar = objectOptions.alignMultilineFlowScalar;
+    if (objectOptions.alignMultilineFlowScalars != null) {
+      alignMultilineFlowScalars = objectOptions.alignMultilineFlowScalars;
     }
   }
   return {
     numOfIndent,
     indentBlockSequences,
     indicatorValueIndent,
-    alignMultilineFlowScalar,
+    alignMultilineFlowScalars,
   };
 }
 
@@ -110,7 +110,7 @@ export default createRule("indent", {
             type: "integer",
             minimum: 2,
           },
-          alignMultilineFlowScalar: {
+          alignMultilineFlowScalars: {
             type: "boolean",
           },
         },
@@ -138,7 +138,7 @@ export default createRule("indent", {
       numOfIndent,
       indentBlockSequences,
       indicatorValueIndent,
-      alignMultilineFlowScalar,
+      alignMultilineFlowScalars,
     } = parseOptions(context);
 
     const indents = new Map<YAMLToken, IndentInfo>();
@@ -693,7 +693,7 @@ export default createRule("indent", {
               );
             } else {
               let expectedIndent = lineIndent.lastScalar.expectedIndent;
-              if (alignMultilineFlowScalar) {
+              if (alignMultilineFlowScalars) {
                 if (!isBeginningToken(lineIndent.lastScalar.token)) {
                   expectedIndent = lineIndent.lastScalar.node.loc.start.column;
                 }
