@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/57H4-input.yaml
+sequence: !!seq
+    -   entry
+    -   !!seq
+            -   nested
+mapping: !!map
+    foo: bar

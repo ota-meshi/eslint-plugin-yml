@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/93JH-input.yaml
+-   key: value
+    key2: value2
+-
+    key3: value3

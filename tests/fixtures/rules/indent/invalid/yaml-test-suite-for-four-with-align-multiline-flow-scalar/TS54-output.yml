@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/TS54-input.yaml
+>
+    ab
+    cd
+    
+    ef
+
+
+    gh

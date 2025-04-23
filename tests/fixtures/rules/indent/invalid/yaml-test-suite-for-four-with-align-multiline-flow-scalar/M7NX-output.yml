@@ -1,0 +1,9 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/M7NX-input.yaml
+---
+{
+    a: [
+        b, c, {
+            d: [e, f]
+        }
+    ]
+}

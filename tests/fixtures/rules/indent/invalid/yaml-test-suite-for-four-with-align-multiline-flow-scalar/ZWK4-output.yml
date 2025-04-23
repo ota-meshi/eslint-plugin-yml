@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/ZWK4-input.yaml
+---
+a: 1
+?   b
+&anchor c: 3

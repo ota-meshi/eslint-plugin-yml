@@ -51,12 +51,14 @@ yml/indent:
   - 2
   - indentBlockSequences: true
     indicatorValueIndent: 2
+    alignMultilineFlowScalars: false
 ```
 
 - Number option ... Specify the number of indents.
 - Object option
   - `indentBlockSequences` ... Specifies whether block sequences should be indented or not (when in a mapping).
   - `indicatorValueIndent` ... Specifies the number of indents from indicator marks. Defaults to specified indent.
+  - `alignMultilineFlowScalars` ... Specifies whether to align multiline flow scalars or not. Defaults to `false`.
 
 ### `"indentBlockSequences": true` (default)
 
@@ -134,6 +136,30 @@ bad:
             name: Bar
         -   id: 3
             name: Baz
+```
+
+</eslint-code-block>
+
+### `[2, "alignMultilineFlowScalars": true]`
+
+<eslint-code-block fix>
+
+<!-- eslint-skip -->
+
+```yaml
+# eslint yml/indent: [error, 2, { alignMultilineFlowScalars: true }]
+
+# ✓ GOOD
+good:
+  key: a
+       b
+       c
+
+# ✗ BAD
+bad:
+  key: a
+    b
+    c
 ```
 
 </eslint-code-block>

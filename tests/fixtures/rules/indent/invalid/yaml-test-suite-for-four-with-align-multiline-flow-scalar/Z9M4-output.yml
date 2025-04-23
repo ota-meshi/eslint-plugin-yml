@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/Z9M4-input.yaml
+%TAG !e! tag:example.com,2000:app/
+---
+-   !e!foo "bar"

@@ -1,0 +1,7 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/JTV5-input.yaml
+?   a
+    true
+:   null
+    d
+?   e
+    42

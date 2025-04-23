@@ -1,0 +1,8 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/S9E8-input.yaml
+sequence:
+    -   one
+    -   two
+mapping:
+    ?   sky
+    :   blue
+    sea : green

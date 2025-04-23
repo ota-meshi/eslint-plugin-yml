@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/V55R-input.yaml
+-   &a a
+-   &b b
+-   *a
+-   *b

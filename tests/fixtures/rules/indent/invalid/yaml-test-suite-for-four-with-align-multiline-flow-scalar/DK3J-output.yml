@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/DK3J-input.yaml
+--- >
+    line1
+    # no comment
+    line3

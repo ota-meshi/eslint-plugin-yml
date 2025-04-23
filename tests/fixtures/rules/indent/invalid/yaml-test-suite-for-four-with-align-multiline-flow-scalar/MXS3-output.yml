@@ -1,0 +1,2 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/MXS3-input.yaml
+-   {a: b}

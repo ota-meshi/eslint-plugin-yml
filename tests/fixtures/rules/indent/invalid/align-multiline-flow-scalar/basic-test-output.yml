@@ -1,0 +1,31 @@
+# indent/invalid/align-multiline-flow-scalar/basic-test-input.yml
+double:
+    key-a: "s
+           s"
+    key-b: "s
+           s"
+    key-c: "s
+           s"
+    key-e:
+        "s
+        s"
+single:
+    key-a: 's
+           s'
+    key-b: 's
+           s'
+    key-c: 's
+           s'
+    key-e:
+        's
+        s'
+plain:
+    key-a: s
+           s
+    key-b: s
+           s
+    key-c: s
+           s
+    key-e:
+        s
+        s

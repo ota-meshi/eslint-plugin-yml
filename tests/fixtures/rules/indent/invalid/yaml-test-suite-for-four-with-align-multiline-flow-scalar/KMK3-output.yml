@@ -1,0 +1,4 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/KMK3-input.yaml
+foo:
+    bar: 1
+baz: 2

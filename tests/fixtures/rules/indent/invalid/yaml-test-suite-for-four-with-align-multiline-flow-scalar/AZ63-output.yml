@@ -1,0 +1,5 @@
+# indent/invalid/yaml-test-suite-for-four-with-align-multiline-flow-scalar/AZ63-input.yaml
+1:
+    -   2
+    -   3
+4: 5
