@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.18.0
+
+### Minor Changes
+
+- [#427](https://github.com/ota-meshi/eslint-plugin-yml/pull/427) [`a61a2a4`](https://github.com/ota-meshi/eslint-plugin-yml/commit/a61a2a478a6810eee7e0c17ce89fab29f0a46897) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: alignMultilineFlowScalar option to indent rule
+
 ## 1.17.0
 
 ### Minor Changes
