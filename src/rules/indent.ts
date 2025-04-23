@@ -845,7 +845,7 @@ export default createRule("indent", {
       }
 
       /**
-       * Process block literal
+       * Process for a scalar
        */
       function processScalar(
         lineIndent: LineIndentStep2,
