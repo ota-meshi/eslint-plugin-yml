@@ -99,7 +99,7 @@
     "eslint-plugin-jsonc": "^2.0.0",
     "eslint-plugin-markdown": "^5.0.0",
     "eslint-plugin-n": "^17.0.0",
-    "eslint-plugin-node-dependencies": "^0.13.0",
+    "eslint-plugin-node-dependencies": "^1.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-regexp": "^2.0.0",
     "eslint-plugin-vue": "^10.0.0",
