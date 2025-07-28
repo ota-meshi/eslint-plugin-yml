@@ -94,7 +94,7 @@
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-eslint-plugin": "^6.0.0",
     "eslint-plugin-eslint-rule-tester": "^0.6.0",
-    "eslint-plugin-jsdoc": "^51.0.0",
+    "eslint-plugin-jsdoc": "^52.0.0",
     "eslint-plugin-json-schema-validator": "^5.0.0",
     "eslint-plugin-jsonc": "^2.0.0",
     "eslint-plugin-markdown": "^5.0.0",
