@@ -7,14 +7,14 @@
 clip: |
   # text
  
-strip: |-
-  # text
-  
  # Keep
   # comments:
 
 keep: |+
   # text
 
+strip: |-
+  # text
+  
  # Trail
   # comments.

@@ -1,8 +1,6 @@
 # sort-keys/invalid/yaml-test-suite-for-desc/XW4D-input.yaml
 b: plain
  value  # lala
-a: "double
-  quotes" # lala
 c  : #lala
   d
 ? # lala
@@ -15,3 +13,5 @@ e:
  - x: y
 block: > # lala
   abcde
+a: "double
+  quotes" # lala

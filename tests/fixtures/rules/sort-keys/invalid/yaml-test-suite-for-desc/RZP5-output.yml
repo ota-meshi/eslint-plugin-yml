@@ -1,8 +1,6 @@
 # sort-keys/invalid/yaml-test-suite-for-desc/RZP5-input.yaml
 b: plain
  value  # lala
-a: "double
-  quotes" # lala
 c  : #lala
   d
 ? # lala
@@ -14,3 +12,5 @@ e: &node # lala
  - x: y
 block: > # lala
   abcde
+a: "double
+  quotes" # lala

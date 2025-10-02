@@ -1,6 +1,6 @@
 # sort-keys/invalid/yaml-test-suite-for-desc/74H7-input.yaml
 c: !!int 42
-!!str a: b
 e: !!str f
 g: h
+!!str a: b
 !!int 23: !!bool false

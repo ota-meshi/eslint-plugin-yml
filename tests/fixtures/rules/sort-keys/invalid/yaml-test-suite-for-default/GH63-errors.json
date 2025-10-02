@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. '1.5' should be before 'a'.",
-    "line": 4,
-    "column": 1
+    "message": "Expected mapping keys to be in ascending order. 'a' should be after '1.5'.",
+    "line": 2,
+    "column": 3
   }
 ]

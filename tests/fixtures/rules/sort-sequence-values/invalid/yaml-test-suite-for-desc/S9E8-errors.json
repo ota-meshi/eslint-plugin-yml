@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected sequence values to be in descending order. 'two' should be before 'one'.",
-    "line": 4,
+    "message": "Expected sequence values to be in descending order. 'one' should be after 'two'.",
+    "line": 3,
     "column": 3
   }
 ]

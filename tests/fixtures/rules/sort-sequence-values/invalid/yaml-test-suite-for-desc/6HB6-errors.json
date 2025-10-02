@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected sequence values to be in descending order. 'Still by two' should be before 'Also by two'.",
+    "message": "Expected sequence values to be in descending order. 'Still by two' should be before 'By two'.",
     "line": 12,
     "column": 4
   }

@@ -1,8 +1,8 @@
 # sort-keys/invalid/yaml-test-suite-for-asc/G4RS-input.yaml
 control: "\b1998\t1999\t2000\n"
-unicode: "Sosa did fine.\u263A"
 hex esc: "\x0d\x0a is \r\n"
 
-quoted: ' # Not a ''comment''.'
 single: '"Howdy!" he cried.'
+quoted: ' # Not a ''comment''.'
 tie-fighter: '|\-*-/|'
+unicode: "Sosa did fine.\u263A"

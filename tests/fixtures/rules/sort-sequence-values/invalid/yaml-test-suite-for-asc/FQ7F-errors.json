@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected sequence values to be in ascending order. 'Ken Griffey' should be before 'Sammy Sosa'.",
+    "message": "Expected sequence values to be in ascending order. 'Ken Griffey' should be before 'Mark McGwire'.",
     "line": 4,
     "column": 3
   }

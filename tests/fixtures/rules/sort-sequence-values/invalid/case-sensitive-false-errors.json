@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected sequence values to be in insensitive ascending order. 'A' should be before 'b'.",
+    "message": "Expected sequence values to be in insensitive ascending order. 'A' should be before 'B'.",
     "line": 3,
     "column": 18
   }

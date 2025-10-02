@@ -15,13 +15,13 @@ Warning:
 Date: 2001-11-23 15:03:17 -5
 Fatal:
   Unknown variable "bar"
-User: ed
 Stack:
-  - code: |
-      x = MoreObject("345\n")
-    file: TopClass.py
+  - file: TopClass.py
     line: 23
-  - code: |-
-      foo = bar
-    file: MoreClass.py
+    code: |
+      x = MoreObject("345\n")
+  - file: MoreClass.py
     line: 58
+    code: |-
+      foo = bar
+User: ed

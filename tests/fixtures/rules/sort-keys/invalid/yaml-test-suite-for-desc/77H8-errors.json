@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'picture' should be before 'not-date'.",
-    "line": 5,
+    "message": "Expected mapping keys to be in descending order. 'not-date' should be after 'picture'.",
+    "line": 3,
     "column": 1
   }
 ]

@@ -1,12 +1,12 @@
 [
   {
-    "message": "Expected sequence values to be in descending order. ' explicit\n' should be before '\n\n# detected\n'.",
-    "line": 8,
+    "message": "Expected sequence values to be in descending order. '\n\n# detected\n' should be after 'detected\n'.",
+    "line": 4,
     "column": 3
   },
   {
-    "message": "Expected sequence values to be in descending order. 'detected\n' should be before ' explicit\n'.",
-    "line": 10,
+    "message": "Expected sequence values to be in descending order. ' explicit\n' should be after 'detected\n'.",
+    "line": 8,
     "column": 3
   }
 ]

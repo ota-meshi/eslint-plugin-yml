@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected mapping keys to be in insensitive ascending order. 'A' should be before 'b'.",
+    "message": "Expected mapping keys to be in insensitive ascending order. 'A' should be before 'B'.",
     "line": 3,
     "column": 20
   }

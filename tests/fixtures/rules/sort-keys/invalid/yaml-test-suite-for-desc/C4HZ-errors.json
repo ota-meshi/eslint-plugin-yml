@@ -1,21 +1,21 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'y' should be before 'x'.",
+    "message": "Expected mapping keys to be in descending order. 'center' should be after 'radius'.",
     "line": 7,
-    "column": 27
-  },
-  {
-    "message": "Expected mapping keys to be in descending order. 'radius' should be before 'center'.",
-    "line": 8,
     "column": 3
   },
   {
-    "message": "Expected mapping keys to be in descending order. 'y' should be before 'x'.",
-    "line": 11,
+    "message": "Expected mapping keys to be in descending order. 'x' should be after 'y'.",
+    "line": 7,
     "column": 20
   },
   {
-    "message": "Expected mapping keys to be in descending order. 'text' should be before 'color'.",
+    "message": "Expected mapping keys to be in descending order. 'x' should be after 'y'.",
+    "line": 11,
+    "column": 13
+  },
+  {
+    "message": "Expected mapping keys to be in descending order. 'text' should be before 'start'.",
     "line": 15,
     "column": 3
   }

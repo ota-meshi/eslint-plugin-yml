@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'Ken Griff' should be before 'Sammy Sosa'.",
+    "message": "Expected mapping keys to be in ascending order. 'Ken Griff' should be before 'Mark McGwire'.",
     "line": 8,
     "column": 3
   }

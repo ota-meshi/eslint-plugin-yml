@@ -1,17 +1,17 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. '?foo' should be before 'a!\"#$%&'()*+,-./09:;<=>?@AZ[\\]^_`az{|}~'.",
+    "message": "Expected mapping keys to be in ascending order. 'a!\"#$%&'()*+,-./09:;<=>?@AZ[\\]^_`az{|}~' should be after '-foo'.",
+    "line": 2,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. '?foo' should be after '-foo'.",
     "line": 3,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in ascending order. ':foo' should be before '?foo'.",
+    "message": "Expected mapping keys to be in ascending order. ':foo' should be after '-foo'.",
     "line": 4,
-    "column": 1
-  },
-  {
-    "message": "Expected mapping keys to be in ascending order. '-foo' should be before ':foo'.",
-    "line": 5,
     "column": 1
   }
 ]

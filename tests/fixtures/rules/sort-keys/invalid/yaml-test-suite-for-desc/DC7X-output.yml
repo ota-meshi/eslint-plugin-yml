@@ -1,5 +1,5 @@
 # sort-keys/invalid/yaml-test-suite-for-desc/DC7X-input.yaml
 seq:	
  - a	
-a: b	
 c: d	#X
+a: b	

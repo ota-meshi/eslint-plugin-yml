@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected sequence values to be in descending order. 'keep\n\n' should be before ' folded\n'.",
-    "line": 6,
+    "message": "Expected sequence values to be in descending order. ' folded\n' should be after ' strip'.",
+    "line": 4,
     "column": 3
   }
 ]

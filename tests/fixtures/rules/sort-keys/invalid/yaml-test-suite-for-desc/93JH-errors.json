@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'key2' should be before 'key'.",
-    "line": 3,
+    "message": "Expected mapping keys to be in descending order. 'key' should be after 'key2'.",
+    "line": 2,
     "column": 4
   }
 ]

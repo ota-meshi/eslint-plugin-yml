@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'description' should be before 'generic'.",
-    "line": 12,
+    "message": "Expected mapping keys to be in ascending order. 'generic' should be after 'description'.",
+    "line": 7,
     "column": 1
   }
 ]

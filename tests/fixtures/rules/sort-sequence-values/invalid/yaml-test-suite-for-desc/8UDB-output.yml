@@ -1,9 +1,9 @@
 # sort-sequence-values/invalid/yaml-test-suite-for-desc/8UDB-input.yaml
 [ 'single
            quoted',
-"double
- quoted",
 plain
- text, [ nested ],
+ text,
+"double
+ quoted", [ nested ],
 single: pair,
 ]

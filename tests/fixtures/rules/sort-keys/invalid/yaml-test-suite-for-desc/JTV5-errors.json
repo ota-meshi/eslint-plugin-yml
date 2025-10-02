@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'e 42' should be before 'a true'.",
-    "line": 6,
+    "message": "Expected mapping keys to be in descending order. 'a true' should be after 'e 42'.",
+    "line": 2,
     "column": 3
   }
 ]

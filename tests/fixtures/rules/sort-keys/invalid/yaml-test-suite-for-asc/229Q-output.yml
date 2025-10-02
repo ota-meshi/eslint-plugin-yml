@@ -1,9 +1,9 @@
 # sort-keys/invalid/yaml-test-suite-for-asc/229Q-input.yaml
 -
   hr:   65
-  name: Mark McGwire
   avg:  0.278
+  name: Mark McGwire
 -
   hr:   63
-  name: Sammy Sosa
   avg:  0.288
+  name: Sammy Sosa

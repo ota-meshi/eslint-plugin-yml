@@ -1,22 +1,22 @@
 [
   {
-    "message": "Expected sequence values to be in ascending order. 'hr' should be before 'name'.",
+    "message": "Expected sequence values to be in ascending order. 'name' should be after 'avg'.",
+    "line": 2,
+    "column": 4
+  },
+  {
+    "message": "Expected sequence values to be in ascending order. 'hr' should be after 'avg'.",
     "line": 2,
     "column": 18
   },
   {
-    "message": "Expected sequence values to be in ascending order. 'avg' should be before 'hr'.",
-    "line": 2,
-    "column": 22
-  },
-  {
-    "message": "Expected sequence values to be in ascending order. '0.278' should be before '65'.",
+    "message": "Expected sequence values to be in ascending order. '65' should be after '0.278'.",
     "line": 3,
-    "column": 22
+    "column": 18
   },
   {
-    "message": "Expected sequence values to be in ascending order. '0.288' should be before '63'.",
+    "message": "Expected sequence values to be in ascending order. '63' should be after '0.288'.",
     "line": 4,
-    "column": 22
+    "column": 18
   }
 ]

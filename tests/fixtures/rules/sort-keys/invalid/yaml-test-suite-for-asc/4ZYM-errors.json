@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'block' should be before 'quoted'.",
+    "message": "Expected mapping keys to be in ascending order. 'block' should be before 'plain'.",
     "line": 6,
     "column": 1
   }

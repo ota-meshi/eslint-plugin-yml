@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'rbi' should be before 'avg'.",
+    "message": "Expected mapping keys to be in descending order. 'rbi' should be before 'hr'.",
     "line": 4,
     "column": 1
   }

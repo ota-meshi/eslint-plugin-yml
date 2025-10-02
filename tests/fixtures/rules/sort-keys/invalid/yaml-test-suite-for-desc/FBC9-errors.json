@@ -1,12 +1,12 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'safe question mark' should be before 'safe'.",
-    "line": 4,
+    "message": "Expected mapping keys to be in descending order. 'safe' should be after 'safe dash'.",
+    "line": 2,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in descending order. 'safe dash' should be before 'safe colon'.",
-    "line": 6,
+    "message": "Expected mapping keys to be in descending order. 'safe colon' should be after 'safe dash'.",
+    "line": 5,
     "column": 1
   }
 ]
