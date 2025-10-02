@@ -5,7 +5,7 @@ import { isComma } from "../utils/ast-utils";
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
 import { getSourceCode } from "../utils/compat";
-import { calcShortestEditScript } from "src/utils/calc-shortest-edit-script";
+import { calcShortestEditScript } from "../utils/calc-shortest-edit-script";
 
 type YAMLValue = ReturnType<typeof getStaticYAMLValue>;
 
