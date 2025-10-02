@@ -5,6 +5,7 @@ import { isComma } from "../utils/ast-utils";
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
 import { getSourceCode } from "../utils/compat";
+import { calcShortestEditScript } from "src/utils/calc-shortest-edit-script";
 
 type YAMLValue = ReturnType<typeof getStaticYAMLValue>;
 
@@ -433,8 +434,10 @@ export default createRule("sort-sequence-values", {
     },
 
     messages: {
-      sortValues:
-        "Expected sequence values to be in {{orderText}} order. '{{thisValue}}' should be before '{{prevValue}}'.",
+      shouldBeBefore:
+        "Expected sequence values to be in {{orderText}} order. '{{thisValue}}' should be before '{{targetValue}}'.",
+      shouldBeAfter:
+        "Expected sequence values to be in {{orderText}} order. '{{thisValue}}' should be after '{{targetValue}}'.",
     },
     type: "suggestion",
   },
@@ -447,24 +450,23 @@ export default createRule("sort-sequence-values", {
     const parsedOptions = parseOptions(context.options, sourceCode);
 
     /**
-     * Check order
+     * Checks whether the given two entries are in should be kept order.
      */
-    function isValidOrder(
-      prevData: YAMLEntryData,
-      thisData: YAMLEntryData,
-      option: ParsedOption,
-    ) {
-      if (option.isValidOrder(prevData, thisData)) {
-        return true;
-      }
-
-      for (const aliasName of thisData.anchorAlias.aliases) {
+    function shouldKeepOrder(prevData: YAMLEntryData, nextData: YAMLEntryData) {
+      if (
+        (prevData.anchorAlias.aliases.size === 0 &&
+          prevData.anchorAlias.anchors.size === 0) ||
+        (nextData.anchorAlias.aliases.size === 0 &&
+          nextData.anchorAlias.anchors.size === 0)
+      )
+        return false;
+      for (const aliasName of nextData.anchorAlias.aliases) {
         if (prevData.anchorAlias.anchors.has(aliasName)) {
           // The current order is correct for handling anchors.
           return true;
         }
       }
-      for (const anchorName of thisData.anchorAlias.anchors) {
+      for (const anchorName of nextData.anchorAlias.anchors) {
         if (prevData.anchorAlias.aliases.has(anchorName)) {
           // The current order is correct for handling anchors.
           return true;
@@ -474,47 +476,181 @@ export default createRule("sort-sequence-values", {
     }
 
     /**
+     * Sort entries by bubble sort.
+     */
+    function bubbleSort(entries: YAMLEntryData[], option: ParsedOption) {
+      const l = entries.length;
+      const result = [...entries];
+      let swapped: boolean;
+      do {
+        swapped = false;
+        for (let nextIndex = 1; nextIndex < l; nextIndex++) {
+          const prevIndex = nextIndex - 1;
+          if (
+            option.isValidOrder(result[prevIndex], result[nextIndex]) ||
+            shouldKeepOrder(result[prevIndex], result[nextIndex])
+          )
+            continue;
+          [result[prevIndex], result[nextIndex]] = [
+            result[nextIndex],
+            result[prevIndex],
+          ];
+          swapped = true;
+        }
+      } while (swapped);
+      return result;
+    }
+
+    /**
      * Verify for sequence entries
      */
-    function verifyArrayElement(data: YAMLEntryData, option: ParsedOption) {
-      if (option.ignore(data)) {
-        return;
-      }
-      const prevList = data.sequence.entries
-        .slice(0, data.index)
-        .reverse()
-        .filter((d) => !option.ignore(d));
-
-      if (prevList.length === 0) {
-        return;
-      }
-      const prev = prevList[0];
-      if (!isValidOrder(prev, data, option)) {
-        const reportLoc = data.reportLoc;
-        context.report({
-          loc: reportLoc,
-          messageId: "sortValues",
-          data: {
-            thisValue: toText(data),
-            prevValue: toText(prev),
-            orderText: option.orderText(data),
-          },
-          *fix(fixer) {
-            let moveTarget = prevList[0];
-            for (const prev of prevList) {
-              if (isValidOrder(prev, data, option)) {
-                break;
+    function verifyArrayElements(
+      entries: YAMLEntryData[],
+      option: ParsedOption,
+    ) {
+      const sorted = bubbleSort(entries, option);
+      const editScript = calcShortestEditScript(entries, sorted);
+      for (let index = 0; index < editScript.length; index++) {
+        const edit = editScript[index];
+        if (edit.type !== "delete") continue;
+        const insertEditIndex = editScript.findIndex(
+          (e) => e.type === "insert" && e.b === edit.a,
+        );
+        if (insertEditIndex === -1) {
+          // should not happen
+          continue;
+        }
+        if (index < insertEditIndex) {
+          const target = findInsertAfterTarget(edit.a, insertEditIndex);
+          if (!target) {
+            // should not happen
+            continue;
+          }
+          context.report({
+            loc: edit.a.reportLoc,
+            messageId: "shouldBeAfter",
+            data: {
+              thisValue: toText(edit.a),
+              targetValue: toText(target),
+              orderText: option.orderText(edit.a),
+            },
+            *fix(fixer) {
+              if (edit.a.sequence.node.style === "flow") {
+                yield* fixToMoveDownForFlow(fixer, edit.a, target);
               } else {
-                moveTarget = prev;
+                yield* fixToMoveDownForBlock(fixer, edit.a, target);
               }
+            },
+          });
+        } else {
+          const target = findInsertBeforeTarget(edit.a, insertEditIndex);
+          if (!target) {
+            // should not happen
+            continue;
+          }
+          context.report({
+            loc: edit.a.reportLoc,
+            messageId: "shouldBeBefore",
+            data: {
+              thisValue: toText(edit.a),
+              targetValue: toText(target),
+              orderText: option.orderText(edit.a),
+            },
+            *fix(fixer) {
+              if (edit.a.sequence.node.style === "flow") {
+                yield* fixToMoveUpForFlow(fixer, edit.a, target);
+              } else {
+                yield* fixToMoveUpForBlock(fixer, edit.a, target);
+              }
+            },
+          });
+        }
+      }
+
+      /**
+       * Find insert after target
+       */
+      function findInsertAfterTarget(
+        entry: YAMLEntryData,
+        insertEditIndex: number,
+      ) {
+        let candidate: YAMLEntryData | null = null;
+        for (let index = insertEditIndex - 1; index >= 0; index--) {
+          const edit = editScript[index];
+          if (edit.type === "delete" && edit.a === entry) break;
+          if (edit.type !== "common") continue;
+          candidate = edit.a;
+          break;
+        }
+        const entryIndex = entries.indexOf(entry);
+        if (candidate) {
+          for (let index = entryIndex + 1; index < entries.length; index++) {
+            const element = entries[index];
+            if (element === candidate) return candidate;
+            if (shouldKeepOrder(entry, element)) {
+              break;
             }
-            if (data.sequence.node.style === "flow") {
-              yield* fixForFlow(fixer, data, moveTarget);
-            } else {
-              yield* fixForBlock(fixer, data, moveTarget);
+          }
+        }
+
+        let lastTarget: YAMLEntryData | null = null;
+        for (let index = entryIndex + 1; index < entries.length; index++) {
+          const element = entries[index];
+          if (
+            option.isValidOrder(element, entry) &&
+            !shouldKeepOrder(entry, element)
+          ) {
+            lastTarget = element;
+            continue;
+          }
+          return lastTarget;
+        }
+        return lastTarget;
+      }
+
+      /**
+       * Find insert before target
+       */
+      function findInsertBeforeTarget(
+        entry: YAMLEntryData,
+        insertEditIndex: number,
+      ) {
+        let candidate: YAMLEntryData | null = null;
+        for (
+          let index = insertEditIndex + 1;
+          index < editScript.length;
+          index++
+        ) {
+          const edit = editScript[index];
+          if (edit.type === "delete" && edit.a === entry) break;
+          if (edit.type !== "common") continue;
+          candidate = edit.a;
+          break;
+        }
+        const entryIndex = entries.indexOf(entry);
+        if (candidate) {
+          for (let index = entryIndex - 1; index >= 0; index--) {
+            const element = entries[index];
+            if (element === candidate) return candidate;
+            if (shouldKeepOrder(element, entry)) {
+              break;
             }
-          },
-        });
+          }
+        }
+
+        let lastTarget: YAMLEntryData | null = null;
+        for (let index = entryIndex - 1; index >= 0; index--) {
+          const element = entries[index];
+          if (
+            option.isValidOrder(entry, element) &&
+            !shouldKeepOrder(element, entry)
+          ) {
+            lastTarget = element;
+            continue;
+          }
+          return lastTarget;
+        }
+        return lastTarget;
       }
     }
 
@@ -586,16 +722,70 @@ export default createRule("sort-sequence-values", {
         if (!option) {
           return;
         }
-        for (const element of data.entries) {
-          verifyArrayElement(element, option);
-        }
+        verifyArrayElements(
+          data.entries.filter((d) => !option.ignore(d)),
+          option,
+        );
       },
     };
 
     /**
-     * Fix for flow
+     * Fix by moving the node after the target node for flow.
      */
-    function* fixForFlow(
+    function* fixToMoveDownForFlow(
+      fixer: RuleFixer,
+      data: YAMLEntryData,
+      moveTarget: YAMLEntryData,
+    ) {
+      const beforeToken = data.aroundTokens.before;
+      const afterToken = data.aroundTokens.after;
+      let insertCode: string,
+        removeRange: AST.Range,
+        insertTargetToken: YAMLToken;
+      if (isComma(afterToken)) {
+        // e.g. |# comment\n value,|
+        removeRange = [beforeToken.range[1], afterToken.range[1]];
+        const moveTargetAfterToken = moveTarget.aroundTokens.after;
+        if (isComma(moveTargetAfterToken)) {
+          // e.g. value,
+          insertTargetToken = moveTargetAfterToken;
+          insertCode = sourceCode.text.slice(...removeRange);
+        } else {
+          // e.g. value]
+          insertTargetToken = moveTarget.node
+            ? sourceCode.getLastToken(moveTarget.node)
+            : moveTarget.aroundTokens.before;
+          insertCode = sourceCode.text.slice(
+            beforeToken.range[1],
+            afterToken.range[0],
+          );
+          insertCode = `,${insertCode}`;
+        }
+      } else {
+        if (isComma(beforeToken)) {
+          // e.g. |, # comment\n value|
+          removeRange = [beforeToken.range[0], data.range[1]];
+          insertCode = sourceCode.text.slice(...removeRange);
+          insertTargetToken = moveTarget.node
+            ? sourceCode.getLastToken(moveTarget.node)
+            : moveTarget.aroundTokens.before;
+        } else {
+          // e.g. |[# comment\n value|
+          removeRange = [beforeToken.range[1], data.range[1]];
+          insertCode = `,${sourceCode.text.slice(...removeRange)}`;
+          insertTargetToken = moveTarget.node
+            ? sourceCode.getLastToken(moveTarget.node)
+            : moveTarget.aroundTokens.before;
+        }
+      }
+      yield fixer.removeRange(removeRange);
+      yield fixer.insertTextAfterRange(insertTargetToken.range, insertCode);
+    }
+
+    /**
+     * Fix by moving the node before the target node for flow.
+     */
+    function* fixToMoveUpForFlow(
       fixer: RuleFixer,
       data: YAMLEntryData,
       moveTarget: YAMLEntryData,
@@ -636,9 +826,33 @@ export default createRule("sort-sequence-values", {
     }
 
     /**
-     * Fix for block
+     * Fix by moving the node after the target node for block.
      */
-    function* fixForBlock(
+    function* fixToMoveDownForBlock(
+      fixer: RuleFixer,
+      data: YAMLEntryData,
+      moveTarget: YAMLEntryData,
+    ) {
+      const moveDataList = data.sequence.entries.slice(
+        data.index,
+        moveTarget.index + 1,
+      );
+
+      let replacementCodeRange = getBlockEntryRange(data);
+      for (const target of moveDataList.reverse()) {
+        const range = getBlockEntryRange(target);
+        yield fixer.replaceTextRange(
+          range,
+          sourceCode.text.slice(...replacementCodeRange),
+        );
+        replacementCodeRange = range;
+      }
+    }
+
+    /**
+     * Fix by moving the node before the target node for block.
+     */
+    function* fixToMoveUpForBlock(
       fixer: RuleFixer,
       data: YAMLEntryData,
       moveTarget: YAMLEntryData,

@@ -2,5 +2,5 @@
 %TAG !e! tag:example.com,2000:app/
 ---
 - !!str bar
-- !local foo
 - !e!tag%21 baz
+- !local foo

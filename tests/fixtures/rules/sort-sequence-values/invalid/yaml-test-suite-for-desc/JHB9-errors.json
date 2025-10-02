@@ -1,12 +1,12 @@
 [
   {
-    "message": "Expected sequence values to be in descending order. 'Sammy Sosa' should be before 'Mark McGwire'.",
-    "line": 5,
+    "message": "Expected sequence values to be in descending order. 'Mark McGwire' should be after 'Sammy Sosa'.",
+    "line": 4,
     "column": 3
   },
   {
-    "message": "Expected sequence values to be in descending order. 'St Louis Cardinals' should be before 'Chicago Cubs'.",
-    "line": 11,
+    "message": "Expected sequence values to be in descending order. 'Chicago Cubs' should be after 'St Louis Cardinals'.",
+    "line": 10,
     "column": 3
   }
 ]

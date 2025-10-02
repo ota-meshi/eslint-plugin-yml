@@ -1,10 +1,10 @@
 - >1 # Indentation indicator↓
   folded
-# sort-sequence-values/invalid/yaml-test-suite-for-asc/P2AD-input.yaml
-- | # Empty header↓
- literal
-- >1- # Both indicators↓
-  strip
 - |+ # Chomping indicator↓
  keep
 
+- >1- # Both indicators↓
+  strip
+# sort-sequence-values/invalid/yaml-test-suite-for-asc/P2AD-input.yaml
+- | # Empty header↓
+ literal

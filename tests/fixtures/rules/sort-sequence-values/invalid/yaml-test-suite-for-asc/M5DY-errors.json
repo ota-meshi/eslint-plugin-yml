@@ -1,12 +1,12 @@
 [
   {
-    "message": "Expected sequence values to be in ascending order. 'Chicago cubs' should be before 'Detroit Tigers'.",
-    "line": 3,
+    "message": "Expected sequence values to be in ascending order. 'Detroit Tigers' should be after 'Chicago cubs'.",
+    "line": 2,
     "column": 5
   },
   {
-    "message": "Expected sequence values to be in ascending order. 'Atlanta Braves' should be before 'New York Yankees'.",
-    "line": 8,
+    "message": "Expected sequence values to be in ascending order. 'New York Yankees' should be after 'Atlanta Braves'.",
+    "line": 7,
     "column": 5
   }
 ]
