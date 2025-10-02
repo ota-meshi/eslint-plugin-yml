@@ -13,5 +13,26 @@ const tester = new RuleTester({
 tester.run(
   "sort-sequence-values",
   rule as any,
-  loadTestCases("sort-sequence-values", { skipOutputTest: true }),
+  loadTestCases(
+    "sort-sequence-values",
+    { skipOutputTest: true },
+    {
+      valid: [],
+      invalid: [
+        {
+          code: `["3","2","1"]`,
+          output: `["2","1","3"]`,
+          options: [
+            {
+              pathPattern: ".*",
+              order: ["2", "1", "3"],
+            },
+          ],
+          errors: [
+            "Expected sequence values to be in specified order. '3' should be after '1'.",
+          ],
+        },
+      ],
+    },
+  ),
 );
