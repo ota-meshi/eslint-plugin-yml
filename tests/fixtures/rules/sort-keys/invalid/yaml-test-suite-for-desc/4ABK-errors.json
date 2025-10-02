@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'omitted value' should be before 'http://foo.com'.",
-    "line": 5,
+    "message": "Expected mapping keys to be in descending order. 'http://foo.com' should be after 'omitted value'.",
+    "line": 4,
     "column": 1
   }
 ]

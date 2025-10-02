@@ -2,8 +2,6 @@
 ---
 top2: &node2 # comment
   key2: two
-top1: &node1
-  &k1 key1: one
 top3:
   &k3 key3: three
 top4: &node4
@@ -14,3 +12,5 @@ top6: &val6
   six
 top7:
   &val7 seven
+top1: &node1
+  &k1 key1: one

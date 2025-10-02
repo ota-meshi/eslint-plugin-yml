@@ -4,6 +4,7 @@ import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils/index";
 import { isComma, isCommentToken } from "../utils/ast-utils";
 import { getSourceCode } from "../utils/compat";
+import { calcShortestEditScript } from "src/utils/calc-shortest-edit-script";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -51,7 +52,7 @@ type ParsedOption = {
   allowLineSeparatedGroups: boolean;
   orderText: string;
 };
-type Validator = (a: YAMLPairData, b: YAMLPairData) => boolean;
+type Validator = (prev: YAMLPairData, next: YAMLPairData) => boolean;
 
 /**
  * Checks whether the given string is new line.
@@ -453,8 +454,10 @@ export default createRule("sort-keys", {
     },
 
     messages: {
-      sortKeys:
-        "Expected mapping keys to be in {{orderText}} order. '{{thisName}}' should be before '{{prevName}}'.",
+      shouldBeBefore:
+        "Expected mapping keys to be in {{orderText}} order. '{{thisName}}' should be before '{{targetName}}'.",
+      shouldBeAfter:
+        "Expected mapping keys to be in {{orderText}} order. '{{thisName}}' should be after '{{targetName}}'.",
     },
     type: "suggestion",
   },
@@ -468,24 +471,23 @@ export default createRule("sort-keys", {
     const parsedOptions = parseOptions(context.options, sourceCode);
 
     /**
-     * Check order
+     * Checks whether the given two pairs are in should be kept order.
      */
-    function isValidOrder(
-      prevData: YAMLPairData,
-      thisData: YAMLPairData,
-      option: ParsedOption,
-    ) {
-      if (option.isValidOrder(prevData, thisData)) {
-        return true;
-      }
-
-      for (const aliasName of thisData.anchorAlias.aliases) {
+    function shouldKeepOrder(prevData: YAMLPairData, nextData: YAMLPairData) {
+      if (
+        (prevData.anchorAlias.aliases.size === 0 &&
+          prevData.anchorAlias.anchors.size === 0) ||
+        (nextData.anchorAlias.aliases.size === 0 &&
+          nextData.anchorAlias.anchors.size === 0)
+      )
+        return false;
+      for (const aliasName of nextData.anchorAlias.aliases) {
         if (prevData.anchorAlias.anchors.has(aliasName)) {
           // The current order is correct for handling anchors.
           return true;
         }
       }
-      for (const anchorName of thisData.anchorAlias.anchors) {
+      for (const anchorName of nextData.anchorAlias.anchors) {
         if (prevData.anchorAlias.aliases.has(anchorName)) {
           // The current order is correct for handling anchors.
           return true;
@@ -506,57 +508,210 @@ export default createRule("sort-keys", {
     }
 
     /**
-     * Verify for pair
+     * Group YAML pairs.
      */
-    function verifyPair(data: YAMLPairData, option: ParsedOption) {
-      if (ignore(data, option)) {
-        return;
+    function groupingPairs(pairs: YAMLPairData[], option: ParsedOption) {
+      const groups: YAMLPairData[][] = [];
+
+      let group: YAMLPairData[] = [];
+      let prev: YAMLPairData | null = null;
+      for (const pair of pairs) {
+        if (ignore(pair, option)) {
+          prev = pair;
+          continue;
+        }
+        if (
+          prev &&
+          option.allowLineSeparatedGroups &&
+          hasBlankLine(prev, pair)
+        ) {
+          if (group.length > 0) {
+            groups.push(group);
+            group = [];
+          }
+        }
+        group.push(pair);
+        prev = pair;
       }
-      const prevList: YAMLPairData[] = [];
-      let currTarget = data;
-      let prevTarget;
-      while ((prevTarget = currTarget.getPrev())) {
-        if (option.allowLineSeparatedGroups) {
-          if (hasBlankLine(prevTarget, currTarget)) {
-            break;
+      if (group.length > 0) {
+        groups.push(group);
+      }
+      return groups;
+    }
+
+    /**
+     * Sort pairs by bubble sort.
+     */
+    function bubbleSort(pairs: YAMLPairData[], option: ParsedOption) {
+      const l = pairs.length;
+      const result = [...pairs];
+      let swapped: boolean;
+      do {
+        swapped = false;
+        for (let nextIndex = 1; nextIndex < l; nextIndex++) {
+          const prevIndex = nextIndex - 1;
+          if (
+            option.isValidOrder(result[prevIndex], result[nextIndex]) ||
+            shouldKeepOrder(result[prevIndex], result[nextIndex])
+          )
+            continue;
+          [result[prevIndex], result[nextIndex]] = [
+            result[nextIndex],
+            result[prevIndex],
+          ];
+          swapped = true;
+        }
+      } while (swapped);
+      return result;
+    }
+
+    /**
+     * Verify for pairs order
+     */
+    function verifyPairs(pairs: YAMLPairData[], option: ParsedOption) {
+      const sorted = bubbleSort(pairs, option);
+      const editScript = calcShortestEditScript(pairs, sorted);
+      for (let index = 0; index < editScript.length; index++) {
+        const edit = editScript[index];
+        if (edit.type !== "delete") continue;
+        const insertEditIndex = editScript.findIndex(
+          (e) => e.type === "insert" && e.b === edit.a,
+        );
+        if (insertEditIndex === -1) {
+          // should not happen
+          continue;
+        }
+        if (index < insertEditIndex) {
+          const target = findInsertAfterTarget(edit.a, insertEditIndex);
+          if (!target) {
+            // should not happen
+            continue;
+          }
+          context.report({
+            loc: edit.a.reportLoc,
+            messageId: "shouldBeAfter",
+            data: {
+              thisName: edit.a.name,
+              targetName: target.name,
+              orderText: option.orderText,
+            },
+            *fix(fixer) {
+              if (edit.a.mapping.node.style === "flow") {
+                yield* fixToMoveDownForFlow(fixer, edit.a, target);
+              } else {
+                yield* fixToMoveDownForBlock(fixer, edit.a, target);
+              }
+            },
+          });
+        } else {
+          const target = findInsertBeforeTarget(edit.a, insertEditIndex);
+          if (!target) {
+            // should not happen
+            continue;
+          }
+          context.report({
+            loc: edit.a.reportLoc,
+            messageId: "shouldBeBefore",
+            data: {
+              thisName: edit.a.name,
+              targetName: target.name,
+              orderText: option.orderText,
+            },
+            *fix(fixer) {
+              if (edit.a.mapping.node.style === "flow") {
+                yield* fixToMoveUpForFlow(fixer, edit.a, target);
+              } else {
+                yield* fixToMoveUpForBlock(fixer, edit.a, target);
+              }
+            },
+          });
+        }
+      }
+
+      /**
+       * Find insert after target
+       */
+      function findInsertAfterTarget(
+        pair: YAMLPairData,
+        insertEditIndex: number,
+      ) {
+        let candidate: YAMLPairData | null = null;
+        for (let index = insertEditIndex - 1; index >= 0; index--) {
+          const edit = editScript[index];
+          if (edit.type === "delete" && edit.a === pair) break;
+          if (edit.type !== "common") continue;
+          candidate = edit.a;
+          break;
+        }
+        const pairIndex = pairs.indexOf(pair);
+        if (candidate) {
+          for (let index = pairIndex + 1; index < pairs.length; index++) {
+            const element = pairs[index];
+            if (element === candidate) return candidate;
+            if (shouldKeepOrder(pair, element)) {
+              break;
+            }
           }
         }
 
-        if (!ignore(prevTarget, option)) {
-          prevList.push(prevTarget);
+        let lastTarget: YAMLPairData | null = null;
+        for (let index = pairIndex + 1; index < pairs.length; index++) {
+          const element = pairs[index];
+          if (
+            option.isValidOrder(element, pair) &&
+            !shouldKeepOrder(pair, element)
+          ) {
+            lastTarget = element;
+            continue;
+          }
+          return lastTarget;
         }
-        currTarget = prevTarget;
+        return lastTarget;
       }
 
-      if (prevList.length === 0) {
-        return;
-      }
-      const prev = prevList[0];
-      if (!isValidOrder(prev, data, option)) {
-        context.report({
-          loc: data.reportLoc,
-          messageId: "sortKeys",
-          data: {
-            thisName: data.name,
-            prevName: prev.name,
-            orderText: option.orderText,
-          },
-          *fix(fixer) {
-            let moveTarget = prevList[0];
-            for (const prev of prevList) {
-              if (isValidOrder(prev, data, option)) {
-                break;
-              } else {
-                moveTarget = prev;
-              }
+      /**
+       * Find insert before target
+       */
+      function findInsertBeforeTarget(
+        pair: YAMLPairData,
+        insertEditIndex: number,
+      ) {
+        let candidate: YAMLPairData | null = null;
+        for (
+          let index = insertEditIndex + 1;
+          index < editScript.length;
+          index++
+        ) {
+          const edit = editScript[index];
+          if (edit.type === "delete" && edit.a === pair) break;
+          if (edit.type !== "common") continue;
+          candidate = edit.a;
+          break;
+        }
+        const pairIndex = pairs.indexOf(pair);
+        if (candidate) {
+          for (let index = pairIndex - 1; index >= 0; index--) {
+            const element = pairs[index];
+            if (element === candidate) return candidate;
+            if (shouldKeepOrder(element, pair)) {
+              break;
             }
-            if (data.mapping.node.style === "flow") {
-              yield* fixForFlow(fixer, data, moveTarget);
-            } else {
-              yield* fixForBlock(fixer, data, moveTarget);
-            }
-          },
-        });
+          }
+        }
+
+        let lastTarget: YAMLPairData | null = null;
+        for (let index = pairIndex - 1; index >= 0; index--) {
+          const element = pairs[index];
+          if (
+            option.isValidOrder(pair, element) &&
+            !shouldKeepOrder(element, pair)
+          ) {
+            lastTarget = element;
+            continue;
+          }
+          return lastTarget;
+        }
+        return lastTarget;
       }
     }
 
@@ -630,16 +785,64 @@ export default createRule("sort-keys", {
         if (!option) {
           return;
         }
-        for (const pair of data.pairs) {
-          verifyPair(pair, option);
+        for (const pairs of groupingPairs(data.pairs, option)) {
+          verifyPairs(pairs, option);
         }
       },
     };
 
     /**
-     * Fix for flow
+     * Fix by moving the node after the target node for flow.
      */
-    function* fixForFlow(
+    function* fixToMoveDownForFlow(
+      fixer: RuleFixer,
+      data: YAMLPairData,
+      moveTarget: YAMLPairData,
+    ) {
+      const beforeToken = sourceCode.getTokenBefore(data.node)!;
+      let insertCode: string,
+        removeRange: AST.Range,
+        insertTargetToken: AST.Token | AST.Comment;
+
+      const afterCommaToken = sourceCode.getTokenAfter(data.node);
+      if (isComma(afterCommaToken)) {
+        // e.g. |/**/ key: value,|
+        removeRange = [beforeToken.range[1], afterCommaToken.range[1]];
+        const moveTargetAfterToken = sourceCode.getTokenAfter(moveTarget.node)!;
+        if (isComma(moveTargetAfterToken)) {
+          // e.g. target: value,
+          insertTargetToken = moveTargetAfterToken;
+          insertCode = sourceCode.text.slice(...removeRange);
+        } else {
+          // e.g. target: value}
+          insertTargetToken = sourceCode.getLastToken(moveTarget.node);
+          insertCode = sourceCode.text.slice(
+            beforeToken.range[1],
+            afterCommaToken.range[0],
+          );
+          insertCode = `,${insertCode}`;
+        }
+      } else {
+        if (isComma(beforeToken)) {
+          // e.g. |,/**/ key: value|
+          removeRange = [beforeToken.range[0], data.node.range[1]];
+          insertCode = sourceCode.text.slice(...removeRange);
+          insertTargetToken = sourceCode.getLastToken(moveTarget.node);
+        } else {
+          // e.g. |{/**/ key: value|
+          removeRange = [beforeToken.range[1], data.node.range[1]];
+          insertCode = `,${sourceCode.text.slice(...removeRange)}`;
+          insertTargetToken = sourceCode.getLastToken(moveTarget.node);
+        }
+      }
+      yield fixer.removeRange(removeRange);
+      yield fixer.insertTextAfterRange(insertTargetToken.range, insertCode);
+    }
+
+    /**
+     * Fix by moving the node before the target node for flow.
+     */
+    function* fixToMoveUpForFlow(
       fixer: RuleFixer,
       data: YAMLPairData,
       moveTarget: YAMLPairData,
@@ -680,9 +883,61 @@ export default createRule("sort-keys", {
     }
 
     /**
-     * Fix for block
+     * Fix by moving the node after the target node for block.
      */
-    function* fixForBlock(
+    function* fixToMoveDownForBlock(
+      fixer: RuleFixer,
+      data: YAMLPairData,
+      moveTarget: YAMLPairData,
+    ) {
+      const nodeLocs = getPairRangeForBlock(data.node);
+      const moveTargetLocs = getPairRangeForBlock(moveTarget.node);
+
+      if (nodeLocs.loc.start.column === 0) {
+        const removeRange: AST.Range = [
+          getNewlineStartIndex(nodeLocs.range[0]),
+          nodeLocs.range[1],
+        ];
+        const moveTargetRange: AST.Range = [
+          getNewlineStartIndex(moveTargetLocs.range[0]),
+          moveTargetLocs.range[1],
+        ];
+        const insertCode = sourceCode.text.slice(...removeRange);
+        yield fixer.removeRange(removeRange);
+        yield fixer.insertTextAfterRange(moveTargetRange, insertCode);
+      } else {
+        // e.g.
+        // | - a: 1
+        // |   b: 2
+
+        const nextToken = sourceCode.getTokenAfter(data.node, {
+          includeComments: true,
+        })!;
+        // | - a: 1
+        //     ^ data.node.range[0]
+        // |   b: 2
+        //     ^ nextToken
+        const removeRange: AST.Range = [data.node.range[0], nextToken.range[0]];
+        yield fixer.removeRange(removeRange);
+
+        const indentCode = sourceCode.text
+          .slice(
+            sourceCode.getIndexFromLoc({
+              line: nodeLocs.loc.start.line,
+              column: 0,
+            }),
+            data.node.range[0],
+          )
+          .replace(/\S/g, " ");
+        const insertCode = `\n${indentCode}${sourceCode.text.slice(data.node.range[0], nodeLocs.range[1])}`;
+        yield fixer.insertTextAfterRange(moveTargetLocs.range, insertCode);
+      }
+    }
+
+    /**
+     * Fix by moving the node before the target node for block.
+     */
+    function* fixToMoveUpForBlock(
       fixer: RuleFixer,
       data: YAMLPairData,
       moveTarget: YAMLPairData,
@@ -755,7 +1010,7 @@ export default createRule("sort-keys", {
       range: AST.Range;
       indentColumn: number;
     } {
-      let endOfRange: number, end: AST.Position;
+      let end: { index: number; loc: AST.Position };
       const afterToken = sourceCode.getTokenAfter(node, {
         includeComments: true,
         filter: (t) =>
@@ -767,13 +1022,16 @@ export default createRule("sort-keys", {
           : node.loc.end.line;
         const lineText = sourceCode.lines[line - 1];
         end = {
-          line,
-          column: lineText.length,
+          loc: { line, column: lineText.length },
+          get index() {
+            return sourceCode.getIndexFromLoc(this.loc);
+          },
         };
-        endOfRange = sourceCode.getIndexFromLoc(end);
       } else {
-        endOfRange = node.range[1];
-        end = node.loc.end;
+        end = {
+          index: node.range[1],
+          loc: node.loc.end,
+        };
       }
 
       const beforeToken = sourceCode.getTokenBefore(node);
@@ -792,18 +1050,15 @@ export default createRule("sort-keys", {
                 : node.loc.start.line,
             column: 0,
           };
-          const startOfRange = sourceCode.getIndexFromLoc(start);
           return {
-            range: [startOfRange, endOfRange],
-            loc: { start, end },
+            range: [sourceCode.getIndexFromLoc(start), end.index],
+            loc: { start, end: end.loc },
             indentColumn: next.loc.start.column,
           };
         }
-        const start = beforeToken.loc.end;
-        const startOfRange = beforeToken.range[1];
         return {
-          range: [startOfRange, endOfRange],
-          loc: { start, end },
+          range: [beforeToken.range[1], end.index],
+          loc: { start: beforeToken.loc.end, end: end.loc },
           indentColumn: node.range[0] - beforeToken.range[1],
         };
       }
@@ -820,8 +1075,8 @@ export default createRule("sort-keys", {
           };
           const startOfRange = sourceCode.getIndexFromLoc(start);
           return {
-            range: [startOfRange, endOfRange],
-            loc: { start, end },
+            range: [startOfRange, end.index],
+            loc: { start, end: end.loc },
             indentColumn: next.loc.start.column,
           };
         }
@@ -833,8 +1088,8 @@ export default createRule("sort-keys", {
       };
       const startOfRange = sourceCode.getIndexFromLoc(start);
       return {
-        range: [startOfRange, endOfRange],
-        loc: { start, end },
+        range: [startOfRange, end.index],
+        loc: { start, end: end.loc },
         indentColumn: node.loc.start.column,
       };
     }

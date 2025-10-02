@@ -1,12 +1,12 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'finish' should be before 'start'.",
-    "line": 11,
+    "message": "Expected mapping keys to be in ascending order. 'start' should be after 'finish'.",
+    "line": 10,
     "column": 3
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'color' should be before 'start'.",
-    "line": 14,
+    "message": "Expected mapping keys to be in ascending order. 'start' should be after 'color'.",
+    "line": 13,
     "column": 3
   }
 ]

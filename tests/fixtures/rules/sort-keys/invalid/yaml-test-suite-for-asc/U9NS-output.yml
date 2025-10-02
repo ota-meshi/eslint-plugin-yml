@@ -1,11 +1,11 @@
 # sort-keys/invalid/yaml-test-suite-for-asc/U9NS-input.yaml
 ---
 player: Sammy Sosa
-time: 20:03:20
 action: strike (miss)
+time: 20:03:20
 ...
 ---
 player: Sammy Sosa
-time: 20:03:47
 action: grand slam
+time: 20:03:47
 ...

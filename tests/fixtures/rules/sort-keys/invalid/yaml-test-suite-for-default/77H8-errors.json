@@ -1,6 +1,6 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'application specific tag' should be before 'picture'.",
+    "message": "Expected mapping keys to be in ascending order. 'application specific tag' should be before 'not-date'.",
     "line": 11,
     "column": 1
   }

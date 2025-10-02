@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. '[ New York Yankees,\n    Atlanta Braves ]' should be before '- Detroit Tigers\n  - Chicago cubs'.",
-    "line": 7,
+    "message": "Expected mapping keys to be in descending order. '- Detroit Tigers\n  - Chicago cubs' should be after '[ New York Yankees,\n    Atlanta Braves ]'.",
+    "line": 2,
     "column": 3
   }
 ]

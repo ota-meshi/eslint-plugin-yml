@@ -1,7 +1,7 @@
 # sort-keys/invalid/yaml-test-suite-for-default/4ABK-input.yaml
 {
 http://foo.com,
-unquoted : "separate",
 omitted value:,
+unquoted : "separate",
 : omitted key,
 }

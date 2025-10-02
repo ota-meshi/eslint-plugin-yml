@@ -1,61 +1,61 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'date' should be before 'invoice'.",
+    "message": "Expected mapping keys to be in ascending order. 'invoice' should be after 'bill-to'.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. 'date' should be after 'bill-to'.",
     "line": 4,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'bill-to' should be before 'date'.",
-    "line": 5,
-    "column": 1
+    "message": "Expected mapping keys to be in ascending order. 'given' should be after 'address'.",
+    "line": 6,
+    "column": 5
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'family' should be before 'given'.",
+    "message": "Expected mapping keys to be in ascending order. 'family' should be after 'address'.",
     "line": 7,
     "column": 5
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'address' should be before 'family'.",
-    "line": 8,
-    "column": 5
-  },
-  {
-    "message": "Expected mapping keys to be in ascending order. 'city' should be before 'lines'.",
-    "line": 12,
+    "message": "Expected mapping keys to be in ascending order. 'lines' should be after 'city'.",
+    "line": 9,
     "column": 9
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'postal' should be before 'state'.",
-    "line": 14,
+    "message": "Expected mapping keys to be in ascending order. 'state' should be after 'postal'.",
+    "line": 13,
     "column": 9
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'product' should be before 'ship-to'.",
-    "line": 16,
+    "message": "Expected mapping keys to be in ascending order. 'ship-to' should be after 'product'.",
+    "line": 15,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'quantity' should be before 'sku'.",
+    "message": "Expected mapping keys to be in ascending order. 'sku' should be after 'price'.",
+    "line": 17,
+    "column": 7
+  },
+  {
+    "message": "Expected mapping keys to be in ascending order. 'quantity' should be after 'price'.",
     "line": 18,
     "column": 7
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'description' should be before 'quantity'.",
-    "line": 19,
+    "message": "Expected mapping keys to be in ascending order. 'sku' should be after 'price'.",
+    "line": 21,
     "column": 7
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'quantity' should be before 'sku'.",
+    "message": "Expected mapping keys to be in ascending order. 'quantity' should be after 'price'.",
     "line": 22,
     "column": 7
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'description' should be before 'quantity'.",
-    "line": 23,
-    "column": 7
-  },
-  {
-    "message": "Expected mapping keys to be in ascending order. 'comments' should be before 'total'.",
+    "message": "Expected mapping keys to be in ascending order. 'comments' should be before 'product'.",
     "line": 27,
     "column": 1
   }

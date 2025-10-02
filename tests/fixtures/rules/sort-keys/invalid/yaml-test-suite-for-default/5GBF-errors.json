@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'Chomping' should be before 'Folding'.",
-    "line": 6,
+    "message": "Expected mapping keys to be in ascending order. 'Folding' should be after 'Chomping'.",
+    "line": 2,
     "column": 1
   }
 ]

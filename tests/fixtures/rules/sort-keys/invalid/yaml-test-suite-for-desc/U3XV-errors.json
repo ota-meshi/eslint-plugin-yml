@@ -1,32 +1,32 @@
 [
   {
-    "message": "Expected mapping keys to be in descending order. 'top2' should be before 'top1'.",
+    "message": "Expected mapping keys to be in descending order. 'top1' should be after 'top7'.",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "message": "Expected mapping keys to be in descending order. 'top2' should be after 'top7'.",
     "line": 5,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in descending order. 'top3' should be before 'top2'.",
+    "message": "Expected mapping keys to be in descending order. 'top3' should be after 'top7'.",
     "line": 7,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in descending order. 'top4' should be before 'top3'.",
+    "message": "Expected mapping keys to be in descending order. 'top4' should be after 'top7'.",
     "line": 9,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in descending order. 'top5' should be before 'top4'.",
+    "message": "Expected mapping keys to be in descending order. 'top5' should be after 'top7'.",
     "line": 12,
     "column": 1
   },
   {
-    "message": "Expected mapping keys to be in descending order. 'top6' should be before 'top5'.",
+    "message": "Expected mapping keys to be in descending order. 'top6' should be after 'top7'.",
     "line": 15,
-    "column": 1
-  },
-  {
-    "message": "Expected mapping keys to be in descending order. 'top7' should be before 'top6'.",
-    "line": 17,
     "column": 1
   }
 ]

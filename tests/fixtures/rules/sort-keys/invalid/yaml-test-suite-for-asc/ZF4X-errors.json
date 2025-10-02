@@ -1,12 +1,12 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'avg' should be before 'hr'.",
+    "message": "Expected mapping keys to be in ascending order. 'hr' should be after 'avg'.",
     "line": 2,
-    "column": 24
+    "column": 16
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'avg' should be before 'hr'.",
-    "line": 5,
+    "message": "Expected mapping keys to be in ascending order. 'hr' should be after 'avg'.",
+    "line": 4,
     "column": 5
   }
 ]

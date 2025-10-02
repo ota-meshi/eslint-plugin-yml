@@ -1,7 +1,7 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. 'c' should be before 'seq'.",
-    "line": 5,
+    "message": "Expected mapping keys to be in ascending order. 'seq' should be after 'c'.",
+    "line": 3,
     "column": 1
   }
 ]

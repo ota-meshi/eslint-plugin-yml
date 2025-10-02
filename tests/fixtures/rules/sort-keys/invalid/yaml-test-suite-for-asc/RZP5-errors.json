@@ -1,11 +1,11 @@
 [
   {
-    "message": "Expected mapping keys to be in ascending order. '- seq1' should be before 'c'.",
+    "message": "Expected mapping keys to be in ascending order. '- seq1' should be before 'a'.",
     "line": 9,
     "column": 2
   },
   {
-    "message": "Expected mapping keys to be in ascending order. 'block' should be before 'e'.",
+    "message": "Expected mapping keys to be in ascending order. 'block' should be before 'c'.",
     "line": 15,
     "column": 1
   }

@@ -169,9 +169,9 @@ tester.run(
                     }`,
           options: OPTIONS_FOR_PACKAGE_JSON,
           errors: [
-            "Expected mapping keys to be in specified order. 'name' should be before 'version'.",
-            "Expected mapping keys to be in specified order. 'plugins' should be before 'extends'.",
-            "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
+            "Expected mapping keys to be in specified order. 'version' should be after 'name'.",
+            "Expected mapping keys to be in specified order. 'extends' should be after 'plugins'.",
+            "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
           ],
         },
 
@@ -201,8 +201,8 @@ tester.run(
                     }`,
           options: OPTIONS_FOR_JSON_SCHEMA,
           errors: [
-            "Expected mapping keys to be in specified order. 'properties' should be before 'additionalProperties'.",
-            "Expected mapping keys to be in specified order. 'type' should be before 'minItems'.",
+            "Expected mapping keys to be in specified order. 'additionalProperties' should be after 'properties'.",
+            "Expected mapping keys to be in specified order. 'minItems' should be after 'type'.",
           ],
         },
         {
@@ -230,7 +230,7 @@ tester.run(
                     }`,
           options: OPTIONS_FOR_JSON_SCHEMA,
           errors: [
-            "Expected mapping keys to be in specified order. 'type' should be before 'minItems'.",
+            "Expected mapping keys to be in specified order. 'minItems' should be after 'type'.",
           ],
         },
 
@@ -281,8 +281,8 @@ tester.run(
             },
           ],
           errors: [
-            "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
-            "Expected mapping keys to be in ascending order. 'e' should be before 'f'.",
+            "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
+            "Expected mapping keys to be in ascending order. 'f' should be after 'e'.",
           ],
         },
 
@@ -331,7 +331,7 @@ tester.run(
             },
           ],
           errors: [
-            "Expected mapping keys to be in specified order. 'c' should be before 'd'.",
+            "Expected mapping keys to be in specified order. 'd' should be after 'c'.",
             "Expected mapping keys to be in specified order. 'f' should be before 'g'.",
           ],
         },
@@ -353,11 +353,11 @@ tester.run(
                         "a":1,
                         "b":2,
                         "c":3,
-                        "z":26,
                         "d":4,
                         "e":5,
                         "f":6,
-                        "g":7
+                        "g":7,
+                        "z":26
                     }
                     `,
           options: [
@@ -379,7 +379,7 @@ tester.run(
             },
           ],
           errors: [
-            "Expected mapping keys to be in specified order. 'c' should be before 'z'.",
+            "Expected mapping keys to be in specified order. 'z' should be after 'g'.",
           ],
         },
         {
@@ -402,9 +402,9 @@ tester.run(
                         "c":3,
                         "d":4,
                         "e":5,
-                        "z":26,
                         "f":6,
-                        "g":7
+                        "g":7,
+                        "z":26
                     }
                     `,
           options: [
@@ -426,7 +426,7 @@ tester.run(
             },
           ],
           errors: [
-            "Expected mapping keys to be in specified order. 'e' should be before 'z'.",
+            "Expected mapping keys to be in specified order. 'z' should be after 'g'.",
           ],
         },
         {
@@ -437,7 +437,7 @@ tester.run(
           errors: [
             {
               message:
-                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+                "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
               line: 3,
               column: 3,
             },
@@ -456,7 +456,7 @@ tester.run(
           errors: [
             {
               message:
-                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+                "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
               line: 4,
               column: 3,
             },
@@ -475,7 +475,7 @@ a: 3
           errors: [
             {
               message:
-                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+                "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
               line: 3,
               column: 1,
             },
@@ -494,7 +494,7 @@ c: 2
           errors: [
             {
               message:
-                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+                "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
               line: 3,
               column: 2,
             },
@@ -514,7 +514,7 @@ a: 3
           errors: [
             {
               message:
-                "Expected mapping keys to be in ascending order. 'a' should be before 'c'.",
+                "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
               line: 4,
               column: 1,
             },
@@ -524,6 +524,36 @@ a: 3
 b: 1
 c: 2
 `,
+        },
+        {
+          code: `
+product:
+    - sku         : BL394D
+      quantity    : 4
+      description : Basketball
+      price       : 450.00
+    - sku         : BL4438H
+      quantity    : 1
+      description : Super Hoop
+      price       : 2392.00
+`,
+          output: `
+product:
+    - quantity    : 4
+      description : Basketball
+      price       : 450.00
+      sku         : BL394D
+    - quantity    : 1
+      description : Super Hoop
+      price       : 2392.00
+      sku         : BL4438H
+`,
+          errors: [
+            "Expected mapping keys to be in ascending order. 'sku' should be after 'price'.",
+            "Expected mapping keys to be in ascending order. 'quantity' should be after 'price'.",
+            "Expected mapping keys to be in ascending order. 'sku' should be after 'price'.",
+            "Expected mapping keys to be in ascending order. 'quantity' should be after 'price'.",
+          ],
         },
       ],
     },

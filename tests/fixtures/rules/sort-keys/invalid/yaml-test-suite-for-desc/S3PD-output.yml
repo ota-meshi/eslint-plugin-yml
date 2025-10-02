@@ -1,5 +1,5 @@
 # sort-keys/invalid/yaml-test-suite-for-desc/S3PD-input.yaml
+: # Both empty
 "quoted key":
 - entry
 plain key: in-line value
-: # Both empty

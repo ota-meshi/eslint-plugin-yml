@@ -1,7 +1,7 @@
 # sort-keys/invalid/yaml-test-suite-for-asc/A6F9-input.yaml
 clip: |
   text
-strip: |-
-  text
 keep: |+
+  text
+strip: |-
   text
