@@ -1,5 +1,13 @@
 # eslint-plugin-yml
 
+## 1.19.0
+
+### Minor Changes
+
+- [#482](https://github.com/ota-meshi/eslint-plugin-yml/pull/482) [`2dd3bca`](https://github.com/ota-meshi/eslint-plugin-yml/commit/2dd3bcadfc831e651e26750c833abb89193da8ca) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(sort-keys): improve to calculate the minimum edit distance for sorting and report the optimal sorting direction
+
+- [#482](https://github.com/ota-meshi/eslint-plugin-yml/pull/482) [`2dd3bca`](https://github.com/ota-meshi/eslint-plugin-yml/commit/2dd3bcadfc831e651e26750c833abb89193da8ca) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(sort-sequence-values): improve to calculate the minimum edit distance for sorting and report the optimal sorting direction
+
 ## 1.18.0
 
 ### Minor Changes
