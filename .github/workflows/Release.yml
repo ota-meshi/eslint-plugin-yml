@@ -5,8 +5,16 @@ on:
     branches:
       - master
 
+permissions: {}
+
 jobs:
   release:
+    # prevents this action from running on forks
+    if: github.repository == 'ota-meshi/eslint-plugin-yml'
+    permissions:
+      id-token: write # Required for OIDC
+      contents: write # to create release (changesets/action)
+      pull-requests: write # to create pull request (changesets/action)
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -15,8 +23,10 @@ jobs:
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
-      - name: Setup Node.js 16
+      - name: Setup Node.js
         uses: actions/setup-node@v4
+        with:
+          node-version: 24
       - name: Install Dependencies
         run: npm install -f
       - name: Create Release Pull Request or Publish to npm
@@ -27,8 +37,5 @@ jobs:
           version: npm run version:ci
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
           publish: npm run release
-          commit: "chore: release eslint-plugin-yml"
-          title: "chore: release eslint-plugin-yml"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

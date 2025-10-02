@@ -13,9 +13,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v4
       - name: Install Packages
-        run: npm install
+        run: npm install -f
       - name: Build
         run: npm run build
         env:
