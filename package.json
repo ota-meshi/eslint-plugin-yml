@@ -59,7 +59,7 @@
   "dependencies": {
     "debug": "^4.3.2",
     "diff-sequences": "^27.5.1",
-    "escape-string-regexp": "4.0.0",
+    "escape-string-regexp": "5.0.0",
     "eslint-compat-utils": "^0.6.0",
     "natural-compare": "^1.4.0",
     "yaml-eslint-parser": "^1.2.1"
