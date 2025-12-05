@@ -33,6 +33,19 @@ const CONFIGS = {
     },
     config: "standard",
   },
+  stylistic: {
+    filter(rule: RuleModule) {
+      return (
+        rule.meta.docs.categories &&
+        !rule.meta.deprecated &&
+        rule.meta.docs.categories.includes("stylistic")
+      );
+    },
+    option(rule: RuleModule) {
+      return rule.meta.docs.default || "error";
+    },
+    config: "stylistic",
+  },
   prettier: {
     filter(rule: RuleModule) {
       return rule.meta.docs.layout;
@@ -44,7 +57,12 @@ const CONFIGS = {
   },
 };
 
-for (const rec of ["recommended", "standard", "prettier"] as const) {
+for (const rec of [
+  "recommended",
+  "standard",
+  "stylistic",
+  "prettier",
+] as const) {
   let content = `/*
  * IMPORTANT!
  * This file has been automatically generated,
@@ -61,7 +79,7 @@ export = {
         ${rules
           .filter(CONFIGS[rec].filter)
           .map((rule) => {
-            return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
+            return `"${rule.meta.docs.ruleId}": ${JSON.stringify(CONFIGS[rec].option(rule))}`;
           })
           .join(",\n")}
     },
@@ -84,7 +102,12 @@ export = {
   fs.writeFileSync(filePath, content);
 }
 
-for (const rec of ["recommended", "standard", "prettier"] as const) {
+for (const rec of [
+  "recommended",
+  "standard",
+  "stylistic",
+  "prettier",
+] as const) {
   let content = `/*
  * IMPORTANT!
  * This file has been automatically generated,
@@ -100,7 +123,7 @@ export default [
         ${rules
           .filter(CONFIGS[rec].filter)
           .map((rule) => {
-            return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
+            return `"${rule.meta.docs.ruleId}": ${JSON.stringify(CONFIGS[rec].option(rule))}`;
           })
           .join(",\n")}
     },

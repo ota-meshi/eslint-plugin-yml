@@ -386,8 +386,12 @@ const ORDER_OBJECT_SCHEMA = {
 export default createRule("sort-sequence-values", {
   meta: {
     docs: {
+      default: [
+        "error",
+        { order: { type: "asc" }, pathPattern: "^.*$" },
+      ],
       description: "require sequence values to be sorted",
-      categories: null,
+      categories: ["stylistic"],
       extensionRule: false,
       layout: false,
     },
