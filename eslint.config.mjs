@@ -97,9 +97,7 @@ export default [
 
     languageOptions: {
       sourceType: "module",
-      parserOptions: {
-        project: true,
-      },
+      parserOptions: {},
     },
 
     rules: {
