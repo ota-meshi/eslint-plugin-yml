@@ -42,6 +42,7 @@ export default [
       sourceType: "script",
       parserOptions: {
         projectService: true,
+        project: null,
       },
     },
 
@@ -97,9 +98,7 @@ export default [
 
     languageOptions: {
       sourceType: "module",
-      parserOptions: {
-        project: null,
-      },
+      parserOptions: {},
     },
 
     rules: {
