@@ -555,6 +555,40 @@ product:
             "Expected mapping keys to be in ascending order. 'quantity' should be after 'price'.",
           ],
         },
+        {
+          code: `b: 2
+a: 1
+c: 3`,
+          output: `a: 1
+b: 2
+c: 3`,
+          errors: [
+            {
+              message:
+                "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
+              line: 1,
+              column: 1,
+            },
+          ],
+        },
+        {
+          code: `b: |
+  eslint-plugin-yml is ESLint plugin provides linting rules for YAML.
+a: 1
+c: 3`,
+          output: `a: 1
+b: |
+  eslint-plugin-yml is ESLint plugin provides linting rules for YAML.
+c: 3`,
+          errors: [
+            {
+              message:
+                "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
+              line: 1,
+              column: 1,
+            },
+          ],
+        },
       ],
     },
   ),

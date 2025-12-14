@@ -903,8 +903,44 @@ export default createRule("sort-keys", {
           moveTargetLocs.range[1],
         ];
         const insertCode = sourceCode.text.slice(...removeRange);
+        const isAtFileStart = nodeLocs.loc.start.line === 1;
+
+        if (isAtFileStart) {
+          // e.g.
+          // | b: 2
+          //       ^ trailing newline (will be redundant after move)
+          // | a: 1
+          // | c: 3
+
+          const removeRangeEnd = nodeLocs.range[1];
+          const len = sourceCode.text.length;
+          if (removeRangeEnd < len) {
+            const ch = sourceCode.text[removeRangeEnd];
+            if (isNewLine(ch)) {
+              if (
+                ch === "\r" &&
+                removeRangeEnd + 1 < len &&
+                sourceCode.text[removeRangeEnd + 1] === "\n"
+              ) {
+                removeRange[1] += 2;
+              } else {
+                removeRange[1] += 1;
+              }
+            }
+          }
+        }
+
         yield fixer.removeRange(removeRange);
-        yield fixer.insertTextAfterRange(moveTargetRange, insertCode);
+
+        // e.g.
+        // | b: 2
+        //   ^ no leading newline (prepend upon move)
+        // | a: 1
+        // | c: 3
+        yield fixer.insertTextAfterRange(
+          moveTargetRange,
+          `${isAtFileStart ? "\n" : ""}${insertCode}`,
+        );
       } else {
         // e.g.
         // | - a: 1
@@ -960,7 +996,6 @@ export default createRule("sort-keys", {
           moveTargetRange,
           `${insertCode}${moveTargetLocs.loc.start.line === 1 ? "\n" : ""}`,
         );
-
         yield fixer.removeRange(removeRange);
       } else {
         // e.g.
