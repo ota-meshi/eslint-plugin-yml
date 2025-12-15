@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 1.19.1
+
+### Patch Changes
+
+- [#506](https://github.com/ota-meshi/eslint-plugin-yml/pull/506) [`736f153`](https://github.com/ota-meshi/eslint-plugin-yml/commit/736f15343788720aa210070f7e78aab3c5ef929d) Thanks [@sumimakito](https://github.com/sumimakito)! - fix(sort-keys): fix incorrect result when move down the block located at the file start
+
 ## 1.19.0
 
 ### Minor Changes
