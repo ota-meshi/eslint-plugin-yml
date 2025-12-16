@@ -45,6 +45,7 @@ This plugin provides configs:
 - `*.configs['flat/base']` ... Configuration to enable correct YAML parsing.
 - `*.configs['flat/recommended']` ... Above, plus rules to prevent errors or unintended behavior.
 - `*.configs['flat/standard']` ... Above, plus rules to enforce the common stylistic conventions.
+- `*.configs['flat/stylistic']` ... Rules to enforce additional opinionated stylistic conventions.
 - `*.configs['flat/prettier']` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.
@@ -74,6 +75,7 @@ This plugin provides configs:
 - `plugin:yml/base` ... Configuration to enable correct YAML parsing.
 - `plugin:yml/recommended` ... Above, plus rules to prevent errors or unintended behavior.
 - `plugin:yml/standard` ... Above, plus rules to enforce the common stylistic conventions.
+- `plugin:yml/stylistic` ... Rules to enforce additional opinionated stylistic conventions.
 - `plugin:yml/prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.
