@@ -1,6 +1,12 @@
 import type { RuleModule } from "../src/types";
 import { rules } from "../src/utils/rules";
 
+const categoryEmojis = {
+  recommended: ":star:",
+  standard: ":star2:",
+  stylistic: ":art:",
+};
+
 //eslint-disable-next-line jsdoc/require-jsdoc -- tool
 export default function renderRulesTableContent(
   categoryLevel: number,
@@ -20,22 +26,15 @@ export default function renderRulesTableContent(
   //eslint-disable-next-line jsdoc/require-jsdoc -- tool
   function toRuleRow(rule: RuleModule) {
     const fixableMark = rule.meta.fixable ? ":wrench:" : "";
-    const recommendedMark =
-      rule.meta.docs.categories &&
-      rule.meta.docs.categories.includes("recommended")
-        ? ":star:"
-        : "";
-    const standardMark =
-      rule.meta.docs.categories &&
-      rule.meta.docs.categories.includes("standard")
-        ? ":star:"
-        : "";
+    const categoriesMark = rule.meta.docs.categories
+      ? rule.meta.docs.categories.map(category => categoryEmojis[category]).join(" ")
+      : "";
     const link = `[${rule.meta.docs.ruleId}](${buildRulePath(
-      rule.meta.docs.ruleName || "",
+      rule.meta.docs.ruleName || ""
     )})`;
     const description = rule.meta.docs.description || "(no description)";
 
-    return `| ${link} | ${description} | ${fixableMark} | ${recommendedMark} | ${standardMark} |`;
+    return `| ${link} | ${description} | ${fixableMark} | ${categoriesMark} |`;
   }
 
   //eslint-disable-next-line jsdoc/require-jsdoc -- tool
@@ -55,14 +54,18 @@ export default function renderRulesTableContent(
   let rulesTableContent = `
 #${"#".repeat(categoryLevel)} YAML Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
-|:--------|:------------|:-------:|:-----------:|:--------:|
+Category emojis:
+
+${Object.entries(categoryEmojis).map(([category, emoji]) => `- ${emoji} - ${category}`).join("\n")}
+
+| Rule ID | Description | Fixable | Configurations |
+|:--------|:------------|:-------:|:--------------:|
 ${pluginRules.map(toRuleRow).join("\n")}
 
 #${"#".repeat(categoryLevel)} Extension Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
-|:--------|:------------|:-------:|:-----------:|:--------:|
+| Rule ID | Description | Fixable | Configurations |
+|:--------|:------------|:-------:|:--------------:|
 ${extensionRules.map(toRuleRow).join("\n")}
 `;
 

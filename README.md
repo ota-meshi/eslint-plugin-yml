@@ -91,6 +91,7 @@ This plugin provides configs:
 - `*.configs['flat/base']` ... Configuration to enable correct YAML parsing.
 - `*.configs['flat/recommended']` ... Above, plus rules to prevent errors or unintended behavior.
 - `*.configs['flat/standard']` ... Above, plus rules to enforce the common stylistic conventions.
+- `*.configs['flat/stylistic']` ... Rules to enforce additional opinionated stylistic conventions.
 - `*.configs['flat/prettier']` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](https://ota-meshi.github.io/eslint-plugin-yml/rules/) to get the `rules` that this plugin provides.
@@ -120,6 +121,7 @@ This plugin provides configs:
 - `plugin:yml/base` ... Configuration to enable correct YAML parsing.
 - `plugin:yml/recommended` ... Above, plus rules to prevent errors or unintended behavior.
 - `plugin:yml/standard` ... Above, plus rules to enforce the common stylistic conventions.
+- `plugin:yml/stylistic` ... Rules to enforce additional opinionated stylistic conventions.
 - `plugin:yml/prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](https://ota-meshi.github.io/eslint-plugin-yml/rules/) to get the `rules` that this plugin provides.
@@ -229,41 +231,47 @@ The rules with the following star :star: are included in the config.
 
 ### YAML Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
-|:--------|:------------|:-------:|:-----------:|:--------:|
-| [yml/block-mapping-colon-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-colon-indicator-newline.html) | enforce consistent line breaks after `:` indicator | :wrench: |  |  |
-| [yml/block-mapping-question-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-question-indicator-newline.html) | enforce consistent line breaks after `?` indicator | :wrench: |  | :star: |
-| [yml/block-mapping](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping.html) | require or disallow block style mappings. | :wrench: |  | :star: |
-| [yml/block-sequence-hyphen-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence-hyphen-indicator-newline.html) | enforce consistent line breaks after `-` indicator | :wrench: |  | :star: |
-| [yml/block-sequence](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence.html) | require or disallow block style sequences. | :wrench: |  | :star: |
-| [yml/file-extension](https://ota-meshi.github.io/eslint-plugin-yml/rules/file-extension.html) | enforce YAML file extension |  |  |  |
-| [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  | :star: |
-| [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |  |
-| [yml/no-empty-document](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-document.html) | disallow empty document |  | :star: | :star: |
-| [yml/no-empty-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-key.html) | disallow empty mapping keys |  | :star: | :star: |
-| [yml/no-empty-mapping-value](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-mapping-value.html) | disallow empty mapping values |  | :star: | :star: |
-| [yml/no-empty-sequence-entry](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-sequence-entry.html) | disallow empty sequence entries |  | :star: | :star: |
-| [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: | :star: |
-| [yml/no-trailing-zeros](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-zeros.html) | disallow trailing zeros for floats | :wrench: |  |  |
-| [yml/plain-scalar](https://ota-meshi.github.io/eslint-plugin-yml/rules/plain-scalar.html) | require or disallow plain style scalar. | :wrench: |  | :star: |
-| [yml/quotes](https://ota-meshi.github.io/eslint-plugin-yml/rules/quotes.html) | enforce the consistent use of either double, or single quotes | :wrench: |  | :star: |
-| [yml/require-string-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/require-string-key.html) | disallow mapping keys other than strings |  |  |  |
-| [yml/sort-keys](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-keys.html) | require mapping keys to be sorted | :wrench: |  |  |
-| [yml/sort-sequence-values](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-sequence-values.html) | require sequence values to be sorted | :wrench: |  |  |
-| [yml/vue-custom-block/no-parsing-error](https://ota-meshi.github.io/eslint-plugin-yml/rules/vue-custom-block/no-parsing-error.html) | disallow parsing errors in Vue custom blocks |  | :star: | :star: |
+Category emojis:
+
+- :star: - recommended
+- :star2: - standard
+- :art: - stylistic
+
+| Rule ID | Description | Fixable | Configurations |
+|:--------|:------------|:-------:|:--------------:|
+| [yml/block-mapping-colon-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-colon-indicator-newline.html) | enforce consistent line breaks after `:` indicator | :wrench: |  |
+| [yml/block-mapping-question-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-question-indicator-newline.html) | enforce consistent line breaks after `?` indicator | :wrench: | :star2: |
+| [yml/block-mapping](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping.html) | require or disallow block style mappings. | :wrench: | :star2: |
+| [yml/block-sequence-hyphen-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence-hyphen-indicator-newline.html) | enforce consistent line breaks after `-` indicator | :wrench: | :star2: |
+| [yml/block-sequence](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence.html) | require or disallow block style sequences. | :wrench: | :star2: |
+| [yml/file-extension](https://ota-meshi.github.io/eslint-plugin-yml/rules/file-extension.html) | enforce YAML file extension |  | :art: |
+| [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: | :star2: |
+| [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |
+| [yml/no-empty-document](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-document.html) | disallow empty document |  | :star: :star2: |
+| [yml/no-empty-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-key.html) | disallow empty mapping keys |  | :star: :star2: |
+| [yml/no-empty-mapping-value](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-mapping-value.html) | disallow empty mapping values |  | :star: :star2: |
+| [yml/no-empty-sequence-entry](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-sequence-entry.html) | disallow empty sequence entries |  | :star: :star2: |
+| [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: :star2: |
+| [yml/no-trailing-zeros](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-zeros.html) | disallow trailing zeros for floats | :wrench: |  |
+| [yml/plain-scalar](https://ota-meshi.github.io/eslint-plugin-yml/rules/plain-scalar.html) | require or disallow plain style scalar. | :wrench: | :star2: |
+| [yml/quotes](https://ota-meshi.github.io/eslint-plugin-yml/rules/quotes.html) | enforce the consistent use of either double, or single quotes | :wrench: | :star2: |
+| [yml/require-string-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/require-string-key.html) | disallow mapping keys other than strings |  | :art: |
+| [yml/sort-keys](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-keys.html) | require mapping keys to be sorted | :wrench: | :art: |
+| [yml/sort-sequence-values](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-sequence-values.html) | require sequence values to be sorted | :wrench: | :art: |
+| [yml/vue-custom-block/no-parsing-error](https://ota-meshi.github.io/eslint-plugin-yml/rules/vue-custom-block/no-parsing-error.html) | disallow parsing errors in Vue custom blocks |  | :star: :star2: |
 
 ### Extension Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
-|:--------|:------------|:-------:|:-----------:|:--------:|
-| [yml/flow-mapping-curly-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-mapping-curly-newline.html) | enforce consistent line breaks inside braces | :wrench: |  | :star: |
-| [yml/flow-mapping-curly-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-mapping-curly-spacing.html) | enforce consistent spacing inside braces | :wrench: |  | :star: |
-| [yml/flow-sequence-bracket-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-newline.html) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: |  | :star: |
-| [yml/flow-sequence-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-spacing.html) | enforce consistent spacing inside flow sequence brackets | :wrench: |  | :star: |
-| [yml/key-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-spacing.html) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
-| [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: | :star: |
-| [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: |  |  |
-| [yml/spaced-comment](https://ota-meshi.github.io/eslint-plugin-yml/rules/spaced-comment.html) | enforce consistent spacing after the `#` in a comment | :wrench: |  | :star: |
+| Rule ID | Description | Fixable | Configurations |
+|:--------|:------------|:-------:|:--------------:|
+| [yml/flow-mapping-curly-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-mapping-curly-newline.html) | enforce consistent line breaks inside braces | :wrench: | :star2: |
+| [yml/flow-mapping-curly-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-mapping-curly-spacing.html) | enforce consistent spacing inside braces | :wrench: | :star2: |
+| [yml/flow-sequence-bracket-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-newline.html) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: | :star2: |
+| [yml/flow-sequence-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-spacing.html) | enforce consistent spacing inside flow sequence brackets | :wrench: | :star2: |
+| [yml/key-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-spacing.html) | enforce consistent spacing between keys and values in mapping pairs | :wrench: | :star2: |
+| [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: :star2: |
+| [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: |  |
+| [yml/spaced-comment](https://ota-meshi.github.io/eslint-plugin-yml/rules/spaced-comment.html) | enforce consistent spacing after the `#` in a comment | :wrench: | :star2: |
 
 <!--RULES_TABLE_END-->
 <!--RULES_SECTION_END-->

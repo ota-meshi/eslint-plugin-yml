@@ -366,8 +366,12 @@ const ORDER_OBJECT_SCHEMA = {
 export default createRule("sort-keys", {
   meta: {
     docs: {
+      default: [
+        "error",
+        { order: { type: "asc" }, pathPattern: "^.*$" },
+      ],
       description: "require mapping keys to be sorted",
-      categories: null,
+      categories: ["stylistic"],
       extensionRule: false,
       layout: false,
     },

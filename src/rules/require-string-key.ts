@@ -6,7 +6,7 @@ export default createRule("require-string-key", {
   meta: {
     docs: {
       description: "disallow mapping keys other than strings",
-      categories: null,
+      categories: ["stylistic"],
       extensionRule: false,
       layout: false,
     },
@@ -51,7 +51,7 @@ export default createRule("require-string-key", {
      * Checks if the given node is string
      */
     function isStringNode(
-      node: AST.YAMLContent | AST.YAMLWithMeta | null,
+      node: AST.YAMLContent | AST.YAMLWithMeta | null
     ): boolean {
       if (!node) {
         return false;

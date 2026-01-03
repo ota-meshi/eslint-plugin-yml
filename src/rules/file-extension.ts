@@ -6,7 +6,7 @@ export default createRule("file-extension", {
   meta: {
     docs: {
       description: "enforce YAML file extension",
-      categories: [],
+      categories: ["stylistic"],
       extensionRule: false,
       layout: false,
     },
