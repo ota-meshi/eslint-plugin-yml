@@ -11,38 +11,44 @@ The rules with the following star :star: are included in the `plugin:yml/recomme
 
 ## YAML Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
-|:--------|:------------|:-------:|:-----------:|:--------:|
-| [yml/block-mapping-colon-indicator-newline](./block-mapping-colon-indicator-newline.md) | enforce consistent line breaks after `:` indicator | :wrench: |  |  |
-| [yml/block-mapping-question-indicator-newline](./block-mapping-question-indicator-newline.md) | enforce consistent line breaks after `?` indicator | :wrench: |  | :star: |
-| [yml/block-mapping](./block-mapping.md) | require or disallow block style mappings. | :wrench: |  | :star: |
-| [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md) | enforce consistent line breaks after `-` indicator | :wrench: |  | :star: |
-| [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: |  | :star: |
-| [yml/file-extension](./file-extension.md) | enforce YAML file extension |  |  |  |
-| [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  | :star: |
-| [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |  |
-| [yml/no-empty-document](./no-empty-document.md) | disallow empty document |  | :star: | :star: |
-| [yml/no-empty-key](./no-empty-key.md) | disallow empty mapping keys |  | :star: | :star: |
-| [yml/no-empty-mapping-value](./no-empty-mapping-value.md) | disallow empty mapping values |  | :star: | :star: |
-| [yml/no-empty-sequence-entry](./no-empty-sequence-entry.md) | disallow empty sequence entries |  | :star: | :star: |
-| [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: | :star: |
-| [yml/no-trailing-zeros](./no-trailing-zeros.md) | disallow trailing zeros for floats | :wrench: |  |  |
-| [yml/plain-scalar](./plain-scalar.md) | require or disallow plain style scalar. | :wrench: |  | :star: |
-| [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: |  | :star: |
-| [yml/require-string-key](./require-string-key.md) | disallow mapping keys other than strings |  |  |  |
-| [yml/sort-keys](./sort-keys.md) | require mapping keys to be sorted | :wrench: |  |  |
-| [yml/sort-sequence-values](./sort-sequence-values.md) | require sequence values to be sorted | :wrench: |  |  |
-| [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: | :star: |
+Category emojis:
+
+- :star: - recommended
+- :star2: - standard
+- :art: - stylistic
+
+| Rule ID | Description | Fixable | CONFIGS |
+|:--------|:------------|:-------:|:-------:|
+| [yml/block-mapping-colon-indicator-newline](./block-mapping-colon-indicator-newline.md) | enforce consistent line breaks after `:` indicator | :wrench: |  |
+| [yml/block-mapping-question-indicator-newline](./block-mapping-question-indicator-newline.md) | enforce consistent line breaks after `?` indicator | :wrench: | :star2: |
+| [yml/block-mapping](./block-mapping.md) | require or disallow block style mappings. | :wrench: | :star2: |
+| [yml/block-sequence-hyphen-indicator-newline](./block-sequence-hyphen-indicator-newline.md) | enforce consistent line breaks after `-` indicator | :wrench: | :star2: |
+| [yml/block-sequence](./block-sequence.md) | require or disallow block style sequences. | :wrench: | :star2: |
+| [yml/file-extension](./file-extension.md) | enforce YAML file extension |  | :art: |
+| [yml/indent](./indent.md) | enforce consistent indentation | :wrench: | :star2: |
+| [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |
+| [yml/no-empty-document](./no-empty-document.md) | disallow empty document |  | :star: :star2: |
+| [yml/no-empty-key](./no-empty-key.md) | disallow empty mapping keys |  | :star: :star2: |
+| [yml/no-empty-mapping-value](./no-empty-mapping-value.md) | disallow empty mapping values |  | :star: :star2: |
+| [yml/no-empty-sequence-entry](./no-empty-sequence-entry.md) | disallow empty sequence entries |  | :star: :star2: |
+| [yml/no-tab-indent](./no-tab-indent.md) | disallow tabs for indentation. |  | :star: :star2: |
+| [yml/no-trailing-zeros](./no-trailing-zeros.md) | disallow trailing zeros for floats | :wrench: |  |
+| [yml/plain-scalar](./plain-scalar.md) | require or disallow plain style scalar. | :wrench: | :star2: |
+| [yml/quotes](./quotes.md) | enforce the consistent use of either double, or single quotes | :wrench: | :star2: |
+| [yml/require-string-key](./require-string-key.md) | disallow mapping keys other than strings |  | :art: |
+| [yml/sort-keys](./sort-keys.md) | require mapping keys to be sorted | :wrench: | :art: |
+| [yml/sort-sequence-values](./sort-sequence-values.md) | require sequence values to be sorted | :wrench: | :art: |
+| [yml/vue-custom-block/no-parsing-error](./vue-custom-block/no-parsing-error.md) | disallow parsing errors in Vue custom blocks |  | :star: :star2: |
 
 ## Extension Rules
 
-| Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
-|:--------|:------------|:-------:|:-----------:|:--------:|
-| [yml/flow-mapping-curly-newline](./flow-mapping-curly-newline.md) | enforce consistent line breaks inside braces | :wrench: |  | :star: |
-| [yml/flow-mapping-curly-spacing](./flow-mapping-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |  | :star: |
-| [yml/flow-sequence-bracket-newline](./flow-sequence-bracket-newline.md) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: |  | :star: |
-| [yml/flow-sequence-bracket-spacing](./flow-sequence-bracket-spacing.md) | enforce consistent spacing inside flow sequence brackets | :wrench: |  | :star: |
-| [yml/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
-| [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: | :star: |
-| [yml/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines | :wrench: |  |  |
-| [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: |  | :star: |
+| Rule ID | Description | Fixable | CONFIGS |
+|:--------|:------------|:-------:|:-------:|
+| [yml/flow-mapping-curly-newline](./flow-mapping-curly-newline.md) | enforce consistent line breaks inside braces | :wrench: | :star2: |
+| [yml/flow-mapping-curly-spacing](./flow-mapping-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: | :star2: |
+| [yml/flow-sequence-bracket-newline](./flow-sequence-bracket-newline.md) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: | :star2: |
+| [yml/flow-sequence-bracket-spacing](./flow-sequence-bracket-spacing.md) | enforce consistent spacing inside flow sequence brackets | :wrench: | :star2: |
+| [yml/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in mapping pairs | :wrench: | :star2: |
+| [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: :star2: |
+| [yml/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines | :wrench: |  |
+| [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: | :star2: |
