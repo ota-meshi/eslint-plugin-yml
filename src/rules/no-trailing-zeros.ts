@@ -6,7 +6,7 @@ export default createRule("no-trailing-zeros", {
   meta: {
     docs: {
       description: "disallow trailing zeros for floats",
-      categories: null,
+      categories: ["standard"],
       extensionRule: false,
       layout: true,
     },

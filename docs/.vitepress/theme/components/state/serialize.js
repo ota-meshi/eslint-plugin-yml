@@ -29,7 +29,6 @@ export function serializeState(state) {
   const uint8Arr = new TextEncoder().encode(jsonString);
   const compressedString = String.fromCharCode(...pako.deflate(uint8Arr));
   const base64 =
-    // eslint-disable-next-line n/no-unsupported-features/node-builtins -- Used in browser
     (typeof window !== "undefined" && window.btoa(compressedString)) ||
     compressedString;
 

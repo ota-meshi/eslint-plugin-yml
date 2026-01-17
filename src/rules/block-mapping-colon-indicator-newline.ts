@@ -7,10 +7,7 @@ export default createRule("block-mapping-colon-indicator-newline", {
   meta: {
     docs: {
       description: "enforce consistent line breaks after `:` indicator",
-      categories: [
-        // TODO Switch to "standard" in the major version.
-        // "standard"
-      ],
+      categories: ["standard"],
       extensionRule: false,
       layout: true,
     },

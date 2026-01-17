@@ -8,6 +8,7 @@ export default [
   {
     rules: {
       // eslint-plugin-yml rules
+      "yml/block-mapping-colon-indicator-newline": "error",
       "yml/block-mapping-question-indicator-newline": "error",
       "yml/block-mapping": "error",
       "yml/block-sequence-hyphen-indicator-newline": "error",
@@ -23,7 +24,9 @@ export default [
       "yml/no-empty-mapping-value": "error",
       "yml/no-empty-sequence-entry": "error",
       "yml/no-irregular-whitespace": "error",
+      "yml/no-multiple-empty-lines": "error",
       "yml/no-tab-indent": "error",
+      "yml/no-trailing-zeros": "error",
       "yml/plain-scalar": "error",
       "yml/quotes": "error",
       "yml/spaced-comment": "error",

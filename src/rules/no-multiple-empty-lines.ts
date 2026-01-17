@@ -5,7 +5,7 @@ export default createRule("no-multiple-empty-lines", {
   meta: {
     docs: {
       description: "disallow multiple empty lines",
-      categories: null,
+      categories: ["standard"],
       extensionRule: "no-multiple-empty-lines",
       layout: true,
     },
