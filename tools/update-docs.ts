@@ -40,7 +40,7 @@ function pickSince(content: string): string | null | Promise<string> {
   // eslint-disable-next-line no-process-env -- ignore
   if (process.env.IN_VERSION_SCRIPT) {
     const pkg = JSON.parse(
-      fs.readFileSync(path.join(__dirname, "../package.json"), "utf8")
+      fs.readFileSync(path.join(__dirname, "../package.json"), "utf8"),
     );
     return `v${pkg.version}`;
   }
