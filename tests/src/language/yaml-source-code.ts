@@ -153,7 +153,7 @@ describe("YAMLSourceCode", () => {
       const code = `key: value`;
       const sourceCode = createSourceCode(code);
       const pair = sourceCode.ast.body[0];
-      
+
       if (pair.type === "YAMLPair" && pair.value) {
         const token = sourceCode.getTokenBefore(pair.value);
 
@@ -168,7 +168,7 @@ describe("YAMLSourceCode", () => {
       const code = `key: value # comment`;
       const sourceCode = createSourceCode(code);
       const pair = sourceCode.ast.body[0];
-      
+
       if (pair.type === "YAMLPair" && pair.value) {
         const token = sourceCode.getTokenAfter(pair.value);
 
@@ -294,7 +294,7 @@ key: value`;
       assert.ok(tokensAndComments.length > 0);
       // First should be the comment
       assert.strictEqual(tokensAndComments[0].type, "Block");
-      
+
       // Check that they are sorted by range
       for (let i = 1; i < tokensAndComments.length; i++) {
         assert.ok(
