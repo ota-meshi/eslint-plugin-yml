@@ -54,7 +54,7 @@ npm install --save-dev eslint eslint-plugin-yml
 > **Requirements**
 >
 > - ESLint v6.0.0 and above
-> - Node.js v14.17.x, v16.x and above
+> - Node.js v20.19.0 or higher (in the 20.x line), v22.13.0 or higher (in the 22.x line), or v24.0.0 and above
 
 <!--DOCS_IGNORE_END-->
 
