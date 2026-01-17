@@ -67,7 +67,7 @@
     "@eslint/core": "^1.0.1",
     "@eslint/plugin-kit": "^0.5.1",
     "debug": "^4.3.2",
-    "diff-sequences": "^27.5.1",
+    "diff-sequences": "^29.0.0",
     "escape-string-regexp": "4.0.0",
     "eslint-compat-utils": "^0.6.0",
     "natural-compare": "^1.4.0",
