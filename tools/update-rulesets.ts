@@ -6,8 +6,8 @@ import os from "os";
 import { rules } from "./lib/load-rules";
 import type { RuleModule } from "../src/types";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 const isWin = os.platform().startsWith("win");
 
@@ -74,7 +74,7 @@ export default [
 `;
 
   const filePath = path.resolve(
-    __dirname,
+    dirname,
     `../src/configs/flat/${CONFIGS[rec].config}.ts`,
   );
 

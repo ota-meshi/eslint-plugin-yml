@@ -3,8 +3,8 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 import cp from "child_process";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 const logger = console;
 
@@ -21,13 +21,13 @@ const logger = console;
     return;
   }
 
-  const ruleFile = path.resolve(__dirname, `../src/rules/${ruleId}.ts`);
-  const testFile = path.resolve(__dirname, `../tests/src/rules/${ruleId}.ts`);
+  const ruleFile = path.resolve(dirname, `../src/rules/${ruleId}.ts`);
+  const testFile = path.resolve(dirname, `../tests/src/rules/${ruleId}.ts`);
   const fixturesRoot = path.resolve(
-    __dirname,
+    dirname,
     `../tests/fixtures/rules/${ruleId}/`,
   );
-  const docFile = path.resolve(__dirname, `../docs/rules/${ruleId}.md`);
+  const docFile = path.resolve(dirname, `../docs/rules/${ruleId}.md`);
   try {
     fs.mkdirSync(fixturesRoot);
     fs.mkdirSync(path.resolve(fixturesRoot, "valid"));
@@ -152,6 +152,7 @@ Same as [${ruleId}] rule option. See [here](https://eslint.org/docs/rules/${rule
   cp.execSync(`code "${ruleFile}"`);
   cp.execSync(`code "${testFile}"`);
   cp.execSync(`code "${docFile}"`);
+  // eslint-disable-next-line no-console -- log
   console.log(
     `npm run mocha -- "tests/src/**/${ruleId}.ts" --reporter dot --timeout 60000`,
   );

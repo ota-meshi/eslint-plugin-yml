@@ -3,8 +3,8 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 import type { RuleModule } from "../../src/types";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 /**
  * Get the all rules
@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
  */
 async function readRules() {
   const rules: RuleModule[] = [];
-  const rulesLibRoot = path.resolve(__dirname, "../../src/rules");
+  const rulesLibRoot = path.resolve(dirname, "../../src/rules");
   for (const name of fs
     .readdirSync(rulesLibRoot)
     .filter((n) => n.endsWith(".ts"))) {
@@ -27,7 +27,7 @@ async function readRules() {
     rules.push(rule);
   }
   const vueCustomBlockRulesLibRoot = path.resolve(
-    __dirname,
+    dirname,
     "../../src/rules/vue-custom-block",
   );
   for (const name of fs.readdirSync(vueCustomBlockRulesLibRoot)) {

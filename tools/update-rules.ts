@@ -5,8 +5,8 @@ import os from "os";
 // import eslint from "eslint"
 import { rules } from "./lib/load-rules";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 const isWin = os.platform().startsWith("win");
 
@@ -37,7 +37,7 @@ export const rules = [
 ] as RuleModule[]
 `;
 
-const filePath = path.resolve(__dirname, "../src/utils/rules.ts");
+const filePath = path.resolve(dirname, "../src/utils/rules.ts");
 
 if (isWin) {
   content = content
