@@ -10,7 +10,7 @@ since: "v0.3.0"
 
 > disallow empty mapping keys
 
-- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
+- :gear: This rule is included in `configs.recommended` and `configs.standard`.
 
 ## :book: Rule Details
 
