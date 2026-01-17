@@ -4,7 +4,6 @@ import fs from "fs";
 import { rules } from "../src/utils/rules";
 import type { RuleModule } from "../src/types";
 import { getNewVersion } from "./lib/changesets-util";
-import { version } from "../package.json";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,7 +39,10 @@ function pickSince(content: string): string | null | Promise<string> {
   }
   // eslint-disable-next-line no-process-env -- ignore
   if (process.env.IN_VERSION_SCRIPT) {
-    return `v${version}`;
+    const pkg = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "../package.json"), "utf8")
+    );
+    return `v${pkg.version}`;
   }
   // eslint-disable-next-line no-process-env -- ignore
   if (process.env.IN_VERSION_CI_SCRIPT) {

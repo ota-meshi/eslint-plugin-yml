@@ -1,24 +1,13 @@
 import type { ESLint, Linter } from "eslint";
 import * as parser from "yaml-eslint-parser";
-
-let pluginCache: ESLint.Plugin | null = null;
+import * as plugin from "../../index.js";
 
 export default [
   {
     plugins: {
       get yml(): ESLint.Plugin {
-        if (!pluginCache) {
-          // Dynamic import in ESM - this will be resolved synchronously
-          // after the first module load
-          pluginCache = (globalThis as any).__eslintPluginYml_instance;
-          if (!pluginCache) {
-            throw new Error(
-              "ESLint Plugin YML: Plugin not properly initialized. " +
-              "Please ensure you're using the plugin correctly."
-            );
-          }
-        }
-        return pluginCache;
+        // Delayed reference to avoid circular dependency
+        return plugin as unknown as ESLint.Plugin;
       },
     },
   },
