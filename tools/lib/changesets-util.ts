@@ -1,5 +1,9 @@
 import getReleasePlan from "@changesets/get-release-plan";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /** Get new version string from changesets */
 export async function getNewVersion(): Promise<string> {

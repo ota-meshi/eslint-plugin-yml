@@ -26,8 +26,9 @@ const rules = ruleList.reduce(
   {} as { [key: string]: RuleModule },
 );
 
-export = {
-  meta,
-  configs,
-  rules,
-};
+const plugin = { meta, configs, rules };
+
+// Set global instance for circular dependency resolution in configs
+(globalThis as any).__eslintPluginYml_instance = plugin;
+
+export { meta, configs, rules };

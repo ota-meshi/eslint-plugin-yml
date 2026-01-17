@@ -1,9 +1,14 @@
 import path from "path";
+import { fileURLToPath } from "url";
 import fs from "fs";
 import os from "os";
 // import eslint from "eslint"
 import { rules } from "./lib/load-rules";
 import type { RuleModule } from "../src/types";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const isWin = os.platform().startsWith("win");
 
 const CONFIGS = {

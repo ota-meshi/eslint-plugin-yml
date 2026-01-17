@@ -1,6 +1,10 @@
 import path from "path";
+import { fileURLToPath } from "url";
 import fs from "fs";
 import renderRulesTableContent from "./render-rules";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // -----------------------------------------------------------------------------
 const readmeFilePath = path.resolve(__dirname, "../docs/rules/index.md");

@@ -1,12 +1,16 @@
 import path from "path";
+import { fileURLToPath } from "url";
 import fs from "fs";
 import type { RuleModule } from "../../src/types";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Get the all rules
  * @returns {Array} The all rules
  */
-function readRules() {
+async function readRules() {
   const rules: RuleModule[] = [];
   const rulesLibRoot = path.resolve(__dirname, "../../src/rules");
   for (const name of fs
@@ -14,8 +18,8 @@ function readRules() {
     .filter((n) => n.endsWith(".ts"))) {
     const ruleName = name.replace(/\.ts$/u, "");
     const ruleId = `yml/${ruleName}`;
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires -- tool
-    const rule = require(path.join(rulesLibRoot, name)).default;
+    const module = await import(path.join(rulesLibRoot, name));
+    const rule = module.default;
 
     rule.meta.docs.ruleName = ruleName;
     rule.meta.docs.ruleId = ruleId;
@@ -29,8 +33,8 @@ function readRules() {
   for (const name of fs.readdirSync(vueCustomBlockRulesLibRoot)) {
     const ruleName = `vue-custom-block/${name.replace(/\.ts$/u, "")}`;
     const ruleId = `yml/${ruleName}`;
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires -- tool
-    const rule = require(path.join(vueCustomBlockRulesLibRoot, name)).default;
+    const module = await import(path.join(vueCustomBlockRulesLibRoot, name));
+    const rule = module.default;
 
     rule.meta.docs.ruleName = ruleName;
     rule.meta.docs.ruleId = ruleId;
@@ -40,4 +44,4 @@ function readRules() {
   return rules;
 }
 
-export const rules = readRules();
+export const rules = await readRules();
