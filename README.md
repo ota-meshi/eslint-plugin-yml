@@ -231,7 +231,7 @@ The rules with the following star :star: are included in the config.
 
 | Rule ID | Description | Fixable | RECOMMENDED | STANDARD |
 |:--------|:------------|:-------:|:-----------:|:--------:|
-| [yml/block-mapping-colon-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-colon-indicator-newline.html) | enforce consistent line breaks after `:` indicator | :wrench: |  |  |
+| [yml/block-mapping-colon-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-colon-indicator-newline.html) | enforce consistent line breaks after `:` indicator | :wrench: |  | :star: |
 | [yml/block-mapping-question-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-question-indicator-newline.html) | enforce consistent line breaks after `?` indicator | :wrench: |  | :star: |
 | [yml/block-mapping](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping.html) | require or disallow block style mappings. | :wrench: |  | :star: |
 | [yml/block-sequence-hyphen-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence-hyphen-indicator-newline.html) | enforce consistent line breaks after `-` indicator | :wrench: |  | :star: |
@@ -244,7 +244,7 @@ The rules with the following star :star: are included in the config.
 | [yml/no-empty-mapping-value](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-mapping-value.html) | disallow empty mapping values |  | :star: | :star: |
 | [yml/no-empty-sequence-entry](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-sequence-entry.html) | disallow empty sequence entries |  | :star: | :star: |
 | [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: | :star: |
-| [yml/no-trailing-zeros](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-zeros.html) | disallow trailing zeros for floats | :wrench: |  |  |
+| [yml/no-trailing-zeros](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-zeros.html) | disallow trailing zeros for floats | :wrench: |  | :star: |
 | [yml/plain-scalar](https://ota-meshi.github.io/eslint-plugin-yml/rules/plain-scalar.html) | require or disallow plain style scalar. | :wrench: |  | :star: |
 | [yml/quotes](https://ota-meshi.github.io/eslint-plugin-yml/rules/quotes.html) | enforce the consistent use of either double, or single quotes | :wrench: |  | :star: |
 | [yml/require-string-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/require-string-key.html) | disallow mapping keys other than strings |  |  |  |
@@ -262,7 +262,7 @@ The rules with the following star :star: are included in the config.
 | [yml/flow-sequence-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-spacing.html) | enforce consistent spacing inside flow sequence brackets | :wrench: |  | :star: |
 | [yml/key-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-spacing.html) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
 | [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: | :star: |
-| [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: |  |  |
+| [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: |  | :star: |
 | [yml/spaced-comment](https://ota-meshi.github.io/eslint-plugin-yml/rules/spaced-comment.html) | enforce consistent spacing after the `#` in a comment | :wrench: |  | :star: |
 
 <!--RULES_TABLE_END-->
