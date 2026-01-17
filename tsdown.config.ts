@@ -7,5 +7,4 @@ export default defineConfig({
   dts: true,
   clean: true,
   outDir: "lib",
-  outExtensions: () => ({ js: ".js" }),
 });
