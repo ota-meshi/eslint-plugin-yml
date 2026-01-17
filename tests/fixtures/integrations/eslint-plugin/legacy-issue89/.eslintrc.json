@@ -1,7 +1,0 @@
-{
-    "root": true,
-    "extends": ["plugin:yml/standard"],
-    "rules":{
-        "no-multi-spaces": "error"
-    }
-}

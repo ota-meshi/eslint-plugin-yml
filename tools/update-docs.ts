@@ -95,7 +95,7 @@ class DocFile {
       if (categories && categories.length) {
         const presets = [];
         for (const cat of categories.sort()) {
-          presets.push(`\`"plugin:yml/${cat}"\``);
+          presets.push(`\`configs.${cat}\``);
         }
         notes.push(
           `- :gear: This rule is included in ${formatItems(presets)}.`,

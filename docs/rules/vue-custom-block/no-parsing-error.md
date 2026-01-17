@@ -10,7 +10,7 @@ since: "v0.2.0"
 
 > disallow parsing errors in Vue custom blocks
 
-- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
+- :gear: This rule is included in `configs.recommended` and `configs.standard`.
 
 ## :book: Rule Details
 

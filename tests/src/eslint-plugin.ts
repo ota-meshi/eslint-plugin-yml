@@ -1,9 +1,9 @@
 import path from "path";
 import assert from "assert";
-import plugin from "../../src/index";
-import { LegacyESLint, ESLint } from "../utils/eslint-compat";
+import { ESLint } from "../utils/eslint-compat";
 import { setPlugin } from "../fixtures/integrations/eslint-plugin/plugin-store.cjs";
 import semver from "semver";
+import plugin from "../../src/index";
 
 // -----------------------------------------------------------------------------
 // Tests
@@ -17,40 +17,6 @@ const TEST_ROOT = path.join(
 );
 
 describe("Integration with eslint-plugin-yml", () => {
-  describe("should lint without errors (legacy)", () => {
-    for (const { dir, expects } of [
-      {
-        dir: "legacy-test01",
-        expects: {
-          files: 2,
-          errors: 0,
-        },
-      },
-      {
-        // https://github.com/ota-meshi/eslint-plugin-yml/issues/89
-        dir: "legacy-issue89",
-        expects: {
-          files: 1,
-          errors: 0,
-        },
-      },
-    ]) {
-      it(dir, async () => {
-        const engine = new LegacyESLint({
-          cwd: path.join(TEST_ROOT, dir),
-          // @ts-expect-error -- ignore
-          extensions: [".js", ".yml"],
-          plugins: { "eslint-plugin-yml": plugin as any },
-        });
-        const results = await engine.lintFiles(["src"]);
-        assert.strictEqual(results.length, expects.files);
-        assert.strictEqual(
-          results.reduce((s, a) => s + a.errorCount, 0),
-          expects.errors,
-        );
-      });
-    }
-  });
   describe("should lint without errors", () => {
     if (!semver.satisfies(ESLint.version, ">=8")) return;
     for (const { dir, expects } of [
