@@ -19,19 +19,22 @@ async function main() {
   if (!fs.existsSync(META_PATH)) {
     fs.writeFileSync(META_PATH, "", "utf8");
   }
-  const eslint = new ESLint({ fix: true });
-  const [result] = await eslint.lintText(
-    `/*
+  const code = `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
 export const name = ${JSON.stringify(name)} as const;
 export const version = ${JSON.stringify(await getVersion())} as const;
-`,
-    { filePath: META_PATH },
-  );
-  fs.writeFileSync(META_PATH, result.output!);
+`;
+  fs.writeFileSync(META_PATH, code);
+  const eslint = new ESLint({ fix: true });
+  try {
+    const [result] = await eslint.lintText(code, { filePath: META_PATH });
+    fs.writeFileSync(META_PATH, result.output!);
+  } catch {
+    // ignore
+  }
 }
 
 /** Get version */
