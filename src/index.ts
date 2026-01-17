@@ -4,12 +4,7 @@ import base from "./configs/flat/base.js";
 import recommended from "./configs/flat/recommended.js";
 import standard from "./configs/flat/standard.js";
 import prettier from "./configs/flat/prettier.js";
-import pkg from "../package.json" with { type: "json" };
-
-const meta = {
-  name: pkg.name,
-  version: pkg.version,
-};
+import * as meta from "./meta.js";
 
 const configs = {
   base,
