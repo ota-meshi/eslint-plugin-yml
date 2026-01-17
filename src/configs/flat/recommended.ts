@@ -14,7 +14,7 @@ export default [
       "yml/no-empty-sequence-entry": "error",
       "yml/no-irregular-whitespace": "error",
       "yml/no-tab-indent": "error",
-      "yml/vue-custom-block/no-parsing-error": "error"
+      "yml/vue-custom-block/no-parsing-error": "error",
     },
   },
 ] satisfies Linter.FlatConfig[];

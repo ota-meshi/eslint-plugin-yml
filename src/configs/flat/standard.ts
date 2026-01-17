@@ -30,7 +30,7 @@ export default [
       "yml/plain-scalar": "error",
       "yml/quotes": "error",
       "yml/spaced-comment": "error",
-      "yml/vue-custom-block/no-parsing-error": "error"
+      "yml/vue-custom-block/no-parsing-error": "error",
     },
   },
 ] satisfies Linter.FlatConfig[];

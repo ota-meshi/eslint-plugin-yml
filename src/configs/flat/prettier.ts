@@ -19,7 +19,7 @@ export default [
       "yml/key-spacing": "off",
       "yml/no-multiple-empty-lines": "off",
       "yml/no-trailing-zeros": "off",
-      "yml/quotes": "off"
+      "yml/quotes": "off",
     },
   },
 ] satisfies Linter.FlatConfig[];
