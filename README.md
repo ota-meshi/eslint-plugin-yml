@@ -150,6 +150,31 @@ eslint .
 eslint "src/**/*.{js,yaml,yml}"
 ```
 
+#### Languages
+
+This plugin provides the following language identifiers for use in ESLint configurations:
+
+- `yml/yaml` ... YAML files
+
+For example, to apply settings specifically to YAML files, you can use the `language` field in your ESLint configuration:
+
+```js
+import eslintPluginYml from 'eslint-plugin-yml';
+export default [
+  {
+    files: ["*.yaml", "*.yml", "**/*.yaml", "**/*.yml"],
+    plugins: {
+      yml: eslintPluginYml,
+    },
+    language: "yml/yaml",
+  }
+]
+```
+
+The configuration above is included in the shareable configs provided by this plugin, so using `configs` is generally recommended.
+
+See also <https://eslint.org/docs/latest/use/configure/plugins#specify-a-language>
+
 ## :computer: Editor Integrations
 
 ### Visual Studio Code
