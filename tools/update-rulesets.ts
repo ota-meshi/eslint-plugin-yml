@@ -1,9 +1,14 @@
 import path from "path";
+import { fileURLToPath } from "url";
 import fs from "fs";
 import os from "os";
 // import eslint from "eslint"
 import { rules } from "./lib/load-rules";
 import type { RuleModule } from "../src/types";
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
 const isWin = os.platform().startsWith("win");
 
 const CONFIGS = {
@@ -69,7 +74,7 @@ export default [
 `;
 
   const filePath = path.resolve(
-    __dirname,
+    dirname,
     `../src/configs/flat/${CONFIGS[rec].config}.ts`,
   );
 

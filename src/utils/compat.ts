@@ -2,7 +2,7 @@ import {
   getSourceCode as getSourceCodeBase,
   getFilename as getFilenameBase,
 } from "eslint-compat-utils";
-import type { RuleContext, SourceCode } from "../types";
+import type { RuleContext, SourceCode } from "../types.js";
 import type { Rule, SourceCode as ESLintSourceCode } from "eslint";
 
 export function getSourceCode(context: RuleContext): SourceCode;

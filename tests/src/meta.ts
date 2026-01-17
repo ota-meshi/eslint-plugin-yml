@@ -1,6 +1,7 @@
 import assert from "assert";
 import plugin from "../../src";
-import { version } from "../../package.json";
+import pkg from "../../package.json" with { type: "json" };
+const { version } = pkg;
 const expectedMeta = {
   name: "eslint-plugin-yml",
   version,

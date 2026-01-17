@@ -1,11 +1,11 @@
-import type { RuleFixer, SourceCode, YAMLToken } from "../types";
+import type { RuleFixer, SourceCode, YAMLToken } from "../types.js";
 import naturalCompare from "natural-compare";
-import { createRule } from "../utils/index";
-import { isComma } from "../utils/ast-utils";
+import { createRule } from "../utils/index.js";
+import { isComma } from "../utils/ast-utils.js";
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
-import { getSourceCode } from "../utils/compat";
-import { calcShortestEditScript } from "../utils/calc-shortest-edit-script";
+import { getSourceCode } from "../utils/compat.js";
+import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.js";
 
 type YAMLValue = ReturnType<typeof getStaticYAMLValue>;
 

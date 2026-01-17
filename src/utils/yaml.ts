@@ -5,9 +5,9 @@ import type {
   Fix,
   RuleFixer,
   SourceCode,
-} from "../types";
-import { isHyphen } from "./ast-utils";
-import { getSourceCode } from "./compat";
+} from "../types.js";
+import { isHyphen } from "./ast-utils.js";
+import { getSourceCode } from "./compat.js";
 
 /**
  * Check if you are using tabs for indentation.

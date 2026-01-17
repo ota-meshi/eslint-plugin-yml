@@ -1,7 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
-import { isTokenOnSameLine } from "../utils/ast-utils";
+import { createRule } from "../utils/index.js";
+import { getSourceCode } from "../utils/compat.js";
+import { isTokenOnSameLine } from "../utils/ast-utils.js";
 
 interface Schema1 {
   singleValue?: boolean;

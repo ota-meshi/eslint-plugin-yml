@@ -1,9 +1,9 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import { hasTabIndent, getNumOfIndent } from "../utils/yaml";
-import type { YAMLToken, Fix, RuleFixer, RuleContext } from "../types";
-import { isHyphen, isQuestion, isColon } from "../utils/ast-utils";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
+import { hasTabIndent, getNumOfIndent } from "../utils/yaml.js";
+import type { YAMLToken, Fix, RuleFixer, RuleContext } from "../types.js";
+import { isHyphen, isQuestion, isColon } from "../utils/ast-utils.js";
+import { getSourceCode } from "../utils/compat.js";
 
 // ----------------------------------------------------------------------
 // Helpers

@@ -5,8 +5,7 @@ import type { RuleTester } from "eslint";
 import type { Linter } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import * as vueESLintParser from "vue-eslint-parser";
-// eslint-disable-next-line @typescript-eslint/no-require-imports -- tests
-import plugin = require("../../src/index");
+import plugin from "../../src/index.ts";
 import type { YMLSettings } from "../../src/types";
 import { applyFixes } from "./apply-fixer";
 import { getLinter as getCompatLinter } from "eslint-compat-utils/linter";

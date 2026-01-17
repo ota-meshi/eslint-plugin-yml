@@ -1,14 +1,14 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
+import { createRule } from "../utils/index.js";
 import {
   hasTabIndent,
   getActualIndentFromLine,
   incIndent,
   isKeyNode,
-} from "../utils/yaml";
-import { isTokenOnSameLine, isCommentToken } from "../utils/ast-utils";
-import type { YAMLToken } from "../types";
-import { getSourceCode } from "../utils/compat";
+} from "../utils/yaml.js";
+import { isTokenOnSameLine, isCommentToken } from "../utils/ast-utils.js";
+import type { YAMLToken } from "../types.js";
+import { getSourceCode } from "../utils/compat.js";
 
 type UserOption =
   | "always"

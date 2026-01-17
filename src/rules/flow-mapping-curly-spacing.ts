@@ -1,14 +1,14 @@
-import { createRule } from "../utils/index";
+import { createRule } from "../utils/index.js";
 import type { AST } from "yaml-eslint-parser";
-import { getSourceCode } from "../utils/compat";
+import { getSourceCode } from "../utils/compat.js";
 import {
   isClosingBraceToken,
   isClosingBracketToken,
   isOpeningBraceToken,
   isOpeningBracketToken,
   isTokenOnSameLine,
-} from "../utils/ast-utils";
-import type { YAMLToken } from "../types";
+} from "../utils/ast-utils.js";
+import type { YAMLToken } from "../types.js";
 
 interface Schema1 {
   arraysInObjects?: boolean;

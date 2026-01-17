@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "node16",
-    "moduleResolution": "node16",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "lib": ["es2020"],
     "allowJs": true,
     "checkJs": true,
@@ -21,6 +21,8 @@
     "esModuleInterop": true,
     "outDir": "lib",
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
 
     "skipLibCheck": true
   },
