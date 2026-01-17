@@ -36,7 +36,7 @@ export interface RuleModule {
 export interface RuleMetaData {
   docs: {
     description: string;
-    categories: ("recommended" | "standard")[] | null;
+    categories: ("recommended" | "standard" | "stylistic")[] | null;
     url: string;
     ruleId: string;
     ruleName: string;
@@ -61,9 +61,9 @@ export interface PartialRuleModule {
 export interface PartialRuleMetaData {
   docs: {
     description: string;
-    categories: ("recommended" | "standard")[] | null;
+    categories: ("recommended" | "standard" | "stylistic")[] | null;
     replacedBy?: [];
-    default?: "error" | "warn";
+    default?: "error" | "warn" | ["error" | "warn", unknown];
     extensionRule: string | false;
     layout: boolean;
   };

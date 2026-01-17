@@ -10,6 +10,8 @@ since: "v1.2.0"
 
 > enforce YAML file extension
 
+- :gear: This rule is included in `"plugin:yml/stylistic"`.
+
 ## :book: Rule Details
 
 This rule aims to enforce YAML file extension.
