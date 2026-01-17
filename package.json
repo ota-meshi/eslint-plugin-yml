@@ -126,6 +126,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "packageManager": "npm@11.7.0"
+  }
 }
