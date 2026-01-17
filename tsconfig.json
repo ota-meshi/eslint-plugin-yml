@@ -21,6 +21,8 @@
     "esModuleInterop": true,
     "outDir": "lib",
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
 
     "skipLibCheck": true
   },
