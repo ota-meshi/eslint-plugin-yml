@@ -218,18 +218,19 @@ foo: qux
   });
 
   describe("multiple rules", () => {
-    it("should disable a specific rule with eslint-disable-next-line", () => {
-      const code = `# eslint-disable-next-line yml/no-empty-key
-: bar
+    it("should disable multiple rules separated by commas", () => {
+      const code = `# eslint-disable-next-line yml/no-empty-key, yml/no-empty-mapping-value
+: 
 `;
       const config = createConfig({
         "yml/no-empty-key": "error",
+        "yml/no-empty-mapping-value": "error",
       });
 
       const messages = linter.verify(code, config, "test.yaml");
       const errors = messages.filter((m) => m.ruleId?.startsWith("yml/"));
 
-      assert.strictEqual(errors.length, 0, "Rule should be disabled");
+      assert.strictEqual(errors.length, 0, "Both rules should be disabled");
     });
 
     it("should disable multiple rules in eslint-disable", () => {
@@ -316,12 +317,13 @@ describe("Inline Configuration Comments", () => {
       );
     });
 
-    it("should configure a rule with inline config comment", () => {
-      const code = `# eslint yml/no-empty-key: "off"
-: bar
+    it("should configure multiple rules in one comment", () => {
+      const code = `# eslint yml/no-empty-key: "off", yml/no-empty-mapping-value: "off"
+: 
 `;
       const config = createConfig({
         "yml/no-empty-key": "error",
+        "yml/no-empty-mapping-value": "error",
       });
 
       const messages = linter.verify(code, config, "test.yaml");
@@ -330,7 +332,7 @@ describe("Inline Configuration Comments", () => {
       assert.strictEqual(
         errors.length,
         0,
-        "Rule should be disabled by inline config",
+        "Both rules should be disabled by inline config",
       );
     });
 
