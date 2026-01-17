@@ -1,13 +1,13 @@
 import type { ESLint, Linter } from "eslint";
 import * as parser from "yaml-eslint-parser";
-import * as plugin from "../../index.js";
+import * as pluginModule from "../../index.js";
 
 export default [
   {
     plugins: {
       get yml(): ESLint.Plugin {
         // Delayed reference to avoid circular dependency
-        return plugin as unknown as ESLint.Plugin;
+        return pluginModule.default as unknown as ESLint.Plugin;
       },
     },
   },
