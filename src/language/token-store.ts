@@ -386,7 +386,7 @@ export class TokenStore {
   public getTokensBetween(
     left: YAMLSyntaxElement,
     right: YAMLSyntaxElement,
-    paddingOrOptions?: CursorWithCountOptions,
+    paddingOrOptions?: number | FilterPredicate | CursorWithCountOptions,
   ): YAMLToken[] {
     const { filter, count } = normalizeCountOptions(paddingOrOptions);
     const startIndex = getFirstIndex(
