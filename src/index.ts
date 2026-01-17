@@ -1,13 +1,9 @@
 import type { RuleModule } from "./types";
 import { rules as ruleList } from "./utils/rules";
-import base from "./configs/base";
-import recommended from "./configs/recommended";
-import standard from "./configs/standard";
-import prettier from "./configs/prettier";
-import flatBase from "./configs/flat/base";
-import flatRecommended from "./configs/flat/recommended";
-import flatStandard from "./configs/flat/standard";
-import flatPrettier from "./configs/flat/prettier";
+import base from "./configs/flat/base";
+import recommended from "./configs/flat/recommended";
+import standard from "./configs/flat/standard";
+import prettier from "./configs/flat/prettier";
 import * as meta from "./meta";
 
 const configs = {
@@ -15,10 +11,11 @@ const configs = {
   recommended,
   standard,
   prettier,
-  "flat/base": flatBase,
-  "flat/recommended": flatRecommended,
-  "flat/standard": flatStandard,
-  "flat/prettier": flatPrettier,
+  // Keep flat/* for backward compatibility
+  "flat/base": base,
+  "flat/recommended": recommended,
+  "flat/standard": standard,
+  "flat/prettier": prettier,
 };
 
 const rules = ruleList.reduce(

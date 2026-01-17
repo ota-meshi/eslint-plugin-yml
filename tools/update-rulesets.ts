@@ -44,45 +44,7 @@ const CONFIGS = {
   },
 };
 
-for (const rec of ["recommended", "standard", "prettier"] as const) {
-  let content = `/*
- * IMPORTANT!
- * This file has been automatically generated,
- * in order to update its content execute "npm run update"
- */
-import path from "path"
-const base = require.resolve("./base")
-const baseExtend =
-    path.extname(\`\${base}\`) === ".ts" ? "plugin:yml/base" : base
-export = {
-    extends: [baseExtend],
-    rules: {
-        // eslint-plugin-yml rules
-        ${rules
-          .filter(CONFIGS[rec].filter)
-          .map((rule) => {
-            return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
-          })
-          .join(",\n")}
-    },
-}
-`;
-
-  const filePath = path.resolve(
-    __dirname,
-    `../src/configs/${CONFIGS[rec].config}.ts`,
-  );
-
-  if (isWin) {
-    content = content
-      .replace(/\r?\n/gu, "\n")
-      .replace(/\r/gu, "\n")
-      .replace(/\n/gu, "\r\n");
-  }
-
-  // Update file.
-  fs.writeFileSync(filePath, content);
-}
+// Legacy configs are no longer generated or used
 
 for (const rec of ["recommended", "standard", "prettier"] as const) {
   let content = `/*
