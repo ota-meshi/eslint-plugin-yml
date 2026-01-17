@@ -47,27 +47,25 @@ const CONFIGS = {
 // Legacy configs are no longer generated or used
 
 for (const rec of ["recommended", "standard", "prettier"] as const) {
-  let content = `/*
- * IMPORTANT!
- * This file has been automatically generated,
- * in order to update its content execute "npm run update"
- */
+  let content = `// IMPORTANT!
+// This file has been automatically generated,
+// in order to update its content execute "npm run update"
 import type { Linter } from "eslint";
-import base from './base';
+import base from "./base";
 export default [
   ...base,
   {
     rules: {
-        // eslint-plugin-yml rules
-        ${rules
-          .filter(CONFIGS[rec].filter)
-          .map((rule) => {
-            return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
-          })
-          .join(",\n")}
+      // eslint-plugin-yml rules
+      ${rules
+        .filter(CONFIGS[rec].filter)
+        .map((rule) => {
+          return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
+        })
+        .join(",\n      ")}
     },
-  }
-] satisfies Linter.FlatConfig[]
+  },
+] satisfies Linter.FlatConfig[];
 `;
 
   const filePath = path.resolve(
