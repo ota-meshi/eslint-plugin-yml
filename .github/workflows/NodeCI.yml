@@ -33,31 +33,6 @@ jobs:
         run: npm install
       - name: Test
         run: npm test
-  test-with-eslint6:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
-      - name: Install Target Packages
-        run: |+
-          npm i -D eslint@6
-          npx rimraf node_modules
-          npm install
-      - name: Test
-        run: npm test
-  test-with-eslint7:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-      - name: Install Target Packages
-        run: |+
-          npm i -D eslint@7
-          npx rimraf node_modules
-          npm install
-      - name: Test
-        run: npm test
   test-and-coverage:
     runs-on: ubuntu-latest
     steps:
