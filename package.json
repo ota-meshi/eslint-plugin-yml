@@ -65,7 +65,7 @@
     "yaml-eslint-parser": "^1.2.1"
   },
   "peerDependencies": {
-    "eslint": ">=6.0.0"
+    "eslint": ">=9.38.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
