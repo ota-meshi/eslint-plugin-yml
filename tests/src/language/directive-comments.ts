@@ -218,7 +218,7 @@ foo: qux
   });
 
   describe("multiple rules", () => {
-    it("should disable multiple rules separated by commas", () => {
+    it("should disable a specific rule with eslint-disable-next-line", () => {
       const code = `# eslint-disable-next-line yml/no-empty-key
 : bar
 `;
@@ -316,7 +316,7 @@ describe("Inline Configuration Comments", () => {
       );
     });
 
-    it("should configure multiple rules in one comment", () => {
+    it("should configure a rule with inline config comment", () => {
       const code = `# eslint yml/no-empty-key: "off"
 : bar
 `;
