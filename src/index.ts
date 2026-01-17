@@ -32,3 +32,4 @@ const plugin = { meta, configs, rules };
 (globalThis as any).__eslintPluginYml_instance = plugin;
 
 export { meta, configs, rules };
+export default plugin;

@@ -4,6 +4,13 @@
   "description": "This ESLint plugin provides linting rules for YAML.",
   "type": "module",
   "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "lib"
   ],
@@ -14,7 +21,7 @@
     "prebuild": "npm run -s clean",
     "build": "npm run build:meta && npm run build:ts",
     "build:meta": "npm run ts -- ./tools/update-meta.ts",
-    "build:ts": "tsc --project ./tsconfig.build.json",
+    "build:ts": "tsc --project ./tsconfig.build.json && node ./tools/fix-esm-imports.mjs",
     "clean": "rimraf .nyc_output dist coverage",
     "lint": "eslint .",
     "eslint-fix": "eslint . --fix",
