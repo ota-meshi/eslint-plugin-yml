@@ -1,5 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
+import { createRule } from "../utils/index.js";
 import {
   hasTabIndent,
   calcExpectIndentForEntries,
@@ -10,16 +10,16 @@ import {
   unwrapMeta,
   processIndentFix,
   fixIndent,
-} from "../utils/yaml";
+} from "../utils/yaml.js";
 import type {
   RuleContext,
   Fix,
   RuleFixer,
   YAMLNodeOrToken,
   SourceCode,
-} from "../types";
-import { isComma } from "../utils/ast-utils";
-import { getSourceCode } from "../utils/compat";
+} from "../types.js";
+import { isComma } from "../utils/ast-utils.js";
+import { getSourceCode } from "../utils/compat.js";
 
 // ----------------------------------------------------------------------
 // Helpers

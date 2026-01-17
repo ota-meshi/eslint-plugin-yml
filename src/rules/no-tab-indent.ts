@@ -1,6 +1,6 @@
-import type { RuleContext } from "../types";
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
+import type { RuleContext } from "../types.js";
+import { createRule } from "../utils/index.js";
+import { getSourceCode } from "../utils/compat.js";
 
 export default createRule("no-tab-indent", {
   meta: {

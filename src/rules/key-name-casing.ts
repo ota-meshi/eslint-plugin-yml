@@ -1,10 +1,10 @@
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import type { CasingKind } from "../utils/casing";
-import { getChecker } from "../utils/casing";
-import { allowedCaseOptions } from "../utils/casing";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
+import type { CasingKind } from "../utils/casing.js";
+import { getChecker } from "../utils/casing.js";
+import { allowedCaseOptions } from "../utils/casing.js";
+import { getSourceCode } from "../utils/compat.js";
 
 type Option = {
   [key in CasingKind]?: boolean;

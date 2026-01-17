@@ -1,6 +1,6 @@
 import path from "path";
-import { createRule } from "../utils/index";
-import { getFilename, getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
+import { getFilename, getSourceCode } from "../utils/compat.js";
 
 export default createRule("file-extension", {
   meta: {

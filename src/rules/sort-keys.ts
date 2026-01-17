@@ -1,10 +1,10 @@
-import type { RuleFixer, SourceCode } from "../types";
+import type { RuleFixer, SourceCode } from "../types.js";
 import naturalCompare from "natural-compare";
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import { isComma, isCommentToken } from "../utils/ast-utils";
-import { getSourceCode } from "../utils/compat";
-import { calcShortestEditScript } from "../utils/calc-shortest-edit-script";
+import { createRule } from "../utils/index.js";
+import { isComma, isCommentToken } from "../utils/ast-utils.js";
+import { getSourceCode } from "../utils/compat.js";
+import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.js";
 
 //------------------------------------------------------------------------------
 // Helpers

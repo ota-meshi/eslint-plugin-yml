@@ -1,9 +1,9 @@
 /* eslint @typescript-eslint/no-explicit-any: off -- util */
-import type { RuleModule, PartialRuleModule } from "../types";
+import type { RuleModule, PartialRuleModule } from "../types.js";
 import type { Rule } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import path from "path";
-import { getFilename, getSourceCode } from "./compat";
+import { getFilename, getSourceCode } from "./compat.js";
 
 /**
  * Define the rule.

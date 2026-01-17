@@ -1,10 +1,10 @@
-import type { RuleModule } from "./types";
-import { rules as ruleList } from "./utils/rules";
-import base from "./configs/flat/base";
-import recommended from "./configs/flat/recommended";
-import standard from "./configs/flat/standard";
-import prettier from "./configs/flat/prettier";
-import * as meta from "./meta";
+import type { RuleModule } from "./types.js";
+import { rules as ruleList } from "./utils/rules.js";
+import base from "./configs/flat/base.js";
+import recommended from "./configs/flat/recommended.js";
+import standard from "./configs/flat/standard.js";
+import prettier from "./configs/flat/prettier.js";
+import * as meta from "./meta.js";
 
 const configs = {
   base,

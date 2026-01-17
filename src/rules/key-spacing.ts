@@ -3,10 +3,10 @@
 //------------------------------------------------------------------------------
 
 import type { AST } from "yaml-eslint-parser";
-import type { RuleListener, RuleContext } from "../types";
-import { createRule } from "../utils/index";
-import { isColon, isQuestion } from "../utils/ast-utils";
-import { getSourceCode } from "../utils/compat";
+import type { RuleListener, RuleContext } from "../types.js";
+import { createRule } from "../utils/index.js";
+import { isColon, isQuestion } from "../utils/ast-utils.js";
+import { getSourceCode } from "../utils/compat.js";
 
 //------------------------------------------------------------------------------
 // Helpers

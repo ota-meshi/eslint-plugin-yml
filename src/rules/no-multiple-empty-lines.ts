@@ -1,5 +1,5 @@
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
+import { getSourceCode } from "../utils/compat.js";
 
 export default createRule("no-multiple-empty-lines", {
   meta: {

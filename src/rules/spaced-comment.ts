@@ -1,7 +1,7 @@
 import type { AST } from "yaml-eslint-parser";
 import escapeStringRegexp from "escape-string-regexp";
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
+import { getSourceCode } from "../utils/compat.js";
 
 //------------------------------------------------------------------------------
 // Helpers
