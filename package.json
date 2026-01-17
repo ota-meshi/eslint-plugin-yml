@@ -64,6 +64,8 @@
   },
   "homepage": "https://ota-meshi.github.io/eslint-plugin-yml/",
   "dependencies": {
+    "@eslint/core": "^1.0.1",
+    "@eslint/plugin-kit": "^0.5.1",
     "debug": "^4.3.2",
     "diff-sequences": "^27.5.1",
     "escape-string-regexp": "4.0.0",
