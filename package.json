@@ -3,12 +3,12 @@
   "version": "1.19.1",
   "description": "This ESLint plugin provides linting rules for YAML.",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "lib/index.mjs",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "default": "./lib/index.js"
+      "types": "./lib/index.d.mts",
+      "import": "./lib/index.mjs",
+      "default": "./lib/index.mjs"
     },
     "./package.json": "./package.json"
   },
@@ -20,10 +20,8 @@
   },
   "scripts": {
     "prebuild": "npm run -s clean",
-    "build": "npm run build:meta && npm run build:ts",
-    "build:meta": "node --experimental-strip-types --experimental-transform-types ./tools/update-meta.ts",
-    "build:ts": "tsc --project ./tsconfig.build.json",
-    "clean": "rimraf .nyc_output dist coverage",
+    "build": "tsdown",
+    "clean": "rimraf .nyc_output dist coverage lib",
     "lint": "eslint .",
     "eslint-fix": "eslint . --fix",
     "eslint-test-fix": "eslint tests/src/rules/*.ts --fix -c .eslintrc.for-vscode.js",
@@ -124,6 +122,7 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-config-standard-vue": "^1.0.0",
     "stylelint-stylus": "^1.0.0",
+    "tsdown": "^0.20.0-beta.3",
     "tsx": "^4.21.0",
     "typescript": "~5.9.0",
     "typescript-eslint": "^8.0.0",

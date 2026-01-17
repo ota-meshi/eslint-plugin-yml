@@ -31,7 +31,8 @@
     "tests/src/**/*",
     "tests/utils/**/*",
     "tools/**/*",
-    "docs/.vitepress/**/*"
+    "docs/.vitepress/**/*",
+    "tsdown.config.ts"
     // "typings/**/*"
   ],
   "exclude": ["lib/**/*"]
