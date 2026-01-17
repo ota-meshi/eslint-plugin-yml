@@ -9,7 +9,7 @@ npm install --save-dev eslint eslint-plugin-yml
 ::: tip Requirements
 
 - ESLint v6.0.0 and above
-- Node.js v20.19.x, v22.13.x and above, or v24.x and above
+- Node.js v20.19.0 or higher (in the 20.x line), v22.13.0 or higher (in the 22.x line), or v24.0.0 and above
 
 :::
 
