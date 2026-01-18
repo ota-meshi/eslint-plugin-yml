@@ -82,7 +82,7 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-// TODO Delete when it are done.
+// TODO Delete when it is done.
 makeSuiteTests("${ruleId}", {
     default: [],
     // never: ["never"],
