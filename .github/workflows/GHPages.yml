@@ -28,6 +28,8 @@ jobs:
       - uses: actions/setup-node@v6
       - name: Install Packages
         run: npm install -f
+      - name: Build
+        run: npm run build
       - name: Update docs
         run: npm run update
       - name: Build docs
