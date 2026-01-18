@@ -28,10 +28,10 @@ jobs:
       - uses: actions/setup-node@v6
       - name: Install Packages
         run: npm install -f
-      - name: Build docs
-        run: npm run docs:build
       - name: Update docs
         run: npm run update
+      - name: Build docs
+        run: npm run docs:build
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
