@@ -1,20 +1,15 @@
 import type { AST } from "yaml-eslint-parser";
-import type {
-  RuleContext,
-  YAMLNodeOrToken,
-  Fix,
-  RuleFixer,
-  SourceCode,
-} from "../types.js";
+import type { ESLintSettings, RuleContext, YAMLNodeOrToken } from "../types.js";
 import { isHyphen } from "./ast-utils.js";
-import { getSourceCode } from "./compat.js";
+import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
+import type { YAMLSourceCode } from "../language/yaml-source-code.js";
 
 /**
  * Check if you are using tabs for indentation.
  * If you're using tabs, you're not sure if your YAML was parsed successfully, so almost all rules stop auto-fix.
  */
 export function hasTabIndent(context: RuleContext): boolean {
-  for (const line of getSourceCode(context).getLines()) {
+  for (const line of context.sourceCode.getLines()) {
     if (/^\s*\t/u.test(line)) {
       return true;
     }
@@ -32,7 +27,7 @@ export function calcExpectIndentForPairs(
   mapping: AST.YAMLMapping,
   context: RuleContext,
 ): string | null {
-  const sourceCode = getSourceCode(context);
+  const sourceCode = context.sourceCode;
   let parentNode = mapping.parent;
   if (parentNode.type === "YAMLWithMeta") {
     const before = sourceCode.getTokenBefore(parentNode);
@@ -110,7 +105,7 @@ export function calcExpectIndentForEntries(
   sequence: AST.YAMLFlowSequence,
   context: RuleContext,
 ): string | null {
-  const sourceCode = getSourceCode(context);
+  const sourceCode = context.sourceCode;
   let parentNode = sequence.parent;
   if (parentNode.type === "YAMLWithMeta") {
     const before = sourceCode.getTokenBefore(parentNode);
@@ -209,7 +204,7 @@ export function getActualIndent(
   node: YAMLNodeOrToken,
   context: RuleContext,
 ): string | null {
-  const sourceCode = getSourceCode(context);
+  const sourceCode = context.sourceCode;
   const before = sourceCode.getTokenBefore(node, { includeComments: true });
   if (!before || before.loc.end.line < node.loc.start.line) {
     return getActualIndentFromLine(node.loc.start.line, context);
@@ -224,7 +219,7 @@ export function getActualIndentFromLine(
   line: number,
   context: RuleContext,
 ): string {
-  const sourceCode = getSourceCode(context);
+  const sourceCode = context.sourceCode;
   const lineText = sourceCode.getLines()[line - 1];
   return /^[^\S\n\r\u2028\u2029]*/u.exec(lineText)![0];
 }
@@ -258,7 +253,7 @@ export function getNumOfIndent(
   context: RuleContext,
   optionValue?: number | null,
 ): number {
-  const num = optionValue ?? context.settings?.yml?.indent;
+  const num = optionValue ?? (context.settings as ESLintSettings)?.yml?.indent;
   return num == null || num < 2 ? 2 : num;
 }
 
@@ -304,12 +299,12 @@ export function unwrapMeta(
  * Adjust indent
  */
 export function* processIndentFix(
-  fixer: RuleFixer,
+  fixer: RuleTextEditor,
   baseIndent: string,
   targetNode: AST.YAMLContent | AST.YAMLWithMeta | AST.YAMLPair,
   context: RuleContext,
-): IterableIterator<Fix> {
-  const sourceCode = getSourceCode(context);
+): IterableIterator<RuleTextEdit> {
+  const sourceCode = context.sourceCode;
   if (targetNode.type === "YAMLWithMeta") {
     yield* metaIndent(targetNode);
     return;
@@ -409,11 +404,11 @@ export function* processIndentFix(
  * Fix indent
  */
 export function fixIndent(
-  fixer: RuleFixer,
-  sourceCode: SourceCode,
+  fixer: RuleTextEditor,
+  sourceCode: YAMLSourceCode,
   indent: string,
   node: YAMLNodeOrToken,
-): Fix {
+): RuleTextEdit {
   const prevToken = sourceCode.getTokenBefore(node, {
     includeComments: true,
   })!;

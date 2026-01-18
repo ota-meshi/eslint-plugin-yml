@@ -58,20 +58,42 @@ function getLastIndex(
 /**
  * Normalizes the options for cursor methods.
  */
-function normalizeOptions(options: CursorWithSkipOptions | undefined): {
-  includeComments: boolean;
-  filter: FilterPredicate | null;
+function normalizeSkipOptions(options: CursorWithSkipOptions | undefined): {
+  filter: FilterPredicate;
   skip: number;
 } {
   if (typeof options === "number") {
-    return { includeComments: false, filter: null, skip: options };
+    return { filter: isNotComment, skip: options };
   }
   if (typeof options === "function") {
-    return { includeComments: false, filter: options, skip: 0 };
+    return {
+      filter: (n) => {
+        if (isComment(n)) {
+          return false;
+        }
+        return options(n);
+      },
+      skip: 0,
+    };
+  }
+  let filter: FilterPredicate;
+  if (options?.includeComments) {
+    filter = options?.filter ?? (() => true);
+  } else {
+    if (options?.filter) {
+      const baseFilter = options?.filter;
+      filter = (token) => {
+        if (isComment(token)) {
+          return false;
+        }
+        return baseFilter(token);
+      };
+    } else {
+      filter = isNotComment;
+    }
   }
   return {
-    includeComments: options?.includeComments ?? false,
-    filter: options?.filter ?? null,
+    filter,
     skip: options?.skip ?? 0,
   };
 }
@@ -94,7 +116,7 @@ function isNotComment(token: YAMLToken): boolean {
  * Normalizes the options for cursor methods with count.
  */
 function normalizeCountOptions(options: CursorWithCountOptions | undefined): {
-  filter: FilterPredicate | null;
+  filter: FilterPredicate;
   count: number;
 } {
   if (typeof options === "number") {
@@ -111,11 +133,13 @@ function normalizeCountOptions(options: CursorWithCountOptions | undefined): {
       count: 0,
     };
   }
-  let filter = options?.filter;
-  if (!options?.includeComments) {
-    if (filter) {
-      const baseFilter = filter;
-      filter = (token: YAMLToken) => {
+  let filter: FilterPredicate;
+  if (options?.includeComments) {
+    filter = options?.filter ?? (() => true);
+  } else {
+    if (options?.filter) {
+      const baseFilter = options?.filter;
+      filter = (token) => {
         if (isComment(token)) {
           return false;
         }
@@ -126,7 +150,7 @@ function normalizeCountOptions(options: CursorWithCountOptions | undefined): {
     }
   }
   return {
-    filter: filter ?? null,
+    filter,
     count: options?.count ?? 0,
   };
 }
@@ -165,7 +189,7 @@ export class TokenStore {
     node: YAMLSyntaxElement,
     options?: CursorWithSkipOptions,
   ): YAMLToken | null {
-    const { filter, skip } = normalizeOptions(options);
+    const { filter, skip } = normalizeSkipOptions(options);
     const startIndex = getFirstIndex(
       this.allTokens,
       this.tokenStartToIndex,
@@ -199,7 +223,7 @@ export class TokenStore {
     node: YAMLSyntaxElement,
     options?: CursorWithSkipOptions,
   ): YAMLToken | null {
-    const { filter, skip } = normalizeOptions(options);
+    const { filter, skip } = normalizeSkipOptions(options);
     const startIndex = getFirstIndex(
       this.allTokens,
       this.tokenStartToIndex,
@@ -234,7 +258,7 @@ export class TokenStore {
     right: YAMLSyntaxElement,
     options?: CursorWithSkipOptions,
   ): YAMLToken | null {
-    const { filter, skip } = normalizeOptions(options);
+    const { filter, skip } = normalizeSkipOptions(options);
     const startIndex = getFirstIndex(
       this.allTokens,
       this.tokenStartToIndex,
@@ -268,7 +292,7 @@ export class TokenStore {
     node: YAMLSyntaxElement,
     options?: CursorWithSkipOptions,
   ): YAMLToken | null {
-    const { filter, skip } = normalizeOptions(options);
+    const { filter, skip } = normalizeSkipOptions(options);
     const endIndex = getLastIndex(
       this.allTokens,
       this.tokenStartToIndex,
@@ -297,7 +321,7 @@ export class TokenStore {
     node: YAMLSyntaxElement,
     options?: CursorWithSkipOptions,
   ): YAMLToken | null {
-    const { filter, skip } = normalizeOptions(options);
+    const { filter, skip } = normalizeSkipOptions(options);
     const startIndex = getFirstIndex(
       this.allTokens,
       this.tokenStartToIndex,

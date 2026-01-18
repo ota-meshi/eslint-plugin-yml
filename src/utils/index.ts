@@ -3,7 +3,6 @@ import type { RuleModule, PartialRuleModule } from "../types.js";
 import type { Rule } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import path from "path";
-import { getFilename, getSourceCode } from "./compat.js";
 
 /**
  * Define the rule.
@@ -25,11 +24,11 @@ export function createRule(
       },
     },
     create(context: Rule.RuleContext): any {
-      const sourceCode = getSourceCode(context);
+      const sourceCode = context.sourceCode;
       if (
         typeof sourceCode.parserServices?.defineCustomBlocksVisitor ===
           "function" &&
-        path.extname(getFilename(context)) === ".vue"
+        path.extname(context.filename) === ".vue"
       ) {
         return sourceCode.parserServices.defineCustomBlocksVisitor(
           context,

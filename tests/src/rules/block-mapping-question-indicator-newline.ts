@@ -1,13 +1,11 @@
-import { RuleTester } from "../../utils/eslint-compat";
+import { RuleTester } from "eslint";
 import rule from "../../../src/rules/block-mapping-question-indicator-newline";
 import { loadTestCases } from "../../utils/utils";
+import plugin from "../../../src/index";
 
 const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
 tester.run(

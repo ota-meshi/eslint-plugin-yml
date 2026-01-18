@@ -61,6 +61,55 @@ describe("TokenStore", () => {
 
       assert.strictEqual(token, null);
     });
+
+    it("should exclude comments by default", () => {
+      const ast = parse(`arr: [1, # comment
+  2]`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair = content.pairs[0];
+      assert.strictEqual(pair.type, "YAMLPair");
+      const arr = pair.value;
+      assert.ok(arr);
+
+      // Get all tokens including comments
+      const tokens = store.getTokens(arr, { includeComments: true });
+      const hasComment = tokens.some((t) => t.type === "Block");
+      assert.ok(
+        hasComment,
+        "Test setup: there should be a comment in the node",
+      );
+
+      // getFirstToken should skip comments by default
+      const firstToken = store.getFirstToken(arr);
+      assert.ok(firstToken);
+      assert.notStrictEqual(firstToken.type, "Block");
+      assert.strictEqual(firstToken.value, "[");
+    });
+
+    it("should filter tokens with filter option", () => {
+      const ast = parse(`key: value`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair = content.pairs[0];
+      assert.strictEqual(pair.type, "YAMLPair");
+
+      const token = store.getFirstToken(pair, {
+        filter: (t) => t.type === "Punctuator",
+      });
+
+      assert.ok(token);
+      assert.strictEqual(token.type, "Punctuator");
+      assert.strictEqual(token.value, ":");
+    });
   });
 
   describe("getLastToken", () => {
@@ -97,6 +146,61 @@ describe("TokenStore", () => {
       assert.ok(token);
       assert.strictEqual(token.type, "Punctuator");
       assert.strictEqual(token.value, ":");
+    });
+
+    it("should exclude comments by default", () => {
+      const ast = parse(`arr: [1 # comment
+  ]`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair = content.pairs[0];
+      assert.strictEqual(pair.type, "YAMLPair");
+      const arr = pair.value;
+      assert.ok(arr);
+
+      // Get all tokens including comments
+      const tokens = store.getTokens(arr, { includeComments: true });
+      const hasComment = tokens.some((t) => t.type === "Block");
+      assert.ok(
+        hasComment,
+        "Test setup: there should be a comment in the node",
+      );
+
+      // getLastToken should skip comments by default
+      const lastToken = store.getLastToken(arr);
+      assert.ok(lastToken);
+      assert.notStrictEqual(lastToken.type, "Block");
+      assert.strictEqual(lastToken.value, "]");
+    });
+
+    it("should include comments when option is set", () => {
+      const ast = parse(`arr: [1 # comment
+  ]`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair = content.pairs[0];
+      assert.strictEqual(pair.type, "YAMLPair");
+      const arr = pair.value;
+      assert.ok(arr);
+
+      // The comment is between "1" and "]" so lastToken with includeComments
+      // should still be "]" since comment is not the last
+      // Instead, let's test that we can retrieve the comment with skip
+      const lastTokenWithComments = store.getLastToken(arr, {
+        includeComments: true,
+        skip: 1,
+      });
+
+      assert.ok(lastTokenWithComments);
+      assert.strictEqual(lastTokenWithComments.type, "Block");
     });
   });
 
@@ -137,6 +241,27 @@ describe("TokenStore", () => {
 
       assert.strictEqual(token, null);
     });
+
+    it("should exclude comments by default", () => {
+      const ast = parse(`key1: value1 # comment
+key2: value2`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair2 = content.pairs[1];
+      assert.strictEqual(pair2.type, "YAMLPair");
+      const key2 = pair2.key;
+      assert.ok(key2);
+
+      // getTokenBefore should skip comments by default
+      const token = store.getTokenBefore(key2);
+      assert.ok(token);
+      assert.notStrictEqual(token.type, "Block");
+      assert.strictEqual(token.value, "value1");
+    });
   });
 
   describe("getTokenAfter", () => {
@@ -174,6 +299,26 @@ another: test`);
       const token = store.getTokenAfter(pair);
 
       assert.strictEqual(token, null);
+    });
+
+    it("should exclude comments by default", () => {
+      const ast = parse(`key1: value1 # comment
+key2: value2`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair1 = content.pairs[0];
+      assert.strictEqual(pair1.type, "YAMLPair");
+
+      // getTokenAfter should skip comments by default
+      const token = store.getTokenAfter(pair1);
+      assert.ok(token);
+      assert.notStrictEqual(token.type, "Block");
+      assert.strictEqual(token.type, "Identifier");
+      assert.strictEqual(token.value, "key2");
     });
   });
 
@@ -295,6 +440,73 @@ another: test`);
         assert.ok(token);
         assert.strictEqual(token.value, ":");
       }
+    });
+
+    it("should exclude comments by default", () => {
+      const ast = parse(`arr: [1, # comment
+  2, 3]`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair = content.pairs[0];
+      assert.strictEqual(pair.type, "YAMLPair");
+      const arr = pair.value;
+      assert.ok(arr);
+      assert.strictEqual(arr.type, "YAMLSequence");
+      const firstElement = arr.entries[0];
+      const secondElement = arr.entries[1];
+      assert.ok(firstElement);
+      assert.ok(secondElement);
+
+      // getFirstTokenBetween should skip comments by default
+      const token = store.getFirstTokenBetween(firstElement, secondElement);
+      assert.ok(token);
+      assert.notStrictEqual(token.type, "Block");
+      assert.strictEqual(token.type, "Punctuator");
+      assert.strictEqual(token.value, ",");
+    });
+
+    it("should include comments when option is set", () => {
+      const ast = parse(`arr: [1, # comment
+  2, 3]`);
+      const store = new TokenStore({ ast });
+      const doc = ast.body[0];
+      assert.strictEqual(doc.type, "YAMLDocument");
+      const content = doc.content;
+      assert.ok(content);
+      assert.strictEqual(content.type, "YAMLMapping");
+      const pair = content.pairs[0];
+      assert.strictEqual(pair.type, "YAMLPair");
+      const arr = pair.value;
+      assert.ok(arr);
+      assert.strictEqual(arr.type, "YAMLSequence");
+      const firstElement = arr.entries[0];
+      const secondElement = arr.entries[1];
+      assert.ok(firstElement);
+      assert.ok(secondElement);
+
+      // with includeComments, it should return the "," first
+      const token = store.getFirstTokenBetween(firstElement, secondElement, {
+        includeComments: true,
+      });
+      assert.ok(token);
+      assert.strictEqual(token.type, "Punctuator");
+      assert.strictEqual(token.value, ",");
+
+      // skip 1 should get the comment
+      const commentToken = store.getFirstTokenBetween(
+        firstElement,
+        secondElement,
+        {
+          includeComments: true,
+          skip: 1,
+        },
+      );
+      assert.ok(commentToken);
+      assert.strictEqual(commentToken.type, "Block");
     });
   });
 

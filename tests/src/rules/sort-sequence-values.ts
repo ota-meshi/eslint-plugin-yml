@@ -1,14 +1,9 @@
-import { RuleTester } from "../../utils/eslint-compat";
+import { RuleTester } from "eslint";
 import rule from "../../../src/rules/sort-sequence-values";
 import { loadTestCases } from "../../utils/utils";
+import plugin from "../../../src/index";
 
-const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
-});
+const tester = new RuleTester({});
 
 tester.run(
   "sort-sequence-values",
@@ -31,6 +26,9 @@ tester.run(
           errors: [
             "Expected sequence values to be in specified order. '3' should be after '1'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
       ],
     },

@@ -1,13 +1,13 @@
 import type { ESLint, Linter } from "eslint";
 import * as parser from "yaml-eslint-parser";
-import * as pluginModule from "../../index.js";
+import plugin from "../../index.js";
 
 export default [
   {
     plugins: {
       get yml(): ESLint.Plugin {
         // Delayed reference to avoid circular dependency
-        return pluginModule.default as unknown as ESLint.Plugin;
+        return plugin;
       },
     },
   },
@@ -23,4 +23,4 @@ export default [
       "spaced-comment": "off",
     },
   },
-] satisfies Linter.FlatConfig[];
+] satisfies Linter.Config[];

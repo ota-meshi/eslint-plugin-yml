@@ -1,6 +1,5 @@
 import { createRule } from "../utils/index.js";
 import type { AST } from "yaml-eslint-parser";
-import { getSourceCode } from "../utils/compat.js";
 import {
   isClosingBraceToken,
   isClosingBracketToken,
@@ -50,7 +49,7 @@ export default createRule("flow-mapping-curly-spacing", {
     },
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

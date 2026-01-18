@@ -1,13 +1,11 @@
-import { RuleTester } from "../../utils/eslint-compat";
+import { RuleTester } from "eslint";
 import rule from "../../../src/rules/no-empty-mapping-value";
 import { loadTestCases } from "../../utils/utils";
-import * as yamlESLintParser from "yaml-eslint-parser";
+import plugin from "../../../src/index";
 
 const tester = new RuleTester({
-  languageOptions: {
-    parser: yamlESLintParser,
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
 tester.run(

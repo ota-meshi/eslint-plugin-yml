@@ -1,9 +1,9 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils/index.js";
 import { hasTabIndent, getNumOfIndent } from "../utils/yaml.js";
-import type { YAMLToken, Fix, RuleFixer, RuleContext } from "../types.js";
+import type { YAMLToken, RuleContext } from "../types.js";
 import { isHyphen, isQuestion, isColon } from "../utils/ast-utils.js";
-import { getSourceCode } from "../utils/compat.js";
+import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -124,7 +124,7 @@ export default createRule("indent", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -1018,7 +1018,7 @@ export default createRule("indent", {
           }
         }
       }
-      return function* (fixer: RuleFixer): IterableIterator<Fix> {
+      return function* (fixer: RuleTextEditor): IterableIterator<RuleTextEdit> {
         type Stack = {
           indent: number;
           parentIndent: number;
@@ -1071,7 +1071,7 @@ export default createRule("indent", {
     /**
      * Fix a line
      */
-    function* fixLine(fixer: RuleFixer, li: LineIndentStep2) {
+    function* fixLine(fixer: RuleTextEditor, li: LineIndentStep2) {
       if (li.indentBlockScalar) {
         const blockLiteral = li.indentBlockScalar.node;
         const diff = li.expectedIndent - li.actualIndent;

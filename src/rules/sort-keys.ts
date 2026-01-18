@@ -1,10 +1,10 @@
-import type { RuleFixer, SourceCode } from "../types.js";
 import naturalCompare from "natural-compare";
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils/index.js";
 import { isComma, isCommentToken } from "../utils/ast-utils.js";
-import { getSourceCode } from "../utils/compat.js";
 import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.js";
+import type { YAMLSourceCode } from "../language/yaml-source-code.js";
+import type { RuleTextEditor } from "@eslint/core";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -66,7 +66,10 @@ function isNewLine(char: string) {
 /**
  * Gets the property name of the given `YAMLPair` node.
  */
-function getPropertyName(node: AST.YAMLPair, sourceCode: SourceCode): string {
+function getPropertyName(
+  node: AST.YAMLPair,
+  sourceCode: YAMLSourceCode,
+): string {
   const prop = node.key;
   if (prop == null) {
     return "";
@@ -129,7 +132,7 @@ class YAMLPairData {
 class YAMLMappingData {
   public readonly node: AST.YAMLMapping;
 
-  public readonly sourceCode: SourceCode;
+  public readonly sourceCode: YAMLSourceCode;
 
   private readonly anchorAliasMap: Map<
     AST.YAMLPair,
@@ -143,7 +146,7 @@ class YAMLMappingData {
 
   public constructor(
     node: AST.YAMLMapping,
-    sourceCode: SourceCode,
+    sourceCode: YAMLSourceCode,
     anchorAliasMap: Map<
       AST.YAMLPair,
       {
@@ -164,7 +167,7 @@ class YAMLMappingData {
     ));
   }
 
-  public getPath(sourceCode: SourceCode): string {
+  public getPath(sourceCode: YAMLSourceCode): string {
     let path = "";
     let curr: AST.YAMLNode = this.node;
     let p: AST.YAMLNode | null = curr.parent;
@@ -234,7 +237,7 @@ function buildValidatorFromType(
  */
 function parseOptions(
   options: UserOptions,
-  sourceCode: SourceCode,
+  sourceCode: YAMLSourceCode,
 ): ParsedOption[] {
   if (isCompatibleWithESLintOptions(options)) {
     const type: OrderTypeOption = options[0] ?? "asc";
@@ -462,7 +465,7 @@ export default createRule("sort-keys", {
     type: "suggestion",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -795,7 +798,7 @@ export default createRule("sort-keys", {
      * Fix by moving the node after the target node for flow.
      */
     function* fixToMoveDownForFlow(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLPairData,
       moveTarget: YAMLPairData,
     ) {
@@ -843,7 +846,7 @@ export default createRule("sort-keys", {
      * Fix by moving the node before the target node for flow.
      */
     function* fixToMoveUpForFlow(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLPairData,
       moveTarget: YAMLPairData,
     ) {
@@ -886,7 +889,7 @@ export default createRule("sort-keys", {
      * Fix by moving the node after the target node for block.
      */
     function* fixToMoveDownForBlock(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLPairData,
       moveTarget: YAMLPairData,
     ) {
@@ -974,7 +977,7 @@ export default createRule("sort-keys", {
      * Fix by moving the node before the target node for block.
      */
     function* fixToMoveUpForBlock(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLPairData,
       moveTarget: YAMLPairData,
     ) {

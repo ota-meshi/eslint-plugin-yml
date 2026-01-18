@@ -40,7 +40,6 @@ const logger = console;
     ruleFile,
     `
 import type { AST } from "yaml-eslint-parser"
-import { getSourceCode } from "../utils/compat";
 import { createRule, defineWrapperListener, getCoreRule } from "../utils/index"
 const coreRule = getCoreRule("${ruleId}")
 import {
@@ -59,7 +58,7 @@ export default createRule("${ruleId}", {
         type: coreRule.meta!.type!,
     },
     create(context) {
-        const sourceCode = getSourceCode(context)
+        const sourceCode = context.sourceCode
         if (!sourceCode.parserServices?.isYAML) {
             return {}
         }
@@ -73,19 +72,17 @@ export default createRule("${ruleId}", {
   );
   fs.writeFileSync(
     testFile,
-    `import { RuleTester } from "../../utils/eslint-compat";
+    `import { RuleTester } from "eslint";
 import rule from "../../../src/rules/${ruleId}"
 import { loadTestCases } from "../../utils/utils";
-import * as yamlESLintParser from "yaml-eslint-parser";
+import plugin from "../../../src/index";
 
 const tester = new RuleTester({
-  languageOptions: {
-    parser: yamlESLintParser,
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
-// TODO Delete when it are done.
+// TODO Delete when it is done.
 makeSuiteTests("${ruleId}", {
     default: [],
     // never: ["never"],

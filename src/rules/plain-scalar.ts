@@ -1,7 +1,6 @@
 import { getStaticYAMLValue, parseForESLint } from "yaml-eslint-parser";
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils/index.js";
-import { getSourceCode } from "../utils/compat.js";
 
 const SYMBOLS = new Set([
   // mapping
@@ -86,7 +85,7 @@ export default createRule("plain-scalar", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

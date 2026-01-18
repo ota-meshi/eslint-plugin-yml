@@ -1,6 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils/index.js";
-import { getSourceCode } from "../utils/compat.js";
 
 export default createRule("no-trailing-zeros", {
   meta: {
@@ -18,7 +17,7 @@ export default createRule("no-trailing-zeros", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

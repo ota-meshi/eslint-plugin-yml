@@ -4,7 +4,6 @@ import { createRule } from "../utils/index.js";
 import type { CasingKind } from "../utils/casing.js";
 import { getChecker } from "../utils/casing.js";
 import { allowedCaseOptions } from "../utils/casing.js";
-import { getSourceCode } from "../utils/compat.js";
 
 type Option = {
   [key in CasingKind]?: boolean;
@@ -63,7 +62,7 @@ export default createRule("key-name-casing", {
     type: "suggestion",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

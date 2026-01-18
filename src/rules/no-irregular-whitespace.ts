@@ -1,7 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils/index.js";
 import type { YAMLNodeOrToken } from "../types.js";
-import { getSourceCode } from "../utils/compat.js";
 
 // ------------------------------------------------------------------------------
 // Constants
@@ -43,7 +42,7 @@ export default createRule("no-irregular-whitespace", {
     type: "problem",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
