@@ -70,7 +70,7 @@
     "diff-sequences": "^29.0.0",
     "escape-string-regexp": "5.0.0",
     "natural-compare": "^1.4.0",
-    "yaml-eslint-parser": "^1.2.1"
+    "yaml-eslint-parser": "^2.0.0"
   },
   "peerDependencies": {
     "eslint": ">=9.38.0"
