@@ -1,10 +1,9 @@
 import diffModule from "diff-sequences";
 
-type DiffSequencesModule = typeof import("diff-sequences");
 const diff =
   typeof diffModule === "function"
     ? diffModule
-    : (diffModule as { default: DiffSequencesModule["default"] }).default;
+    : (diffModule as { default: typeof diffModule }).default;
 
 export type DeleteEntry<E> = {
   type: "delete";
