@@ -1,16 +1,15 @@
 import assert from "assert";
 import plugin from "../../../src/index";
-import { ESLint } from "../../utils/eslint-compat";
+import { ESLint } from "eslint";
 
 const code = `foo:   42`;
 describe("`standard` config", () => {
   it("`standard` config should work. ", async () => {
     const linter = new ESLint({
-      overrideConfigFile: true as never,
-      // @ts-expect-error -- typing bug
+      overrideConfigFile: true,
       overrideConfig: [
-        ...(plugin.configs.recommended as never),
-        ...(plugin.configs.standard as never),
+        ...plugin.configs.recommended,
+        ...plugin.configs.standard,
       ],
     });
     const result = await linter.lintText(code, { filePath: "test.yml" });
@@ -45,11 +44,10 @@ describe("`standard` config", () => {
   });
   it("`flat/standard` config should work (backward compatibility). ", async () => {
     const linter = new ESLint({
-      overrideConfigFile: true as never,
-      // @ts-expect-error -- typing bug
+      overrideConfigFile: true,
       overrideConfig: [
-        ...(plugin.configs["flat/recommended"] as never),
-        ...(plugin.configs["flat/standard"] as never),
+        ...plugin.configs["flat/recommended"],
+        ...plugin.configs["flat/standard"],
       ],
     });
     const result = await linter.lintText(code, { filePath: "test.yml" });

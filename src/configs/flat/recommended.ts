@@ -17,4 +17,4 @@ export default [
       "yml/vue-custom-block/no-parsing-error": "error",
     },
   },
-] satisfies Linter.FlatConfig[];
+] satisfies Linter.Config[];

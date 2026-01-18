@@ -8,7 +8,6 @@ import {
 } from "../utils/yaml.js";
 import { isTokenOnSameLine, isCommentToken } from "../utils/ast-utils.js";
 import type { YAMLToken } from "../types.js";
-import { getSourceCode } from "../utils/compat.js";
 
 type UserOption =
   | "always"
@@ -60,7 +59,7 @@ export default createRule("flow-sequence-bracket-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

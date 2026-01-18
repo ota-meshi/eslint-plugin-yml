@@ -1,5 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
-import type { YAMLNodeOrToken, RuleFixer, Fix, RuleContext } from "../types.js";
+import type { YAMLNodeOrToken, RuleContext } from "../types.js";
 import { createRule } from "../utils/index.js";
 import { isColon, isComma } from "../utils/ast-utils.js";
 import {
@@ -9,7 +9,7 @@ import {
   unwrapMeta,
   processIndentFix,
 } from "../utils/yaml.js";
-import { getSourceCode } from "../utils/compat.js";
+import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -100,7 +100,7 @@ export default createRule("block-mapping", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -293,8 +293,8 @@ function canFixToFlow(mappingInfo: Stack, node: AST.YAMLBlockMapping) {
  * Build the fixer function that makes the flow style to block style.
  */
 function buildFixFlowToBlock(node: AST.YAMLFlowMapping, context: RuleContext) {
-  return function* (fixer: RuleFixer): IterableIterator<Fix> {
-    const sourceCode = getSourceCode(context);
+  return function* (fixer: RuleTextEditor): IterableIterator<RuleTextEdit> {
+    const sourceCode = context.sourceCode;
     const open = sourceCode.getFirstToken(node);
     const close = sourceCode.getLastToken(node);
     if (open?.value !== "{" || close?.value !== "}") {
@@ -364,7 +364,7 @@ function buildFixBlockToFlow(
   node: AST.YAMLBlockMapping,
   _context: RuleContext,
 ) {
-  return function* (fixer: RuleFixer): IterableIterator<Fix> {
+  return function* (fixer: RuleTextEditor): IterableIterator<RuleTextEdit> {
     yield fixer.insertTextBefore(node, "{");
     const pairs = [...node.pairs];
     const lastPair = pairs.pop()!;

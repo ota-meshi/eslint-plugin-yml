@@ -1,6 +1,6 @@
 import path from "path";
 import assert from "assert";
-import { ESLint } from "../utils/eslint-compat";
+import { ESLint } from "eslint";
 import { setPlugin } from "../fixtures/integrations/eslint-plugin/plugin-store.cjs";
 import semver from "semver";
 import plugin from "../../src/index";

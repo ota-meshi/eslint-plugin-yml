@@ -1,6 +1,5 @@
 import type { Linter } from "eslint";
 import type { RuleDefinition } from "@eslint/core";
-import type { RuleModule } from "./types.js";
 import { rules as ruleList } from "./utils/rules.js";
 import base from "./configs/flat/base.js";
 import recommended from "./configs/flat/recommended.js";
@@ -22,12 +21,8 @@ const configs = {
   "flat/prettier": prettier as Linter.Config[],
 };
 
-const rules = ruleList.reduce(
-  (obj, r) => {
-    obj[r.meta.docs.ruleName] = r;
-    return obj;
-  },
-  {} as { [key: string]: RuleModule },
+const rules = Object.fromEntries(
+  ruleList.map((r) => [r.meta.docs.ruleName, r]),
 ) as Record<string, RuleDefinition>;
 
 const languages = {

@@ -1,11 +1,12 @@
-import type { RuleFixer, SourceCode, YAMLToken } from "../types.js";
+import type { YAMLToken } from "../types.js";
 import naturalCompare from "natural-compare";
 import { createRule } from "../utils/index.js";
 import { isComma } from "../utils/ast-utils.js";
 import type { AST } from "yaml-eslint-parser";
 import { getStaticYAMLValue } from "yaml-eslint-parser";
-import { getSourceCode } from "../utils/compat.js";
 import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.js";
+import type { YAMLSourceCode } from "../language/yaml-source-code.js";
+import type { RuleTextEditor } from "@eslint/core";
 
 type YAMLValue = ReturnType<typeof getStaticYAMLValue>;
 
@@ -132,7 +133,7 @@ class YAMLEntryData {
 class YAMLSequenceData {
   public readonly node: AST.YAMLSequence;
 
-  public readonly sourceCode: SourceCode;
+  public readonly sourceCode: YAMLSourceCode;
 
   private readonly anchorAliasMap: Map<
     AST.YAMLContent | AST.YAMLWithMeta | null,
@@ -143,7 +144,7 @@ class YAMLSequenceData {
 
   public constructor(
     node: AST.YAMLSequence,
-    sourceCode: SourceCode,
+    sourceCode: YAMLSourceCode,
     anchorAliasMap: Map<
       YAMLEntry,
       {
@@ -214,7 +215,7 @@ function buildValidatorFromType(
  */
 function parseOptions(
   options: UserOptions,
-  sourceCode: SourceCode,
+  sourceCode: YAMLSourceCode,
 ): ParsedOption[] {
   return options.map((opt) => {
     const order = opt.order;
@@ -442,7 +443,7 @@ export default createRule("sort-sequence-values", {
     type: "suggestion",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -733,7 +734,7 @@ export default createRule("sort-sequence-values", {
      * Fix by moving the node after the target node for flow.
      */
     function* fixToMoveDownForFlow(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLEntryData,
       moveTarget: YAMLEntryData,
     ) {
@@ -786,7 +787,7 @@ export default createRule("sort-sequence-values", {
      * Fix by moving the node before the target node for flow.
      */
     function* fixToMoveUpForFlow(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLEntryData,
       moveTarget: YAMLEntryData,
     ) {
@@ -829,7 +830,7 @@ export default createRule("sort-sequence-values", {
      * Fix by moving the node after the target node for block.
      */
     function* fixToMoveDownForBlock(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLEntryData,
       moveTarget: YAMLEntryData,
     ) {
@@ -853,7 +854,7 @@ export default createRule("sort-sequence-values", {
      * Fix by moving the node before the target node for block.
      */
     function* fixToMoveUpForBlock(
-      fixer: RuleFixer,
+      fixer: RuleTextEditor,
       data: YAMLEntryData,
       moveTarget: YAMLEntryData,
     ) {

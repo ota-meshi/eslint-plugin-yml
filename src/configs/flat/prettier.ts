@@ -22,4 +22,4 @@ export default [
       "yml/quotes": "off",
     },
   },
-] satisfies Linter.FlatConfig[];
+] satisfies Linter.Config[];

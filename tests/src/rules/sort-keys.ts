@@ -1,15 +1,12 @@
 import fs from "fs";
-import { RuleTester } from "../../utils/eslint-compat";
+import path from "path";
+import { fileURLToPath } from "url";
+import { RuleTester } from "eslint";
 import rule from "../../../src/rules/sort-keys";
 import { loadTestCases } from "../../utils/utils";
+import plugin from "../../../src/index";
 
-const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
-});
+const tester = new RuleTester({});
 
 const OPTIONS_FOR_PACKAGE_JSON = [
   {
@@ -63,16 +60,25 @@ tester.run(
         // package.json
         {
           code: fs.readFileSync(
-            require.resolve("../../../package.json"),
+            path.resolve(
+              path.dirname(fileURLToPath(import.meta.url)),
+              "../../../package.json",
+            ),
             "utf-8",
           ),
           options: OPTIONS_FOR_PACKAGE_JSON,
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
 
         // JSON Schema
         {
           code: JSON.stringify(rule.meta.schema),
           options: OPTIONS_FOR_JSON_SCHEMA,
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
 
         // nest
@@ -107,6 +113,9 @@ tester.run(
               ],
             },
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `
@@ -134,6 +143,9 @@ tester.run(
               ],
             },
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
       ],
       invalid: [
@@ -173,6 +185,9 @@ tester.run(
             "Expected mapping keys to be in specified order. 'extends' should be after 'plugins'.",
             "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
 
         // JSON Schema
@@ -204,6 +219,9 @@ tester.run(
             "Expected mapping keys to be in specified order. 'additionalProperties' should be after 'properties'.",
             "Expected mapping keys to be in specified order. 'minItems' should be after 'type'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `
@@ -232,6 +250,9 @@ tester.run(
           errors: [
             "Expected mapping keys to be in specified order. 'minItems' should be after 'type'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
 
         // Other
@@ -284,6 +305,9 @@ tester.run(
             "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
             "Expected mapping keys to be in ascending order. 'f' should be after 'e'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
 
         // nest
@@ -334,6 +358,9 @@ tester.run(
             "Expected mapping keys to be in specified order. 'd' should be after 'c'.",
             "Expected mapping keys to be in specified order. 'f' should be before 'g'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `
@@ -381,6 +408,9 @@ tester.run(
           errors: [
             "Expected mapping keys to be in specified order. 'z' should be after 'g'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `
@@ -428,6 +458,9 @@ tester.run(
           errors: [
             "Expected mapping keys to be in specified order. 'z' should be after 'g'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `- b: 1
@@ -446,6 +479,9 @@ tester.run(
   b: 1
   c: 2
 `,
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `
@@ -466,6 +502,9 @@ tester.run(
   b: 1
   c: 2
 `,
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `b: 1
@@ -485,6 +524,9 @@ a: 3
 b: 1
 c: 2
 `,
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: ` b: 1
@@ -504,6 +546,9 @@ c: 2
  b: 1
  c: 2
 `,
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `
@@ -524,6 +569,9 @@ a: 3
 b: 1
 c: 2
 `,
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `
@@ -554,6 +602,9 @@ product:
             "Expected mapping keys to be in ascending order. 'sku' should be after 'price'.",
             "Expected mapping keys to be in ascending order. 'quantity' should be after 'price'.",
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `b: 2
@@ -570,6 +621,9 @@ c: 3`,
               column: 1,
             },
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
         {
           code: `b: |
@@ -588,6 +642,9 @@ c: 3`,
               column: 1,
             },
           ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
         },
       ],
     },

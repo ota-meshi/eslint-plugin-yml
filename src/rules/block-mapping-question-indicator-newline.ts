@@ -1,6 +1,5 @@
 import { createRule } from "../utils/index.js";
 import { isQuestion } from "../utils/ast-utils.js";
-import { getSourceCode } from "../utils/compat.js";
 
 export default createRule("block-mapping-question-indicator-newline", {
   meta: {
@@ -25,7 +24,7 @@ export default createRule("block-mapping-question-indicator-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
