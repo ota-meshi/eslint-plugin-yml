@@ -1,5 +1,23 @@
 # eslint-plugin-yml
 
+## 2.0.0
+
+### Major Changes
+
+- [#532](https://github.com/ota-meshi/eslint-plugin-yml/pull/532) [`40eb4be`](https://github.com/ota-meshi/eslint-plugin-yml/commit/40eb4bee573a66f13cf12dd0162b78bfc5ab73a1) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - feat: add ESLint language plugin support
+
+- [#528](https://github.com/ota-meshi/eslint-plugin-yml/pull/528) [`c4e74d0`](https://github.com/ota-meshi/eslint-plugin-yml/commit/c4e74d0f5bb39c85028c90c5d5f8557b1c6c8829) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Convert package to ESM-only. The package now uses `"type": "module"` and only exports ESM modules. CommonJS `require()` is no longer supported. Users must use ES modules (`import`) to load this plugin.
+
+- [#527](https://github.com/ota-meshi/eslint-plugin-yml/pull/527) [`4059169`](https://github.com/ota-meshi/eslint-plugin-yml/commit/40591697f7bb23cad0076ac53b188ca9de7203b0) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Drop support for legacy ESLint config format. The plugin now exports flat configuration as the main configuration format. The previous `flat/*` namespace is kept for backward compatibility.
+
+- [#524](https://github.com/ota-meshi/eslint-plugin-yml/pull/524) [`2260263`](https://github.com/ota-meshi/eslint-plugin-yml/commit/2260263247825ddc1e6803fc328a5b5ea53d117c) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Drop support for ESLint versions older than 9.38.0. The new supported version is `>=9.38.0`.
+
+- [#522](https://github.com/ota-meshi/eslint-plugin-yml/pull/522) [`dc5028e`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dc5028eb222a1b247d0c51cbb9afbf479d01bdd8) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Drop support for Node.js versions older than 20.19.0. The new supported version is `^20.19.0 || ^22.13.0 || >=24`.
+
+- [#526](https://github.com/ota-meshi/eslint-plugin-yml/pull/526) [`3e7cb79`](https://github.com/ota-meshi/eslint-plugin-yml/commit/3e7cb79b9873f50acad785d6ed23233084ed428c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: update `standard` config
+
+- [#523](https://github.com/ota-meshi/eslint-plugin-yml/pull/523) [`50a96f8`](https://github.com/ota-meshi/eslint-plugin-yml/commit/50a96f81e81c53b5648ffe1aae19575fd0ceccb1) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependency yaml-eslint-parser to v2
+
 ## 1.19.1
 
 ### Patch Changes
