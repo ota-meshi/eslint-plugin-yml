@@ -30,7 +30,10 @@ describe("`base` config", () => {
     // Find the config object that has files and language settings
     const yamlConfig = baseConfig.find((config) => 
       Array.isArray(config.files) && 
-      config.files.some((f: string) => f.includes("*.yml") || f.includes("*.yaml"))
+      config.files.some((f: string) => 
+        f === "*.yml" || f === "*.yaml" || 
+        f === "**/*.yml" || f === "**/*.yaml"
+      )
     );
 
     assert.ok(yamlConfig, "Should have a config for YAML files");
