@@ -26,14 +26,18 @@ describe("`base` config", () => {
 
   it("`base` config should use language config instead of parser", () => {
     const baseConfig = plugin.configs.base;
-    
+
     // Find the config object that has files and language settings
-    const yamlConfig = baseConfig.find((config) => 
-      Array.isArray(config.files) && 
-      config.files.some((f: string) => 
-        f === "*.yml" || f === "*.yaml" || 
-        f === "**/*.yml" || f === "**/*.yaml"
-      )
+    const yamlConfig = baseConfig.find(
+      (config) =>
+        Array.isArray(config.files) &&
+        config.files.some(
+          (f: string) =>
+            f === "*.yml" ||
+            f === "*.yaml" ||
+            f === "**/*.yml" ||
+            f === "**/*.yaml",
+        ),
     );
 
     assert.ok(yamlConfig, "Should have a config for YAML files");
