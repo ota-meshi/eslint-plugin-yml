@@ -427,25 +427,25 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
     if (node?.type !== "Program") {
       return null;
     }
-    const fakeGlobalScope: Scope.Scope = {
-      type: "global",
-      block: node as never,
-      set: new Map(),
-      through: [],
-      childScopes: [],
-      variableScope: null as never,
-      variables: [],
-      references: [],
-      functionExpressionScope: false,
-      isStrict: false,
-      upper: null,
-      implicit: {
-        variables: [],
-        set: new Map(),
+    return createFakeGlobalScope(this.ast);
+  }
+
+  /**
+   * Compatibility for ESLint's SourceCode API
+   * @deprecated YAML does not have scopes
+   */
+  public get scopeManager(): Scope.ScopeManager | null {
+    return {
+      scopes: [],
+      globalScope: createFakeGlobalScope(this.ast),
+      acquire: (node) => {
+        if (node.type === "Program") {
+          return createFakeGlobalScope(this.ast);
+        }
+        return null;
       },
+      getDeclaredVariables: () => [],
     };
-    fakeGlobalScope.variableScope = fakeGlobalScope;
-    return fakeGlobalScope;
   }
 
   /**
@@ -494,4 +494,30 @@ function isNode(value: unknown): value is AST.YAMLNode {
  */
 function nodesOrTokensOverlap(first: YAMLToken, second: YAMLToken): boolean {
   return first.range[0] < second.range[1] && second.range[0] < first.range[1];
+}
+
+/**
+ * Creates a fake global scope for YAML files.
+ * @deprecated YAML does not have scopes
+ */
+function createFakeGlobalScope(node: AST.YAMLProgram): Scope.Scope {
+  const fakeGlobalScope: Scope.Scope = {
+    type: "global",
+    block: node as never,
+    set: new Map(),
+    through: [],
+    childScopes: [],
+    variableScope: null as never,
+    variables: [],
+    references: [],
+    functionExpressionScope: false,
+    isStrict: false,
+    upper: null,
+    implicit: {
+      variables: [],
+      set: new Map(),
+    },
+  };
+  fakeGlobalScope.variableScope = fakeGlobalScope;
+  return fakeGlobalScope;
 }
