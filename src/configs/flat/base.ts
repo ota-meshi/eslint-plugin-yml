@@ -1,5 +1,4 @@
 import type { ESLint, Linter } from "eslint";
-import * as parser from "yaml-eslint-parser";
 import plugin from "../../index.js";
 
 export default [
@@ -13,9 +12,7 @@ export default [
   },
   {
     files: ["*.yaml", "**/*.yaml", "*.yml", "**/*.yml"],
-    languageOptions: {
-      parser,
-    },
+    language: "yml/yaml",
     rules: {
       // ESLint core rules known to cause problems with YAML.
       "no-irregular-whitespace": "off",
