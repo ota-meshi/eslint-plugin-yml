@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-yml",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "This ESLint plugin provides linting rules for YAML.",
   "type": "module",
   "main": "lib/index.mjs",
