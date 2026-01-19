@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.0.0
+
+### Major Changes
+
+- [#543](https://github.com/ota-meshi/eslint-plugin-yml/pull/543) [`12df7f4`](https://github.com/ota-meshi/eslint-plugin-yml/commit/12df7f430855645aab9643e4ec1a443839bfa215) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Use language config in shareable configs. The shareable configs now use the new ESLint v9 language config API (`language: "yml/yaml"`) instead of the legacy parser approach (`languageOptions: { parser }`). This is a breaking change that aligns with ESLint's language plugin architecture.
+
 ## 2.0.2
 
 ### Patch Changes
