@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 2.0.2
+
+### Patch Changes
+
+- [#539](https://github.com/ota-meshi/eslint-plugin-yml/pull/539) [`0fc8d41`](https://github.com/ota-meshi/eslint-plugin-yml/commit/0fc8d41fa3fd17afdc8f399d61977334ba13fcc3) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: add fake scopeManager for SourceCode API compatibility
+
 ## 2.0.1
 
 ### Patch Changes
