@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 2.0.1
+
+### Patch Changes
+
+- [#536](https://github.com/ota-meshi/eslint-plugin-yml/pull/536) [`c7a45cd`](https://github.com/ota-meshi/eslint-plugin-yml/commit/c7a45cd09e9f7f4b87ea623913e6467490576710) Thanks [@luxass](https://github.com/luxass)! - fix: handle diff-sequences import issue
+
 ## 2.0.0
 
 ### Major Changes
