@@ -1,10 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":preserveSemverRanges",
-    ":disableDependencyDashboard"
-  ],
+  "extends": ["config:base", ":preserveSemverRanges"],
   "packageRules": [
     {
       "updateTypes": ["minor", "patch", "pin", "digest"],
