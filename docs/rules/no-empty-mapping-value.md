@@ -24,7 +24,9 @@ This rule reports empty mapping values.
 # eslint yml/no-empty-mapping-value: 'error'
 
 # ✓ GOOD
-"GOOD": "foo"
+"GOOD_1": null
+"GOOD_2": "foo"
+"GOOD_3": ""
 
 # ✗ BAD
 "BAD": 
