@@ -1,6 +1,6 @@
-import assert from "assert";
+import assert from "node:assert";
 import { parseForESLint } from "yaml-eslint-parser";
-import { YAMLSourceCode } from "../../../src/language/yaml-source-code";
+import { YAMLSourceCode } from "../../../src/language/yaml-source-code.ts";
 
 function createSourceCode(code: string): YAMLSourceCode {
   const result = parseForESLint(code);

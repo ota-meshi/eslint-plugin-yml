@@ -1,14 +1,14 @@
-import fs from "fs";
-import path from "path";
-import assert from "assert";
+import fs from "node:fs";
+import path from "node:path";
+import assert from "node:assert";
 import type { RuleTester } from "eslint";
 import { Linter } from "eslint";
 import type { Linter as LinterType } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import * as vueESLintParser from "vue-eslint-parser";
 import plugin from "../../src/index.ts";
-import type { YMLSettings } from "../../src/types";
-import { applyFixes } from "./apply-fixer";
+import type { YMLSettings } from "../../src/types.ts";
+import { applyFixes } from "./apply-fixer.ts";
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string

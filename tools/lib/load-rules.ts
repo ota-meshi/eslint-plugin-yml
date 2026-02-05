@@ -1,7 +1,7 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
-import type { RuleModule } from "../../src/types";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import type { RuleModule } from "../../src/types.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

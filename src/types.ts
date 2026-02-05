@@ -2,7 +2,7 @@
 import type { JSONSchema4 } from "json-schema";
 import type * as core from "@eslint/core";
 import type { AST } from "yaml-eslint-parser";
-import type { YAMLLanguageOptions, YAMLSourceCode } from "./language";
+import type { YAMLLanguageOptions, YAMLSourceCode } from "./language/index.ts";
 export interface RuleListener {
   YAMLDocument?: (node: AST.YAMLDocument) => void;
   "YAMLDocument:exit"?: (node: AST.YAMLDocument) => void;

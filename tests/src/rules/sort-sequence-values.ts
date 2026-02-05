@@ -1,7 +1,7 @@
 import { RuleTester } from "eslint";
-import rule from "../../../src/rules/sort-sequence-values";
-import { loadTestCases } from "../../utils/utils";
-import plugin from "../../../src/index";
+import rule from "../../../src/rules/sort-sequence-values.ts";
+import { loadTestCases } from "../../utils/utils.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({});
 

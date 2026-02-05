@@ -1,7 +1,7 @@
 import { RuleTester } from "eslint";
-import rule from "../../../src/rules/block-mapping-question-indicator-newline";
-import { loadTestCases } from "../../utils/utils";
-import plugin from "../../../src/index";
+import rule from "../../../src/rules/block-mapping-question-indicator-newline.ts";
+import { loadTestCases } from "../../utils/utils.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
   plugins: { yml: plugin },

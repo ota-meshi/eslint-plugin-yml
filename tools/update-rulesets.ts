@@ -1,10 +1,10 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
-import os from "os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import os from "node:os";
 // import eslint from "eslint"
-import { rules } from "./lib/load-rules";
-import type { RuleModule } from "../src/types";
+import { rules } from "./lib/load-rules.ts";
+import type { RuleModule } from "../src/types.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

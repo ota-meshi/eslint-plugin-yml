@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { createRule } from "../utils/index.js";
 
 export default createRule("file-extension", {

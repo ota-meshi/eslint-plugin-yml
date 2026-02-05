@@ -1,6 +1,6 @@
-import assert from "assert";
+import assert from "node:assert";
 import { parseYAML } from "yaml-eslint-parser";
-import { TokenStore } from "../../../src/language/token-store";
+import { TokenStore } from "../../../src/language/token-store.ts";
 import type { AST } from "yaml-eslint-parser";
 
 function parse(code: string): AST.YAMLProgram {

@@ -1,6 +1,6 @@
-import assert from "assert";
+import assert from "node:assert";
 import { Linter } from "eslint";
-import plugin from "../../../src/index";
+import plugin from "../../../src/index.ts";
 
 /**
  * Creates a config array for testing with the specified rules.
