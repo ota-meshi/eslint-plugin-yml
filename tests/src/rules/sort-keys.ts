@@ -1,10 +1,10 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { RuleTester } from "eslint";
-import rule from "../../../src/rules/sort-keys";
-import { loadTestCases } from "../../utils/utils";
-import plugin from "../../../src/index";
+import rule from "../../../src/rules/sort-keys.ts";
+import { loadTestCases } from "../../utils/utils.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({});
 

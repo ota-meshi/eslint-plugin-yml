@@ -2,7 +2,7 @@
 import type { RuleModule, PartialRuleModule } from "../types.js";
 import type { Rule } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
-import path from "path";
+import path from "node:path";
 
 /**
  * Define the rule.

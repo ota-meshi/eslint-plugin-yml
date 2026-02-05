@@ -1,6 +1,6 @@
 import { RuleTester } from "eslint";
-import rule from "../../../src/rules/file-extension";
-import plugin from "../../../src/index";
+import rule from "../../../src/rules/file-extension.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
   plugins: { yml: plugin },

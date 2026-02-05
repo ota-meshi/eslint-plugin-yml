@@ -1,6 +1,6 @@
 import { RuleTester } from "eslint";
-import rule from "../../../src/rules/key-spacing";
-import { loadTestCases } from "../../utils/utils";
+import rule from "../../../src/rules/key-spacing.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 
 const tester = new RuleTester({});
 

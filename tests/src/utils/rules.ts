@@ -1,9 +1,9 @@
-import type { RuleModule } from "../../../src/types";
-import assert from "assert";
-import path from "path";
-import fs from "fs";
+import type { RuleModule } from "../../../src/types.ts";
+import assert from "node:assert";
+import path from "node:path";
+import fs from "node:fs";
 
-import { rules as allRules } from "../../../src/utils/rules";
+import { rules as allRules } from "../../../src/utils/rules.ts";
 
 /**
  * @returns {Array} Get the list of rules placed in the directory.

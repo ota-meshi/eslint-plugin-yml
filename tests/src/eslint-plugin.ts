@@ -1,9 +1,9 @@
-import path from "path";
-import assert from "assert";
+import path from "node:path";
+import assert from "node:assert";
 import { ESLint } from "eslint";
 import { setPlugin } from "../fixtures/integrations/eslint-plugin/plugin-store.cjs";
 import semver from "semver";
-import plugin from "../../src/index";
+import plugin from "../../src/index.ts";
 
 // -----------------------------------------------------------------------------
 // Tests

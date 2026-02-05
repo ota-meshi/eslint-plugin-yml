@@ -1,6 +1,6 @@
 import { RuleTester } from "eslint";
-import rule from "../../../src/rules/key-name-casing";
-import plugin from "../../../src/index";
+import rule from "../../../src/rules/key-name-casing.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
   plugins: { yml: plugin },

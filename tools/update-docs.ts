@@ -1,9 +1,9 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
-import { rules } from "../src/utils/rules";
-import type { RuleModule } from "../src/types";
-import { getNewVersion } from "./lib/changesets-util";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import { rules } from "../src/utils/rules.ts";
+import type { RuleModule } from "../src/types.ts";
+import { getNewVersion } from "./lib/changesets-util.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

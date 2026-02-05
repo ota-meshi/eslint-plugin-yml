@@ -1,6 +1,6 @@
 import { RuleTester } from "eslint";
-import rule from "../../../src/rules/no-irregular-whitespace";
-import { loadTestCases } from "../../utils/utils";
+import rule from "../../../src/rules/no-irregular-whitespace.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 
 const tester = new RuleTester({});
 
