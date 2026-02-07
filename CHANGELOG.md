@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.1.2
+
+### Patch Changes
+
+- [#569](https://github.com/ota-meshi/eslint-plugin-yml/pull/569) [`21904d6`](https://github.com/ota-meshi/eslint-plugin-yml/commit/21904d649574bcf5e2c64c3e341fa09ddab5ddce) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: type bug with eslint v10
+
 ## 3.1.1
 
 ### Patch Changes
