@@ -1,5 +1,5 @@
 /* eslint @typescript-eslint/no-explicit-any: off -- util */
-import type { RuleModule, PartialRuleModule } from "../types.js";
+import type { RuleModule, PartialRuleModule, RuleContext } from "../types.js";
 import type { Rule } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import path from "node:path";
@@ -23,8 +23,8 @@ export function createRule(
         ruleName,
       },
     },
-    create(context: Rule.RuleContext): any {
-      const sourceCode = context.sourceCode;
+    create(context: RuleContext): any {
+      const sourceCode = (context as unknown as Rule.RuleContext).sourceCode;
       if (
         typeof sourceCode.parserServices?.defineCustomBlocksVisitor ===
           "function" &&
@@ -43,7 +43,7 @@ export function createRule(
           },
         );
       }
-      return rule.create(context as any, {
+      return rule.create(context, {
         customBlock: false,
       });
     },

@@ -3,7 +3,6 @@
   "exclude": ["tests/**/*", "tools/**/*", "typings/**/*", "docs/**/*"],
   "compilerOptions": {
     "removeComments": true /* Do not emit comments to output. */,
-    "noEmit": false,
-    "allowImportingTsExtensions": false
+    "noEmit": true
   }
 }
