@@ -67,11 +67,11 @@ export class YAMLLanguage implements Language<{
       ecmaVersion: "latest",
     };
     return {
+      ...fakeProperties,
       ...languageOptions,
       parserOptions: {
         ...languageOptions.parserOptions,
       },
-      ...fakeProperties,
     };
   }
 
