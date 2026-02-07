@@ -1,5 +1,13 @@
 # eslint-plugin-yml
 
+## 3.1.0
+
+### Minor Changes
+
+- [#564](https://github.com/ota-meshi/eslint-plugin-yml/pull/564) [`c8ff016`](https://github.com/ota-meshi/eslint-plugin-yml/commit/c8ff016b762ccfb43406ee45eefe2a338d3bcb16) Thanks [@antfu](https://github.com/antfu)! - Add ESLint v10 compatibility while maintaining v9 support
+  - Migrated from deprecated `isSpaceBetweenTokens()` to `isSpaceBetween()` API
+  - All changes are backward compatible with ESLint v9
+
 ## 3.0.0
 
 ### Major Changes
