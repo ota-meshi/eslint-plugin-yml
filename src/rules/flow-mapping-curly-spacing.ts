@@ -207,7 +207,7 @@ export default createRule("flow-mapping-curly-spacing", {
       last: YAMLToken,
     ) {
       if (isTokenOnSameLine(first, second)) {
-        const firstSpaced = sourceCode.isSpaceBetweenTokens(first, second);
+        const firstSpaced = sourceCode.isSpaceBetween(first, second);
 
         if (options.isOpeningCurlyBraceMustBeSpaced(second)) {
           if (!firstSpaced) reportRequiredBeginningSpace(node, first);
@@ -218,7 +218,7 @@ export default createRule("flow-mapping-curly-spacing", {
       }
 
       if (isTokenOnSameLine(penultimate, last)) {
-        const lastSpaced = sourceCode.isSpaceBetweenTokens(penultimate, last);
+        const lastSpaced = sourceCode.isSpaceBetween(penultimate, last);
 
         if (options.isClosingCurlyBraceMustBeSpaced(penultimate)) {
           if (!lastSpaced) reportRequiredEndingSpace(node, last);
