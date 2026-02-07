@@ -467,8 +467,11 @@ export default createRule("indent", {
       "Program:exit"(node) {
         const lineIndentsWk: (LineIndentStep1 | undefined)[] = [];
         let tokensOnSameLine: YAMLToken[] = [];
+
         // Validate indentation of tokens.
-        for (const token of sourceCode.getTokens(node, ITERATION_OPTS)) {
+        for (const token of [...node.comments, ...node.tokens].sort(
+          (a, b) => a.range[0] - b.range[0],
+        )) {
           if (
             tokensOnSameLine.length === 0 ||
             tokensOnSameLine[0].loc.start.line === token.loc.start.line
