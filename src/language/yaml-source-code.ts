@@ -445,6 +445,9 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
         return null;
       },
       getDeclaredVariables: () => [],
+      addGlobals: () => {
+        // noop
+      },
     };
   }
 
