@@ -9,7 +9,7 @@
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-yml.svg)](http://www.npmtrends.com/eslint-plugin-yml)
 [![NPM downloads](https://img.shields.io/npm/dy/eslint-plugin-yml.svg)](http://www.npmtrends.com/eslint-plugin-yml)
 [![NPM downloads](https://img.shields.io/npm/dt/eslint-plugin-yml.svg)](http://www.npmtrends.com/eslint-plugin-yml)
-[![Build Status](https://github.com/ota-meshi/eslint-plugin-yml/workflows/CI/badge.svg?branch=master)](https://github.com/ota-meshi/eslint-plugin-yml/actions?query=workflow%3ACI)
+[![Build Status](https://github.com/ota-meshi/eslint-plugin-yml/actions/workflows/NodeCI.yml/badge.svg)](https://github.com/ota-meshi/eslint-plugin-yml/actions/workflows/NodeCI.yml)
 [![Coverage Status](https://coveralls.io/repos/github/ota-meshi/eslint-plugin-yml/badge.svg?branch=master)](https://coveralls.io/github/ota-meshi/eslint-plugin-yml?branch=master)
 
 ## :name_badge: Features
