@@ -63,11 +63,15 @@ export class YAMLLanguage implements Language<{
   public normalizeLanguageOptions(
     languageOptions: YAMLLanguageOptions,
   ): YAMLLanguageOptions {
+    const fakeProperties: Record<string, unknown> = {
+      ecmaVersion: "latest",
+    };
     return {
       ...languageOptions,
       parserOptions: {
         ...languageOptions.parserOptions,
       },
+      ...fakeProperties,
     };
   }
 
