@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.2.0
+
+### Minor Changes
+
+- [#573](https://github.com/ota-meshi/eslint-plugin-yml/pull/573) [`099cb89`](https://github.com/ota-meshi/eslint-plugin-yml/commit/099cb89a50e0e3a23632671a382dd2c1a194e373) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: use `@ota-meshi/ast-token-store`
+
 ## 3.1.2
 
 ### Patch Changes
