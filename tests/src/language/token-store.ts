@@ -1,17 +1,24 @@
 import assert from "node:assert";
 import { parseYAML } from "yaml-eslint-parser";
-import { TokenStore } from "../../../src/language/token-store.ts";
+import { TokenStore } from "@ota-meshi/ast-token-store";
 import type { AST } from "yaml-eslint-parser";
 
 function parse(code: string): AST.YAMLProgram {
   return parseYAML(code);
 }
 
+function createStore(ast: AST.YAMLProgram) {
+  return new TokenStore<AST.YAMLNode, AST.Token, AST.Comment>({
+    tokens: [...ast.tokens, ...ast.comments],
+    isComment: (token): token is AST.Comment => token.type === "Block",
+  });
+}
+
 describe("TokenStore", () => {
   describe("getFirstToken", () => {
     it("should return the first token of a node", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -30,7 +37,7 @@ describe("TokenStore", () => {
 
     it("should return the first token with skip option", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -48,7 +55,7 @@ describe("TokenStore", () => {
 
     it("should return null when skip exceeds available tokens", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -65,7 +72,7 @@ describe("TokenStore", () => {
     it("should exclude comments by default", () => {
       const ast = parse(`arr: [1, # comment
   2]`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -93,7 +100,7 @@ describe("TokenStore", () => {
 
     it("should filter tokens with filter option", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -115,7 +122,7 @@ describe("TokenStore", () => {
   describe("getLastToken", () => {
     it("should return the last token of a node", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -132,7 +139,7 @@ describe("TokenStore", () => {
 
     it("should return the last token with skip option", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -151,7 +158,7 @@ describe("TokenStore", () => {
     it("should exclude comments by default", () => {
       const ast = parse(`arr: [1 # comment
   ]`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -180,7 +187,7 @@ describe("TokenStore", () => {
     it("should include comments when option is set", () => {
       const ast = parse(`arr: [1 # comment
   ]`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -207,7 +214,7 @@ describe("TokenStore", () => {
   describe("getTokenBefore", () => {
     it("should return the token before a node", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -228,7 +235,7 @@ describe("TokenStore", () => {
 
     it("should return null when there is no token before", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -245,7 +252,7 @@ describe("TokenStore", () => {
     it("should exclude comments by default", () => {
       const ast = parse(`key1: value1 # comment
 key2: value2`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -268,7 +275,7 @@ key2: value2`);
     it("should return the token after a node", () => {
       const ast = parse(`key: value
 another: test`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -287,7 +294,7 @@ another: test`);
 
     it("should return null when there is no token after", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -304,7 +311,7 @@ another: test`);
     it("should exclude comments by default", () => {
       const ast = parse(`key1: value1 # comment
 key2: value2`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -325,7 +332,7 @@ key2: value2`);
   describe("getTokensBefore", () => {
     it("should return tokens before a node", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -347,7 +354,7 @@ key2: value2`);
   describe("getTokens", () => {
     it("should return all tokens within a node", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -367,7 +374,7 @@ key2: value2`);
 
     it("should limit tokens with count option", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -383,7 +390,7 @@ key2: value2`);
 
     it("should filter tokens with filter option", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -404,7 +411,7 @@ key2: value2`);
   describe("getTokensBetween", () => {
     it("should return tokens between two nodes", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -425,7 +432,7 @@ key2: value2`);
   describe("getFirstTokenBetween", () => {
     it("should return the first token between two nodes", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -445,7 +452,7 @@ key2: value2`);
     it("should exclude comments by default", () => {
       const ast = parse(`arr: [1, # comment
   2, 3]`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -472,7 +479,7 @@ key2: value2`);
     it("should include comments when option is set", () => {
       const ast = parse(`arr: [1, # comment
   2, 3]`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -514,7 +521,7 @@ key2: value2`);
     it("should return comments directly before a node", () => {
       const ast = parse(`# comment
 key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -533,7 +540,7 @@ key: value`);
       const ast = parse(`# comment1
 # comment2
 key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -551,7 +558,7 @@ key: value`);
 
     it("should return empty array when no comments before", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -569,7 +576,7 @@ key: value`);
       const ast = parse(`key1: value1
 # comment
 key2: value2`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -588,7 +595,7 @@ key2: value2`);
   describe("getCommentsAfter", () => {
     it("should return comments directly after a node", () => {
       const ast = parse(`key: value # comment`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -605,7 +612,7 @@ key2: value2`);
 
     it("should return empty array when no comments after", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -622,7 +629,7 @@ key2: value2`);
     it("should stop at non-comment token", () => {
       const ast = parse(`key1: value1 # comment
 key2: value2`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -641,7 +648,7 @@ key2: value2`);
   describe("options as number", () => {
     it("should treat number option as skip for getFirstToken", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -659,7 +666,7 @@ key2: value2`);
 
     it("should treat number option as count for getTokens", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -677,7 +684,7 @@ key2: value2`);
   describe("options as filter function", () => {
     it("should use function as filter for getFirstToken", () => {
       const ast = parse(`key: value`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -696,7 +703,7 @@ key2: value2`);
   describe("complex YAML structures", () => {
     it("should handle flow sequence tokens", () => {
       const ast = parse(`arr: [1, 2, 3]`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -718,7 +725,7 @@ key2: value2`);
 
     it("should handle flow mapping tokens", () => {
       const ast = parse(`inline: { a: 1, b: 2 }`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
@@ -742,7 +749,7 @@ key2: value2`);
       const ast = parse(`items:
   - item1
   - item2`);
-      const store = new TokenStore({ ast });
+      const store = createStore(ast);
       const doc = ast.body[0];
       assert.strictEqual(doc.type, "YAMLDocument");
       const content = doc.content;
