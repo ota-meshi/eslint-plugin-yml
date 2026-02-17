@@ -15,12 +15,15 @@ import {
   Directive as DirectiveImpl,
 } from "@eslint/plugin-kit";
 import type { DirectiveType, FileProblem, RulesConfig } from "@eslint/core";
-import type {
-  CursorWithCountOptions,
-  CursorWithSkipOptions,
-  FilterPredicate,
-} from "./token-store.js";
-import { TokenStore } from "./token-store.js";
+import {
+  TokenStore,
+  type CursorWithSkipOptionsWithoutFilter,
+  type CursorWithSkipOptionsWithFilter,
+  type CursorWithSkipOptionsWithComment,
+  type CursorWithCountOptionsWithoutFilter,
+  type CursorWithCountOptionsWithFilter,
+  type CursorWithCountOptionsWithComment,
+} from "@ota-meshi/ast-token-store";
 import type { Scope } from "eslint";
 
 //-----------------------------------------------------------------------------
@@ -60,7 +63,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
 
   public readonly visitorKeys: Record<string, string[]>;
 
-  private readonly tokenStore: TokenStore;
+  private readonly tokenStore: TokenStore<AST.YAMLNode, AST.Token, AST.Comment>;
 
   #steps: TraversalStep[] | null = null;
 
@@ -85,7 +88,10 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
     this.hasBOM = Boolean(config.hasBOM);
     this.parserServices = config.parserServices;
     this.visitorKeys = config.visitorKeys || {};
-    this.tokenStore = new TokenStore({ ast: this.ast });
+    this.tokenStore = new TokenStore<AST.YAMLNode, AST.Token, AST.Comment>({
+      tokens: [...config.ast.tokens, ...config.ast.comments],
+      isComment: (token): token is AST.Comment => token.type === "Block",
+    });
   }
 
   public traverse(): Iterable<TraversalStep> {
@@ -151,7 +157,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
   }
 
   public getAllComments(): AST.Comment[] {
-    return this.ast.comments;
+    return this.tokenStore.getAllComments();
   }
 
   /**
@@ -297,90 +303,514 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
     }
   }
 
+  /**
+   * Gets the first token of the given node.
+   */
   public getFirstToken(node: YAMLSyntaxElement): AST.Token;
 
+  /**
+   * Gets the first token of the given node with options.
+   */
   public getFirstToken(
     node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null;
+    options: CursorWithSkipOptionsWithoutFilter,
+  ): AST.Token | null;
+
+  /**
+   * Gets the first token of the given node with filter options.
+   */
+  public getFirstToken<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithFilter<AST.Token, R>,
+  ): R | null;
+
+  /**
+   * Gets the first token of the given node with comment options.
+   */
+  public getFirstToken<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R | null;
 
   public getFirstToken(
     node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null {
-    return this.tokenStore.getFirstToken(node, options);
+    options?:
+      | CursorWithSkipOptionsWithoutFilter
+      | CursorWithSkipOptionsWithFilter<AST.Token>
+      | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
+  ): AST.Token | AST.Comment | null {
+    return this.tokenStore.getFirstToken(node, options as never);
   }
 
+  /**
+   * Gets the first tokens of the given node.
+   */
+  public getFirstTokens(
+    node: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Gets the first tokens of the given node with filter options.
+   */
+  public getFirstTokens<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Gets the first tokens of the given node with comment options.
+   */
+  public getFirstTokens<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
+
+  public getFirstTokens(
+    node: YAMLSyntaxElement,
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getFirstTokens(node, options as never);
+  }
+
+  /**
+   * Gets the last token of the given node.
+   */
   public getLastToken(node: YAMLSyntaxElement): AST.Token;
 
+  /**
+   * Gets the last token of the given node with options.
+   */
   public getLastToken(
     node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null;
+    options: CursorWithSkipOptionsWithoutFilter,
+  ): AST.Token | null;
+
+  /**
+   * Gets the last token of the given node with filter options.
+   */
+  public getLastToken<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithFilter<AST.Token, R>,
+  ): R | null;
+
+  /**
+   * Gets the last token of the given node with comment options.
+   */
+  public getLastToken<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R | null;
 
   public getLastToken(
     node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null {
-    return this.tokenStore.getLastToken(node, options);
+    options?:
+      | CursorWithSkipOptionsWithoutFilter
+      | CursorWithSkipOptionsWithFilter<AST.Token>
+      | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment) | null {
+    return this.tokenStore.getLastToken(node, options as never);
   }
 
-  public getTokenBefore(node: YAMLSyntaxElement): AST.Token | null;
+  /**
+   * Get the last tokens of the given node.
+   */
+  public getLastTokens(
+    node: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Get the last tokens of the given node with filter options.
+   */
+  public getLastTokens<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Get the last tokens of the given node with comment options.
+   */
+  public getLastTokens<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
+
+  public getLastTokens(
+    node: YAMLSyntaxElement,
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getLastTokens(node, options as never);
+  }
+
+  /**
+   * Gets the token that precedes a given node or token.
+   */
+  public getTokenBefore(
+    node: YAMLSyntaxElement,
+    options?: CursorWithSkipOptionsWithoutFilter,
+  ): AST.Token | null;
+
+  /**
+   * Gets the token that precedes a given node or token with filter options.
+   */
+  public getTokenBefore<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithFilter<AST.Token, R>,
+  ): R | null;
+
+  /**
+   * Gets the token that precedes a given node or token with comment options.
+   */
+  public getTokenBefore<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R | null;
 
   public getTokenBefore(
     node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null;
-
-  public getTokenBefore(
-    node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null {
-    return this.tokenStore.getTokenBefore(node, options);
+    options?:
+      | CursorWithSkipOptionsWithoutFilter
+      | CursorWithSkipOptionsWithFilter<AST.Token>
+      | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
+  ): AST.Token | AST.Comment | null {
+    return this.tokenStore.getTokenBefore(node, options as never);
   }
+
+  /**
+   * Gets the `count` tokens that precedes a given node or token.
+   */
+  public getTokensBefore(
+    node: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Gets the `count` tokens that precedes a given node or token with filter options.
+   */
+  public getTokensBefore<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Gets the `count` tokens that precedes a given node or token with comment options.
+   */
+  public getTokensBefore<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
 
   public getTokensBefore(
     node: YAMLSyntaxElement,
-    options?: CursorWithCountOptions,
-  ): YAMLToken[] {
-    return this.tokenStore.getTokensBefore(node, options);
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getTokensBefore(node, options as never);
   }
 
-  public getTokenAfter(node: YAMLSyntaxElement): AST.Token | null;
+  /**
+   * Gets the token that follows a given node or token.
+   */
+  public getTokenAfter(
+    node: YAMLSyntaxElement,
+    options?: CursorWithSkipOptionsWithoutFilter,
+  ): AST.Token | null;
+
+  /**
+   * Gets the token that follows a given node or token with filter options.
+   */
+  public getTokenAfter<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithFilter<AST.Token, R>,
+  ): R | null;
+
+  /**
+   * Gets the token that follows a given node or token with comment options.
+   */
+  public getTokenAfter<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R | null;
 
   public getTokenAfter(
     node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null;
-
-  public getTokenAfter(
-    node: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null {
-    return this.tokenStore.getTokenAfter(node, options);
+    options?:
+      | CursorWithSkipOptionsWithoutFilter
+      | CursorWithSkipOptionsWithFilter<AST.Token>
+      | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
+  ): AST.Token | AST.Comment | null {
+    return this.tokenStore.getTokenAfter(node, options as never);
   }
+
+  /**
+   * Gets the `count` tokens that follows a given node or token.
+   */
+  public getTokensAfter(
+    node: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Gets the `count` tokens that follows a given node or token with filter options.
+   */
+  public getTokensAfter<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Gets the `count` tokens that follows a given node or token with comment options.
+   */
+  public getTokensAfter<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
+
+  public getTokensAfter(
+    node: YAMLSyntaxElement,
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getTokensAfter(node, options as never);
+  }
+
+  /**
+   * Gets the first token between two non-overlapping nodes.
+   */
+  public getFirstTokenBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?: CursorWithSkipOptionsWithoutFilter,
+  ): AST.Token | null;
+
+  /**
+   * Gets the first token between two non-overlapping nodes with filter options.
+   */
+  public getFirstTokenBetween<R extends AST.Token>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithFilter<AST.Token, R>,
+  ): R | null;
+
+  /**
+   * Gets the first token between two non-overlapping nodes with comment options.
+   */
+  public getFirstTokenBetween<R extends AST.Token | AST.Comment>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R | null;
 
   public getFirstTokenBetween(
     left: YAMLSyntaxElement,
     right: YAMLSyntaxElement,
-    options?: CursorWithSkipOptions,
-  ): YAMLToken | null {
-    return this.tokenStore.getFirstTokenBetween(left, right, options);
+    options?:
+      | CursorWithSkipOptionsWithoutFilter
+      | CursorWithSkipOptionsWithFilter<AST.Token>
+      | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
+  ): AST.Token | AST.Comment | null {
+    return this.tokenStore.getFirstTokenBetween(left, right, options as never);
   }
+
+  /**
+   * Gets the first tokens between two non-overlapping nodes.
+   */
+  public getFirstTokensBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Gets the first tokens between two non-overlapping nodes with filter options.
+   */
+  public getFirstTokensBetween<R extends AST.Token>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Gets the first tokens between two non-overlapping nodes with comment options.
+   */
+  public getFirstTokensBetween<R extends AST.Token | AST.Comment>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
+
+  public getFirstTokensBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getFirstTokensBetween(left, right, options as never);
+  }
+
+  /**
+   * Gets the last token between two non-overlapping nodes.
+   */
+  public getLastTokenBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?: CursorWithSkipOptionsWithoutFilter,
+  ): AST.Token | null;
+
+  /**
+   * Gets the last token between two non-overlapping nodes with filter options.
+   */
+  public getLastTokenBetween<R extends AST.Token>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithFilter<AST.Token, R>,
+  ): R | null;
+
+  /**
+   * Gets the last token between two non-overlapping nodes with comment options.
+   */
+  public getLastTokenBetween<R extends AST.Token | AST.Comment>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithSkipOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R | null;
+
+  public getLastTokenBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?:
+      | CursorWithSkipOptionsWithoutFilter
+      | CursorWithSkipOptionsWithFilter<AST.Token>
+      | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
+  ): AST.Token | AST.Comment | null {
+    return this.tokenStore.getLastTokenBetween(left, right, options as never);
+  }
+
+  /**
+   * Gets the last tokens between two non-overlapping nodes.
+   */
+  public getLastTokensBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Gets the last tokens between two non-overlapping nodes with filter options.
+   */
+  public getLastTokensBetween<R extends AST.Token>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Gets the last tokens between two non-overlapping nodes with comment options.
+   */
+  public getLastTokensBetween<R extends AST.Token | AST.Comment>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
+
+  public getLastTokensBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getLastTokensBetween(left, right, options as never);
+  }
+
+  /**
+   * Gets all tokens that are related to the given node.
+   */
+  public getTokens(
+    node: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Gets all tokens that are related to the given node with filter options.
+   */
+  public getTokens<R extends AST.Token>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Gets all tokens that are related to the given node with comment options.
+   */
+  public getTokens<R extends AST.Token | AST.Comment>(
+    node: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
+
+  public getTokens(
+    node: YAMLSyntaxElement,
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getTokens(node, options as never);
+  }
+
+  /**
+   * Gets all of the tokens between two non-overlapping nodes.
+   */
+  public getTokensBetween(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options?: CursorWithCountOptionsWithoutFilter,
+  ): AST.Token[];
+
+  /**
+   * Gets all of the tokens between two non-overlapping nodes with filter options.
+   */
+  public getTokensBetween<R extends AST.Token>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithFilter<AST.Token, R>,
+  ): R[];
+
+  /**
+   * Gets all of the tokens between two non-overlapping nodes with comment options.
+   */
+  public getTokensBetween<R extends AST.Token | AST.Comment>(
+    left: YAMLSyntaxElement,
+    right: YAMLSyntaxElement,
+    options: CursorWithCountOptionsWithComment<AST.Token, AST.Comment, R>,
+  ): R[];
 
   public getTokensBetween(
     left: YAMLSyntaxElement,
     right: YAMLSyntaxElement,
-    paddingOrOptions?: number | FilterPredicate | CursorWithCountOptions,
-  ): YAMLToken[] {
-    return this.tokenStore.getTokensBetween(left, right, paddingOrOptions);
+    options?:
+      | CursorWithCountOptionsWithoutFilter
+      | CursorWithCountOptionsWithFilter<AST.Token>
+      | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
+  ): (AST.Token | AST.Comment)[] {
+    return this.tokenStore.getTokensBetween(left, right, options as never);
   }
 
-  public getTokens(
-    node: AST.YAMLNode,
-    options?: FilterPredicate | CursorWithCountOptions,
-  ): YAMLToken[] {
-    return this.tokenStore.getTokens(node, options);
+  public getCommentsInside(nodeOrToken: YAMLSyntaxElement): AST.Comment[] {
+    return this.tokenStore.getCommentsInside(nodeOrToken);
   }
 
   public getCommentsBefore(nodeOrToken: YAMLSyntaxElement): AST.Comment[] {
@@ -391,32 +821,14 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
     return this.tokenStore.getCommentsAfter(nodeOrToken);
   }
 
-  public isSpaceBetween(first: YAMLToken, second: YAMLToken): boolean {
-    if (nodesOrTokensOverlap(first, second)) {
-      return false;
-    }
-
-    const [startingNodeOrToken, endingNodeOrToken] =
+  public isSpaceBetween(
+    first: AST.Token | AST.Comment,
+    second: AST.Token | AST.Comment,
+  ): boolean {
+    // Normalize order: ensure left comes before right
+    const [left, right] =
       first.range[1] <= second.range[0] ? [first, second] : [second, first];
-    const firstToken =
-      this.getLastToken(startingNodeOrToken) || startingNodeOrToken;
-    const finalToken =
-      this.getFirstToken(endingNodeOrToken) || endingNodeOrToken;
-    let currentToken: YAMLToken = firstToken;
-
-    while (currentToken !== finalToken) {
-      const nextToken: YAMLToken = this.getTokenAfter(currentToken, {
-        includeComments: true,
-      })!;
-
-      if (currentToken.range[1] !== nextToken.range[0]) {
-        return true;
-      }
-
-      currentToken = nextToken;
-    }
-
-    return false;
+    return this.tokenStore.isSpaceBetween(left, right);
   }
 
   /**
@@ -490,13 +902,6 @@ function isNode(value: unknown): value is AST.YAMLNode {
     Boolean((value as Record<string, unknown>).loc) &&
     typeof (value as Record<string, unknown>).loc === "object"
   );
-}
-
-/**
- * Determines whether two nodes or tokens overlap.
- */
-function nodesOrTokensOverlap(first: YAMLToken, second: YAMLToken): boolean {
-  return first.range[0] < second.range[1] && second.range[0] < first.range[1];
 }
 
 /**
