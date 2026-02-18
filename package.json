@@ -66,7 +66,7 @@
   "dependencies": {
     "@eslint/core": "^1.0.1",
     "@eslint/plugin-kit": "^0.6.0",
-    "@ota-meshi/ast-token-store": "^0.2.0",
+    "@ota-meshi/ast-token-store": "^0.2.1",
     "debug": "^4.3.2",
     "diff-sequences": "^29.0.0",
     "escape-string-regexp": "5.0.0",
