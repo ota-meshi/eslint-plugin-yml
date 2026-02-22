@@ -339,7 +339,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithSkipOptionsWithFilter<AST.Token>
       | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
   ): AST.Token | AST.Comment | null {
-    return this.tokenStore.getFirstToken(node, options as never);
+    return this.tokenStore.getFirstToken(node, options);
   }
 
   /**
@@ -373,7 +373,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getFirstTokens(node, options as never);
+    return this.tokenStore.getFirstTokens(node, options);
   }
 
   /**
@@ -412,7 +412,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithSkipOptionsWithFilter<AST.Token>
       | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment) | null {
-    return this.tokenStore.getLastToken(node, options as never);
+    return this.tokenStore.getLastToken(node, options);
   }
 
   /**
@@ -446,7 +446,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getLastTokens(node, options as never);
+    return this.tokenStore.getLastTokens(node, options);
   }
 
   /**
@@ -480,7 +480,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithSkipOptionsWithFilter<AST.Token>
       | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
   ): AST.Token | AST.Comment | null {
-    return this.tokenStore.getTokenBefore(node, options as never);
+    return this.tokenStore.getTokenBefore(node, options);
   }
 
   /**
@@ -514,7 +514,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getTokensBefore(node, options as never);
+    return this.tokenStore.getTokensBefore(node, options);
   }
 
   /**
@@ -548,7 +548,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithSkipOptionsWithFilter<AST.Token>
       | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
   ): AST.Token | AST.Comment | null {
-    return this.tokenStore.getTokenAfter(node, options as never);
+    return this.tokenStore.getTokenAfter(node, options);
   }
 
   /**
@@ -582,7 +582,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getTokensAfter(node, options as never);
+    return this.tokenStore.getTokensAfter(node, options);
   }
 
   /**
@@ -620,7 +620,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithSkipOptionsWithFilter<AST.Token>
       | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
   ): AST.Token | AST.Comment | null {
-    return this.tokenStore.getFirstTokenBetween(left, right, options as never);
+    return this.tokenStore.getFirstTokenBetween(left, right, options);
   }
 
   /**
@@ -658,7 +658,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getFirstTokensBetween(left, right, options as never);
+    return this.tokenStore.getFirstTokensBetween(left, right, options);
   }
 
   /**
@@ -696,7 +696,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithSkipOptionsWithFilter<AST.Token>
       | CursorWithSkipOptionsWithComment<AST.Token, AST.Comment>,
   ): AST.Token | AST.Comment | null {
-    return this.tokenStore.getLastTokenBetween(left, right, options as never);
+    return this.tokenStore.getLastTokenBetween(left, right, options);
   }
 
   /**
@@ -734,7 +734,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getLastTokensBetween(left, right, options as never);
+    return this.tokenStore.getLastTokensBetween(left, right, options);
   }
 
   /**
@@ -768,7 +768,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getTokens(node, options as never);
+    return this.tokenStore.getTokens(node, options);
   }
 
   /**
@@ -806,7 +806,7 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
       | CursorWithCountOptionsWithFilter<AST.Token>
       | CursorWithCountOptionsWithComment<AST.Token, AST.Comment>,
   ): (AST.Token | AST.Comment)[] {
-    return this.tokenStore.getTokensBetween(left, right, options as never);
+    return this.tokenStore.getTokensBetween(left, right, options);
   }
 
   public getCommentsInside(nodeOrToken: YAMLSyntaxElement): AST.Comment[] {
