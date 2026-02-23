@@ -6,13 +6,96 @@ import {
   isOpeningBraceToken,
   isOpeningBracketToken,
   isTokenOnSameLine,
+  isCommentToken,
 } from "../utils/ast-utils.js";
 import type { YAMLToken } from "../types.js";
+import type { YAMLSourceCode } from "../language/yaml-source-code.js";
 
 interface Schema1 {
   arraysInObjects?: boolean;
   objectsInObjects?: boolean;
+  emptyObjects?: "ignore" | "always" | "never";
 }
+
+/**
+ * Parse rule options and return helpers for spacing checks.
+ * @param options The options tuple from the rule configuration.
+ * @param sourceCode The sourceCode object for node lookup.
+ */
+function parseOptions(
+  options: [("always" | "never")?, Schema1?],
+  sourceCode: YAMLSourceCode,
+) {
+  const spaced = options[0] ?? "never";
+
+  /**
+   * Determines whether an exception option is set relative to the base spacing.
+   * @param option The option to check.
+   */
+  function isOptionSet(
+    option: "arraysInObjects" | "objectsInObjects",
+  ): boolean {
+    return options[1] ? options[1][option] === (spaced === "never") : false;
+  }
+
+  const arraysInObjectsException = isOptionSet("arraysInObjects");
+  const objectsInObjectsException = isOptionSet("objectsInObjects");
+  const emptyObjects = options[1]?.emptyObjects ?? "ignore";
+
+  /**
+   * Whether the opening brace must be spaced, considering exceptions.
+   * @param spaced The primary spaced option string.
+   * @param second The token after the opening brace.
+   */
+  function isOpeningCurlyBraceMustBeSpaced(
+    spaced: "always" | "never",
+    second: YAMLToken,
+  ) {
+    const targetPenultimateType =
+      arraysInObjectsException && isOpeningBracketToken(second)
+        ? "YAMLSequence"
+        : objectsInObjectsException && isOpeningBraceToken(second)
+          ? "YAMLMapping"
+          : null;
+
+    const node = sourceCode.getNodeByRangeIndex(second.range[0]);
+
+    return targetPenultimateType && node?.type === targetPenultimateType
+      ? spaced === "never"
+      : spaced === "always";
+  }
+
+  /**
+   * Whether the closing brace must be spaced, considering exceptions.
+   * @param spaced The primary spaced option string.
+   * @param penultimate The token before the closing brace.
+   */
+  function isClosingCurlyBraceMustBeSpaced(
+    spaced: "always" | "never",
+    penultimate: YAMLToken,
+  ) {
+    const targetPenultimateType =
+      arraysInObjectsException && isClosingBracketToken(penultimate)
+        ? "YAMLSequence"
+        : objectsInObjectsException && isClosingBraceToken(penultimate)
+          ? "YAMLMapping"
+          : null;
+
+    const node = sourceCode.getNodeByRangeIndex(penultimate.range[0]);
+
+    return targetPenultimateType && node?.type === targetPenultimateType
+      ? spaced === "never"
+      : spaced === "always";
+  }
+
+  return {
+    spaced,
+    emptyObjects,
+    isOpeningCurlyBraceMustBeSpaced,
+    isClosingCurlyBraceMustBeSpaced,
+  };
+}
+
 export default createRule("flow-mapping-curly-spacing", {
   meta: {
     docs: {
@@ -37,6 +120,10 @@ export default createRule("flow-mapping-curly-spacing", {
           objectsInObjects: {
             type: "boolean",
           },
+          emptyObjects: {
+            type: "string",
+            enum: ["ignore", "always", "never"],
+          },
         },
         additionalProperties: false,
       },
@@ -46,6 +133,9 @@ export default createRule("flow-mapping-curly-spacing", {
       requireSpaceAfter: "A space is required after '{{token}}'.",
       unexpectedSpaceBefore: "There should be no space before '{{token}}'.",
       unexpectedSpaceAfter: "There should be no space after '{{token}}'.",
+      requiredSpaceInEmptyObject: "A space is required in empty flow mapping.",
+      unexpectedSpaceInEmptyObject:
+        "There should be no space in empty flow mapping.",
     },
   },
   create(context) {
@@ -54,55 +144,10 @@ export default createRule("flow-mapping-curly-spacing", {
       return {};
     }
 
-    const spaced = context.options[0] === "always";
-
-    /**
-     * Determines whether an option is set, relative to the spacing option.
-     * If spaced is "always", then check whether option is set to false.
-     * If spaced is "never", then check whether option is set to true.
-     * @param option The option to exclude.
-     * @returns Whether or not the property is excluded.
-     */
-    function isOptionSet(option: keyof NonNullable<Schema1>): boolean {
-      return context.options[1]
-        ? context.options[1][option] === !spaced
-        : false;
-    }
-
-    const options = {
-      spaced,
-      arraysInObjectsException: isOptionSet("arraysInObjects"),
-      objectsInObjectsException: isOptionSet("objectsInObjects"),
-      isOpeningCurlyBraceMustBeSpaced(second: YAMLToken) {
-        const targetPenultimateType =
-          options.arraysInObjectsException && isOpeningBracketToken(second)
-            ? "YAMLSequence"
-            : options.objectsInObjectsException && isOpeningBraceToken(second)
-              ? "YAMLMapping"
-              : null;
-
-        return targetPenultimateType &&
-          sourceCode.getNodeByRangeIndex(second.range[0])?.type ===
-            targetPenultimateType
-          ? !options.spaced
-          : options.spaced;
-      },
-      isClosingCurlyBraceMustBeSpaced(penultimate: YAMLToken) {
-        const targetPenultimateType =
-          options.arraysInObjectsException && isClosingBracketToken(penultimate)
-            ? "YAMLSequence"
-            : options.objectsInObjectsException &&
-                isClosingBraceToken(penultimate)
-              ? "YAMLMapping"
-              : null;
-
-        return targetPenultimateType &&
-          sourceCode.getNodeByRangeIndex(penultimate.range[0])?.type ===
-            targetPenultimateType
-          ? !options.spaced
-          : options.spaced;
-      },
-    };
+    const options = parseOptions(
+      context.options as [("always" | "never")?, Schema1?],
+      sourceCode,
+    );
 
     /**
      * Reports that there shouldn't be a space after the first token
@@ -201,29 +246,30 @@ export default createRule("flow-mapping-curly-spacing", {
      */
     function validateBraceSpacing(
       node: AST.YAMLNode,
-      first: AST.Token,
+      spaced: "always" | "never",
+      openingToken: AST.Token,
       second: YAMLToken,
       penultimate: YAMLToken,
-      last: YAMLToken,
+      closingToken: YAMLToken,
     ) {
-      if (isTokenOnSameLine(first, second)) {
-        const firstSpaced = sourceCode.isSpaceBetween(first, second);
+      if (isTokenOnSameLine(openingToken, second)) {
+        const firstSpaced = sourceCode.isSpaceBetween(openingToken, second);
 
-        if (options.isOpeningCurlyBraceMustBeSpaced(second)) {
-          if (!firstSpaced) reportRequiredBeginningSpace(node, first);
+        if (options.isOpeningCurlyBraceMustBeSpaced(spaced, second)) {
+          if (!firstSpaced) reportRequiredBeginningSpace(node, openingToken);
         } else {
           if (firstSpaced && second.type !== "Line")
-            reportNoBeginningSpace(node, first);
+            reportNoBeginningSpace(node, openingToken);
         }
       }
 
-      if (isTokenOnSameLine(penultimate, last)) {
-        const lastSpaced = sourceCode.isSpaceBetween(penultimate, last);
+      if (isTokenOnSameLine(penultimate, closingToken)) {
+        const lastSpaced = sourceCode.isSpaceBetween(penultimate, closingToken);
 
-        if (options.isClosingCurlyBraceMustBeSpaced(penultimate)) {
-          if (!lastSpaced) reportRequiredEndingSpace(node, last);
+        if (options.isClosingCurlyBraceMustBeSpaced(spaced, penultimate)) {
+          if (!lastSpaced) reportRequiredEndingSpace(node, closingToken);
         } else {
-          if (lastSpaced) reportNoEndingSpace(node, last);
+          if (lastSpaced) reportNoEndingSpace(node, closingToken);
         }
       }
     }
@@ -249,19 +295,97 @@ export default createRule("flow-mapping-curly-spacing", {
      * Reports a given object node if spacing in curly braces is invalid.
      * @param node An ObjectExpression or ObjectPattern node to check.
      */
+    function checkSpaceInEmptyObject(node: AST.YAMLMapping) {
+      if (options.emptyObjects === "ignore") {
+        return;
+      }
+
+      const openingToken = sourceCode.getFirstToken(node);
+      const closingToken = sourceCode.getLastToken(node);
+
+      const second = sourceCode.getTokenAfter(openingToken, {
+        includeComments: true,
+      })!;
+      if (second !== closingToken && isCommentToken(second)) {
+        const penultimate = sourceCode.getTokenBefore(closingToken, {
+          includeComments: true,
+        })!;
+        validateBraceSpacing(
+          node,
+          options.emptyObjects,
+          openingToken,
+          second,
+          penultimate,
+          closingToken,
+        );
+        return;
+      }
+      if (!isTokenOnSameLine(openingToken, closingToken)) return;
+
+      const sourceBetween = sourceCode.text.slice(
+        openingToken.range[1],
+        closingToken.range[0],
+      );
+      if (sourceBetween.trim() !== "") {
+        return;
+      }
+
+      if (options.emptyObjects === "always") {
+        if (sourceBetween) return;
+        context.report({
+          node,
+          loc: { start: openingToken.loc.end, end: closingToken.loc.start },
+          messageId: "requiredSpaceInEmptyObject",
+          fix(fixer) {
+            return fixer.replaceTextRange(
+              [openingToken.range[1], closingToken.range[0]],
+              " ",
+            );
+          },
+        });
+      } else if (options.emptyObjects === "never") {
+        if (!sourceBetween) return;
+        context.report({
+          node,
+          loc: { start: openingToken.loc.end, end: closingToken.loc.start },
+          messageId: "unexpectedSpaceInEmptyObject",
+          fix(fixer) {
+            return fixer.removeRange([
+              openingToken.range[1],
+              closingToken.range[0],
+            ]);
+          },
+        });
+      }
+    }
+
+    /**
+     * Reports a given mapping node if spacing in curly braces is invalid.
+     * @param node A YAMLMapping node to check.
+     */
     function checkForObject(node: AST.YAMLMapping) {
-      if (node.pairs.length === 0) return;
+      if (node.pairs.length === 0) {
+        checkSpaceInEmptyObject(node);
+        return;
+      }
 
-      const first = sourceCode.getFirstToken(node);
-      const last = getClosingBraceOfObject(node)!;
-      const second = sourceCode.getTokenAfter(first, {
+      const openingToken = sourceCode.getFirstToken(node);
+      const closingToken = getClosingBraceOfObject(node)!;
+      const second = sourceCode.getTokenAfter(openingToken, {
         includeComments: true,
       })!;
-      const penultimate = sourceCode.getTokenBefore(last, {
+      const penultimate = sourceCode.getTokenBefore(closingToken, {
         includeComments: true,
       })!;
 
-      validateBraceSpacing(node, first, second, penultimate, last);
+      validateBraceSpacing(
+        node,
+        options.spaced,
+        openingToken,
+        second,
+        penultimate,
+        closingToken,
+      );
     }
 
     return {

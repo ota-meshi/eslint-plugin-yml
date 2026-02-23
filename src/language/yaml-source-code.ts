@@ -821,6 +821,13 @@ export class YAMLSourceCode extends TextSourceCodeBase<{
     return this.tokenStore.getCommentsAfter(nodeOrToken);
   }
 
+  public commentsExistBetween(
+    first: YAMLSyntaxElement,
+    second: YAMLSyntaxElement,
+  ): boolean {
+    return this.tokenStore.commentsExistBetween(first, second);
+  }
+
   public isSpaceBetween(
     first: AST.Token | AST.Comment,
     second: AST.Token | AST.Comment,

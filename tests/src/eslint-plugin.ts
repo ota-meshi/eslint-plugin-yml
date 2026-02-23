@@ -1,20 +1,19 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import assert from "node:assert";
 import { ESLint } from "eslint";
 import { setPlugin } from "../fixtures/integrations/eslint-plugin/plugin-store.cjs";
 import semver from "semver";
 import plugin from "../../src/index.ts";
 
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
 
 setPlugin(plugin);
 
-const TEST_ROOT = path.join(
-  __dirname,
-  "../fixtures/integrations/eslint-plugin",
-);
+const TEST_ROOT = path.join(dirname, "../fixtures/integrations/eslint-plugin");
 
 describe("Integration with eslint-plugin-yml", () => {
   describe("should lint without errors", () => {

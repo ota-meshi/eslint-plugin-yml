@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import assert from "node:assert";
 import type { RuleTester } from "eslint";
 import { Linter } from "eslint";
@@ -9,6 +10,8 @@ import * as vueESLintParser from "vue-eslint-parser";
 import plugin from "../../src/index.ts";
 import type { YMLSettings } from "../../src/types.ts";
 import { applyFixes } from "./apply-fixer.ts";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string
@@ -72,11 +75,11 @@ export function loadTestCases(
   invalid: RuleTester.InvalidTestCase[];
 } {
   const validFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     `../fixtures/rules/${ruleName}/valid/`,
   );
   const invalidFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     `../fixtures/rules/${ruleName}/invalid/`,
   );
 
@@ -193,11 +196,11 @@ export function makeSuiteTests(
   { force }: { force?: boolean } = {},
 ): void {
   const suiteFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     "../fixtures/yaml-test-suite/",
   );
   const invalidFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     `../fixtures/rules/${ruleName}/invalid/`,
   );
   const linter = getLinter();
