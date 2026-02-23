@@ -1,9 +1,12 @@
 import type { RuleModule } from "../../../src/types.ts";
 import assert from "node:assert";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 
 import { rules as allRules } from "../../../src/utils/rules.ts";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * @returns {Array} Get the list of rules placed in the directory.
@@ -11,7 +14,7 @@ import { rules as allRules } from "../../../src/utils/rules.ts";
 function getDirRules() {
   const rules: { [key: string]: RuleModule } = {};
 
-  const rulesRoot = path.resolve(__dirname, "../../../src/rules");
+  const rulesRoot = path.resolve(dirname, "../../../src/rules");
   for (const filename of fs
     .readdirSync(rulesRoot)
     .filter((n) => n.endsWith(".ts"))) {
@@ -24,7 +27,7 @@ function getDirRules() {
   }
 
   const vueCustomBlockRulesLibRoot = path.resolve(
-    __dirname,
+    dirname,
     "../../../src/rules/vue-custom-block",
   );
   for (const filename of fs.readdirSync(vueCustomBlockRulesLibRoot)) {
@@ -75,7 +78,7 @@ describe("Check if the strict of all rules is correct", () => {
         }
         for (const messageId of Object.keys(rule.meta.messages)) {
           it(messageId, () => {
-            const message = rule.meta.messages[messageId];
+            const message = rule.meta.messages![messageId];
             assert.ok(
               message.endsWith(".") || message.endsWith("}}"),
               "Doesn't end with a dot.",
