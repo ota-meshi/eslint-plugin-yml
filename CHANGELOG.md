@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.3.0
+
+### Minor Changes
+
+- [#582](https://github.com/ota-meshi/eslint-plugin-yml/pull/582) [`ef8de6e`](https://github.com/ota-meshi/eslint-plugin-yml/commit/ef8de6ea1ccb78fcc44ab29e43d5e0e4f32c5870) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(flow-mapping-curly-spacing): add `emptyObjects` option to control spacing in empty flow-mapping
+
 ## 3.2.2
 
 ### Patch Changes
