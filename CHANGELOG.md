@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.3.1
+
+### Patch Changes
+
+- [#589](https://github.com/ota-meshi/eslint-plugin-yml/pull/589) [`98ed3bb`](https://github.com/ota-meshi/eslint-plugin-yml/commit/98ed3bbf406c8929f970d8f6aa9bf880990e0d49) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix(yaml-language): crash when parsing error
+
 ## 3.3.0
 
 ### Minor Changes
