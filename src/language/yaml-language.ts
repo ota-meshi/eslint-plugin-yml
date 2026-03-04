@@ -1,19 +1,11 @@
 /**
  * @fileoverview The YAML language implementation for ESLint.
  */
-import type { Language, File, OkParseResult } from "@eslint/core";
+import type { Language, File, OkParseResult, ParseResult } from "@eslint/core";
 import { parseYAML } from "yaml-eslint-parser";
 import { VisitorKeys } from "yaml-eslint-parser";
 import type { AST } from "yaml-eslint-parser";
 import { YAMLSourceCode } from "./yaml-source-code.js";
-
-/**
- * Parse result
- */
-interface YAMLParseResult {
-  ok: true;
-  ast: AST.YAMLProgram;
-}
 
 /**
  * Language options for YAML
@@ -81,20 +73,38 @@ export class YAMLLanguage implements Language<{
   public parse(
     file: File,
     context: { languageOptions?: YAMLLanguageOptions },
-  ): OkParseResult<AST.YAMLProgram> | YAMLParseResult {
+  ): ParseResult<AST.YAMLProgram> {
     // Note: BOM already removed
     const text = file.body as string;
 
-    const ast = parseYAML(text, {
-      filePath: file.path,
-      defaultYAMLVersion:
-        context.languageOptions?.parserOptions?.defaultYAMLVersion,
-    });
+    try {
+      const ast = parseYAML(text, {
+        filePath: file.path,
+        defaultYAMLVersion:
+          context.languageOptions?.parserOptions?.defaultYAMLVersion,
+      });
 
-    return {
-      ok: true,
-      ast,
-    };
+      return {
+        ok: true,
+        ast,
+      };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      const parseError = error as {
+        lineNumber?: number;
+        column?: number;
+      };
+      return {
+        ok: false,
+        errors: [
+          {
+            message,
+            line: parseError.lineNumber ?? 1,
+            column: parseError.column ?? 1,
+          },
+        ],
+      };
+    }
   }
 
   /**
@@ -102,7 +112,7 @@ export class YAMLLanguage implements Language<{
    */
   public createSourceCode(
     file: File,
-    parseResult: OkParseResult<AST.YAMLProgram> | YAMLParseResult,
+    parseResult: OkParseResult<AST.YAMLProgram>,
   ): YAMLSourceCode {
     return new YAMLSourceCode({
       text: file.body as string,
