@@ -123,7 +123,7 @@
     "stylelint-stylus": "^1.0.0",
     "tsdown": "^0.21.0",
     "tsx": "^4.21.0",
-    "typescript": "~5.9.0",
+    "typescript": "~6.0.0",
     "typescript-eslint": "^8.0.0",
     "vite-plugin-eslint4b": "^0.8.0",
     "vitepress": "^1.0.0-rc.17",
