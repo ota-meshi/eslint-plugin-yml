@@ -6,6 +6,6 @@ const tester = new RuleTester({});
 
 tester.run(
   "flow-mapping-curly-newline",
-  rule as any,
+  rule,
   loadTestCases("flow-mapping-curly-newline"),
 );

@@ -723,7 +723,7 @@ export default createRule("sort-keys", {
      */
     function hasBlankLine(prev: YAMLPairData, next: YAMLPairData) {
       const tokenOrNodes = [
-        ...sourceCode.getTokensBetween(prev.node as never, next.node as never, {
+        ...sourceCode.getTokensBetween(prev.node, next.node, {
           includeComments: true,
         }),
         next.node,

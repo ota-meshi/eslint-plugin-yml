@@ -8,4 +8,4 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run("quotes", rule as any, loadTestCases("quotes"));
+tester.run("quotes", rule, loadTestCases("quotes"));

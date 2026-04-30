@@ -8,8 +8,4 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run(
-  "require-string-key",
-  rule as any,
-  loadTestCases("require-string-key"),
-);
+tester.run("require-string-key", rule, loadTestCases("require-string-key"));

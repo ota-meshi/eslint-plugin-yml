@@ -6,6 +6,6 @@ const tester = new RuleTester({});
 
 tester.run(
   "flow-sequence-bracket-spacing",
-  rule as any,
+  rule,
   loadTestCases("flow-sequence-bracket-spacing"),
 );

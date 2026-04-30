@@ -6,6 +6,6 @@ const tester = new RuleTester({});
 
 tester.run(
   "flow-sequence-bracket-newline",
-  rule as any,
+  rule,
   loadTestCases("flow-sequence-bracket-newline"),
 );

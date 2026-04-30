@@ -6,6 +6,6 @@ const tester = new RuleTester({});
 
 tester.run(
   "block-sequence-hyphen-indicator-newline",
-  rule as any,
+  rule,
   loadTestCases("block-sequence-hyphen-indicator-newline"),
 );

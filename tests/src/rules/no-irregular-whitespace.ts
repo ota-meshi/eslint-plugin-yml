@@ -6,6 +6,6 @@ const tester = new RuleTester({});
 
 tester.run(
   "no-irregular-whitespace",
-  rule as any,
+  rule,
   loadTestCases("no-irregular-whitespace"),
 );

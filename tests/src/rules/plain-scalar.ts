@@ -8,4 +8,4 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run("plain-scalar", rule as any, loadTestCases("plain-scalar"));
+tester.run("plain-scalar", rule, loadTestCases("plain-scalar"));

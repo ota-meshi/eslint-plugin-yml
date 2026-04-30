@@ -8,8 +8,4 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run(
-  "no-trailing-zeros",
-  rule as any,
-  loadTestCases("no-trailing-zeros"),
-);
+tester.run("no-trailing-zeros", rule, loadTestCases("no-trailing-zeros"));

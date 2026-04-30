@@ -7,7 +7,7 @@ const tester = new RuleTester({});
 
 tester.run(
   "sort-sequence-values",
-  rule as any,
+  rule,
   loadTestCases(
     "sort-sequence-values",
     { skipOutputTest: true },

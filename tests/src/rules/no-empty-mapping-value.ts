@@ -10,6 +10,6 @@ const tester = new RuleTester({
 
 tester.run(
   "no-empty-mapping-value",
-  rule as any,
+  rule,
   loadTestCases("no-empty-mapping-value"),
 );
