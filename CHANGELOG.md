@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.3.2
+
+### Patch Changes
+
+- [#602](https://github.com/ota-meshi/eslint-plugin-yml/pull/602) [`594f5ea`](https://github.com/ota-meshi/eslint-plugin-yml/commit/594f5ea806e4a4a4a2fb5d46ee4edf9379971f39) Thanks [@sxzz](https://github.com/sxzz)! - fix: remove unused dependency
+
 ## 3.3.1
 
 ### Patch Changes
