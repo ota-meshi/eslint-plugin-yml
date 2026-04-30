@@ -11,6 +11,6 @@ const tester = new RuleTester({
 
 tester.run(
   "vue-custom-block/no-parsing-error",
-  rule as any,
+  rule,
   loadTestCases("vue-custom-block/no-parsing-error"),
 );

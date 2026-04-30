@@ -51,7 +51,7 @@ const OPTIONS_FOR_JSON_SCHEMA = [
 
 tester.run(
   "sort-keys",
-  rule as any,
+  rule,
   loadTestCases(
     "sort-keys",
     {},

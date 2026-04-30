@@ -10,6 +10,6 @@ const tester = new RuleTester({
 
 tester.run(
   "block-mapping-question-indicator-newline",
-  rule as any,
+  rule,
   loadTestCases("block-mapping-question-indicator-newline"),
 );

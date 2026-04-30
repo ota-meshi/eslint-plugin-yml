@@ -8,4 +8,4 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run("no-empty-key", rule as any, loadTestCases("no-empty-key"));
+tester.run("no-empty-key", rule, loadTestCases("no-empty-key"));

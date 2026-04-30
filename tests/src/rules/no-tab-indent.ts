@@ -8,4 +8,4 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run("no-tab-indent", rule as any, loadTestCases("no-tab-indent"));
+tester.run("no-tab-indent", rule, loadTestCases("no-tab-indent"));

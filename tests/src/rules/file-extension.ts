@@ -7,7 +7,7 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run("file-extension", rule as any, {
+tester.run("file-extension", rule, {
   valid: [
     {
       filename: "test.yaml",

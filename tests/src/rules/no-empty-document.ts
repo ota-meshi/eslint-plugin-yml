@@ -8,8 +8,4 @@ const tester = new RuleTester({
   language: "yml/yaml",
 });
 
-tester.run(
-  "no-empty-document",
-  rule as any,
-  loadTestCases("no-empty-document"),
-);
+tester.run("no-empty-document", rule, loadTestCases("no-empty-document"));

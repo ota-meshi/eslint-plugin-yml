@@ -10,6 +10,6 @@ const tester = new RuleTester({
 
 tester.run(
   "no-multiple-empty-lines",
-  rule as any,
+  rule,
   loadTestCases("no-multiple-empty-lines"),
 );
