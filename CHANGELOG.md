@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.4.0
+
+### Minor Changes
+
+- [`f0bbd12`](https://github.com/ota-meshi/eslint-plugin-yml/commit/f0bbd1281f7bd6342b70db3a74d9c72470446c1b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `namespace` to plugin `meta`
+
 ## 3.3.2
 
 ### Patch Changes
