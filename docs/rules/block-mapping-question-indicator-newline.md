@@ -43,7 +43,7 @@ This rule aims to enforce consistent line breaks after `?` indicator.
 ```yaml
 yml/block-mapping-question-indicator-newline:
   - error
-  - never # or "always" 
+  - never # or "always"
 ```
 
 - `"always"` ... Requires line breaks after after `?` indicator of block style mappings.

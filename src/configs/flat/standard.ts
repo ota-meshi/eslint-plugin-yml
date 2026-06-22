@@ -26,6 +26,7 @@ export default [
       "yml/no-irregular-whitespace": "error",
       "yml/no-multiple-empty-lines": "error",
       "yml/no-tab-indent": "error",
+      "yml/no-trailing-spaces": "error",
       "yml/no-trailing-zeros": "error",
       "yml/plain-scalar": "error",
       "yml/quotes": "error",

@@ -45,4 +45,5 @@ The rules with the following star :star: are included in `configs.recommended` o
 | [yml/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
 | [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: | :star: |
 | [yml/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines | :wrench: |  | :star: |
+| [yml/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines | :wrench: |  | :star: |
 | [yml/spaced-comment](./spaced-comment.md) | enforce consistent spacing after the `#` in a comment | :wrench: |  | :star: |

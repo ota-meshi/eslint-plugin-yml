@@ -45,7 +45,7 @@ yml/sort-keys:
   - error
   # For example, a definition for eslintrc
   - pathPattern: ^$ # Hits the root properties
-    order: 
+    order:
       - root
       - plugins
       - extends
