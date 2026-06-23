@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.5.0
+
+### Minor Changes
+
+- [#618](https://github.com/ota-meshi/eslint-plugin-yml/pull/618) [`da3bec7`](https://github.com/ota-meshi/eslint-plugin-yml/commit/da3bec7d73bb0613f5ff738d8ac6b8117805657c) Thanks [@morgan-coded](https://github.com/morgan-coded)! - Add `yml/no-trailing-spaces` rule
+
 ## 3.4.0
 
 ### Minor Changes
