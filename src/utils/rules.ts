@@ -22,6 +22,7 @@ import noEmptySequenceEntry from "../rules/no-empty-sequence-entry.ts";
 import noIrregularWhitespace from "../rules/no-irregular-whitespace.ts";
 import noMultipleEmptyLines from "../rules/no-multiple-empty-lines.ts";
 import noTabIndent from "../rules/no-tab-indent.ts";
+import noTrailingSpaces from "../rules/no-trailing-spaces.ts";
 import noTrailingZeros from "../rules/no-trailing-zeros.ts";
 import plainScalar from "../rules/plain-scalar.ts";
 import quotes from "../rules/quotes.ts";
@@ -52,6 +53,7 @@ export const rules = [
   noIrregularWhitespace,
   noMultipleEmptyLines,
   noTabIndent,
+  noTrailingSpaces,
   noTrailingZeros,
   plainScalar,
   quotes,

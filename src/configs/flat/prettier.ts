@@ -18,6 +18,7 @@ export default [
       "yml/indent": "off",
       "yml/key-spacing": "off",
       "yml/no-multiple-empty-lines": "off",
+      "yml/no-trailing-spaces": "off",
       "yml/no-trailing-zeros": "off",
       "yml/quotes": "off",
     },
