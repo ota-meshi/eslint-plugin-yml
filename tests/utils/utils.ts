@@ -222,7 +222,7 @@ export function makeSuiteTests(
         `yaml-test-suite-for-${optionName}/`,
       );
       const inputFile = path.join(fixtureDir, path.basename(fixture));
-      const filename = inputFile.slice(inputFile.indexOf(ruleName));
+      const filename = toRuleRelativeName(inputFile, ruleName);
       const code = `# ${filename}\n${code0}`;
 
       const result = verify(
@@ -385,7 +385,7 @@ function getConfig(ruleName: string, inputFile: string) {
       : {},
   );
 
-  const filename = inputFile.slice(inputFile.indexOf(ruleName));
+  const filename = toRuleRelativeName(inputFile, ruleName);
 
   const code0 = fs.readFileSync(inputFile, "utf8");
   const overrideConfigFile: string = inputFile.replace(
@@ -434,6 +434,11 @@ function getConfig(ruleName: string, inputFile: string) {
   }
 
   return Object.assign(baseConfig, config, { code, filename });
+}
+
+function toRuleRelativeName(inputFile: string, ruleName: string) {
+  const posixInputFile = inputFile.replace(/\\/gu, "/");
+  return posixInputFile.slice(posixInputFile.indexOf(ruleName));
 }
 
 function isYaml(fileName: string) {
