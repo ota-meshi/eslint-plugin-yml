@@ -33,12 +33,14 @@ type OrderObject = {
   type?: OrderTypeOption;
   caseSensitive?: boolean;
   natural?: boolean;
+  key?: string;
 };
 type ParsedOption = {
   isTargetArray: (node: YAMLSequenceData) => boolean;
   ignore: (data: YAMLEntryData) => boolean;
   isValidOrder: Validator;
   orderText: (data: YAMLEntryData) => string;
+  key?: string;
 };
 type Validator = (a: YAMLEntryData, b: YAMLEntryData) => boolean;
 
@@ -129,6 +131,14 @@ class YAMLEntryData {
       })
     ).value;
   }
+
+  public getValueForKey(key: string): YAMLValue | undefined {
+    const val = this.value;
+    if (val !== null && typeof val === "object" && !Array.isArray(val)) {
+      return (val as Record<string, YAMLValue>)[key];
+    }
+    return undefined;
+  }
 }
 class YAMLSequenceData {
   public readonly node: AST.YAMLSequence;
@@ -173,6 +183,7 @@ function buildValidatorFromType(
   order: OrderTypeOption,
   insensitive: boolean,
   natural: boolean,
+  key?: string,
 ): Validator {
   type Compare<T> = ([a, b]: T[]) => boolean;
 
@@ -197,16 +208,31 @@ function buildValidatorFromType(
     const baseCompareValue = compareValue;
     compareValue = (args) => baseCompareValue(args.reverse());
   }
-  return (a: YAMLEntryData, b: YAMLEntryData) => {
-    if (typeof a.value === "string" && typeof b.value === "string") {
-      return compareText([a.value, b.value]);
+
+  /**
+   * Compare resolved sequence entry values.
+   */
+  function compare(aVal: YAMLValue, bVal: YAMLValue): boolean {
+    if (typeof aVal === "string" && typeof bVal === "string") {
+      return compareText([aVal, bVal]);
     }
-    const type = getYAMLPrimitiveType(a.value);
-    if (type && type === getYAMLPrimitiveType(b.value)) {
-      return compareValue([a.value, b.value]);
+    const type = getYAMLPrimitiveType(aVal);
+    if (type && type === getYAMLPrimitiveType(bVal)) {
+      return compareValue([aVal, bVal]);
     }
     // Unknown
     return true;
+  }
+
+  return (a: YAMLEntryData, b: YAMLEntryData) => {
+    if (key) {
+      const aVal = a.getValueForKey(key);
+      const bVal = b.getValueForKey(key);
+      if (aVal === undefined || bVal === undefined) return true;
+      return compare(aVal, bVal);
+    }
+
+    return compare(a.value, b.value);
   };
 }
 
@@ -225,19 +251,22 @@ function parseOptions(
       const type: OrderTypeOption = order.type ?? "asc";
       const insensitive = order.caseSensitive === false;
       const natural = Boolean(order.natural);
+      const key = order.key;
 
       return {
         isTargetArray,
-        ignore: () => false,
-        isValidOrder: buildValidatorFromType(type, insensitive, natural),
+        ignore: key ? (v) => v.getValueForKey(key) === undefined : () => false,
+        isValidOrder: buildValidatorFromType(type, insensitive, natural, key),
         orderText(data) {
-          if (typeof data.value === "string") {
-            return `${natural ? "natural " : ""}${
-              insensitive ? "insensitive " : ""
-            }${type}ending`;
-          }
-          return `${type}ending`;
+          const base =
+            typeof data.value === "string" || key
+              ? `${natural ? "natural " : ""}${
+                  insensitive ? "insensitive " : ""
+                }${type}ending`
+              : `${type}ending`;
+          return key ? `${base} by '${key}'` : base;
         },
+        key,
       };
     }
     const parsedOrder: {
@@ -256,13 +285,26 @@ function parseOptions(
         const type: OrderTypeOption = nestOrder.type ?? "asc";
         const insensitive = nestOrder.caseSensitive === false;
         const natural = Boolean(nestOrder.natural);
+        const itemKey = nestOrder.key;
         parsedOrder.push({
-          test: (v) =>
-            valuePattern
+          test: (v) => {
+            if (itemKey) {
+              const keyVal = v.getValueForKey(itemKey);
+              return valuePattern
+                ? keyVal !== undefined && valuePattern.test(String(keyVal))
+                : keyVal !== undefined;
+            }
+            return valuePattern
               ? Boolean(getYAMLPrimitiveType(v.value)) &&
-                valuePattern.test(String(v.value))
-              : true,
-          isValidNestOrder: buildValidatorFromType(type, insensitive, natural),
+                  valuePattern.test(String(v.value))
+              : true;
+          },
+          isValidNestOrder: buildValidatorFromType(
+            type,
+            insensitive,
+            natural,
+            itemKey,
+          ),
         });
       }
     }
@@ -375,6 +417,9 @@ const ORDER_OBJECT_SCHEMA = {
     },
     natural: {
       type: "boolean",
+    },
+    key: {
+      type: "string",
     },
   },
   additionalProperties: false,
@@ -531,8 +576,8 @@ export default createRule("sort-sequence-values", {
             loc: edit.a.reportLoc,
             messageId: "shouldBeAfter",
             data: {
-              thisValue: toText(edit.a),
-              targetValue: toText(target),
+              thisValue: toText(edit.a, option.key),
+              targetValue: toText(target, option.key),
               orderText: option.orderText(edit.a),
             },
             *fix(fixer) {
@@ -553,8 +598,8 @@ export default createRule("sort-sequence-values", {
             loc: edit.a.reportLoc,
             messageId: "shouldBeBefore",
             data: {
-              thisValue: toText(edit.a),
-              targetValue: toText(target),
+              thisValue: toText(edit.a, option.key),
+              targetValue: toText(target, option.key),
               orderText: option.orderText(edit.a),
             },
             *fix(fixer) {
@@ -658,7 +703,13 @@ export default createRule("sort-sequence-values", {
     /**
      * Convert to display text.
      */
-    function toText(data: YAMLEntryData) {
+    function toText(data: YAMLEntryData, key?: string) {
+      if (key) {
+        const keyVal = data.getValueForKey(key);
+        if (keyVal !== undefined) {
+          return String(keyVal);
+        }
+      }
       if (getYAMLPrimitiveType(data.value)) {
         return String(data.value);
       }
