@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.6.0
+
+### Minor Changes
+
+- [#624](https://github.com/ota-meshi/eslint-plugin-yml/pull/624) [`dc04bae`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dc04bae15e200209a8f158d3b5a5ea203593401a) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Add `key` option to `yml/sort-sequence-values` to sort mapping sequences by a mapping key value.
+
 ## 3.5.0
 
 ### Minor Changes
