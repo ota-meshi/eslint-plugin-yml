@@ -52,6 +52,15 @@ yml/sort-sequence-values:
       - eslint-plugin
       - # Fallback order
         order: { type: asc }
+  - pathPattern: ^categories\.\w+$ # Hits sequences of mappings
+    # Sort each sequence of mappings by its "name" key
+    order: { type: asc, key: name }
+  - pathPattern: ^items$
+    order:
+      - # Sort mapping entries by their "name" key
+        order: { type: asc, key: name }
+      - # Sort any remaining values alphabetically
+        order: { type: asc }
 ```
 
 The option receives multiple objects with the following properties:
@@ -61,19 +70,21 @@ The option receives multiple objects with the following properties:
   - Array ... Defines an array of values to enforce the order.
     - String ... Defines the value.
     - Object ... The object has the following properties:
-      - `valuePattern` ... Defines a pattern to match the value. Default is to match all.
+      - `valuePattern` ... Defines a pattern to match the value, or the value at `order.key`, when defined. Default behavior matches the logic to all values.
       - `order` ... The object has the following properties:
         - `type`:
           - `"asc"` ... Enforce values to be in ascending order. This is default.
           - `"desc"` ... Enforce values to be in descending order.
         - `caseSensitive` ... If `true`, enforce values to be in case-sensitive order. Default is `true`.
         - `natural` ... If `true`, enforce values to be in natural order. Default is `false`.
+        - `key` ... Sorts a sequence of mappings by the value of this key. Entries that lack the key are left in place and not reordered. Default is to compare the entry value itself.
   - Object ... The object has the following properties:
     - `type`:
       - `"asc"` ... Enforce values to be in ascending order. This is default.
       - `"desc"` ... Enforce values to be in descending order.
     - `caseSensitive` ... If `true`, enforce values to be in case-sensitive order. Default is `true`.
     - `natural` ... If `true`, enforce values to be in natural order. Default is `false`.
+    - `key` ... Sorts a sequence of mappings by the value of this key. Entries that lack the key are left in place and not reordered. Default is to compare the entry value itself.
 - `minValues` ... Specifies the minimum number of values that a sequence should have in order for the sequence's unsorted values to produce an error. Default is `2`, which means by default all sequences with unsorted values will result in lint errors.
 
 ## :couple: Related rules
