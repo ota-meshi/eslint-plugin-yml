@@ -1,0 +1,5 @@
+%YAML 1.1
+---
+- value: &flag yes
+- !!bool "true": tagged
+- {*flag : aliased}
