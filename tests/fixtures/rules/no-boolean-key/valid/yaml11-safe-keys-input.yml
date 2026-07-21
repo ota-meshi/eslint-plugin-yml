@@ -1,0 +1,12 @@
+%YAML 1.1
+---
+ordinary: value
+quoted:
+  "yes": 1
+tagged:
+  !!str yes: 2
+aliases:
+  - value: &word "yes"
+  - {*word : aliased}
+merge:
+  <<: {base: value}
