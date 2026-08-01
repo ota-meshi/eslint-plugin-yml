@@ -1,0 +1,6 @@
+- true: 1
+- True: 2
+- TRUE: 3
+- false: 4
+- False: 5
+- FALSE: 6

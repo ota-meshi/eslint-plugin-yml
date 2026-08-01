@@ -233,6 +233,7 @@ The rules with the following star :star: are included in the config.
 | [yml/file-extension](https://ota-meshi.github.io/eslint-plugin-yml/rules/file-extension.html) | enforce YAML file extension |  |  |  |
 | [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: |  | :star: |
 | [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |  |
+| [yml/no-boolean-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-boolean-key.html) | disallow boolean mapping keys |  |  |  |
 | [yml/no-empty-document](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-document.html) | disallow empty document |  | :star: | :star: |
 | [yml/no-empty-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-key.html) | disallow empty mapping keys |  | :star: | :star: |
 | [yml/no-empty-mapping-value](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-mapping-value.html) | disallow empty mapping values |  | :star: | :star: |

@@ -15,6 +15,7 @@ import flowSequenceBracketSpacing from "../rules/flow-sequence-bracket-spacing.t
 import indent from "../rules/indent.ts";
 import keyNameCasing from "../rules/key-name-casing.ts";
 import keySpacing from "../rules/key-spacing.ts";
+import noBooleanKey from "../rules/no-boolean-key.ts";
 import noEmptyDocument from "../rules/no-empty-document.ts";
 import noEmptyKey from "../rules/no-empty-key.ts";
 import noEmptyMappingValue from "../rules/no-empty-mapping-value.ts";
@@ -46,6 +47,7 @@ export const rules = [
   indent,
   keyNameCasing,
   keySpacing,
+  noBooleanKey,
   noEmptyDocument,
   noEmptyKey,
   noEmptyMappingValue,

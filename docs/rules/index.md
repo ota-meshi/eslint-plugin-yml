@@ -21,6 +21,7 @@ The rules with the following star :star: are included in `configs.recommended` o
 | [yml/file-extension](./file-extension.md) | enforce YAML file extension |  |  |  |
 | [yml/indent](./indent.md) | enforce consistent indentation | :wrench: |  | :star: |
 | [yml/key-name-casing](./key-name-casing.md) | enforce naming convention to key names |  |  |  |
+| [yml/no-boolean-key](./no-boolean-key.md) | disallow boolean mapping keys |  |  |  |
 | [yml/no-empty-document](./no-empty-document.md) | disallow empty document |  | :star: | :star: |
 | [yml/no-empty-key](./no-empty-key.md) | disallow empty mapping keys |  | :star: | :star: |
 | [yml/no-empty-mapping-value](./no-empty-mapping-value.md) | disallow empty mapping values |  | :star: | :star: |
