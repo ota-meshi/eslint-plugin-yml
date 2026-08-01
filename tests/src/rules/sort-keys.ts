@@ -255,6 +255,42 @@ tester.run(
           language: "yml/yaml",
         },
 
+        // inline comment moves with its key, no duplication
+        {
+          code: `- b: 1 # comment
+  a: 2
+`,
+          output: `- a: 2
+  b: 1 # comment
+`,
+          options: [{ order: { type: "asc" }, pathPattern: ".*" }],
+          errors: [
+            "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+
+        // inline comment on the pair above the moved key is not duplicated
+        {
+          code: `- b: 1
+  c: 2 # comment
+  a: 3
+`,
+          output: `- a: 3
+  b: 1
+  c: 2 # comment
+`,
+          options: [{ order: { type: "asc" }, pathPattern: ".*" }],
+          errors: [
+            "Expected mapping keys to be in ascending order. 'a' should be before 'b'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+
         // Other
         {
           code: `

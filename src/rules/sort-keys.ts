@@ -951,11 +951,13 @@ export default createRule("sort-keys", {
 
         const nextToken = sourceCode.getTokenAfter(data.node, {
           includeComments: true,
+          filter: (t) =>
+            !isCommentToken(t) || data.node.loc.end.line < t.loc.start.line,
         })!;
-        // | - a: 1
+        // | - a: 1 # comment
         //     ^ data.node.range[0]
         // |   b: 2
-        //     ^ nextToken
+        //     ^ nextToken (comments on the node's own line move with it)
         const removeRange: AST.Range = [data.node.range[0], nextToken.range[0]];
         yield fixer.removeRange(removeRange);
 
@@ -1076,6 +1078,8 @@ export default createRule("sort-keys", {
       if (beforeToken) {
         const next = sourceCode.getTokenAfter(beforeToken, {
           includeComments: true,
+          filter: (t) =>
+            !isCommentToken(t) || beforeToken.loc.end.line < t.loc.start.line,
         })!;
         if (
           beforeToken.loc.end.line < next.loc.start.line ||
