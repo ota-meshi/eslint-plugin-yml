@@ -3,13 +3,12 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/no-boolean-key"
 description: "disallow boolean mapping keys"
+since: "v3.7.0"
 ---
 
 # yml/no-boolean-key
 
 > disallow boolean mapping keys
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
@@ -65,6 +64,10 @@ You do not need this rule if your codebase intentionally allows boolean
 mapping keys and downstream consumers handle them safely.
 
 [issue #280]: https://github.com/ota-meshi/eslint-plugin-yml/issues/280
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v3.7.0
 
 ## :mag: Implementation
 

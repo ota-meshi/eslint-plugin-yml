@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.7.0
+
+### Minor Changes
+
+- [#631](https://github.com/ota-meshi/eslint-plugin-yml/pull/631) [`5002618`](https://github.com/ota-meshi/eslint-plugin-yml/commit/50026189bca5761304f3713e936d034d13e6eb95) Thanks [@morgan-coded](https://github.com/morgan-coded)! - Add `yml/no-boolean-key` rule
+
 ## 3.6.1
 
 ### Patch Changes
