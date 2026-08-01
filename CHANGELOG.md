@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.6.1
+
+### Patch Changes
+
+- [#621](https://github.com/ota-meshi/eslint-plugin-yml/pull/621) [`7329c61`](https://github.com/ota-meshi/eslint-plugin-yml/commit/7329c61a21f971a8d7a6ac079f3509a92108ddc8) Thanks [@christopher-buss](https://github.com/christopher-buss)! - fix(sort-keys): don't duplicate inline comments when reordering block sequence keys
+
 ## 3.6.0
 
 ### Minor Changes
