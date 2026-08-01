@@ -13,13 +13,16 @@ description: "disallow boolean mapping keys"
 
 ## :book: Rule Details
 
-YAML 1.1 resolves several plain scalars, including `yes`, `no`, `on`, and
-`off`, as booleans. When those values are used as mapping keys, downstream
-processors can mishandle them, as reported in [issue #280]. A common example
-is the `no:` "Norway problem," where a key intended as text resolves to
-`false`.
+YAML resolves some plain scalars as booleans. When those values are used as
+mapping keys, downstream processors can mishandle them, as reported in
+[issue #280]. A common example is the `no:` "Norway problem," where a key
+intended as text resolves to `false`.
 
-This rule reports boolean mapping keys in YAML 1.1 documents.
+This rule reports boolean mapping keys in any YAML document. Which plain
+scalars resolve to booleans depends on the document's YAML version. YAML 1.1
+additionally resolves the `y`/`yes`, `n`/`no`, `on`, and `off` families, while
+the YAML 1.2 core schema resolves only `true`/`false` and the `True`/`TRUE` and
+`False`/`FALSE` case variants.
 
 <eslint-code-block>
 
@@ -27,6 +30,17 @@ This rule reports boolean mapping keys in YAML 1.1 documents.
 
 ```yaml
 # eslint yml/no-boolean-key: 'error'
+%YAML 1.2
+---
+
+# ✓ GOOD
+"true": value
+!!str false: value
+
+# ✗ BAD
+true: value
+false: value
+...
 %YAML 1.1
 ---
 
@@ -47,7 +61,8 @@ Nothing.
 
 ## :warning: When Not To Use It
 
-You do not need this rule if your codebase only uses YAML 1.2 documents.
+You do not need this rule if your codebase intentionally allows boolean
+mapping keys and downstream consumers handle them safely.
 
 [issue #280]: https://github.com/ota-meshi/eslint-plugin-yml/issues/280
 

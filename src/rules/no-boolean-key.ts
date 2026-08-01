@@ -11,7 +11,7 @@ export default createRule("no-boolean-key", {
     },
     schema: [],
     messages: {
-      unexpectedBoolean: "Boolean mapping keys are not allowed in YAML 1.1.",
+      unexpectedBoolean: "Boolean mapping keys are not allowed.",
     },
     type: "suggestion",
   },
@@ -21,7 +21,6 @@ export default createRule("no-boolean-key", {
       return {};
     }
 
-    let currentDocument: AST.YAMLDocument | undefined;
     let anchors: Record<string, AST.YAMLAnchor[]> = {};
 
     /**
@@ -77,8 +76,7 @@ export default createRule("no-boolean-key", {
     }
 
     return {
-      YAMLDocument(node) {
-        currentDocument = node;
+      YAMLDocument() {
         anchors = {};
       },
       YAMLAnchor(node: AST.YAMLAnchor) {
@@ -86,7 +84,7 @@ export default createRule("no-boolean-key", {
         list.push(node);
       },
       YAMLPair(node) {
-        if (currentDocument?.version === "1.1" && isBooleanNode(node.key)) {
+        if (isBooleanNode(node.key)) {
           context.report({
             node: node.key || node,
             messageId: "unexpectedBoolean",

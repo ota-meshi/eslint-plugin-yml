@@ -1,18 +1,28 @@
 [
   {
     "message": "Boolean mapping keys are not allowed.",
+    "line": 2,
+    "column": 3
+  },
+  {
+    "message": "Boolean mapping keys are not allowed.",
+    "line": 3,
+    "column": 3
+  },
+  {
+    "message": "Boolean mapping keys are not allowed.",
     "line": 4,
-    "column": 1
+    "column": 3
   },
   {
     "message": "Boolean mapping keys are not allowed.",
     "line": 5,
-    "column": 8
+    "column": 3
   },
   {
     "message": "Boolean mapping keys are not allowed.",
-    "line": 5,
-    "column": 15
+    "line": 6,
+    "column": 3
   },
   {
     "message": "Boolean mapping keys are not allowed.",

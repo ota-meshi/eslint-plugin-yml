@@ -1,16 +1,16 @@
 [
   {
-    "message": "Boolean mapping keys are not allowed in YAML 1.1.",
+    "message": "Boolean mapping keys are not allowed.",
     "line": 2,
     "column": 3
   },
   {
-    "message": "Boolean mapping keys are not allowed in YAML 1.1.",
+    "message": "Boolean mapping keys are not allowed.",
     "line": 3,
     "column": 3
   },
   {
-    "message": "Boolean mapping keys are not allowed in YAML 1.1.",
+    "message": "Boolean mapping keys are not allowed.",
     "line": 4,
     "column": 3
   }
