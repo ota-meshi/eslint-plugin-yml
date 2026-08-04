@@ -1,5 +1,17 @@
 # eslint-plugin-yml
 
+## 3.8.0
+
+### Minor Changes
+
+- [#643](https://github.com/ota-meshi/eslint-plugin-yml/pull/643) [`dce9600`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dce9600747acd547a17f876c38bf0003f4470f1c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Add an `ignore` order type to `yml/sort-keys` path options.
+
+### Patch Changes
+
+- [#647](https://github.com/ota-meshi/eslint-plugin-yml/pull/647) [`f0dfcac`](https://github.com/ota-meshi/eslint-plugin-yml/commit/f0dfcacfe2e639d997d5cb636e8a7229c943911c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix `yml/sort-keys` autofixes that reorder YAML anchors and aliases across ignored pairs.
+
+- [#647](https://github.com/ota-meshi/eslint-plugin-yml/pull/647) [`f0dfcac`](https://github.com/ota-meshi/eslint-plugin-yml/commit/f0dfcacfe2e639d997d5cb636e8a7229c943911c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix `yml/sort-keys` line-separated groups that begin with ignored pairs.
+
 ## 3.7.0
 
 ### Minor Changes
