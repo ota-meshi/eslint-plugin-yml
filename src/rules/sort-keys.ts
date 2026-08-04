@@ -570,7 +570,6 @@ export default createRule("sort-keys", {
       let prev: YAMLPairData | null = null;
       for (const pair of pairs) {
         if (
-          !ignore(pair, option) &&
           prev &&
           option.allowLineSeparatedGroups &&
           hasBlankLine(prev, pair)
@@ -689,7 +688,6 @@ export default createRule("sort-keys", {
           .slice(0, index)
           .find(
             (prev, i, prevPairs) =>
-              !ignore(prev, option) &&
               shouldAfterPairs.includes(prev) &&
               prevPairs.slice(i).every((pp) => !shouldKeepOrder(pp, pair)),
           );
@@ -702,7 +700,6 @@ export default createRule("sort-keys", {
           .slice(index + 1)
           .find(
             (next, i, nextPairs) =>
-              !ignore(next, option) &&
               shouldBeforePairs.includes(next) &&
               nextPairs
                 .slice(0, i + 1)
@@ -793,12 +790,8 @@ export default createRule("sort-keys", {
         let lastTarget: YAMLPairData | null = null;
         for (let index = pairIndex + 1; index < pairs.length; index++) {
           const element = pairs[index];
-          if (ignore(element, option)) {
-            if (shouldKeepOrder(pair, element)) return lastTarget;
-            continue;
-          }
           if (
-            option.isValidOrder(element, pair) &&
+            (ignore(element, option) || option.isValidOrder(element, pair)) &&
             !shouldKeepOrder(pair, element)
           ) {
             lastTarget = element;
@@ -842,12 +835,8 @@ export default createRule("sort-keys", {
         let lastTarget: YAMLPairData | null = null;
         for (let index = pairIndex - 1; index >= 0; index--) {
           const element = pairs[index];
-          if (ignore(element, option)) {
-            if (shouldKeepOrder(element, pair)) return lastTarget;
-            continue;
-          }
           if (
-            option.isValidOrder(pair, element) &&
+            (ignore(element, option) || option.isValidOrder(pair, element)) &&
             !shouldKeepOrder(element, pair)
           ) {
             lastTarget = element;
