@@ -629,6 +629,22 @@ export default createRule("sort-keys", {
             [result[prevIndex], result[nextIndex]] = [next, prev];
             return result;
           }
+          // Neither pair can move directly across every ignored pair. If the
+          // ignored pairs can be split between them, keep the intended key
+          // order so that the existing target selection can choose one of the
+          // safe local moves.
+          const moveDownBarrierIndex = between.findIndex((element) =>
+            shouldKeepOrder(prev, element),
+          );
+          if (
+            moveDownBarrierIndex > 0 &&
+            between
+              .slice(moveDownBarrierIndex)
+              .every((element) => !shouldKeepOrder(element, next))
+          ) {
+            [result[prevIndex], result[nextIndex]] = [next, prev];
+            return result;
+          }
         }
       } while (swapped);
       return result;
