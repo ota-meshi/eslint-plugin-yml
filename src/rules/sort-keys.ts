@@ -569,11 +569,8 @@ export default createRule("sort-keys", {
       let group: YAMLPairData[] = [];
       let prev: YAMLPairData | null = null;
       for (const pair of pairs) {
-        if (ignore(pair, option)) {
-          prev = pair;
-          continue;
-        }
         if (
+          !ignore(pair, option) &&
           prev &&
           option.allowLineSeparatedGroups &&
           hasBlankLine(prev, pair)
@@ -593,26 +590,46 @@ export default createRule("sort-keys", {
     }
 
     /**
-     * Sort pairs by bubble sort.
+     * Build a sort target while retaining ignored pairs for anchor and alias
+     * safety checks.
      */
-    function bubbleSort(pairs: YAMLPairData[], option: ParsedOption) {
-      const l = pairs.length;
+    function buildSafeSortTarget(pairs: YAMLPairData[], option: ParsedOption) {
       const result = [...pairs];
       let swapped: boolean;
       do {
         swapped = false;
-        for (let nextIndex = 1; nextIndex < l; nextIndex++) {
-          const prevIndex = nextIndex - 1;
-          if (
-            option.isValidOrder(result[prevIndex], result[nextIndex]) ||
-            shouldKeepOrder(result[prevIndex], result[nextIndex])
-          )
+        for (let nextIndex = 1; nextIndex < result.length; nextIndex++) {
+          const next = result[nextIndex];
+          if (ignore(next, option)) continue;
+
+          // Ignored pairs do not participate in key ordering, but they must
+          // remain between sortable pairs so that crossing them can be checked.
+          let prevIndex = nextIndex - 1;
+          while (prevIndex >= 0 && ignore(result[prevIndex], option)) {
+            prevIndex--;
+          }
+          if (prevIndex < 0) continue;
+
+          const prev = result[prevIndex];
+          if (option.isValidOrder(prev, next) || shouldKeepOrder(prev, next)) {
             continue;
-          [result[prevIndex], result[nextIndex]] = [
-            result[nextIndex],
-            result[prevIndex],
-          ];
-          swapped = true;
+          }
+
+          const between = result.slice(prevIndex + 1, nextIndex);
+          // Prefer moving `next` before `prev` when it can safely cross every
+          // ignored pair between them, as in a normal bubble-sort swap.
+          if (between.every((element) => !shouldKeepOrder(element, next))) {
+            [result[prevIndex], result[nextIndex]] = [next, prev];
+            swapped = true;
+            continue;
+          }
+          // If `next` cannot move up, the same ordering can be reached by
+          // moving `prev` down. Return after this swap so that the edit script
+          // preserves that safe direction; later fix passes sort the rest.
+          if (between.every((element) => !shouldKeepOrder(prev, element))) {
+            [result[prevIndex], result[nextIndex]] = [next, prev];
+            return result;
+          }
         }
       } while (swapped);
       return result;
@@ -620,10 +637,17 @@ export default createRule("sort-keys", {
 
     /**
      * Verify for pairs order
+     * @param pairs The pairs to verify. These pairs include some that should be ignored.
+     * @param option The option for the current mapping.
      */
     function verifyPairs(pairs: YAMLPairData[], option: ParsedOption) {
-      const sorted = bubbleSort(pairs, option);
-      const editScript = calcShortestEditScript(pairs, sorted);
+      const sorted = buildSafeSortTarget(pairs, option);
+      const editScript = calcShortestEditScript(
+        pairs.filter((pair) => !ignore(pair, option)),
+        sorted.filter((pair) => !ignore(pair, option)),
+      );
+
+      let hasReport = false;
       for (let index = 0; index < editScript.length; index++) {
         const edit = editScript[index];
         if (edit.type !== "delete") continue;
@@ -640,45 +664,104 @@ export default createRule("sort-keys", {
             // should not happen
             continue;
           }
-          context.report({
-            loc: edit.a.reportLoc,
-            messageId: "shouldBeAfter",
-            data: {
-              thisName: edit.a.name,
-              targetName: target.name,
-              orderText: option.orderText,
-            },
-            *fix(fixer) {
-              if (edit.a.mapping.node.style === "flow") {
-                yield* fixToMoveDownForFlow(fixer, edit.a, target);
-              } else {
-                yield* fixToMoveDownForBlock(fixer, edit.a, target);
-              }
-            },
-          });
+          reportShouldBeAfter(edit.a, target);
         } else {
           const target = findInsertBeforeTarget(edit.a, insertEditIndex);
           if (!target) {
             // should not happen
             continue;
           }
-          context.report({
-            loc: edit.a.reportLoc,
-            messageId: "shouldBeBefore",
-            data: {
-              thisName: edit.a.name,
-              targetName: target.name,
-              orderText: option.orderText,
-            },
-            *fix(fixer) {
-              if (edit.a.mapping.node.style === "flow") {
-                yield* fixToMoveUpForFlow(fixer, edit.a, target);
-              } else {
-                yield* fixToMoveUpForBlock(fixer, edit.a, target);
-              }
-            },
-          });
+          reportShouldBeBefore(edit.a, target);
         }
+      }
+
+      if (hasReport) return;
+      if (editScript.every((e) => e.type === "common")) return;
+
+      // An ordering error was detected,
+      // but the shortest edit script could not determine a safe reordering.
+
+      for (const [index, pair] of pairs.entries()) {
+        if (ignore(pair, option)) continue;
+        const sortedIndex = sorted.indexOf(pair);
+        const shouldAfterPairs = sorted.slice(sortedIndex + 1);
+        const shouldBeBeforeTarget = pairs
+          .slice(0, index)
+          .find(
+            (prev, i, prevPairs) =>
+              !ignore(prev, option) &&
+              shouldAfterPairs.includes(prev) &&
+              prevPairs.slice(i).every((pp) => !shouldKeepOrder(pp, pair)),
+          );
+        if (shouldBeBeforeTarget) {
+          reportShouldBeBefore(pair, shouldBeBeforeTarget);
+          return;
+        }
+        const shouldBeforePairs = sorted.slice(0, sortedIndex);
+        const shouldBeAfterTarget = pairs
+          .slice(index + 1)
+          .find(
+            (next, i, nextPairs) =>
+              !ignore(next, option) &&
+              shouldBeforePairs.includes(next) &&
+              nextPairs
+                .slice(0, i + 1)
+                .every((nn) => !shouldKeepOrder(pair, nn)),
+          );
+        if (shouldBeAfterTarget) {
+          reportShouldBeAfter(pair, shouldBeAfterTarget);
+          return;
+        }
+      }
+
+      /**
+       * Report that the given pair should be after the target pair.
+       * @param pair The pair that should be after the target.
+       * @param target The target pair that the given pair should be after.
+       */
+      function reportShouldBeAfter(pair: YAMLPairData, target: YAMLPairData) {
+        hasReport = true;
+        context.report({
+          loc: pair.reportLoc,
+          messageId: "shouldBeAfter",
+          data: {
+            thisName: pair.name,
+            targetName: target.name,
+            orderText: option.orderText,
+          },
+          *fix(fixer) {
+            if (pair.mapping.node.style === "flow") {
+              yield* fixToMoveDownForFlow(fixer, pair, target);
+            } else {
+              yield* fixToMoveDownForBlock(fixer, pair, target);
+            }
+          },
+        });
+      }
+
+      /**
+       * Report that the given pair should be before the target pair.
+       * @param pair The pair that should be before the target.
+       * @param target The target pair that the given pair should be before.
+       */
+      function reportShouldBeBefore(pair: YAMLPairData, target: YAMLPairData) {
+        hasReport = true;
+        context.report({
+          loc: pair.reportLoc,
+          messageId: "shouldBeBefore",
+          data: {
+            thisName: pair.name,
+            targetName: target.name,
+            orderText: option.orderText,
+          },
+          *fix(fixer) {
+            if (pair.mapping.node.style === "flow") {
+              yield* fixToMoveUpForFlow(fixer, pair, target);
+            } else {
+              yield* fixToMoveUpForBlock(fixer, pair, target);
+            }
+          },
+        });
       }
 
       /**
@@ -710,6 +793,10 @@ export default createRule("sort-keys", {
         let lastTarget: YAMLPairData | null = null;
         for (let index = pairIndex + 1; index < pairs.length; index++) {
           const element = pairs[index];
+          if (ignore(element, option)) {
+            if (shouldKeepOrder(pair, element)) return lastTarget;
+            continue;
+          }
           if (
             option.isValidOrder(element, pair) &&
             !shouldKeepOrder(pair, element)
@@ -755,6 +842,10 @@ export default createRule("sort-keys", {
         let lastTarget: YAMLPairData | null = null;
         for (let index = pairIndex - 1; index >= 0; index--) {
           const element = pairs[index];
+          if (ignore(element, option)) {
+            if (shouldKeepOrder(element, pair)) return lastTarget;
+            continue;
+          }
           if (
             option.isValidOrder(pair, element) &&
             !shouldKeepOrder(element, pair)
