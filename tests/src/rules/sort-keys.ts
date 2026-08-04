@@ -135,34 +135,6 @@ tester.run(
           language: "yml/yaml",
         },
 
-        // Ignore line-separated groups.
-        {
-          code: `c: 1
-
-z: 2
-b: 3
-`,
-          options: [
-            {
-              pathPattern: "^$",
-              allowLineSeparatedGroups: true,
-              order: [
-                {
-                  keyPattern: "^z$",
-                  order: { type: "ignore" },
-                },
-                {
-                  keyPattern: ".*",
-                  order: { type: "asc" },
-                },
-              ],
-            },
-          ],
-          // @ts-expect-error -- type bug?
-          plugins: { yml: plugin },
-          language: "yml/yaml",
-        },
-
         // nest
         {
           code: `
@@ -297,6 +269,42 @@ b: 1
           language: "yml/yaml",
         },
         {
+          code: `x: 0
+
+z: 0
+c: 1
+b: 2
+`,
+          output: `x: 0
+
+z: 0
+b: 2
+c: 1
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              allowLineSeparatedGroups: true,
+              order: [
+                {
+                  keyPattern: "^z$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'c' should be after 'b'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
           code: `
 b: &x 1
 z: *x
@@ -406,6 +414,70 @@ c: 2
           ],
           errors: [
             "Expected mapping keys to be in specified order. 'c' should be after 'a'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
+          code: `
+b: 0
+y: &x 1
+z: 0
+c: 0
+a: *x
+`,
+          output: `
+b: 0
+y: &x 1
+a: *x
+z: 0
+c: 0
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              order: [
+                {
+                  keyPattern: "^[yz]$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'a' should be before 'z'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
+          code: `{ a: 0, c: &x 1, y: 0, z: *x, b: 0 }
+`,
+          output: `{ a: 0, y: 0, c: &x 1, z: *x, b: 0 }
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              order: [
+                {
+                  keyPattern: "^[yz]$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'c' should be after 'y'.",
           ],
           // @ts-expect-error -- type bug?
           plugins: { yml: plugin },
