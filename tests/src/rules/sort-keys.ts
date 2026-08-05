@@ -1390,7 +1390,8 @@ c: 3`,
 describe("sort-keys autofix convergence", () => {
   it("does not cycle when ignored aliases have independent anchor dependencies", () => {
     const result = new Linter().verifyAndFix(
-      `c: &q 0
+      `
+c: &q 0
 d: &p 0
 x: *p
 y: *q
@@ -1425,8 +1426,6 @@ b: 0
       "test.yaml",
     );
 
-    // The existing `fixToMoveUpForBlock` file-start bug will be fixed
-    // separately; remove the expected leading newline with that fix.
     assert.strictEqual(
       result.output,
       `
