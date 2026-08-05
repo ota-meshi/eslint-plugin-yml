@@ -1388,6 +1388,59 @@ c: 3`,
 );
 
 describe("sort-keys autofix convergence", () => {
+  it("does not cycle when ignored aliases have independent anchor dependencies", () => {
+    const result = new Linter().verifyAndFix(
+      `c: &q 0
+d: &p 0
+x: *p
+y: *q
+a: 0
+b: 0
+`,
+      [
+        {
+          files: ["**/*.yaml"],
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+          rules: {
+            "yml/sort-keys": [
+              "error",
+              {
+                pathPattern: "^$",
+                order: [
+                  {
+                    keyPattern: "^[xy]$",
+                    order: { type: "ignore" },
+                  },
+                  {
+                    keyPattern: ".*",
+                    order: { type: "asc" },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+      "test.yaml",
+    );
+
+    // The existing `fixToMoveUpForBlock` file-start bug will be fixed
+    // separately; remove the expected leading newline with that fix.
+    assert.strictEqual(
+      result.output,
+      `
+a: 0
+b: 0
+c: &q 0
+d: &p 0
+x: *p
+y: *q
+`,
+    );
+    assert.deepStrictEqual(result.messages, []);
+  });
+
   it("does not cycle when an ignored anchor blocks reordering", () => {
     const result = new Linter().verifyAndFix(
       `c: 0
