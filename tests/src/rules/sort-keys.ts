@@ -1,7 +1,8 @@
+import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { RuleTester } from "eslint";
+import { Linter, RuleTester } from "eslint";
 import rule from "../../../src/rules/sort-keys.ts";
 import { loadTestCases } from "../../utils/utils.ts";
 import plugin from "../../../src/index.ts";
@@ -476,10 +477,10 @@ c: 2
 z: &x 3
 a: *x
 `,
-          output: `b: 1
+          output: `c: 2
 z: &x 3
 a: *x
-c: 2
+b: 1
 `,
           options: [
             {
@@ -497,6 +498,7 @@ c: 2
             },
           ],
           errors: [
+            "Expected mapping keys to be in specified order. 'b' should be after 'a'.",
             "Expected mapping keys to be in specified order. 'c' should be after 'a'.",
           ],
           // @ts-expect-error -- type bug?
@@ -512,11 +514,11 @@ c: 0
 a: *x
 `,
           output: `
-b: 0
 y: &x 1
-a: *x
 z: 0
 c: 0
+a: *x
+b: 0
 `,
           options: [
             {
@@ -534,7 +536,8 @@ c: 0
             },
           ],
           errors: [
-            "Expected mapping keys to be in specified order. 'a' should be before 'z'.",
+            "Expected mapping keys to be in specified order. 'b' should be after 'a'.",
+            "Expected mapping keys to be in specified order. 'c' should be after 'a'.",
           ],
           // @ts-expect-error -- type bug?
           plugins: { yml: plugin },
@@ -543,7 +546,7 @@ c: 0
         {
           code: `{ a: 0, c: &x 1, y: 0, z: *x, b: 0 }
 `,
-          output: `{ a: 0, y: 0, c: &x 1, z: *x, b: 0 }
+          output: `{ a: 0, b: 0, c: &x 1, y: 0, z: *x }
 `,
           options: [
             {
@@ -561,7 +564,7 @@ c: 0
             },
           ],
           errors: [
-            "Expected mapping keys to be in specified order. 'c' should be after 'y'.",
+            "Expected mapping keys to be in specified order. 'b' should be before 'c'.",
           ],
           // @ts-expect-error -- type bug?
           plugins: { yml: plugin },
@@ -595,24 +598,27 @@ a: *q
           ],
           errors: [
             "Expected mapping keys to be in specified order. 'b' should be after 'x'.",
+            "Expected mapping keys to be in specified order. 'y' should be after 'a'.",
           ],
           // @ts-expect-error -- type bug?
           plugins: { yml: plugin },
           language: "yml/yaml",
         },
         {
-          code: `c: &p 1
+          code: `
+c: &p 1
 z:
   use: *p
   define: &q 1
 b: *q
 a: 0
 `,
-          output: `c: &p 1
+          output: `
+a: 0
+c: &p 1
 z:
   use: *p
   define: &q 1
-a: 0
 b: *q
 `,
           options: [
@@ -631,7 +637,170 @@ b: *q
             },
           ],
           errors: [
-            "Expected mapping keys to be in specified order. 'b' should be after 'a'.",
+            "Expected mapping keys to be in specified order. 'a' should be before 'c'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
+          code: `{ c: &p 1, z: { use: *p, define: &q 1 }, b: *q, a: 0 }
+`,
+          output: `{ a: 0, c: &p 1, z: { use: *p, define: &q 1 }, b: *q }
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              order: [
+                {
+                  keyPattern: "^z$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'a' should be before 'c'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
+          code: `
+b: 0
+d: 0
+y: &p 0
+a: 0
+c: *p
+`,
+          output: `
+a: 0
+b: 0
+d: 0
+y: &p 0
+c: *p
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              order: [
+                {
+                  keyPattern: "^y$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'd' should be after 'c'.",
+            "Expected mapping keys to be in specified order. 'a' should be before 'b'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
+          code: `{ b: 0, d: 0, y: &p 0, a: 0, c: *p }
+`,
+          output: `{ a: 0, b: 0, d: 0, y: &p 0, c: *p }
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              order: [
+                {
+                  keyPattern: "^y$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'd' should be after 'c'.",
+            "Expected mapping keys to be in specified order. 'a' should be before 'b'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
+          code: `
+a: 0
+d: &p 0
+y: &q 0
+z: *p
+c: 0
+b: *q
+`,
+          output: `
+a: 0
+y: &q 0
+d: &p 0
+z: *p
+b: *q
+c: 0
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              order: [
+                {
+                  keyPattern: "^[yz]$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'd' should be after 'y'.",
+            "Expected mapping keys to be in specified order. 'z' should be after 'b'.",
+            "Expected mapping keys to be in specified order. 'c' should be after 'b'.",
+          ],
+          // @ts-expect-error -- type bug?
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+        },
+        {
+          code: `{ a: 0, d: &p 0, y: &q 0, z: *p, c: 0, b: *q }
+`,
+          output: `{ a: 0, y: &q 0, d: &p 0, z: *p, b: *q, c: 0 }
+`,
+          options: [
+            {
+              pathPattern: "^$",
+              order: [
+                {
+                  keyPattern: "^[yz]$",
+                  order: { type: "ignore" },
+                },
+                {
+                  keyPattern: ".*",
+                  order: { type: "asc" },
+                },
+              ],
+            },
+          ],
+          errors: [
+            "Expected mapping keys to be in specified order. 'd' should be after 'y'.",
+            "Expected mapping keys to be in specified order. 'z' should be after 'b'.",
+            "Expected mapping keys to be in specified order. 'c' should be after 'b'.",
           ],
           // @ts-expect-error -- type bug?
           plugins: { yml: plugin },
@@ -1217,3 +1386,209 @@ c: 3`,
     },
   ),
 );
+
+describe("sort-keys autofix convergence", () => {
+  it("does not cycle when ignored aliases have independent anchor dependencies", () => {
+    const result = new Linter().verifyAndFix(
+      `
+c: &q 0
+d: &p 0
+x: *p
+y: *q
+a: 0
+b: 0
+`,
+      [
+        {
+          files: ["**/*.yaml"],
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+          rules: {
+            "yml/sort-keys": [
+              "error",
+              {
+                pathPattern: "^$",
+                order: [
+                  {
+                    keyPattern: "^[xy]$",
+                    order: { type: "ignore" },
+                  },
+                  {
+                    keyPattern: ".*",
+                    order: { type: "asc" },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+      "test.yaml",
+    );
+
+    assert.strictEqual(
+      result.output,
+      `
+a: 0
+b: 0
+c: &q 0
+d: &p 0
+x: *p
+y: *q
+`,
+    );
+    assert.deepStrictEqual(result.messages, []);
+  });
+
+  it("does not cycle when an ignored anchor blocks reordering", () => {
+    const result = new Linter().verifyAndFix(
+      `c: 0
+d: 0
+b: 0
+x: &p 1
+a: *p
+`,
+      [
+        {
+          files: ["**/*.yaml"],
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+          rules: {
+            "yml/sort-keys": [
+              "error",
+              {
+                pathPattern: "^$",
+                order: [
+                  {
+                    keyPattern: "^x$",
+                    order: { type: "ignore" },
+                  },
+                  {
+                    keyPattern: ".*",
+                    order: { type: "asc" },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+      "test.yaml",
+    );
+
+    assert.strictEqual(
+      result.output,
+      `x: &p 1
+a: *p
+b: 0
+c: 0
+d: 0
+`,
+    );
+    assert.deepStrictEqual(result.messages, []);
+  });
+
+  it("does not cycle when a longer common subsequence precedes an ignored anchor", () => {
+    const result = new Linter().verifyAndFix(
+      `b: 0
+c: 0
+d: 0
+e: 0
+x: &p 1
+a: *p
+`,
+      [
+        {
+          files: ["**/*.yaml"],
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+          rules: {
+            "yml/sort-keys": [
+              "error",
+              {
+                pathPattern: "^$",
+                order: [
+                  {
+                    keyPattern: "^x$",
+                    order: { type: "ignore" },
+                  },
+                  {
+                    keyPattern: ".*",
+                    order: { type: "asc" },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+      "test.yaml",
+    );
+
+    // The existing `fixToMoveUpForBlock` file-start bug will be fixed
+    // separately; remove the expected leading newline with that fix.
+    assert.strictEqual(
+      result.output,
+      `
+x: &p 1
+a: *p
+b: 0
+c: 0
+d: 0
+e: 0
+`,
+    );
+    assert.deepStrictEqual(result.messages, []);
+  });
+
+  it("does not cycle when fixes for disjoint pairs have overlapping ranges", () => {
+    const result = new Linter().verifyAndFix(
+      `c: &p 1
+x: *p
+d: 0
+a: 0
+b: 0
+`,
+      [
+        {
+          files: ["**/*.yaml"],
+          plugins: { yml: plugin },
+          language: "yml/yaml",
+          rules: {
+            "yml/sort-keys": [
+              "error",
+              {
+                pathPattern: "^$",
+                order: [
+                  {
+                    keyPattern: "^x$",
+                    order: { type: "ignore" },
+                  },
+                  {
+                    keyPattern: ".*",
+                    order: { type: "asc" },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+      "test.yaml",
+    );
+
+    // The existing `fixToMoveUpForBlock` file-start bug will be fixed
+    // separately; remove the expected leading newline with that fix.
+    assert.strictEqual(
+      result.output,
+      `
+a: 0
+b: 0
+c: &p 1
+x: *p
+d: 0
+`,
+    );
+    assert.deepStrictEqual(result.messages, []);
+  });
+});

@@ -22,7 +22,7 @@
     "prebuild": "npm run -s clean",
     "build": "tsdown",
     "clean": "rimraf .nyc_output dist coverage lib",
-    "lint": "eslint .",
+    "lint": "eslint . && npm run tsc",
     "eslint-fix": "eslint . --fix",
     "eslint-test-fix": "eslint tests/src/rules/*.ts --fix -c .eslintrc.for-vscode.js",
     "pretest:base": "cross-env DEBUG=eslint-plugin-yml*",
@@ -42,6 +42,7 @@
     "release": "changeset publish",
     "update-fixtures": "npm run ts -- ./tools/update-fixtures.ts && npm run eslint-fix",
     "ts": "tsx",
+    "tsc": "tsc --project ./tsconfig.build.json",
     "mocha": "npm run ts -- ./node_modules/mocha/bin/mocha.js"
   },
   "repository": {

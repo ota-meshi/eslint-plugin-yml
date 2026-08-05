@@ -3,7 +3,8 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "lib": ["es2020"],
+    "lib": ["es2020", "es2023.array"],
+    "types": ["node", "mocha"],
     "allowJs": true,
     "checkJs": true,
     "declaration": true,
@@ -14,7 +15,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     // "paths": {
     //     "*": ["typings/*"]
     // },

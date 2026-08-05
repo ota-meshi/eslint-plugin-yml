@@ -3,6 +3,7 @@ import type { JSONSchema4 } from "json-schema";
 import type { AST } from "yaml-eslint-parser";
 import { createRule } from "../utils/index.js";
 import { isComma, isCommentToken } from "../utils/ast-utils.js";
+import type { DiffEntry } from "../utils/calc-shortest-edit-script.js";
 import { calcShortestEditScript } from "../utils/calc-shortest-edit-script.js";
 import type { YAMLSourceCode } from "../language/yaml-source-code.js";
 import type { RuleTextEditor } from "@eslint/core";
@@ -410,6 +411,56 @@ const IGNORE_ORDER_OBJECT_SCHEMA: JSONSchema4 = {
 // Rule Definition
 //------------------------------------------------------------------------------
 
+class UnsafeMovePairs {
+  private readonly kind: "up" | "down";
+
+  private readonly pairs: YAMLPairData[];
+
+  private readonly unsafeMovePairs = new Map<
+    YAMLPairData,
+    { targets: Set<YAMLPairData> }
+  >();
+
+  public constructor(kind: "up" | "down", pairs: YAMLPairData[]) {
+    this.kind = kind;
+    this.pairs = pairs;
+  }
+
+  public addUnsafeMove(pair: YAMLPairData, targets: YAMLPairData[]) {
+    let unsafeMove = this.unsafeMovePairs.get(pair);
+    if (!unsafeMove) {
+      unsafeMove = { targets: new Set() };
+      this.unsafeMovePairs.set(pair, unsafeMove);
+    }
+    for (const target of targets) {
+      unsafeMove.targets.add(target);
+    }
+  }
+
+  public isEmpty(): boolean {
+    return this.unsafeMovePairs.size === 0;
+  }
+
+  public isUnsafe(pair: YAMLPairData, moveTarget: YAMLPairData): boolean {
+    const unsafeMove = this.unsafeMovePairs.get(pair);
+    if (!unsafeMove) return false;
+    if (this.kind === "up") {
+      const between = this.pairs.slice(
+        this.pairs.indexOf(moveTarget) + 1,
+        this.pairs.indexOf(pair),
+      );
+      return between.some((p) => unsafeMove.targets.has(p));
+    } else if (this.kind === "down") {
+      const between = this.pairs.slice(
+        this.pairs.indexOf(pair) + 1,
+        this.pairs.indexOf(moveTarget),
+      );
+      return between.some((p) => unsafeMove.targets.has(p));
+    }
+    return false;
+  }
+}
+
 export default createRule("sort-keys", {
   meta: {
     docs: {
@@ -588,66 +639,143 @@ export default createRule("sort-keys", {
       return groups;
     }
 
+    type SafeSortTarget = {
+      sorted: YAMLPairData[];
+      unsafeMoveUpPairs: UnsafeMovePairs;
+      unsafeMoveDownPairs: UnsafeMovePairs;
+    };
+
     /**
      * Build a sort target while retaining ignored pairs for anchor and alias
      * safety checks.
      */
-    function buildSafeSortTarget(pairs: YAMLPairData[], option: ParsedOption) {
-      const result = [...pairs];
-      let swapped: boolean;
+    function buildSafeSortTarget(
+      pairs: YAMLPairData[],
+      option: ParsedOption,
+    ): SafeSortTarget {
+      const sorted = [...pairs];
+      const unsafeMoveUpPairs = new UnsafeMovePairs("up", pairs);
+      const unsafeMoveDownPairs = new UnsafeMovePairs("down", pairs);
+
+      let changed: boolean;
       do {
-        swapped = false;
-        for (let nextIndex = 1; nextIndex < result.length; nextIndex++) {
-          const next = result[nextIndex];
+        changed = false;
+        for (let nextIndex = 1; nextIndex < sorted.length; nextIndex++) {
+          const next = sorted[nextIndex];
           if (ignore(next, option)) continue;
 
           // Ignored pairs do not participate in key ordering, but they must
           // remain between sortable pairs so that crossing them can be checked.
           let prevIndex = nextIndex - 1;
-          while (prevIndex >= 0 && ignore(result[prevIndex], option)) {
+          while (prevIndex >= 0 && ignore(sorted[prevIndex], option)) {
             prevIndex--;
           }
           if (prevIndex < 0) continue;
 
-          const prev = result[prevIndex];
+          const prev = sorted[prevIndex];
           if (option.isValidOrder(prev, next) || shouldKeepOrder(prev, next)) {
             continue;
           }
 
-          const between = result.slice(prevIndex + 1, nextIndex);
-          // Prefer moving `next` before `prev` when it can safely cross every
-          // ignored pair between them, as in a normal bubble-sort swap.
-          if (between.every((element) => !shouldKeepOrder(element, next))) {
-            [result[prevIndex], result[nextIndex]] = [next, prev];
-            swapped = true;
+          const between = sorted.slice(prevIndex + 1, nextIndex);
+          // Prefer swapping `next` and `prev` when both can safely cross every
+          // ignored pair between them.
+          if (
+            between.every(
+              (element) =>
+                !shouldKeepOrder(element, next) &&
+                !shouldKeepOrder(prev, element),
+            )
+          ) {
+            [sorted[prevIndex], sorted[nextIndex]] = [next, prev];
+            changed = true;
             continue;
           }
-          // If `next` cannot move up, the same ordering can be reached by
-          // moving `prev` down. Return after this swap so that the edit script
-          // preserves that safe direction; later fix passes sort the rest.
-          if (between.every((element) => !shouldKeepOrder(prev, element))) {
-            [result[prevIndex], result[nextIndex]] = [next, prev];
-            return result;
+          // If only `next` can cross every ignored pair, move it directly
+          // before `prev`.
+          if (between.every((element) => !shouldKeepOrder(element, next))) {
+            sorted.splice(
+              prevIndex,
+              between.length + 2,
+              next,
+              prev,
+              ...between,
+            );
+            changed = true;
+            // Moving `prev` down is not safe because it involves moving `between` as well.
+            unsafeMoveDownPairs.addUnsafeMove(
+              prev,
+              between.filter((element) => shouldKeepOrder(prev, element)),
+            );
+            continue;
           }
-          // Neither pair can move directly across every ignored pair. If the
-          // ignored pairs can be split between them, keep the intended key
-          // order so that the existing target selection can choose one of the
-          // safe local moves.
-          const moveDownBarrierIndex = between.findIndex((element) =>
-            shouldKeepOrder(prev, element),
+          // If only `prev` can cross every ignored pair, move it directly
+          // after `next`.
+          if (between.every((element) => !shouldKeepOrder(prev, element))) {
+            sorted.splice(
+              prevIndex,
+              between.length + 2,
+              ...between,
+              next,
+              prev,
+            );
+            changed = true;
+            // Moving `next` up is not safe because it involves moving `between` as well.
+            unsafeMoveUpPairs.addUnsafeMove(
+              next,
+              between.filter((element) => shouldKeepOrder(element, next)),
+            );
+            continue;
+          }
+
+          // Split after the last ignored pair that cannot move down/up past
+          // `next`.
+          const moveBarrierIndex = between.findLastIndex((element) =>
+            shouldKeepOrder(element, next),
           );
+          const moveUpBetween = between.slice(0, moveBarrierIndex + 1);
+          const moveDownBetween = between.slice(moveBarrierIndex + 1);
           if (
-            moveDownBarrierIndex > 0 &&
-            between
-              .slice(moveDownBarrierIndex)
-              .every((element) => !shouldKeepOrder(element, next))
+            moveUpBetween.every((element) => !shouldKeepOrder(prev, element)) &&
+            moveDownBetween.every(
+              (moveDownElement) =>
+                !shouldKeepOrder(moveDownElement, next) &&
+                moveUpBetween.every(
+                  (moveUpElement) =>
+                    !shouldKeepOrder(moveDownElement, moveUpElement),
+                ),
+            )
           ) {
-            [result[prevIndex], result[nextIndex]] = [next, prev];
-            return result;
+            sorted.splice(
+              prevIndex,
+              between.length + 2,
+              ...moveUpBetween,
+              next,
+              prev,
+              ...moveDownBetween,
+            );
+            changed = true;
+            // Moving `prev` down is not safe because it involves moving `between` as well.
+            unsafeMoveDownPairs.addUnsafeMove(
+              prev,
+              moveDownBetween.filter((element) =>
+                shouldKeepOrder(prev, element),
+              ),
+            );
+            // Moving `next` up is not safe because it involves moving `between` as well.
+            unsafeMoveUpPairs.addUnsafeMove(
+              next,
+              moveUpBetween.filter((element) => shouldKeepOrder(element, next)),
+            );
+            continue;
           }
         }
-      } while (swapped);
-      return result;
+      } while (changed);
+      return {
+        sorted,
+        unsafeMoveUpPairs,
+        unsafeMoveDownPairs,
+      };
     }
 
     /**
@@ -656,74 +784,114 @@ export default createRule("sort-keys", {
      * @param option The option for the current mapping.
      */
     function verifyPairs(pairs: YAMLPairData[], option: ParsedOption) {
-      const sorted = buildSafeSortTarget(pairs, option);
-      const editScript = calcShortestEditScript(
-        pairs.filter((pair) => !ignore(pair, option)),
-        sorted.filter((pair) => !ignore(pair, option)),
-      );
+      const { sorted, unsafeMoveUpPairs, unsafeMoveDownPairs } =
+        buildSafeSortTarget(pairs, option);
+      if (pairs.every((e, i) => e === sorted[i])) return;
 
-      let hasReport = false;
-      for (let index = 0; index < editScript.length; index++) {
-        const edit = editScript[index];
-        if (edit.type !== "delete") continue;
-        const insertEditIndex = editScript.findIndex(
-          (e) => e.type === "insert" && e.b === edit.a,
-        );
-        if (insertEditIndex === -1) {
-          // should not happen
-          continue;
-        }
-        if (index < insertEditIndex) {
-          const target = findInsertAfterTarget(edit.a, insertEditIndex);
-          if (!target) {
-            // should not happen
-            continue;
-          }
-          reportShouldBeAfter(edit.a, target);
-        } else {
-          const target = findInsertBeforeTarget(edit.a, insertEditIndex);
-          if (!target) {
-            // should not happen
-            continue;
-          }
-          reportShouldBeBefore(edit.a, target);
-        }
-      }
+      const alreadyReports = new Set<YAMLPairData>();
 
-      if (hasReport) return;
-      if (editScript.every((e) => e.type === "common")) return;
+      reportUsingShortestEditScript({
+        disableIgnore:
+          !unsafeMoveUpPairs.isEmpty() || !unsafeMoveDownPairs.isEmpty(),
+      });
+
+      if (alreadyReports.size > 0) return;
 
       // An ordering error was detected,
       // but the shortest edit script could not determine a safe reordering.
+      reportUsingSortedPairs({
+        disableIgnore:
+          !unsafeMoveUpPairs.isEmpty() || !unsafeMoveDownPairs.isEmpty(),
+      });
 
-      for (const [index, pair] of pairs.entries()) {
-        if (ignore(pair, option)) continue;
-        const sortedIndex = sorted.indexOf(pair);
-        const shouldAfterPairs = sorted.slice(sortedIndex + 1);
-        const shouldBeBeforeTarget = pairs
-          .slice(0, index)
-          .find(
-            (prev, i, prevPairs) =>
-              shouldAfterPairs.includes(prev) &&
-              prevPairs.slice(i).every((pp) => !shouldKeepOrder(pp, pair)),
+      /**
+       * Report using the shortest edit script.
+       * This is a fallback when the above logic cannot determine a safe reordering.
+       */
+      function reportUsingShortestEditScript(options: {
+        // If true, ignore the `ignore` option when determining the shortest edit script.
+        // If there are unsafe moves, we need to ignore the ignore option when editing.
+        disableIgnore: boolean;
+      }) {
+        const editScript = calcShortestEditScript(pairs, sorted);
+        for (let index = 0; index < editScript.length; index++) {
+          const edit = editScript[index];
+          if (edit.type !== "delete") continue;
+          if (!options.disableIgnore && ignore(edit.a, option)) continue;
+          const insertEditIndex = editScript.findIndex(
+            (e) => e.type === "insert" && e.b === edit.a,
           );
-        if (shouldBeBeforeTarget) {
-          reportShouldBeBefore(pair, shouldBeBeforeTarget);
-          return;
+          if (insertEditIndex === -1) {
+            // should not happen
+            continue;
+          }
+          if (index < insertEditIndex) {
+            const target = findInsertAfterTarget(
+              edit.a,
+              editScript,
+              insertEditIndex,
+            );
+            if (!target) {
+              // should not happen
+              continue;
+            }
+            reportShouldBeAfter(edit.a, target);
+          } else {
+            const target = findInsertBeforeTarget(
+              edit.a,
+              editScript,
+              insertEditIndex,
+            );
+            if (!target) {
+              // should not happen
+              continue;
+            }
+            reportShouldBeBefore(edit.a, target);
+          }
         }
-        const shouldBeforePairs = sorted.slice(0, sortedIndex);
-        const shouldBeAfterTarget = pairs
-          .slice(index + 1)
-          .find(
-            (next, i, nextPairs) =>
-              shouldBeforePairs.includes(next) &&
-              nextPairs
-                .slice(0, i + 1)
-                .every((nn) => !shouldKeepOrder(pair, nn)),
-          );
-        if (shouldBeAfterTarget) {
-          reportShouldBeAfter(pair, shouldBeAfterTarget);
-          return;
+      }
+
+      /**
+       * Report using the sorted pairs.
+       */
+      function reportUsingSortedPairs(options: {
+        // If true, ignore the `ignore` option when determining the shortest edit script.
+        // If there are unsafe moves, we need to ignore the ignore option when editing.
+        disableIgnore: boolean;
+      }) {
+        for (const [index, pair] of pairs.entries()) {
+          if (alreadyReports.has(pair)) continue;
+          if (!options.disableIgnore && ignore(pair, option)) continue;
+          const sortedIndex = sorted.indexOf(pair);
+
+          const shouldAfterPairs = sorted.slice(sortedIndex + 1);
+          const shouldBeBeforeTarget = pairs
+            .slice(0, index)
+            .find(
+              (prev, i, prevPairs) =>
+                shouldAfterPairs.includes(prev) &&
+                prevPairs.slice(i).every((pp) => !shouldKeepOrder(pp, pair)),
+            );
+
+          if (shouldBeBeforeTarget) {
+            reportShouldBeBefore(pair, shouldBeBeforeTarget);
+            continue;
+          }
+
+          const shouldBeforePairs = sorted.slice(0, sortedIndex);
+          const shouldBeAfterTarget = pairs
+            .slice(index + 1)
+            .find(
+              (next, i, nextPairs) =>
+                shouldBeforePairs.includes(next) &&
+                nextPairs
+                  .slice(0, i + 1)
+                  .every((nn) => !shouldKeepOrder(pair, nn)),
+            );
+
+          if (shouldBeAfterTarget) {
+            reportShouldBeAfter(pair, shouldBeAfterTarget);
+          }
         }
       }
 
@@ -733,7 +901,7 @@ export default createRule("sort-keys", {
        * @param target The target pair that the given pair should be after.
        */
       function reportShouldBeAfter(pair: YAMLPairData, target: YAMLPairData) {
-        hasReport = true;
+        alreadyReports.add(pair);
         context.report({
           loc: pair.reportLoc,
           messageId: "shouldBeAfter",
@@ -742,13 +910,15 @@ export default createRule("sort-keys", {
             targetName: target.name,
             orderText: option.orderText,
           },
-          *fix(fixer) {
-            if (pair.mapping.node.style === "flow") {
-              yield* fixToMoveDownForFlow(fixer, pair, target);
-            } else {
-              yield* fixToMoveDownForBlock(fixer, pair, target);
-            }
-          },
+          fix: !unsafeMoveDownPairs.isUnsafe(pair, target)
+            ? function* (fixer) {
+                if (pair.mapping.node.style === "flow") {
+                  yield* fixToMoveDownForFlow(fixer, pair, target);
+                } else {
+                  yield* fixToMoveDownForBlock(fixer, pair, target);
+                }
+              }
+            : undefined,
         });
       }
 
@@ -758,7 +928,7 @@ export default createRule("sort-keys", {
        * @param target The target pair that the given pair should be before.
        */
       function reportShouldBeBefore(pair: YAMLPairData, target: YAMLPairData) {
-        hasReport = true;
+        alreadyReports.add(pair);
         context.report({
           loc: pair.reportLoc,
           messageId: "shouldBeBefore",
@@ -767,13 +937,15 @@ export default createRule("sort-keys", {
             targetName: target.name,
             orderText: option.orderText,
           },
-          *fix(fixer) {
-            if (pair.mapping.node.style === "flow") {
-              yield* fixToMoveUpForFlow(fixer, pair, target);
-            } else {
-              yield* fixToMoveUpForBlock(fixer, pair, target);
-            }
-          },
+          fix: !unsafeMoveUpPairs.isUnsafe(pair, target)
+            ? function* (fixer) {
+                if (pair.mapping.node.style === "flow") {
+                  yield* fixToMoveUpForFlow(fixer, pair, target);
+                } else {
+                  yield* fixToMoveUpForBlock(fixer, pair, target);
+                }
+              }
+            : undefined,
         });
       }
 
@@ -782,6 +954,7 @@ export default createRule("sort-keys", {
        */
       function findInsertAfterTarget(
         pair: YAMLPairData,
+        editScript: DiffEntry<YAMLPairData>[],
         insertEditIndex: number,
       ) {
         let candidate: YAMLPairData | null = null;
@@ -823,6 +996,7 @@ export default createRule("sort-keys", {
        */
       function findInsertBeforeTarget(
         pair: YAMLPairData,
+        editScript: DiffEntry<YAMLPairData>[],
         insertEditIndex: number,
       ) {
         let candidate: YAMLPairData | null = null;
