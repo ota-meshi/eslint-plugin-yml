@@ -413,6 +413,7 @@ function getConfig(ruleName: string, inputFile: string) {
     return Object.assign(baseConfig, config, overrideConfig, {
       code,
       filename,
+      name: filename,
     });
   }
   // inline config
