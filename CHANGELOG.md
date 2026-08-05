@@ -1,5 +1,13 @@
 # eslint-plugin-yml
 
+## 3.8.1
+
+### Patch Changes
+
+- [#648](https://github.com/ota-meshi/eslint-plugin-yml/pull/648) [`ae6db95`](https://github.com/ota-meshi/eslint-plugin-yml/commit/ae6db9560171f89fedd72bfd4b8bc8d285354976) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix circular `yml/sort-keys` autofixes around ignored YAML anchors and aliases.
+
+- [#648](https://github.com/ota-meshi/eslint-plugin-yml/pull/648) [`ae6db95`](https://github.com/ota-meshi/eslint-plugin-yml/commit/ae6db9560171f89fedd72bfd4b8bc8d285354976) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix `yml/sort-keys` autofixes that could select unsafe moves across ignored YAML anchors and aliases.
+
 ## 3.8.0
 
 ### Minor Changes
