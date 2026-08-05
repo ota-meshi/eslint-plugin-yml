@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "lib": ["es2020"],
+    "lib": ["es2020", "es2023.array"],
     "allowJs": true,
     "checkJs": true,
     "declaration": true,

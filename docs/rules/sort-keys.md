@@ -113,6 +113,15 @@ yml/sort-keys:
 
 See [here](https://eslint.org/docs/rules/sort-keys#options) for details.
 
+### Limitations
+
+When YAML anchors and aliases constrain how pairs can be moved, this rule may
+report and move a property configured with `{ type: ignore }`. In this case,
+`ignore` excludes the property from ordering comparisons, but does not
+guarantee that the property remains unreported or fixed in place. This allows
+the rule to sort the remaining properties without moving an alias before its
+anchor.
+
 ## :couple: Related rules
 
 - [sort-keys]
