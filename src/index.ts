@@ -9,16 +9,26 @@ import * as meta from "./meta.js";
 import type { YAMLSourceCode, YAMLLanguageOptions } from "./language/index.js";
 import { YAMLLanguage } from "./language/index.js";
 
-const configs = {
-  base: base as Linter.Config[],
-  recommended: recommended as Linter.Config[],
-  standard: standard as Linter.Config[],
-  prettier: prettier as Linter.Config[],
+const configs: {
+  base: Linter.Config[];
+  recommended: Linter.Config[];
+  standard: Linter.Config[];
+  prettier: Linter.Config[];
   // Keep flat/* for backward compatibility
-  "flat/base": base as Linter.Config[],
-  "flat/recommended": recommended as Linter.Config[],
-  "flat/standard": standard as Linter.Config[],
-  "flat/prettier": prettier as Linter.Config[],
+  "flat/base": Linter.Config[];
+  "flat/recommended": Linter.Config[];
+  "flat/standard": Linter.Config[];
+  "flat/prettier": Linter.Config[];
+} = {
+  base,
+  recommended,
+  standard,
+  prettier,
+  // Keep flat/* for backward compatibility
+  "flat/base": base,
+  "flat/recommended": recommended,
+  "flat/standard": standard,
+  "flat/prettier": prettier,
 };
 
 const rules = Object.fromEntries(

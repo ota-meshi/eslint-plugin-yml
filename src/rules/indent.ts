@@ -162,11 +162,12 @@ export default createRule("indent", {
         token,
         offset * numOfIndent,
         baseToken,
-        options && {
-          indentWhenBaseIsNotFirst:
-            options.offsetWhenBaseIsNotFirst &&
-            options.offsetWhenBaseIsNotFirst * numOfIndent,
-        },
+        options?.offsetWhenBaseIsNotFirst != null
+          ? {
+              indentWhenBaseIsNotFirst:
+                options.offsetWhenBaseIsNotFirst * numOfIndent,
+            }
+          : undefined,
       );
     }
 

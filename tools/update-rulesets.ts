@@ -56,8 +56,9 @@ for (const rec of ["recommended", "standard", "prettier"] as const) {
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 import type { Linter } from "eslint";
-import base from "./base";
-export default [
+import base from "./base.js";
+
+const config: Linter.Config[] = [
   ...base,
   {
     rules: {
@@ -70,7 +71,9 @@ export default [
         .join(",\n      ")}
     },
   },
-] satisfies Linter.Config[];
+];
+
+export default config;
 `;
 
   const filePath = path.resolve(

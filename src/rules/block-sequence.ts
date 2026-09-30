@@ -144,15 +144,18 @@ export default createRule("block-sequence", {
      */
     function upStack() {
       if (styleStack && styleStack.upper) {
-        styleStack.upper.hasNullPair =
-          styleStack.upper.hasNullPair || styleStack.hasNullPair;
-        styleStack.upper.hasBlockLiteralOrFolded =
-          styleStack.upper.hasBlockLiteralOrFolded ||
-          styleStack.hasBlockLiteralOrFolded;
-        styleStack.upper.hasBlockStyle =
-          styleStack.upper.hasBlockStyle || styleStack.hasBlockStyle;
-        styleStack.upper.hasFlowStyle =
-          styleStack.upper.hasFlowStyle || styleStack.hasFlowStyle;
+        if (styleStack.hasNullPair) {
+          styleStack.upper.hasNullPair = true;
+        }
+        if (styleStack.hasBlockLiteralOrFolded) {
+          styleStack.upper.hasBlockLiteralOrFolded = true;
+        }
+        if (styleStack.hasBlockStyle) {
+          styleStack.upper.hasBlockStyle = true;
+        }
+        if (styleStack.hasFlowStyle) {
+          styleStack.upper.hasFlowStyle = true;
+        }
       }
       styleStack = styleStack && styleStack.upper;
     }
