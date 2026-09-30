@@ -1,7 +1,7 @@
 import type { ESLint, Linter } from "eslint";
 import plugin from "../../index.js";
 
-export default [
+const config: Linter.Config[] = [
   {
     plugins: {
       get yml(): ESLint.Plugin {
@@ -20,4 +20,6 @@ export default [
       "spaced-comment": "off",
     },
   },
-] satisfies Linter.Config[];
+];
+
+export default config;

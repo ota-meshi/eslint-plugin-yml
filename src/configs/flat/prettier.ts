@@ -2,8 +2,9 @@
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 import type { Linter } from "eslint";
-import base from "./base.ts";
-export default [
+import base from "./base.js";
+
+const config: Linter.Config[] = [
   ...base,
   {
     rules: {
@@ -23,4 +24,6 @@ export default [
       "yml/quotes": "off",
     },
   },
-] satisfies Linter.Config[];
+];
+
+export default config;

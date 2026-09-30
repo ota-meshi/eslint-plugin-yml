@@ -266,7 +266,7 @@ function parseOptions(
               : `${type}ending`;
           return key ? `${base} by '${key}'` : base;
         },
-        key,
+        ...(key ? { key } : {}),
       };
     }
     const parsedOrder: {

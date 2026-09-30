@@ -32,7 +32,7 @@ describe("`base` config", () => {
       (config) =>
         Array.isArray(config.files) &&
         config.files.some(
-          (f: string) =>
+          (f: string | string[]) =>
             f === "*.yml" ||
             f === "*.yaml" ||
             f === "**/*.yml" ||
