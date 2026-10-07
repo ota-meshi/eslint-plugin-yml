@@ -9,7 +9,6 @@ export default [
     rules: {
       // eslint-plugin-yml rules
       "yml/block-mapping-colon-indicator-newline": "off",
-      "yml/block-mapping-question-indicator-newline": "off",
       "yml/block-sequence-hyphen-indicator-newline": "off",
       "yml/flow-mapping-curly-newline": "off",
       "yml/flow-mapping-curly-spacing": "off",
@@ -19,7 +18,6 @@ export default [
       "yml/key-spacing": "off",
       "yml/no-multiple-empty-lines": "off",
       "yml/no-trailing-spaces": "off",
-      "yml/no-trailing-zeros": "off",
       "yml/quotes": "off",
     },
   },
