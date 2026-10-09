@@ -1,5 +1,5 @@
 ---
-"eslint-plugin-yml": patch
+"eslint-plugin-yml": minor
 ---
 
 fix(types): support `exactOptionalPropertyTypes` for flat configs
