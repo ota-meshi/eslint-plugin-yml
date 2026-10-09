@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.9.0
+
+### Minor Changes
+
+- [#675](https://github.com/ota-meshi/eslint-plugin-yml/pull/675) [`dc9e467`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dc9e4672c4e4bf6bd7cb5ee23e015a711070601e) Thanks [@AdamMagued](https://github.com/AdamMagued)! - fix(types): support `exactOptionalPropertyTypes` for flat configs
+
 ## 3.8.1
 
 ### Patch Changes
