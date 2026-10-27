@@ -18,6 +18,7 @@ const config: Linter.Config[] = [
       "yml/flow-sequence-bracket-spacing": "off",
       "yml/indent": "off",
       "yml/key-spacing": "off",
+      "yml/max-len": "off",
       "yml/no-multiple-empty-lines": "off",
       "yml/no-trailing-spaces": "off",
       "yml/no-trailing-zeros": "off",
