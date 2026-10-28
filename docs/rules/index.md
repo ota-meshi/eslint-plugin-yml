@@ -44,6 +44,7 @@ The rules with the following star :star: are included in `configs.recommended` o
 | [yml/flow-sequence-bracket-newline](./flow-sequence-bracket-newline.md) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: |  | :star: |
 | [yml/flow-sequence-bracket-spacing](./flow-sequence-bracket-spacing.md) | enforce consistent spacing inside flow sequence brackets | :wrench: |  | :star: |
 | [yml/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
+| [yml/max-len](./max-len.md) | enforce a maximum line length |  |  |  |
 | [yml/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  | :star: | :star: |
 | [yml/no-multiple-empty-lines](./no-multiple-empty-lines.md) | disallow multiple empty lines | :wrench: |  | :star: |
 | [yml/no-trailing-spaces](./no-trailing-spaces.md) | disallow trailing whitespace at the end of lines | :wrench: |  | :star: |
