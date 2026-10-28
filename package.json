@@ -89,7 +89,7 @@
     "@stylistic/eslint-plugin": "^5.7.0",
     "@types/mocha": "^10.0.0",
     "@types/natural-compare": "^1.4.0",
-    "@types/node": "^24.0.0",
+    "@types/node": "^26.0.0",
     "@types/semver": "^7.3.1",
     "@typescript-eslint/eslint-plugin": "~8.72.0",
     "@typescript-eslint/parser": "~8.72.0",
