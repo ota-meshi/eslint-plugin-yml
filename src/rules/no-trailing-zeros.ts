@@ -7,7 +7,7 @@ export default createRule("no-trailing-zeros", {
       description: "disallow trailing zeros for floats",
       categories: ["standard"],
       extensionRule: false,
-      layout: true,
+      layout: false,
     },
     fixable: "code",
     schema: [],
