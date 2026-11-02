@@ -84,7 +84,7 @@
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^10.0.0",
     "@eslint/json": "^2.0.0",
-    "@ota-meshi/eslint-plugin": "^0.20.0",
+    "@ota-meshi/eslint-plugin": "^0.21.0",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.0",
     "@stylistic/eslint-plugin": "^5.7.0",
     "@types/mocha": "^10.0.0",
