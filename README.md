@@ -256,6 +256,7 @@ The rules with the following star :star: are included in the config.
 | [yml/flow-sequence-bracket-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-newline.html) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: |  | :star: |
 | [yml/flow-sequence-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-spacing.html) | enforce consistent spacing inside flow sequence brackets | :wrench: |  | :star: |
 | [yml/key-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-spacing.html) | enforce consistent spacing between keys and values in mapping pairs | :wrench: |  | :star: |
+| [yml/max-len](https://ota-meshi.github.io/eslint-plugin-yml/rules/max-len.html) | enforce a maximum line length |  |  |  |
 | [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: | :star: |
 | [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: |  | :star: |
 | [yml/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines | :wrench: |  | :star: |
