@@ -3,13 +3,12 @@ pageClass: "rule-details"
 sidebarDepth: 0
 title: "yml/max-len"
 description: "enforce a maximum line length"
+since: "v3.10.0"
 ---
 
 # yml/max-len
 
 > enforce a maximum line length
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
@@ -81,6 +80,10 @@ plain: this plain scalar makes the line longer than the default limit of eighty 
 - [@stylistic/max-len]
 
 [@stylistic/max-len]: https://eslint.style/rules/max-len
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-yml v3.10.0
 
 ## :mag: Implementation
 

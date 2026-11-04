@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.10.0
+
+### Minor Changes
+
+- [#685](https://github.com/ota-meshi/eslint-plugin-yml/pull/685) [`7ca6634`](https://github.com/ota-meshi/eslint-plugin-yml/commit/7ca66349390f21c0d3f45ac7187ad44fb6ebb47d) Thanks [@Shriraj1901](https://github.com/Shriraj1901)! - Add `yml/max-len` rule
+
 ## 3.9.0
 
 ### Minor Changes
