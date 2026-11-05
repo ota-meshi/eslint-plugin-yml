@@ -7,6 +7,7 @@ import standard from "./configs/flat/standard.js";
 import prettier from "./configs/flat/prettier.js";
 import * as meta from "./meta.js";
 import type { YAMLSourceCode, YAMLLanguageOptions } from "./language/index.js";
+import type { RuleContext, RuleListener } from "./types.js";
 import { YAMLLanguage } from "./language/index.js";
 
 const configs: {
@@ -39,6 +40,6 @@ const languages = {
   yaml: new YAMLLanguage(),
 };
 
-export type { YAMLLanguageOptions, YAMLSourceCode };
+export type { YAMLLanguageOptions, YAMLSourceCode, RuleContext, RuleListener };
 export { meta, configs, rules, languages };
 export default { meta, configs, rules, languages };
