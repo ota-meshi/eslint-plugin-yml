@@ -44,7 +44,7 @@ export interface RuleModule extends core.RuleDefinition<{
 
 export type RuleMetaDocs = {
   description: string;
-  categories: ("recommended" | "standard")[] | null;
+  categories: ("recommended" | "standard" | "stylistic")[] | null;
   url: string;
   ruleId: string;
   ruleName: string;
@@ -68,7 +68,7 @@ export interface PartialRuleModule {
 export interface PartialRuleMetaData {
   docs: {
     description: string;
-    categories: ("recommended" | "standard")[] | null;
+    categories: ("recommended" | "standard" | "stylistic")[] | null;
     replacedBy?: [];
     default?: "error" | "warn";
     extensionRule: string | false;

@@ -5,7 +5,7 @@ export default createRule("require-string-key", {
   meta: {
     docs: {
       description: "disallow mapping keys other than strings",
-      categories: null,
+      categories: ["stylistic"],
       extensionRule: false,
       layout: false,
     },

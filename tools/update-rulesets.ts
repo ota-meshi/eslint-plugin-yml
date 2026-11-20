@@ -38,6 +38,19 @@ const CONFIGS = {
     },
     config: "standard",
   },
+  stylistic: {
+    filter(rule: RuleModule) {
+      return (
+        rule.meta.docs.categories &&
+        !rule.meta.deprecated &&
+        rule.meta.docs.categories.includes("stylistic")
+      );
+    },
+    option(rule: RuleModule) {
+      return rule.meta.docs.default || "error";
+    },
+    config: "stylistic",
+  },
   prettier: {
     filter(rule: RuleModule) {
       return rule.meta.docs.layout;
@@ -51,7 +64,12 @@ const CONFIGS = {
 
 // Legacy configs are no longer generated or used
 
-for (const rec of ["recommended", "standard", "prettier"] as const) {
+for (const rec of [
+  "recommended",
+  "standard",
+  "stylistic",
+  "prettier",
+] as const) {
   let content = `// IMPORTANT!
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"

@@ -465,7 +465,7 @@ export default createRule("sort-keys", {
   meta: {
     docs: {
       description: "require mapping keys to be sorted",
-      categories: null,
+      categories: ["stylistic"],
       extensionRule: false,
       layout: false,
     },
