@@ -1,5 +1,5 @@
-import type { RuleModule } from "../src/types";
-import { rules } from "../src/utils/rules";
+import type { RuleModule } from "../src/types.ts";
+import { rules } from "../src/utils/rules.ts";
 
 const categoryEmojis = {
   recommended: ":star:",
@@ -27,10 +27,12 @@ export default function renderRulesTableContent(
   function toRuleRow(rule: RuleModule) {
     const fixableMark = rule.meta.fixable ? ":wrench:" : "";
     const categoriesMark = rule.meta.docs.categories
-      ? rule.meta.docs.categories.map(category => categoryEmojis[category]).join(" ")
+      ? rule.meta.docs.categories
+          .map((category) => categoryEmojis[category])
+          .join(" ")
       : "";
     const link = `[${rule.meta.docs.ruleId}](${buildRulePath(
-      rule.meta.docs.ruleName || ""
+      rule.meta.docs.ruleName || "",
     )})`;
     const description = rule.meta.docs.description || "(no description)";
 
@@ -56,7 +58,9 @@ export default function renderRulesTableContent(
 
 Category emojis:
 
-${Object.entries(categoryEmojis).map(([category, emoji]) => `- ${emoji} - ${category}`).join("\n")}
+${Object.entries(categoryEmojis)
+  .map(([category, emoji]) => `- ${emoji} - ${category}`)
+  .join("\n")}
 
 | Rule ID | Description | Fixable | Configurations |
 |:--------|:------------|:-------:|:--------------:|

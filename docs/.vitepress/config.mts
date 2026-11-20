@@ -1,7 +1,7 @@
 import type { DefaultTheme, UserConfig } from "vitepress";
 import { defineConfig } from "vitepress";
-import path from "path";
-import { fileURLToPath } from "url";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import eslint4b from "vite-plugin-eslint4b";
 import type { RuleModule } from "../../src/types.js";
 import { viteCommonjs } from "./vite-plugin.mjs";
@@ -21,8 +21,10 @@ function ruleToSidebarItem({
 }
 
 export default async (): Promise<UserConfig<DefaultTheme.Config>> => {
-  const a = "../../lib/utils/rules.js";
-  const { rules } = (await import(a)) as { rules: RuleModule[] };
+  const a = "../../lib/index.mjs";
+  const rules = Object.values(
+    ((await import(a)) as { rules: Record<string, RuleModule> }).rules,
+  );
   return defineConfig({
     base: "/eslint-plugin-yml/",
     title: "eslint-plugin-yml",

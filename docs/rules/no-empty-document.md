@@ -10,7 +10,7 @@ since: "v0.6.0"
 
 > disallow empty document
 
-- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
+- :gear: This rule is included in `configs.recommended` and `configs.standard`.
 
 ## :book: Rule Details
 

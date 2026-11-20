@@ -1,17 +1,16 @@
-import { RuleTester } from "../../../utils/eslint-compat";
-import rule from "../../../../src/rules/vue-custom-block/no-parsing-error";
-import { loadTestCases } from "../../../utils/utils";
+import { RuleTester } from "eslint";
+import rule from "../../../../src/rules/vue-custom-block/no-parsing-error.ts";
+import { loadTestCases } from "../../../utils/utils.ts";
+import * as vueESLintParser from "vue-eslint-parser";
 
 const tester = new RuleTester({
   languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
+    parser: vueESLintParser,
   },
 });
 
 tester.run(
   "vue-custom-block/no-parsing-error",
-  rule as any,
+  rule,
   loadTestCases("vue-custom-block/no-parsing-error"),
 );

@@ -2,12 +2,14 @@
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 import type { Linter } from "eslint";
-import base from "./base";
-export default [
+import base from "./base.js";
+
+const config: Linter.Config[] = [
   ...base,
   {
     rules: {
       // eslint-plugin-yml rules
+      "yml/block-mapping-colon-indicator-newline": "error",
       "yml/block-mapping-question-indicator-newline": "error",
       "yml/block-mapping": "error",
       "yml/block-sequence-hyphen-indicator-newline": "error",
@@ -23,11 +25,16 @@ export default [
       "yml/no-empty-mapping-value": "error",
       "yml/no-empty-sequence-entry": "error",
       "yml/no-irregular-whitespace": "error",
+      "yml/no-multiple-empty-lines": "error",
       "yml/no-tab-indent": "error",
+      "yml/no-trailing-spaces": "error",
+      "yml/no-trailing-zeros": "error",
       "yml/plain-scalar": "error",
       "yml/quotes": "error",
       "yml/spaced-comment": "error",
       "yml/vue-custom-block/no-parsing-error": "error",
     },
   },
-] satisfies Linter.FlatConfig[];
+];
+
+export default config;

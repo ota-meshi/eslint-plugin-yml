@@ -1,11 +1,10 @@
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
 
 export default createRule("no-multiple-empty-lines", {
   meta: {
     docs: {
       description: "disallow multiple empty lines",
-      categories: null,
+      categories: ["standard"],
       extensionRule: "no-multiple-empty-lines",
       layout: true,
     },
@@ -44,7 +43,7 @@ export default createRule("no-multiple-empty-lines", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

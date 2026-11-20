@@ -1,5 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
+import { createRule } from "../utils/index.js";
 import {
   hasTabIndent,
   calcExpectIndentForEntries,
@@ -10,16 +10,11 @@ import {
   unwrapMeta,
   processIndentFix,
   fixIndent,
-} from "../utils/yaml";
-import type {
-  RuleContext,
-  Fix,
-  RuleFixer,
-  YAMLNodeOrToken,
-  SourceCode,
-} from "../types";
-import { isComma } from "../utils/ast-utils";
-import { getSourceCode } from "../utils/compat";
+} from "../utils/yaml.js";
+import type { RuleContext, YAMLNodeOrToken } from "../types.js";
+import { isComma } from "../utils/ast-utils.js";
+import type { YAMLSourceCode } from "../language/yaml-source-code.js";
+import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -110,7 +105,7 @@ export default createRule("block-sequence", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -149,15 +144,18 @@ export default createRule("block-sequence", {
      */
     function upStack() {
       if (styleStack && styleStack.upper) {
-        styleStack.upper.hasNullPair =
-          styleStack.upper.hasNullPair || styleStack.hasNullPair;
-        styleStack.upper.hasBlockLiteralOrFolded =
-          styleStack.upper.hasBlockLiteralOrFolded ||
-          styleStack.hasBlockLiteralOrFolded;
-        styleStack.upper.hasBlockStyle =
-          styleStack.upper.hasBlockStyle || styleStack.hasBlockStyle;
-        styleStack.upper.hasFlowStyle =
-          styleStack.upper.hasFlowStyle || styleStack.hasFlowStyle;
+        if (styleStack.hasNullPair) {
+          styleStack.upper.hasNullPair = true;
+        }
+        if (styleStack.hasBlockLiteralOrFolded) {
+          styleStack.upper.hasBlockLiteralOrFolded = true;
+        }
+        if (styleStack.hasBlockStyle) {
+          styleStack.upper.hasBlockStyle = true;
+        }
+        if (styleStack.hasFlowStyle) {
+          styleStack.upper.hasFlowStyle = true;
+        }
       }
       styleStack = styleStack && styleStack.upper;
     }
@@ -233,7 +231,7 @@ export default createRule("block-sequence", {
 function canFixToBlock(
   sequenceInfo: Stack,
   node: AST.YAMLFlowSequence,
-  sourceCode: SourceCode,
+  sourceCode: YAMLSourceCode,
 ) {
   if (sequenceInfo.hasNullPair || sequenceInfo.hasBlockLiteralOrFolded) {
     return false;
@@ -315,8 +313,8 @@ function canFixToFlow(
  * Build the fixer function that makes the flow style to block style.
  */
 function buildFixFlowToBlock(node: AST.YAMLFlowSequence, context: RuleContext) {
-  return function* (fixer: RuleFixer): IterableIterator<Fix> {
-    const sourceCode = getSourceCode(context);
+  return function* (fixer: RuleTextEditor): IterableIterator<RuleTextEdit> {
+    const sourceCode = context.sourceCode;
     const open = sourceCode.getFirstToken(node);
     const close = sourceCode.getLastToken(node);
     if (open?.value !== "[" || close?.value !== "]") {
@@ -420,8 +418,8 @@ function buildFixBlockToFlow(
   node: AST.YAMLBlockSequence,
   context: RuleContext,
 ) {
-  const sourceCode = getSourceCode(context);
-  return function* (fixer: RuleFixer): IterableIterator<Fix> {
+  const sourceCode = context.sourceCode;
+  return function* (fixer: RuleTextEditor): IterableIterator<RuleTextEdit> {
     const entries = node.entries.filter(
       (
         e: AST.YAMLContent | AST.YAMLWithMeta | null,
@@ -435,7 +433,7 @@ function buildFixBlockToFlow(
     const lastEntry = entries.pop();
 
     const firstHyphen = sourceCode.getTokenBefore(firstEntry);
-    yield fixer.replaceText(firstHyphen!, " ");
+    yield fixer.replaceText(firstHyphen, " ");
     yield fixer.insertTextBefore(firstEntry, "[");
     if (lastEntry) {
       yield fixer.insertTextAfter(firstEntry, ",");
@@ -443,13 +441,13 @@ function buildFixBlockToFlow(
 
     for (const entry of entries) {
       const hyphen = sourceCode.getTokenBefore(entry);
-      yield fixer.replaceText(hyphen!, " ");
+      yield fixer.replaceText(hyphen, " ");
       yield fixer.insertTextAfter(entry, ",");
     }
 
     if (lastEntry) {
       const lastHyphen = sourceCode.getTokenBefore(lastEntry);
-      yield fixer.replaceText(lastHyphen!, " ");
+      yield fixer.replaceText(lastHyphen, " ");
     }
     yield fixer.insertTextAfter(lastEntry || firstEntry || node, "]");
   };

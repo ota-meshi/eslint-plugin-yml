@@ -1,7 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
 import escapeStringRegexp from "escape-string-regexp";
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -158,7 +157,7 @@ export default createRule("spaced-comment", {
     type: "suggestion",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

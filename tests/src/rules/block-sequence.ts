@@ -1,13 +1,7 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/block-sequence";
-import { loadTestCases } from "../../utils/utils";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/block-sequence.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 
-const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
-});
+const tester = new RuleTester({});
 
-tester.run("block-sequence", rule as any, loadTestCases("block-sequence"));
+tester.run("block-sequence", rule, loadTestCases("block-sequence"));

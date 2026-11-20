@@ -1,18 +1,17 @@
-import { createRule } from "../utils/index";
+import { createRule } from "../utils/index.js";
 import type { AST } from "yaml-eslint-parser";
-import type { YAMLToken } from "../types";
+import type { YAMLToken } from "../types.js";
 import {
   isCommentToken,
   isTokenOnSameLine,
   isQuestion,
-} from "../utils/ast-utils";
+} from "../utils/ast-utils.js";
 import {
   getActualIndentFromLine,
   incIndent,
   hasTabIndent,
   isKeyNode,
-} from "../utils/yaml";
-import { getSourceCode } from "../utils/compat";
+} from "../utils/yaml.js";
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -127,7 +126,7 @@ export default createRule("flow-mapping-curly-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

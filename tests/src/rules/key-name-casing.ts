@@ -1,15 +1,13 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/key-name-casing";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/key-name-casing.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
-tester.run("key-name-casing", rule as any, {
+tester.run("key-name-casing", rule, {
   valid: [
     '{"key": "value"}',
     '{"camelCase": "value"}',

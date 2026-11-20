@@ -1,5 +1,165 @@
 # eslint-plugin-yml
 
+## 3.10.0
+
+### Minor Changes
+
+- [#685](https://github.com/ota-meshi/eslint-plugin-yml/pull/685) [`7ca6634`](https://github.com/ota-meshi/eslint-plugin-yml/commit/7ca66349390f21c0d3f45ac7187ad44fb6ebb47d) Thanks [@Shriraj1901](https://github.com/Shriraj1901)! - Add `yml/max-len` rule
+
+## 3.9.0
+
+### Minor Changes
+
+- [#675](https://github.com/ota-meshi/eslint-plugin-yml/pull/675) [`dc9e467`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dc9e4672c4e4bf6bd7cb5ee23e015a711070601e) Thanks [@AdamMagued](https://github.com/AdamMagued)! - fix(types): support `exactOptionalPropertyTypes` for flat configs
+
+## 3.8.1
+
+### Patch Changes
+
+- [#648](https://github.com/ota-meshi/eslint-plugin-yml/pull/648) [`ae6db95`](https://github.com/ota-meshi/eslint-plugin-yml/commit/ae6db9560171f89fedd72bfd4b8bc8d285354976) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix circular `yml/sort-keys` autofixes around ignored YAML anchors and aliases.
+
+- [#648](https://github.com/ota-meshi/eslint-plugin-yml/pull/648) [`ae6db95`](https://github.com/ota-meshi/eslint-plugin-yml/commit/ae6db9560171f89fedd72bfd4b8bc8d285354976) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix `yml/sort-keys` autofixes that could select unsafe moves across ignored YAML anchors and aliases.
+
+## 3.8.0
+
+### Minor Changes
+
+- [#643](https://github.com/ota-meshi/eslint-plugin-yml/pull/643) [`dce9600`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dce9600747acd547a17f876c38bf0003f4470f1c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Add an `ignore` order type to `yml/sort-keys` path options.
+
+### Patch Changes
+
+- [#647](https://github.com/ota-meshi/eslint-plugin-yml/pull/647) [`f0dfcac`](https://github.com/ota-meshi/eslint-plugin-yml/commit/f0dfcacfe2e639d997d5cb636e8a7229c943911c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix `yml/sort-keys` autofixes that reorder YAML anchors and aliases across ignored pairs.
+
+- [#647](https://github.com/ota-meshi/eslint-plugin-yml/pull/647) [`f0dfcac`](https://github.com/ota-meshi/eslint-plugin-yml/commit/f0dfcacfe2e639d997d5cb636e8a7229c943911c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Fix `yml/sort-keys` line-separated groups that begin with ignored pairs.
+
+## 3.7.0
+
+### Minor Changes
+
+- [#631](https://github.com/ota-meshi/eslint-plugin-yml/pull/631) [`5002618`](https://github.com/ota-meshi/eslint-plugin-yml/commit/50026189bca5761304f3713e936d034d13e6eb95) Thanks [@morgan-coded](https://github.com/morgan-coded)! - Add `yml/no-boolean-key` rule
+
+## 3.6.1
+
+### Patch Changes
+
+- [#621](https://github.com/ota-meshi/eslint-plugin-yml/pull/621) [`7329c61`](https://github.com/ota-meshi/eslint-plugin-yml/commit/7329c61a21f971a8d7a6ac079f3509a92108ddc8) Thanks [@christopher-buss](https://github.com/christopher-buss)! - fix(sort-keys): don't duplicate inline comments when reordering block sequence keys
+
+## 3.6.0
+
+### Minor Changes
+
+- [#624](https://github.com/ota-meshi/eslint-plugin-yml/pull/624) [`dc04bae`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dc04bae15e200209a8f158d3b5a5ea203593401a) Thanks [@ota-meshi](https://github.com/ota-meshi)! - Add `key` option to `yml/sort-sequence-values` to sort mapping sequences by a mapping key value.
+
+## 3.5.0
+
+### Minor Changes
+
+- [#618](https://github.com/ota-meshi/eslint-plugin-yml/pull/618) [`da3bec7`](https://github.com/ota-meshi/eslint-plugin-yml/commit/da3bec7d73bb0613f5ff738d8ac6b8117805657c) Thanks [@morgan-coded](https://github.com/morgan-coded)! - Add `yml/no-trailing-spaces` rule
+
+## 3.4.0
+
+### Minor Changes
+
+- [`f0bbd12`](https://github.com/ota-meshi/eslint-plugin-yml/commit/f0bbd1281f7bd6342b70db3a74d9c72470446c1b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: add `namespace` to plugin `meta`
+
+## 3.3.2
+
+### Patch Changes
+
+- [#602](https://github.com/ota-meshi/eslint-plugin-yml/pull/602) [`594f5ea`](https://github.com/ota-meshi/eslint-plugin-yml/commit/594f5ea806e4a4a4a2fb5d46ee4edf9379971f39) Thanks [@sxzz](https://github.com/sxzz)! - fix: remove unused dependency
+
+## 3.3.1
+
+### Patch Changes
+
+- [#589](https://github.com/ota-meshi/eslint-plugin-yml/pull/589) [`98ed3bb`](https://github.com/ota-meshi/eslint-plugin-yml/commit/98ed3bbf406c8929f970d8f6aa9bf880990e0d49) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix(yaml-language): crash when parsing error
+
+## 3.3.0
+
+### Minor Changes
+
+- [#582](https://github.com/ota-meshi/eslint-plugin-yml/pull/582) [`ef8de6e`](https://github.com/ota-meshi/eslint-plugin-yml/commit/ef8de6ea1ccb78fcc44ab29e43d5e0e4f32c5870) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat(flow-mapping-curly-spacing): add `emptyObjects` option to control spacing in empty flow-mapping
+
+## 3.2.2
+
+### Patch Changes
+
+- [#579](https://github.com/ota-meshi/eslint-plugin-yml/pull/579) [`276e3aa`](https://github.com/ota-meshi/eslint-plugin-yml/commit/276e3aa4cb39cdc9e73c12dc1a9021e61da8bfc7) Thanks [@ota-meshi](https://github.com/ota-meshi)! - update `@ota-meshi/ast-token-store` to v0.3.0
+
+## 3.2.1
+
+### Patch Changes
+
+- [#575](https://github.com/ota-meshi/eslint-plugin-yml/pull/575) [`c09b986`](https://github.com/ota-meshi/eslint-plugin-yml/commit/c09b98670ecb5439f3a7ff3e762d17b4cd6d397b) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: update `@ota-meshi/ast-token-store` to 0.2.1
+
+## 3.2.0
+
+### Minor Changes
+
+- [#573](https://github.com/ota-meshi/eslint-plugin-yml/pull/573) [`099cb89`](https://github.com/ota-meshi/eslint-plugin-yml/commit/099cb89a50e0e3a23632671a382dd2c1a194e373) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: use `@ota-meshi/ast-token-store`
+
+## 3.1.2
+
+### Patch Changes
+
+- [#569](https://github.com/ota-meshi/eslint-plugin-yml/pull/569) [`21904d6`](https://github.com/ota-meshi/eslint-plugin-yml/commit/21904d649574bcf5e2c64c3e341fa09ddab5ddce) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: type bug with eslint v10
+
+## 3.1.1
+
+### Patch Changes
+
+- [#567](https://github.com/ota-meshi/eslint-plugin-yml/pull/567) [`5235c42`](https://github.com/ota-meshi/eslint-plugin-yml/commit/5235c4223d388d2c2ee2191c2ec16e781140bb2c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: some bug with eslint v10
+
+## 3.1.0
+
+### Minor Changes
+
+- [#564](https://github.com/ota-meshi/eslint-plugin-yml/pull/564) [`c8ff016`](https://github.com/ota-meshi/eslint-plugin-yml/commit/c8ff016b762ccfb43406ee45eefe2a338d3bcb16) Thanks [@antfu](https://github.com/antfu)! - Add ESLint v10 compatibility while maintaining v9 support
+  - Migrated from deprecated `isSpaceBetweenTokens()` to `isSpaceBetween()` API
+  - All changes are backward compatible with ESLint v9
+
+## 3.0.0
+
+### Major Changes
+
+- [#543](https://github.com/ota-meshi/eslint-plugin-yml/pull/543) [`12df7f4`](https://github.com/ota-meshi/eslint-plugin-yml/commit/12df7f430855645aab9643e4ec1a443839bfa215) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Use language config in shareable configs. The shareable configs now use the new ESLint v9 language config API (`language: "yml/yaml"`) instead of the legacy parser approach (`languageOptions: { parser }`). This is a breaking change that aligns with ESLint's language plugin architecture.
+
+## 2.0.2
+
+### Patch Changes
+
+- [#539](https://github.com/ota-meshi/eslint-plugin-yml/pull/539) [`0fc8d41`](https://github.com/ota-meshi/eslint-plugin-yml/commit/0fc8d41fa3fd17afdc8f399d61977334ba13fcc3) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: add fake scopeManager for SourceCode API compatibility
+
+## 2.0.1
+
+### Patch Changes
+
+- [#536](https://github.com/ota-meshi/eslint-plugin-yml/pull/536) [`c7a45cd`](https://github.com/ota-meshi/eslint-plugin-yml/commit/c7a45cd09e9f7f4b87ea623913e6467490576710) Thanks [@luxass](https://github.com/luxass)! - fix: handle diff-sequences import issue
+
+## 2.0.0
+
+### Major Changes
+
+- [#532](https://github.com/ota-meshi/eslint-plugin-yml/pull/532) [`40eb4be`](https://github.com/ota-meshi/eslint-plugin-yml/commit/40eb4bee573a66f13cf12dd0162b78bfc5ab73a1) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - feat: add ESLint language plugin support
+
+- [#528](https://github.com/ota-meshi/eslint-plugin-yml/pull/528) [`c4e74d0`](https://github.com/ota-meshi/eslint-plugin-yml/commit/c4e74d0f5bb39c85028c90c5d5f8557b1c6c8829) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Convert package to ESM-only. The package now uses `"type": "module"` and only exports ESM modules. CommonJS `require()` is no longer supported. Users must use ES modules (`import`) to load this plugin.
+
+- [#527](https://github.com/ota-meshi/eslint-plugin-yml/pull/527) [`4059169`](https://github.com/ota-meshi/eslint-plugin-yml/commit/40591697f7bb23cad0076ac53b188ca9de7203b0) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Drop support for legacy ESLint config format. The plugin now exports flat configuration as the main configuration format. The previous `flat/*` namespace is kept for backward compatibility.
+
+- [#524](https://github.com/ota-meshi/eslint-plugin-yml/pull/524) [`2260263`](https://github.com/ota-meshi/eslint-plugin-yml/commit/2260263247825ddc1e6803fc328a5b5ea53d117c) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Drop support for ESLint versions older than 9.38.0. The new supported version is `>=9.38.0`.
+
+- [#522](https://github.com/ota-meshi/eslint-plugin-yml/pull/522) [`dc5028e`](https://github.com/ota-meshi/eslint-plugin-yml/commit/dc5028eb222a1b247d0c51cbb9afbf479d01bdd8) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Drop support for Node.js versions older than 20.19.0. The new supported version is `^20.19.0 || ^22.13.0 || >=24`.
+
+- [#526](https://github.com/ota-meshi/eslint-plugin-yml/pull/526) [`3e7cb79`](https://github.com/ota-meshi/eslint-plugin-yml/commit/3e7cb79b9873f50acad785d6ed23233084ed428c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: update `standard` config
+
+- [#523](https://github.com/ota-meshi/eslint-plugin-yml/pull/523) [`50a96f8`](https://github.com/ota-meshi/eslint-plugin-yml/commit/50a96f81e81c53b5648ffe1aae19575fd0ceccb1) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependency yaml-eslint-parser to v2
+
+## 1.19.1
+
+### Patch Changes
+
+- [#506](https://github.com/ota-meshi/eslint-plugin-yml/pull/506) [`736f153`](https://github.com/ota-meshi/eslint-plugin-yml/commit/736f15343788720aa210070f7e78aab3c5ef929d) Thanks [@sumimakito](https://github.com/sumimakito)! - fix(sort-keys): fix incorrect result when move down the block located at the file start
+
 ## 1.19.0
 
 ### Minor Changes

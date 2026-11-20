@@ -1,6 +1,5 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
 
 export default createRule("require-string-key", {
   meta: {
@@ -17,7 +16,7 @@ export default createRule("require-string-key", {
     type: "suggestion",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -51,7 +50,7 @@ export default createRule("require-string-key", {
      * Checks if the given node is string
      */
     function isStringNode(
-      node: AST.YAMLContent | AST.YAMLWithMeta | null
+      node: AST.YAMLContent | AST.YAMLWithMeta | null,
     ): boolean {
       if (!node) {
         return false;

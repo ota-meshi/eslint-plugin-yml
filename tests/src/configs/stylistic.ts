@@ -1,47 +1,17 @@
-import assert from "assert";
-import plugin from "../../../src/index";
-import { LegacyESLint, ESLint } from "../../utils/eslint-compat";
+import assert from "node:assert";
+import plugin from "../../../src/index.ts";
+import { ESLint } from "eslint";
 
-const code = `foo:   42`;
+const code = `b: 1
+a: 2
+`;
 describe("`stylistic` config", () => {
-  it("legacy `stylistic` config should work. ", async () => {
-    const linter = new LegacyESLint({
-      plugins: {
-        yml: plugin as never,
-      },
-      baseConfig: {
-        parserOptions: {
-          ecmaVersion: 2020,
-        },
-        extends: ["plugin:yml/recommended", "plugin:yml/stylistic"],
-      },
-      useEslintrc: false,
-    });
-    const result = await linter.lintText(code, { filePath: "test.yml" });
-    const messages = result[0].messages;
-
-    assert.deepStrictEqual(
-      messages.map((m) => ({
-        ruleId: m.ruleId,
-        line: m.line,
-        message: m.message,
-      })),
-      [
-        {
-          message: "Expected extension '.yaml' but used extension '.yml'.",
-          ruleId: "yml/file-extension",
-          line: 1,
-        },
-      ]
-    );
-  });
-  it("`flat/stylistic` config should work. ", async () => {
+  it("`stylistic` config should work. ", async () => {
     const linter = new ESLint({
-      overrideConfigFile: true as never,
-      // @ts-expect-error -- typing bug
+      overrideConfigFile: true,
       overrideConfig: [
-        ...(plugin.configs["flat/recommended"] as never),
-        ...(plugin.configs["flat/stylistic"] as never),
+        ...plugin.configs.recommended,
+        ...plugin.configs.stylistic,
       ],
     });
     const result = await linter.lintText(code, { filePath: "test.yml" });
@@ -59,7 +29,13 @@ describe("`stylistic` config", () => {
           ruleId: "yml/file-extension",
           line: 1,
         },
-      ]
+        {
+          message:
+            "Expected mapping keys to be in ascending order. 'b' should be after 'a'.",
+          ruleId: "yml/sort-keys",
+          line: 1,
+        },
+      ],
     );
 
     const resultWithJs = await linter.lintText(";", { filePath: "test.js" });
@@ -71,7 +47,7 @@ describe("`stylistic` config", () => {
         line: m.line,
         message: m.message,
       })),
-      []
+      [],
     );
   });
 });

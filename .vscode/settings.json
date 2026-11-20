@@ -11,7 +11,8 @@
     "markdown"
   ],
   "eslint.options": {
-    "overrideConfigFile": "./.eslintrc.for-vscode.mjs"
+    // Use a specific ESLint config file for VSCode ESLint extension
+    // "overrideConfigFile": "./.eslintrc.for-vscode.mjs"
   },
   "typescript.validate.enable": true,
   "javascript.validate.enable": false,

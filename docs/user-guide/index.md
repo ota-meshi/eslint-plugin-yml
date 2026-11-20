@@ -8,8 +8,8 @@ npm install --save-dev eslint eslint-plugin-yml
 
 ::: tip Requirements
 
-- ESLint v6.0.0 and above
-- Node.js v14.17.x, v16.x and above
+- ESLint v9.38.0 and above
+- Node.js v20.19.0 or higher (in the 20.x line), v22.13.0 or higher (in the 22.x line), or v24.0.0 and above
 
 :::
 
@@ -18,8 +18,6 @@ npm install --save-dev eslint eslint-plugin-yml
 <!--USAGE_GUIDE_START-->
 
 ### Configuration
-
-#### New Config (`eslint.config.js`)
 
 Use `eslint.config.js` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
 
@@ -30,7 +28,7 @@ import eslintPluginYml from 'eslint-plugin-yml';
 export default [
   // add more generic rule sets here, such as:
   // js.configs.recommended,
-  ...eslintPluginYml.configs['flat/recommended'],
+  ...eslintPluginYml.configs.recommended,
   {
     rules: {
       // override/add rules settings here, such as:
@@ -42,43 +40,15 @@ export default [
 
 This plugin provides configs:
 
-- `*.configs['flat/base']` ... Configuration to enable correct YAML parsing.
-- `*.configs['flat/recommended']` ... Above, plus rules to prevent errors or unintended behavior.
-- `*.configs['flat/standard']` ... Above, plus rules to enforce the common stylistic conventions.
-- `*.configs['flat/stylistic']` ... Rules to enforce additional opinionated stylistic conventions.
-- `*.configs['flat/prettier']` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
+- `*.configs.base` ... Configuration to enable correct YAML parsing.
+- `*.configs.recommended` ... Above, plus rules to prevent errors or unintended behavior.
+- `*.configs.standard` ... Above, plus rules to enforce the common stylistic conventions.
+- `*.configs.stylistic` ... Rules to enforce additional opinionated stylistic conventions.
+- `*.configs.prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.
 
-#### Legacy Config (`.eslintrc`)
-
-Use `.eslintrc.*` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/>.
-
-Example **.eslintrc.js**:
-
-```js
-module.exports = {
-  extends: [
-    // add more generic rulesets here, such as:
-    // 'eslint:recommended',
-    "plugin:yml/standard",
-  ],
-  rules: {
-    // override/add rules settings here, such as:
-    // 'yml/rule-name': 'error'
-  },
-};
-```
-
-This plugin provides configs:
-
-- `plugin:yml/base` ... Configuration to enable correct YAML parsing.
-- `plugin:yml/recommended` ... Above, plus rules to prevent errors or unintended behavior.
-- `plugin:yml/standard` ... Above, plus rules to enforce the common stylistic conventions.
-- `plugin:yml/stylistic` ... Rules to enforce additional opinionated stylistic conventions.
-- `plugin:yml/prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
-
-See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.
+**Note:** The `*.configs['flat/*']` configs are still available for backward compatibility, but it is recommended to use the new config names without the `flat/` prefix.
 
 #### Parser Configuration
 
@@ -87,20 +57,19 @@ If you have specified a parser, you need to configure a parser for `.yaml`.
 For example, if you are using the `"@babel/eslint-parser"`, configure it as follows:
 
 ```js
-module.exports = {
-  // ...
-  extends: ["plugin:yml/standard"],
-  // ...
-  parser: "@babel/eslint-parser",
-  // Add an `overrides` section to add a parser configuration for YAML.
-  overrides: [
-    {
-      files: ["*.yaml", "*.yml"],
-      parser: "yaml-eslint-parser",
+import eslintPluginYml from 'eslint-plugin-yml';
+import babelParser from '@babel/eslint-parser';
+
+export default [
+  ...eslintPluginYml.configs.standard,
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      parser: babelParser,
     },
-  ],
-  // ...
-};
+  },
+  // YAML files are already configured by the plugin
+];
 ```
 
 #### Parser Options
@@ -108,34 +77,58 @@ module.exports = {
 The following parser options for `yaml-eslint-parser` are available by specifying them in [parserOptions](https://eslint.org/docs/latest/user-guide/configuring/language-options#specifying-parser-options) in the ESLint configuration file.
 
 ```js
-module.exports = {
-  // ...
-  overrides: [
-    {
-      files: ["*.yaml", "*.yml"],
-      parser: "yaml-eslint-parser",
-      // Options used with yaml-eslint-parser.
+import eslintPluginYml from 'eslint-plugin-yml';
+
+export default [
+  ...eslintPluginYml.configs.recommended,
+  {
+    files: ['**/*.yaml', '**/*.yml'],
+    languageOptions: {
       parserOptions: {
-        defaultYAMLVersion: "1.2",
+        defaultYAMLVersion: '1.2',
       },
     },
-  ],
-  // ...
-};
+  },
+];
 ```
 
 See also [https://github.com/ota-meshi/yaml-eslint-parser#readme](https://github.com/ota-meshi/yaml-eslint-parser#readme).
 
 ### Running ESLint from the command line
 
-If you want to run `eslint` from the command line, make sure you include the `.yaml` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
+With ESLint v9 and flat config, ESLint automatically lints all files matched by your config. You typically don't need the `--ext` option anymore.
 
 Examples:
 
 ```bash
-eslint --ext .js,.yaml,.yml src
+eslint .
 eslint "src/**/*.{js,yaml,yml}"
 ```
+
+#### Languages
+
+This plugin provides the following language identifiers for use in ESLint configurations:
+
+- `yml/yaml` ... YAML files
+
+For example, to apply settings specifically to YAML files, you can use the `language` field in your ESLint configuration:
+
+```js
+import eslintPluginYml from 'eslint-plugin-yml';
+export default [
+  {
+    files: ["*.yaml", "*.yml", "**/*.yaml", "**/*.yml"],
+    plugins: {
+      yml: eslintPluginYml,
+    },
+    language: "yml/yaml",
+  }
+]
+```
+
+The configuration above is included in the shareable configs provided by this plugin, so using `configs` is generally recommended.
+
+See also <https://eslint.org/docs/latest/use/configure/plugins#specify-a-language>
 
 ## :computer: Editor Integrations
 

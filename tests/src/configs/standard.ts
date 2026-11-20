@@ -1,21 +1,16 @@
-import assert from "assert";
-import plugin from "../../../src/index";
-import { LegacyESLint, ESLint } from "../../utils/eslint-compat";
+import assert from "node:assert";
+import plugin from "../../../src/index.ts";
+import { ESLint } from "eslint";
 
 const code = `foo:   42`;
 describe("`standard` config", () => {
-  it("legacy `standard` config should work. ", async () => {
-    const linter = new LegacyESLint({
-      plugins: {
-        yml: plugin as never,
-      },
-      baseConfig: {
-        parserOptions: {
-          ecmaVersion: 2020,
-        },
-        extends: ["plugin:yml/recommended", "plugin:yml/standard"],
-      },
-      useEslintrc: false,
+  it("`standard` config should work. ", async () => {
+    const linter = new ESLint({
+      overrideConfigFile: true,
+      overrideConfig: [
+        ...plugin.configs.recommended,
+        ...plugin.configs.standard,
+      ],
     });
     const result = await linter.lintText(code, { filePath: "test.yml" });
     const messages = result[0].messages;
@@ -34,14 +29,25 @@ describe("`standard` config", () => {
         },
       ],
     );
+
+    const resultWithJs = await linter.lintText(";", { filePath: "test.js" });
+    const messagesWithJs = resultWithJs[0].messages;
+
+    assert.deepStrictEqual(
+      messagesWithJs.map((m) => ({
+        ruleId: m.ruleId,
+        line: m.line,
+        message: m.message,
+      })),
+      [],
+    );
   });
-  it("`flat/standard` config should work. ", async () => {
+  it("`flat/standard` config should work (backward compatibility). ", async () => {
     const linter = new ESLint({
-      overrideConfigFile: true as never,
-      // @ts-expect-error -- typing bug
+      overrideConfigFile: true,
       overrideConfig: [
-        ...(plugin.configs["flat/recommended"] as never),
-        ...(plugin.configs["flat/standard"] as never),
+        ...plugin.configs["flat/recommended"],
+        ...plugin.configs["flat/standard"],
       ],
     });
     const result = await linter.lintText(code, { filePath: "test.yml" });

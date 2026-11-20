@@ -1,0 +1,7 @@
+[
+  {
+    "message": "There should be no space in empty flow mapping.",
+    "line": 2,
+    "column": 4
+  }
+]

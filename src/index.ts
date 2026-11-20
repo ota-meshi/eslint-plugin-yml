@@ -1,40 +1,47 @@
-import type { RuleModule } from "./types";
-import { rules as ruleList } from "./utils/rules";
-import base from "./configs/base";
-import recommended from "./configs/recommended";
-import standard from "./configs/standard";
-import stylistic from "./configs/stylistic";
-import prettier from "./configs/prettier";
-import flatBase from "./configs/flat/base";
-import flatRecommended from "./configs/flat/recommended";
-import flatStandard from "./configs/flat/standard";
-import flatStylistic from "./configs/flat/stylistic";
-import flatPrettier from "./configs/flat/prettier";
-import * as meta from "./meta";
+import type { Linter } from "eslint";
+import type { RuleDefinition } from "@eslint/core";
+import { rules as ruleList } from "./utils/rules.js";
+import base from "./configs/flat/base.js";
+import recommended from "./configs/flat/recommended.js";
+import standard from "./configs/flat/standard.js";
+import stylistic from "./configs/flat/stylistic.js";
+import prettier from "./configs/flat/prettier.js";
+import * as meta from "./meta.js";
+import type { YAMLSourceCode, YAMLLanguageOptions } from "./language/index.js";
+import { YAMLLanguage } from "./language/index.js";
 
-const configs = {
+const configs: {
+  base: Linter.Config[];
+  recommended: Linter.Config[];
+  standard: Linter.Config[];
+  stylistic: Linter.Config[];
+  prettier: Linter.Config[];
+  // Keep flat/* for backward compatibility
+  "flat/base": Linter.Config[];
+  "flat/recommended": Linter.Config[];
+  "flat/standard": Linter.Config[];
+  "flat/prettier": Linter.Config[];
+} = {
   base,
   recommended,
   standard,
   stylistic,
   prettier,
-  "flat/base": flatBase,
-  "flat/recommended": flatRecommended,
-  "flat/standard": flatStandard,
-  "flat/stylistic": flatStylistic,
-  "flat/prettier": flatPrettier,
+  // Keep flat/* for backward compatibility
+  "flat/base": base,
+  "flat/recommended": recommended,
+  "flat/standard": standard,
+  "flat/prettier": prettier,
 };
 
-const rules = ruleList.reduce(
-  (obj, r) => {
-    obj[r.meta.docs.ruleName] = r;
-    return obj;
-  },
-  {} as { [key: string]: RuleModule },
-);
+const rules = Object.fromEntries(
+  ruleList.map((r) => [r.meta.docs.ruleName, r]),
+) as Record<string, RuleDefinition>;
 
-export = {
-  meta,
-  configs,
-  rules,
+const languages = {
+  yaml: new YAMLLanguage(),
 };
+
+export type { YAMLLanguageOptions, YAMLSourceCode };
+export { meta, configs, rules, languages };
+export default { meta, configs, rules, languages };

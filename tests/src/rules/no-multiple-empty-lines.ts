@@ -1,17 +1,15 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/no-multiple-empty-lines";
-import { loadTestCases } from "../../utils/utils";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/no-multiple-empty-lines.ts";
+import { loadTestCases } from "../../utils/utils.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
 tester.run(
   "no-multiple-empty-lines",
-  rule as any,
+  rule,
   loadTestCases("no-multiple-empty-lines"),
 );

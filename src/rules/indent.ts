@@ -1,9 +1,9 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import { hasTabIndent, getNumOfIndent } from "../utils/yaml";
-import type { YAMLToken, Fix, RuleFixer, RuleContext } from "../types";
-import { isHyphen, isQuestion, isColon } from "../utils/ast-utils";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
+import { hasTabIndent, getNumOfIndent } from "../utils/yaml.js";
+import type { YAMLToken, RuleContext } from "../types.js";
+import { isHyphen, isQuestion, isColon } from "../utils/ast-utils.js";
+import type { RuleTextEdit, RuleTextEditor } from "@eslint/core";
 
 // ----------------------------------------------------------------------
 // Helpers
@@ -124,7 +124,7 @@ export default createRule("indent", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -162,11 +162,12 @@ export default createRule("indent", {
         token,
         offset * numOfIndent,
         baseToken,
-        options && {
-          indentWhenBaseIsNotFirst:
-            options.offsetWhenBaseIsNotFirst &&
-            options.offsetWhenBaseIsNotFirst * numOfIndent,
-        },
+        options?.offsetWhenBaseIsNotFirst != null
+          ? {
+              indentWhenBaseIsNotFirst:
+                options.offsetWhenBaseIsNotFirst * numOfIndent,
+            }
+          : undefined,
       );
     }
 
@@ -467,8 +468,11 @@ export default createRule("indent", {
       "Program:exit"(node) {
         const lineIndentsWk: (LineIndentStep1 | undefined)[] = [];
         let tokensOnSameLine: YAMLToken[] = [];
+
         // Validate indentation of tokens.
-        for (const token of sourceCode.getTokens(node, ITERATION_OPTS)) {
+        for (const token of [...node.comments, ...node.tokens].sort(
+          (a, b) => a.range[0] - b.range[0],
+        )) {
           if (
             tokensOnSameLine.length === 0 ||
             tokensOnSameLine[0].loc.start.line === token.loc.start.line
@@ -1018,7 +1022,7 @@ export default createRule("indent", {
           }
         }
       }
-      return function* (fixer: RuleFixer): IterableIterator<Fix> {
+      return function* (fixer: RuleTextEditor): IterableIterator<RuleTextEdit> {
         type Stack = {
           indent: number;
           parentIndent: number;
@@ -1071,7 +1075,7 @@ export default createRule("indent", {
     /**
      * Fix a line
      */
-    function* fixLine(fixer: RuleFixer, li: LineIndentStep2) {
+    function* fixLine(fixer: RuleTextEditor, li: LineIndentStep2) {
       if (li.indentBlockScalar) {
         const blockLiteral = li.indentBlockScalar.node;
         const diff = li.expectedIndent - li.actualIndent;

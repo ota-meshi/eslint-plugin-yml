@@ -1,15 +1,13 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/file-extension";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/file-extension.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
-tester.run("file-extension", rule as any, {
+tester.run("file-extension", rule, {
   valid: [
     {
       filename: "test.yaml",

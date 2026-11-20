@@ -1,13 +1,11 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/no-empty-key";
-import { loadTestCases } from "../../utils/utils";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/no-empty-key.ts";
+import { loadTestCases } from "../../utils/utils.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
-tester.run("no-empty-key", rule as any, loadTestCases("no-empty-key"));
+tester.run("no-empty-key", rule, loadTestCases("no-empty-key"));

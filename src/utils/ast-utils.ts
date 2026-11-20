@@ -1,4 +1,4 @@
-import type { YAMLToken } from "../types";
+import type { YAMLToken } from "../types.js";
 
 /**
  * Checks if the given token is a comment token or not.

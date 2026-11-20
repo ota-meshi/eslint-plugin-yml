@@ -10,7 +10,7 @@ since: "v0.3.0"
 
 > disallow empty mapping values
 
-- :gear: This rule is included in `"plugin:yml/recommended"` and `"plugin:yml/standard"`.
+- :gear: This rule is included in `configs.recommended` and `configs.standard`.
 
 ## :book: Rule Details
 
@@ -24,7 +24,9 @@ This rule reports empty mapping values.
 # eslint yml/no-empty-mapping-value: 'error'
 
 # ✓ GOOD
-"GOOD": "foo"
+"GOOD_1": null
+"GOOD_2": "foo"
+"GOOD_3": ""
 
 # ✗ BAD
 "BAD": 

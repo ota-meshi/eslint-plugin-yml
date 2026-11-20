@@ -1,4 +1,9 @@
-import diff from "diff-sequences";
+import diffModule from "diff-sequences";
+
+const diff =
+  typeof diffModule === "function"
+    ? diffModule
+    : (diffModule as { default: typeof diffModule }).default;
 
 export type DeleteEntry<E> = {
   type: "delete";

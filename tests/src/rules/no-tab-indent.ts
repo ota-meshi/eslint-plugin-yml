@@ -1,13 +1,11 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/no-tab-indent";
-import { loadTestCases } from "../../utils/utils";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/no-tab-indent.ts";
+import { loadTestCases } from "../../utils/utils.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
-tester.run("no-tab-indent", rule as any, loadTestCases("no-tab-indent"));
+tester.run("no-tab-indent", rule, loadTestCases("no-tab-indent"));

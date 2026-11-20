@@ -1,17 +1,11 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/block-sequence-hyphen-indicator-newline";
-import { loadTestCases } from "../../utils/utils";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/block-sequence-hyphen-indicator-newline.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 
-const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
-});
+const tester = new RuleTester({});
 
 tester.run(
   "block-sequence-hyphen-indicator-newline",
-  rule as any,
+  rule,
   loadTestCases("block-sequence-hyphen-indicator-newline"),
 );

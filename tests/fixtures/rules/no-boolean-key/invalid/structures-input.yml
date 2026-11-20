@@ -1,0 +1,6 @@
+%YAML 1.1
+---
+yes: block
+flow: {On: 1, OFF: 2}
+outer:
+  true: nested

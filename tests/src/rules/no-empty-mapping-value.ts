@@ -1,17 +1,15 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/no-empty-mapping-value";
-import { loadTestCases } from "../../utils/utils";
-import * as yamlESLintParser from "yaml-eslint-parser";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/no-empty-mapping-value.ts";
+import { loadTestCases } from "../../utils/utils.ts";
+import plugin from "../../../src/index.ts";
 
 const tester = new RuleTester({
-  languageOptions: {
-    parser: yamlESLintParser,
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
 tester.run(
   "no-empty-mapping-value",
-  rule as any,
+  rule,
   loadTestCases("no-empty-mapping-value"),
 );

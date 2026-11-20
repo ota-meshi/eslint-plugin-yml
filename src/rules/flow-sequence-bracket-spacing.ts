@@ -1,7 +1,6 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import { getSourceCode } from "../utils/compat";
-import { isTokenOnSameLine } from "../utils/ast-utils";
+import { createRule } from "../utils/index.js";
+import { isTokenOnSameLine } from "../utils/ast-utils.js";
 
 interface Schema1 {
   singleValue?: boolean;
@@ -48,7 +47,7 @@ export default createRule("flow-sequence-bracket-spacing", {
     },
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }
@@ -216,20 +215,20 @@ export default createRule("flow-sequence-bracket-spacing", {
 
       if (isTokenOnSameLine(first, second)) {
         if (options.isOpeningBracketMustBeSpaced(node)) {
-          if (!sourceCode.isSpaceBetweenTokens(first, second))
+          if (!sourceCode.isSpaceBetween(first, second))
             reportRequiredBeginningSpace(node, first);
         } else {
-          if (sourceCode.isSpaceBetweenTokens(first, second))
+          if (sourceCode.isSpaceBetween(first, second))
             reportNoBeginningSpace(node, first);
         }
       }
 
       if (first !== penultimate && isTokenOnSameLine(penultimate, last)) {
         if (options.isClosingBracketMustBeSpaced(node)) {
-          if (!sourceCode.isSpaceBetweenTokens(penultimate, last))
+          if (!sourceCode.isSpaceBetween(penultimate, last))
             reportRequiredEndingSpace(node, last);
         } else {
-          if (sourceCode.isSpaceBetweenTokens(penultimate, last))
+          if (sourceCode.isSpaceBetween(penultimate, last))
             reportNoEndingSpace(node, last);
         }
       }

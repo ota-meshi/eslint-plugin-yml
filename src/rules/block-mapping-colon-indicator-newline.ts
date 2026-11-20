@@ -1,16 +1,12 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
-import { isColon } from "../utils/ast-utils";
-import { getSourceCode } from "../utils/compat";
+import { createRule } from "../utils/index.js";
+import { isColon } from "../utils/ast-utils.js";
 
 export default createRule("block-mapping-colon-indicator-newline", {
   meta: {
     docs: {
       description: "enforce consistent line breaks after `:` indicator",
-      categories: [
-        // TODO Switch to "standard" in the major version.
-        // "standard"
-      ],
+      categories: ["standard"],
       extensionRule: false,
       layout: true,
     },
@@ -29,7 +25,7 @@ export default createRule("block-mapping-colon-indicator-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

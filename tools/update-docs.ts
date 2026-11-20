@@ -1,8 +1,12 @@
-import path from "path";
-import fs from "fs";
-import { rules } from "../src/utils/rules";
-import type { RuleModule } from "../src/types";
-import { getNewVersion } from "./lib/changesets-util";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import { rules } from "../src/utils/rules.ts";
+import type { RuleModule } from "../src/types.ts";
+import { getNewVersion } from "./lib/changesets-util.ts";
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 //eslint-disable-next-line jsdoc/require-jsdoc -- tools
 function formatItems(items: string[]) {
@@ -22,7 +26,7 @@ function yamlValue(val: unknown) {
   return val;
 }
 
-const ROOT = path.resolve(__dirname, "../docs/rules");
+const ROOT = path.resolve(dirname, "../docs/rules");
 
 //eslint-disable-next-line jsdoc/require-jsdoc -- tools
 function pickSince(content: string): string | null | Promise<string> {
@@ -35,8 +39,10 @@ function pickSince(content: string): string | null | Promise<string> {
   }
   // eslint-disable-next-line no-process-env -- ignore
   if (process.env.IN_VERSION_SCRIPT) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- ignore
-    return `v${require("../package.json").version}`;
+    const pkg = JSON.parse(
+      fs.readFileSync(path.join(dirname, "../package.json"), "utf8"),
+    );
+    return `v${pkg.version}`;
   }
   // eslint-disable-next-line no-process-env -- ignore
   if (process.env.IN_VERSION_CI_SCRIPT) {
@@ -95,7 +101,7 @@ class DocFile {
       if (categories && categories.length) {
         const presets = [];
         for (const cat of categories.sort()) {
-          presets.push(`\`"plugin:yml/${cat}"\``);
+          presets.push(`\`configs.${cat}\``);
         }
         notes.push(
           `- :gear: This rule is included in ${formatItems(presets)}.`,

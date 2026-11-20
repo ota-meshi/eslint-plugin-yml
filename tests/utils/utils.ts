@@ -1,15 +1,17 @@
-import fs from "fs";
-import path from "path";
-import assert from "assert";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import assert from "node:assert";
 import type { RuleTester } from "eslint";
-import type { Linter } from "eslint";
+import { Linter } from "eslint";
+import type { Linter as LinterType } from "eslint";
 import * as yamlESLintParser from "yaml-eslint-parser";
 import * as vueESLintParser from "vue-eslint-parser";
-// eslint-disable-next-line @typescript-eslint/no-require-imports -- tests
-import plugin = require("../../src/index");
-import type { YMLSettings } from "../../src/types";
-import { applyFixes } from "./apply-fixer";
-import { getLinter as getCompatLinter } from "eslint-compat-utils/linter";
+import plugin from "../../src/index.ts";
+import type { YMLSettings } from "../../src/types.ts";
+import { applyFixes } from "./apply-fixer.ts";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string
@@ -73,11 +75,11 @@ export function loadTestCases(
   invalid: RuleTester.InvalidTestCase[];
 } {
   const validFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     `../fixtures/rules/${ruleName}/valid/`,
   );
   const invalidFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     `../fixtures/rules/${ruleName}/invalid/`,
   );
 
@@ -85,7 +87,7 @@ export function loadTestCases(
     getConfig(ruleName, inputFile),
   );
 
-  const fixable = plugin.rules[ruleName].meta.fixable != null;
+  const fixable = plugin.rules[ruleName].meta?.fixable != null;
 
   const invalid = listupInput(invalidFixtureRoot).map((inputFile) => {
     const config = getConfig(ruleName, inputFile);
@@ -194,11 +196,11 @@ export function makeSuiteTests(
   { force }: { force?: boolean } = {},
 ): void {
   const suiteFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     "../fixtures/yaml-test-suite/",
   );
   const invalidFixtureRoot = path.resolve(
-    __dirname,
+    dirname,
     `../fixtures/rules/${ruleName}/invalid/`,
   );
   const linter = getLinter();
@@ -220,7 +222,7 @@ export function makeSuiteTests(
         `yaml-test-suite-for-${optionName}/`,
       );
       const inputFile = path.join(fixtureDir, path.basename(fixture));
-      const filename = inputFile.slice(inputFile.indexOf(ruleName));
+      const filename = toRuleRelativeName(inputFile, ruleName);
       const code = `# ${filename}\n${code0}`;
 
       const result = verify(
@@ -344,7 +346,7 @@ function writeFixtures(
   if (force || !fs.existsSync(outputFile)) {
     const output = applyFixes(config.code, result).output;
 
-    if (plugin.rules[ruleName].meta.fixable != null) {
+    if (plugin.rules[ruleName].meta?.fixable != null) {
       fs.writeFileSync(outputFile, output, "utf8");
     }
   }
@@ -353,9 +355,9 @@ function writeFixtures(
 function verify(
   linter: Linter,
   code: string,
-  config: Linter.Config,
+  config: LinterType.Config,
   filename: string,
-): Linter.LintMessage[] {
+): LinterType.LintMessage[] {
   try {
     return linter.verify(code, config, filename);
   } catch (e) {
@@ -365,15 +367,26 @@ function verify(
 }
 
 function getLinter() {
-  // eslint-disable-next-line @typescript-eslint/naming-convention -- for test
-  const Linter = getCompatLinter();
   const linter = new Linter();
 
   return linter;
 }
 
 function getConfig(ruleName: string, inputFile: string) {
-  const filename = inputFile.slice(inputFile.indexOf(ruleName));
+  const baseConfig = Object.assign(
+    {
+      plugins: { yml: plugin },
+    },
+    isVue(inputFile) ? { languageOptions: { parser: vueESLintParser } } : {},
+    isYaml(inputFile)
+      ? {
+          language: "yml/yaml",
+        }
+      : {},
+  );
+
+  const filename = toRuleRelativeName(inputFile, ruleName);
+
   const code0 = fs.readFileSync(inputFile, "utf8");
   const overrideConfigFile: string = inputFile.replace(
     /input\.(?:ya?ml|vue)$/u,
@@ -397,12 +410,11 @@ function getConfig(ruleName: string, inputFile: string) {
     code = isYaml(inputFile)
       ? `# ${filename}\n${code0}`
       : `<!--${filename}-->\n${code0}`;
-    return Object.assign(
-      isVue(inputFile) ? { languageOptions: { parser: vueESLintParser } } : {},
-      config,
-      overrideConfig,
-      { code, filename },
-    );
+    return Object.assign(baseConfig, config, overrideConfig, {
+      code,
+      filename,
+      name: filename,
+    });
   }
   // inline config
   const configStr = isYaml(inputFile)
@@ -422,11 +434,12 @@ function getConfig(ruleName: string, inputFile: string) {
     }
   }
 
-  return Object.assign(
-    isVue(inputFile) ? { languageOptions: { parser: vueESLintParser } } : {},
-    config,
-    { code, filename },
-  );
+  return Object.assign(baseConfig, config, { code, filename });
+}
+
+function toRuleRelativeName(inputFile: string, ruleName: string) {
+  const posixInputFile = inputFile.replace(/\\/gu, "/");
+  return posixInputFile.slice(posixInputFile.indexOf(ruleName));
 }
 
 function isYaml(fileName: string) {

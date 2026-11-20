@@ -10,7 +10,7 @@ since: "v0.3.0"
 
 > disallow mapping keys other than strings
 
-- :gear: This rule is included in `"plugin:yml/stylistic"`.
+- :gear: This rule is included in `configs.stylistic`.
 
 ## :book: Rule Details
 

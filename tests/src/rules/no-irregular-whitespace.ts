@@ -1,17 +1,11 @@
-import { RuleTester } from "../../utils/eslint-compat";
-import rule from "../../../src/rules/no-irregular-whitespace";
-import { loadTestCases } from "../../utils/utils";
+import { RuleTester } from "eslint";
+import rule from "../../../src/rules/no-irregular-whitespace.ts";
+import { loadTestCases } from "../../utils/utils.ts";
 
-const tester = new RuleTester({
-  languageOptions: {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-    parser: require("yaml-eslint-parser"),
-    ecmaVersion: 2020,
-  },
-});
+const tester = new RuleTester({});
 
 tester.run(
   "no-irregular-whitespace",
-  rule as any,
+  rule,
   loadTestCases("no-irregular-whitespace"),
 );

@@ -1,4 +1,4 @@
-import { makeSuiteTests } from "../tests/utils/utils";
+import { makeSuiteTests } from "../tests/utils/utils.ts";
 
 makeSuiteTests(
   "block-mapping",

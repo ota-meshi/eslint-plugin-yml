@@ -10,7 +10,7 @@ since: "v0.5.0"
 
 > enforce consistent line breaks after `?` indicator
 
-- :gear: This rule is included in `"plugin:yml/standard"`.
+- :gear: This rule is included in `configs.standard`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -43,7 +43,7 @@ This rule aims to enforce consistent line breaks after `?` indicator.
 ```yaml
 yml/block-mapping-question-indicator-newline:
   - error
-  - never # or "always" 
+  - never # or "always"
 ```
 
 - `"always"` ... Requires line breaks after after `?` indicator of block style mappings.

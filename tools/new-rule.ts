@@ -1,6 +1,11 @@
-import path from "path";
-import fs from "fs";
-import cp from "child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import cp from "node:child_process";
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
 const logger = console;
 
 // main
@@ -16,13 +21,13 @@ const logger = console;
     return;
   }
 
-  const ruleFile = path.resolve(__dirname, `../src/rules/${ruleId}.ts`);
-  const testFile = path.resolve(__dirname, `../tests/src/rules/${ruleId}.ts`);
+  const ruleFile = path.resolve(dirname, `../src/rules/${ruleId}.ts`);
+  const testFile = path.resolve(dirname, `../tests/src/rules/${ruleId}.ts`);
   const fixturesRoot = path.resolve(
-    __dirname,
+    dirname,
     `../tests/fixtures/rules/${ruleId}/`,
   );
-  const docFile = path.resolve(__dirname, `../docs/rules/${ruleId}.md`);
+  const docFile = path.resolve(dirname, `../docs/rules/${ruleId}.md`);
   try {
     fs.mkdirSync(fixturesRoot);
     fs.mkdirSync(path.resolve(fixturesRoot, "valid"));
@@ -35,7 +40,6 @@ const logger = console;
     ruleFile,
     `
 import type { AST } from "yaml-eslint-parser"
-import { getSourceCode } from "../utils/compat";
 import { createRule, defineWrapperListener, getCoreRule } from "../utils/index"
 const coreRule = getCoreRule("${ruleId}")
 import {
@@ -54,7 +58,7 @@ export default createRule("${ruleId}", {
         type: coreRule.meta!.type!,
     },
     create(context) {
-        const sourceCode = getSourceCode(context)
+        const sourceCode = context.sourceCode
         if (!sourceCode.parserServices?.isYAML) {
             return {}
         }
@@ -68,19 +72,17 @@ export default createRule("${ruleId}", {
   );
   fs.writeFileSync(
     testFile,
-    `import { RuleTester } from "../../utils/eslint-compat";
+    `import { RuleTester } from "eslint";
 import rule from "../../../src/rules/${ruleId}"
 import { loadTestCases } from "../../utils/utils";
-import * as yamlESLintParser from "yaml-eslint-parser";
+import plugin from "../../../src/index";
 
 const tester = new RuleTester({
-  languageOptions: {
-    parser: yamlESLintParser,
-    ecmaVersion: 2020,
-  },
+  plugins: { yml: plugin },
+  language: "yml/yaml",
 });
 
-// TODO Delete when it are done.
+// TODO Delete when it is done.
 makeSuiteTests("${ruleId}", {
     default: [],
     // never: ["never"],
@@ -147,6 +149,7 @@ Same as [${ruleId}] rule option. See [here](https://eslint.org/docs/rules/${rule
   cp.execSync(`code "${ruleFile}"`);
   cp.execSync(`code "${testFile}"`);
   cp.execSync(`code "${docFile}"`);
+  // eslint-disable-next-line no-console -- log
   console.log(
     `npm run mocha -- "tests/src/**/${ruleId}.ts" --reporter dot --timeout 60000`,
   );

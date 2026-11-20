@@ -12,8 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
       - name: Install Packages
         run: npm install -f
       - name: Build
@@ -22,7 +24,7 @@ jobs:
           SYNCKIT_TS_RUNNER: oxc
       - run: npx pkg-pr-new publish --compact '.' --json output.json --comment=off
       - name: Add metadata to output
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -36,7 +38,7 @@ jobs:
               : context.payload.after;
             fs.writeFileSync('output.json', JSON.stringify(output), 'utf8');
       - name: Upload output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: output
           path: ./output.json

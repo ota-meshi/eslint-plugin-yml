@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "node16",
-    "moduleResolution": "node16",
-    "lib": ["es2020"],
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["es2020", "es2023.array"],
+    "types": ["node", "mocha"],
     "allowJs": true,
     "checkJs": true,
     "declaration": true,
@@ -14,13 +15,14 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     // "paths": {
     //     "*": ["typings/*"]
     // },
     "esModuleInterop": true,
     "outDir": "lib",
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
 
     "skipLibCheck": true
   },
@@ -29,7 +31,8 @@
     "tests/src/**/*",
     "tests/utils/**/*",
     "tools/**/*",
-    "docs/.vitepress/**/*"
+    "docs/.vitepress/**/*",
+    "tsdown.config.ts"
     // "typings/**/*"
   ],
   "exclude": ["lib/**/*"]

@@ -2,8 +2,9 @@
 // This file has been automatically generated,
 // in order to update its content execute "npm run update"
 import type { Linter } from "eslint";
-import base from "./base";
-export default [
+import base from "./base.js";
+
+const config: Linter.Config[] = [
   ...base,
   {
     rules: {
@@ -17,9 +18,13 @@ export default [
       "yml/flow-sequence-bracket-spacing": "off",
       "yml/indent": "off",
       "yml/key-spacing": "off",
+      "yml/max-len": "off",
       "yml/no-multiple-empty-lines": "off",
+      "yml/no-trailing-spaces": "off",
       "yml/no-trailing-zeros": "off",
       "yml/quotes": "off",
     },
   },
-] satisfies Linter.FlatConfig[];
+];
+
+export default config;

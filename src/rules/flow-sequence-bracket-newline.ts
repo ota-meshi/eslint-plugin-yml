@@ -1,14 +1,13 @@
 import type { AST } from "yaml-eslint-parser";
-import { createRule } from "../utils/index";
+import { createRule } from "../utils/index.js";
 import {
   hasTabIndent,
   getActualIndentFromLine,
   incIndent,
   isKeyNode,
-} from "../utils/yaml";
-import { isTokenOnSameLine, isCommentToken } from "../utils/ast-utils";
-import type { YAMLToken } from "../types";
-import { getSourceCode } from "../utils/compat";
+} from "../utils/yaml.js";
+import { isTokenOnSameLine, isCommentToken } from "../utils/ast-utils.js";
+import type { YAMLToken } from "../types.js";
 
 type UserOption =
   | "always"
@@ -60,7 +59,7 @@ export default createRule("flow-sequence-bracket-newline", {
     type: "layout",
   },
   create(context) {
-    const sourceCode = getSourceCode(context);
+    const sourceCode = context.sourceCode;
     if (!sourceCode.parserServices?.isYAML) {
       return {};
     }

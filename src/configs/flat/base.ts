@@ -1,19 +1,18 @@
 import type { ESLint, Linter } from "eslint";
-import * as parser from "yaml-eslint-parser";
-export default [
+import plugin from "../../index.js";
+
+const config: Linter.Config[] = [
   {
     plugins: {
       get yml(): ESLint.Plugin {
-        // eslint-disable-next-line @typescript-eslint/no-require-imports -- ignore
-        return require("../../index");
+        // Delayed reference to avoid circular dependency
+        return plugin;
       },
     },
   },
   {
     files: ["*.yaml", "**/*.yaml", "*.yml", "**/*.yml"],
-    languageOptions: {
-      parser,
-    },
+    language: "yml/yaml",
     rules: {
       // ESLint core rules known to cause problems with YAML.
       "no-irregular-whitespace": "off",
@@ -21,4 +20,6 @@ export default [
       "spaced-comment": "off",
     },
   },
-] satisfies Linter.FlatConfig[];
+];
+
+export default config;

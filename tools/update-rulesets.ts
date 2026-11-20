@@ -1,9 +1,14 @@
-import path from "path";
-import fs from "fs";
-import os from "os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import os from "node:os";
 // import eslint from "eslint"
-import { rules } from "./lib/load-rules";
-import type { RuleModule } from "../src/types";
+import { rules } from "./lib/load-rules.ts";
+import type { RuleModule } from "../src/types.ts";
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
 const isWin = os.platform().startsWith("win");
 
 const CONFIGS = {
@@ -57,50 +62,7 @@ const CONFIGS = {
   },
 };
 
-for (const rec of [
-  "recommended",
-  "standard",
-  "stylistic",
-  "prettier",
-] as const) {
-  let content = `/*
- * IMPORTANT!
- * This file has been automatically generated,
- * in order to update its content execute "npm run update"
- */
-import path from "path"
-const base = require.resolve("./base")
-const baseExtend =
-    path.extname(\`\${base}\`) === ".ts" ? "plugin:yml/base" : base
-export = {
-    extends: [baseExtend],
-    rules: {
-        // eslint-plugin-yml rules
-        ${rules
-          .filter(CONFIGS[rec].filter)
-          .map((rule) => {
-            return `"${rule.meta.docs.ruleId}": ${JSON.stringify(CONFIGS[rec].option(rule))}`;
-          })
-          .join(",\n")}
-    },
-}
-`;
-
-  const filePath = path.resolve(
-    __dirname,
-    `../src/configs/${CONFIGS[rec].config}.ts`,
-  );
-
-  if (isWin) {
-    content = content
-      .replace(/\r?\n/gu, "\n")
-      .replace(/\r/gu, "\n")
-      .replace(/\n/gu, "\r\n");
-  }
-
-  // Update file.
-  fs.writeFileSync(filePath, content);
-}
+// Legacy configs are no longer generated or used
 
 for (const rec of [
   "recommended",
@@ -108,31 +70,32 @@ for (const rec of [
   "stylistic",
   "prettier",
 ] as const) {
-  let content = `/*
- * IMPORTANT!
- * This file has been automatically generated,
- * in order to update its content execute "npm run update"
- */
+  let content = `// IMPORTANT!
+// This file has been automatically generated,
+// in order to update its content execute "npm run update"
 import type { Linter } from "eslint";
-import base from './base';
-export default [
+import base from "./base.js";
+
+const config: Linter.Config[] = [
   ...base,
   {
     rules: {
-        // eslint-plugin-yml rules
-        ${rules
-          .filter(CONFIGS[rec].filter)
-          .map((rule) => {
-            return `"${rule.meta.docs.ruleId}": ${JSON.stringify(CONFIGS[rec].option(rule))}`;
-          })
-          .join(",\n")}
+      // eslint-plugin-yml rules
+      ${rules
+        .filter(CONFIGS[rec].filter)
+        .map((rule) => {
+          return `"${rule.meta.docs.ruleId}": "${CONFIGS[rec].option(rule)}"`;
+        })
+        .join(",\n      ")}
     },
-  }
-] satisfies Linter.FlatConfig[]
+  },
+];
+
+export default config;
 `;
 
   const filePath = path.resolve(
-    __dirname,
+    dirname,
     `../src/configs/flat/${CONFIGS[rec].config}.ts`,
   );
 

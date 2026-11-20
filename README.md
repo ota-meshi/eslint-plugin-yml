@@ -9,7 +9,7 @@
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-yml.svg)](http://www.npmtrends.com/eslint-plugin-yml)
 [![NPM downloads](https://img.shields.io/npm/dy/eslint-plugin-yml.svg)](http://www.npmtrends.com/eslint-plugin-yml)
 [![NPM downloads](https://img.shields.io/npm/dt/eslint-plugin-yml.svg)](http://www.npmtrends.com/eslint-plugin-yml)
-[![Build Status](https://github.com/ota-meshi/eslint-plugin-yml/workflows/CI/badge.svg?branch=master)](https://github.com/ota-meshi/eslint-plugin-yml/actions?query=workflow%3ACI)
+[![Build Status](https://github.com/ota-meshi/eslint-plugin-yml/actions/workflows/NodeCI.yml/badge.svg)](https://github.com/ota-meshi/eslint-plugin-yml/actions/workflows/NodeCI.yml)
 [![Coverage Status](https://coveralls.io/repos/github/ota-meshi/eslint-plugin-yml/badge.svg?branch=master)](https://coveralls.io/github/ota-meshi/eslint-plugin-yml?branch=master)
 
 ## :name_badge: Features
@@ -53,8 +53,8 @@ npm install --save-dev eslint eslint-plugin-yml
 
 > **Requirements**
 >
-> - ESLint v6.0.0 and above
-> - Node.js v14.17.x, v16.x and above
+> - ESLint v9.38.0 and above
+> - Node.js v20.19.0 or higher (in the 20.x line), v22.13.0 or higher (in the 22.x line), or v24.0.0 and above
 
 <!--DOCS_IGNORE_END-->
 
@@ -65,8 +65,6 @@ npm install --save-dev eslint eslint-plugin-yml
 
 ### Configuration
 
-#### New Config (`eslint.config.js`)
-
 Use `eslint.config.js` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
 
 Example **eslint.config.js**:
@@ -76,7 +74,7 @@ import eslintPluginYml from 'eslint-plugin-yml';
 export default [
   // add more generic rule sets here, such as:
   // js.configs.recommended,
-  ...eslintPluginYml.configs['flat/recommended'],
+  ...eslintPluginYml.configs.recommended,
   {
     rules: {
       // override/add rules settings here, such as:
@@ -88,43 +86,15 @@ export default [
 
 This plugin provides configs:
 
-- `*.configs['flat/base']` ... Configuration to enable correct YAML parsing.
-- `*.configs['flat/recommended']` ... Above, plus rules to prevent errors or unintended behavior.
-- `*.configs['flat/standard']` ... Above, plus rules to enforce the common stylistic conventions.
-- `*.configs['flat/stylistic']` ... Rules to enforce additional opinionated stylistic conventions.
-- `*.configs['flat/prettier']` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
+- `*.configs.base` ... Configuration to enable correct YAML parsing.
+- `*.configs.recommended` ... Above, plus rules to prevent errors or unintended behavior.
+- `*.configs.standard` ... Above, plus rules to enforce the common stylistic conventions.
+- `*.configs.stylistic` ... Rules to enforce additional opinionated stylistic conventions.
+- `*.configs.prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](https://ota-meshi.github.io/eslint-plugin-yml/rules/) to get the `rules` that this plugin provides.
 
-#### Legacy Config (`.eslintrc`)
-
-Use `.eslintrc.*` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/>.
-
-Example **.eslintrc.js**:
-
-```js
-module.exports = {
-  extends: [
-    // add more generic rulesets here, such as:
-    // 'eslint:recommended',
-    "plugin:yml/standard",
-  ],
-  rules: {
-    // override/add rules settings here, such as:
-    // 'yml/rule-name': 'error'
-  },
-};
-```
-
-This plugin provides configs:
-
-- `plugin:yml/base` ... Configuration to enable correct YAML parsing.
-- `plugin:yml/recommended` ... Above, plus rules to prevent errors or unintended behavior.
-- `plugin:yml/standard` ... Above, plus rules to enforce the common stylistic conventions.
-- `plugin:yml/stylistic` ... Rules to enforce additional opinionated stylistic conventions.
-- `plugin:yml/prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
-
-See [the rule list](https://ota-meshi.github.io/eslint-plugin-yml/rules/) to get the `rules` that this plugin provides.
+**Note:** The `*.configs['flat/*']` configs are still available for backward compatibility, but it is recommended to use the new config names without the `flat/` prefix.
 
 #### Parser Configuration
 
@@ -133,20 +103,19 @@ If you have specified a parser, you need to configure a parser for `.yaml`.
 For example, if you are using the `"@babel/eslint-parser"`, configure it as follows:
 
 ```js
-module.exports = {
-  // ...
-  extends: ["plugin:yml/standard"],
-  // ...
-  parser: "@babel/eslint-parser",
-  // Add an `overrides` section to add a parser configuration for YAML.
-  overrides: [
-    {
-      files: ["*.yaml", "*.yml"],
-      parser: "yaml-eslint-parser",
+import eslintPluginYml from 'eslint-plugin-yml';
+import babelParser from '@babel/eslint-parser';
+
+export default [
+  ...eslintPluginYml.configs.standard,
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      parser: babelParser,
     },
-  ],
-  // ...
-};
+  },
+  // YAML files are already configured by the plugin
+];
 ```
 
 #### Parser Options
@@ -154,34 +123,58 @@ module.exports = {
 The following parser options for `yaml-eslint-parser` are available by specifying them in [parserOptions](https://eslint.org/docs/latest/user-guide/configuring/language-options#specifying-parser-options) in the ESLint configuration file.
 
 ```js
-module.exports = {
-  // ...
-  overrides: [
-    {
-      files: ["*.yaml", "*.yml"],
-      parser: "yaml-eslint-parser",
-      // Options used with yaml-eslint-parser.
+import eslintPluginYml from 'eslint-plugin-yml';
+
+export default [
+  ...eslintPluginYml.configs.recommended,
+  {
+    files: ['**/*.yaml', '**/*.yml'],
+    languageOptions: {
       parserOptions: {
-        defaultYAMLVersion: "1.2",
+        defaultYAMLVersion: '1.2',
       },
     },
-  ],
-  // ...
-};
+  },
+];
 ```
 
 See also [https://github.com/ota-meshi/yaml-eslint-parser#readme](https://github.com/ota-meshi/yaml-eslint-parser#readme).
 
 ### Running ESLint from the command line
 
-If you want to run `eslint` from the command line, make sure you include the `.yaml` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
+With ESLint v9 and flat config, ESLint automatically lints all files matched by your config. You typically don't need the `--ext` option anymore.
 
 Examples:
 
 ```bash
-eslint --ext .js,.yaml,.yml src
+eslint .
 eslint "src/**/*.{js,yaml,yml}"
 ```
+
+#### Languages
+
+This plugin provides the following language identifiers for use in ESLint configurations:
+
+- `yml/yaml` ... YAML files
+
+For example, to apply settings specifically to YAML files, you can use the `language` field in your ESLint configuration:
+
+```js
+import eslintPluginYml from 'eslint-plugin-yml';
+export default [
+  {
+    files: ["*.yaml", "*.yml", "**/*.yaml", "**/*.yml"],
+    plugins: {
+      yml: eslintPluginYml,
+    },
+    language: "yml/yaml",
+  }
+]
+```
+
+The configuration above is included in the shareable configs provided by this plugin, so using `configs` is generally recommended.
+
+See also <https://eslint.org/docs/latest/use/configure/plugins#specify-a-language>
 
 ## :computer: Editor Integrations
 
@@ -239,7 +232,7 @@ Category emojis:
 
 | Rule ID | Description | Fixable | Configurations |
 |:--------|:------------|:-------:|:--------------:|
-| [yml/block-mapping-colon-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-colon-indicator-newline.html) | enforce consistent line breaks after `:` indicator | :wrench: |  |
+| [yml/block-mapping-colon-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-colon-indicator-newline.html) | enforce consistent line breaks after `:` indicator | :wrench: | :star2: |
 | [yml/block-mapping-question-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping-question-indicator-newline.html) | enforce consistent line breaks after `?` indicator | :wrench: | :star2: |
 | [yml/block-mapping](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-mapping.html) | require or disallow block style mappings. | :wrench: | :star2: |
 | [yml/block-sequence-hyphen-indicator-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/block-sequence-hyphen-indicator-newline.html) | enforce consistent line breaks after `-` indicator | :wrench: | :star2: |
@@ -247,17 +240,18 @@ Category emojis:
 | [yml/file-extension](https://ota-meshi.github.io/eslint-plugin-yml/rules/file-extension.html) | enforce YAML file extension |  | :art: |
 | [yml/indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/indent.html) | enforce consistent indentation | :wrench: | :star2: |
 | [yml/key-name-casing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-name-casing.html) | enforce naming convention to key names |  |  |
+| [yml/no-boolean-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-boolean-key.html) | disallow boolean mapping keys |  |  |
 | [yml/no-empty-document](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-document.html) | disallow empty document |  | :star: :star2: |
 | [yml/no-empty-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-key.html) | disallow empty mapping keys |  | :star: :star2: |
 | [yml/no-empty-mapping-value](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-mapping-value.html) | disallow empty mapping values |  | :star: :star2: |
 | [yml/no-empty-sequence-entry](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-empty-sequence-entry.html) | disallow empty sequence entries |  | :star: :star2: |
 | [yml/no-tab-indent](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-tab-indent.html) | disallow tabs for indentation. |  | :star: :star2: |
-| [yml/no-trailing-zeros](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-zeros.html) | disallow trailing zeros for floats | :wrench: |  |
+| [yml/no-trailing-zeros](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-zeros.html) | disallow trailing zeros for floats | :wrench: | :star2: |
 | [yml/plain-scalar](https://ota-meshi.github.io/eslint-plugin-yml/rules/plain-scalar.html) | require or disallow plain style scalar. | :wrench: | :star2: |
 | [yml/quotes](https://ota-meshi.github.io/eslint-plugin-yml/rules/quotes.html) | enforce the consistent use of either double, or single quotes | :wrench: | :star2: |
 | [yml/require-string-key](https://ota-meshi.github.io/eslint-plugin-yml/rules/require-string-key.html) | disallow mapping keys other than strings |  | :art: |
 | [yml/sort-keys](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-keys.html) | require mapping keys to be sorted | :wrench: | :art: |
-| [yml/sort-sequence-values](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-sequence-values.html) | require sequence values to be sorted | :wrench: | :art: |
+| [yml/sort-sequence-values](https://ota-meshi.github.io/eslint-plugin-yml/rules/sort-sequence-values.html) | require sequence values to be sorted | :wrench: |  |
 | [yml/vue-custom-block/no-parsing-error](https://ota-meshi.github.io/eslint-plugin-yml/rules/vue-custom-block/no-parsing-error.html) | disallow parsing errors in Vue custom blocks |  | :star: :star2: |
 
 ### Extension Rules
@@ -269,8 +263,10 @@ Category emojis:
 | [yml/flow-sequence-bracket-newline](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-newline.html) | enforce linebreaks after opening and before closing flow sequence brackets | :wrench: | :star2: |
 | [yml/flow-sequence-bracket-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/flow-sequence-bracket-spacing.html) | enforce consistent spacing inside flow sequence brackets | :wrench: | :star2: |
 | [yml/key-spacing](https://ota-meshi.github.io/eslint-plugin-yml/rules/key-spacing.html) | enforce consistent spacing between keys and values in mapping pairs | :wrench: | :star2: |
+| [yml/max-len](https://ota-meshi.github.io/eslint-plugin-yml/rules/max-len.html) | enforce a maximum line length |  |  |
 | [yml/no-irregular-whitespace](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-irregular-whitespace.html) | disallow irregular whitespace |  | :star: :star2: |
-| [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: |  |
+| [yml/no-multiple-empty-lines](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-multiple-empty-lines.html) | disallow multiple empty lines | :wrench: | :star2: |
+| [yml/no-trailing-spaces](https://ota-meshi.github.io/eslint-plugin-yml/rules/no-trailing-spaces.html) | disallow trailing whitespace at the end of lines | :wrench: | :star2: |
 | [yml/spaced-comment](https://ota-meshi.github.io/eslint-plugin-yml/rules/spaced-comment.html) | enforce consistent spacing after the `#` in a comment | :wrench: | :star2: |
 
 <!--RULES_TABLE_END-->
