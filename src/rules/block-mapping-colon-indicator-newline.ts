@@ -78,14 +78,14 @@ export default createRule("block-mapping-colon-indicator-newline", {
           }
           const colon = getColonToken(pair);
           if (!colon) {
-            return;
+            continue;
           }
 
           const hasNewline = colon.loc.end.line < value.loc.start.line;
           if (hasNewline) {
             if (option === "never") {
               if (!canRemoveNewline(value)) {
-                return;
+                continue;
               }
               context.report({
                 loc: colon.loc,
