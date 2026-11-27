@@ -1,5 +1,11 @@
 # eslint-plugin-yml
 
+## 3.10.1
+
+### Patch Changes
+
+- [#703](https://github.com/ota-meshi/eslint-plugin-yml/pull/703) [`96bbbd8`](https://github.com/ota-meshi/eslint-plugin-yml/commit/96bbbd8b54cfe730d5aee0a1aa2a040fca45d7bd) Thanks [@danielrentz](https://github.com/danielrentz)! - fix(block-mapping-colon-indicator-newline): check the pairs of a mapping after a pair with a block collection value
+
 ## 3.10.0
 
 ### Minor Changes
