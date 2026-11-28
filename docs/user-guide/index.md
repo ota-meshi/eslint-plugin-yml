@@ -43,6 +43,7 @@ This plugin provides configs:
 - `*.configs.base` ... Configuration to enable correct YAML parsing.
 - `*.configs.recommended` ... Above, plus rules to prevent errors or unintended behavior.
 - `*.configs.standard` ... Above, plus rules to enforce the common stylistic conventions.
+- `*.configs.stylistic` ... Rules to enforce additional opinionated stylistic conventions.
 - `*.configs.prettier` ... Turn off rules that may conflict with [Prettier](https://prettier.io/).
 
 See [the rule list](../rules/index.md) to get the `rules` that this plugin provides.

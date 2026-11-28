@@ -4,6 +4,7 @@ import { rules as ruleList } from "./utils/rules.js";
 import base from "./configs/flat/base.js";
 import recommended from "./configs/flat/recommended.js";
 import standard from "./configs/flat/standard.js";
+import stylistic from "./configs/flat/stylistic.js";
 import prettier from "./configs/flat/prettier.js";
 import * as meta from "./meta.js";
 import type { YAMLSourceCode, YAMLLanguageOptions } from "./language/index.js";
@@ -13,6 +14,7 @@ const configs: {
   base: Linter.Config[];
   recommended: Linter.Config[];
   standard: Linter.Config[];
+  stylistic: Linter.Config[];
   prettier: Linter.Config[];
   // Keep flat/* for backward compatibility
   "flat/base": Linter.Config[];
@@ -23,6 +25,7 @@ const configs: {
   base,
   recommended,
   standard,
+  stylistic,
   prettier,
   // Keep flat/* for backward compatibility
   "flat/base": base,
